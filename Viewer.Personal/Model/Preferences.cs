@@ -8,11 +8,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
 using Viewer.Common.Model;
+using System.IO;
+using System.Xml.Linq;
+using Viewer.Common.Xml;
 
 namespace Viewer.Personal.Model {
 
@@ -74,5 +78,43 @@ namespace Viewer.Personal.Model {
         private string m_retention = "00,00,00";
 
         #endregion // properties
+
+
+        #region methods
+
+        /// <summary>
+        /// path로 지정된 xml 파일에서 설정 정보들을 가져온다.
+        /// </summary>
+        /// <param name="path"></param>
+        public void Load(string path) {
+            Debug.WriteLine("Preferences load...");
+
+            if (!File.Exists(path)) {
+                Save(path);
+                return;
+            }
+
+            Debug.WriteLine("Preferences loaded.");
+        }
+
+        /// <summary>
+        /// path로 지정된 파일에 설정 정보를 xml로 저장한다.
+        /// </summary>
+        /// <param name="path"></param>
+        public void Save(string path) {
+            Debug.WriteLine("Preferences save...");
+            
+            XDocument doc = new XDocument();
+            XElement root = new XElement("GreenFleet");
+            doc.Add(root);
+            new XmlTransformer().Serialize<Preferences>(this, root);
+
+            doc.Save(path);
+
+            Debug.WriteLine("Preferences saved.");
+            Debug.WriteLine(doc.ToString());
+        }
+
+        #endregion // methods
     }
 }

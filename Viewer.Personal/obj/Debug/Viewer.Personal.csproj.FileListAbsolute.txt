@@ -21,3 +21,5 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.View.RepositoryView.resources
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\GenerateResource.read.1.tlog
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Personal.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Personal.pdb

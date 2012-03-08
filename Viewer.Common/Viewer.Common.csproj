@@ -62,7 +62,9 @@
     <Compile Include="Model\Track.cs" />
     <Compile Include="Model\TrackPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringExtension.cs" />
     <Compile Include="Util\FileUtil.cs" />
+    <Compile Include="Util\ObjectUtil.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\BingMapView.xaml.cs">
       <DependentUpon>BingMapView.xaml</DependentUpon>
@@ -73,6 +75,10 @@
     <Compile Include="View\VideoView.xaml.cs">
       <DependentUpon>VideoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Xml\IXmlValueConverter.cs" />
+    <Compile Include="Xml\TransientAttribute.cs" />
+    <Compile Include="Xml\XmlModelTransformer.cs" />
+    <Compile Include="Xml\XmlTransformer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\Microsoft.Practices.Prism.dll" />

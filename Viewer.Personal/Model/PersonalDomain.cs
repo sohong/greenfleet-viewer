@@ -12,6 +12,8 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Viewer.Common.Util;
+using System.IO;
 
 namespace Viewer.Personal.Model {
 
@@ -19,6 +21,13 @@ namespace Viewer.Personal.Model {
     /// Personal viewer application domain.
     /// </summary>
     public class PersonalDomain {
+
+        #region consts
+
+        private const string PREFERS_PATH = "preferences.xml";
+        
+        #endregion // consts
+
 
         #region static members
 
@@ -64,5 +73,14 @@ namespace Viewer.Personal.Model {
         }
 
         #endregion // properties
+
+
+        #region methods
+
+        public void Start() {
+            m_preferences.Load(Path.Combine(FileUtil.GetAppFolder(), PREFERS_PATH));
+        }
+
+        #endregion // methods
     }
 }

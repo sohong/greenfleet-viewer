@@ -18,7 +18,7 @@ namespace Viewer.Common.Xml {
     /// 저장하지 않는 필드.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class TransientAttribute {
+    public class TransientAttribute : Attribute {
 
         public TransientAttribute() {
         }

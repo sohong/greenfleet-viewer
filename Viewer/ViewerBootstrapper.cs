@@ -19,6 +19,7 @@ using Microsoft.Practices.Prism.Logging;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using GreenFleet.Viewer.View;
+using Microsoft.Practices.Prism.Modularity;
 
 namespace GreenFleet.Viewer {
 
@@ -47,26 +48,28 @@ namespace GreenFleet.Viewer {
             Application.Current.MainWindow.Show();
         }
 
+        protected override IModuleCatalog CreateModuleCatalog() {
+            IModuleCatalog cat = base.CreateModuleCatalog();
+            return cat;
+        }
+
+        protected override void ConfigureModuleCatalog() {
+            base.ConfigureModuleCatalog();
+        }
+
+        protected override AggregateCatalog CreateAggregateCatalog() {
+            AggregateCatalog cat = base.CreateAggregateCatalog();
+            return cat;
+        }
+
         protected override void ConfigureAggregateCatalog() {
             base.ConfigureAggregateCatalog();
 
             // Shell 등을 export한다.
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ViewerBootstrapper).Assembly));
 
-            /*
-            // Add this assembly to export ModuleTracker
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(QuickStartBootstrapper).Assembly));
-
-            // Module A is referenced in in the project and directly in code.
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleA).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ModuleC).Assembly));
-
-            // Module B and Module D are copied to a directory as part of a post-build step.
-            // These modules are not referenced in the project and are discovered by inspecting a directory.
-            // Both projects have a post-build step to copy themselves into that directory.
-            DirectoryCatalog catalog = new DirectoryCatalog("DirectoryModules");
+            DirectoryCatalog catalog = new DirectoryCatalog(".");
             this.AggregateCatalog.Catalogs.Add(catalog);
-            */
         }
 
         protected override void ConfigureContainer() {
