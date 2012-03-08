@@ -21,6 +21,10 @@ namespace GreenFleet.Viewer.ViewModel {
     public class HomeViewModel : ViewModelBase {
 
         #region constructors
+
+        public HomeViewModel() {
+        }
+
         #endregion // constructors
     }
 }
