@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Viewer.Common.Model;
 
 namespace Viewer.Personal.Model {
     
@@ -19,9 +20,17 @@ namespace Viewer.Personal.Model {
     /// </summary>
     public class Repository {
 
-        #region constructors 
+        #region fields
+
+        private List<Track> m_tracks;
+        
+        #endregion // fields
+
+
+        #region constructors
 
         public Repository() {
+            m_tracks = new List<Track>();
         }
 
         #endregion // constructors
@@ -29,5 +38,43 @@ namespace Viewer.Personal.Model {
 
         #region properties
         #endregion // properties
+
+
+        #region methods
+
+        /// <summary>
+        /// Repository를 연다.
+        /// </summary>
+        public void Open() {
+        }
+
+        /// <summary>
+        /// froTime에서 toTime까지의 track들을 가져온다.
+        /// </summary>
+        /// <param name="fromTime"></param>
+        /// <param name="toTime"></param>
+        /// <param name="inclusive">fromTime, toTime을 검색 범위에 포함시킬 것인가?</param>
+        /// <returns></returns>
+        public IEnumerable<Track> GetTracks(DateTime fromTime, DateTime toTime, bool inclusive = true) {
+            return null;
+        }
+
+        #endregion // methods
+
+
+        #region internal methods
+
+        private Track Find(DateTime time) {
+            return null;
+        }
+
+        private IEnumerable<Track> LoadTracks(DateTime fromTime, DateTime toTime, bool inclusive) {
+            return null;
+        }
+
+        private void SaveTracks(IEnumerable<Track> tracks) {
+        }
+
+        #endregion // internal methods
     }
 }
