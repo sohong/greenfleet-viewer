@@ -70,7 +70,6 @@ namespace Viewer.Common.Xml {
                             }
 
                         } else if (p.CanRead) {
-
                         }
 
                     } else {
