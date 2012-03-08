@@ -1,0 +1,1707 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kafka12 version="1.0">
+  <property name="version">
+    <value>1.0</value>
+  </property>
+  <property name="name">
+    <value>Mindmap</value>
+  </property>
+  <property name="theme">
+    <value>Default</value>
+  </property>
+  <topic id="C5047DF5-8B28-18DE-C1A1-E09F4870C3DD">
+    <property name="height">
+      <value>27</value>
+    </property>
+    <property name="textBackgroundColor" null="true"/>
+    <property name="shape">
+      <value _type="com.brownsoft.kafka.model.shape::RoundedRectShape">
+        <property name="background">
+          <value _type="com.brownsoft::LinearGradientFill">
+            <property name="angle">
+              <value>90</value>
+            </property>
+            <property name="alpha">
+              <value>1</value>
+            </property>
+            <property name="color1">
+              <value>16777215</value>
+            </property>
+            <property name="color2">
+              <value>3355443</value>
+            </property>
+          </value>
+        </property>
+        <property name="border">
+          <value _type="com.brownsoft::SolidPen">
+            <property name="color">
+              <value>3355443</value>
+            </property>
+            <property name="alpha">
+              <value>1</value>
+            </property>
+            <property name="weight">
+              <value>1</value>
+            </property>
+          </value>
+        </property>
+      </value>
+    </property>
+    <property name="font">
+      <value _type="com.brownsoft::Font">
+        <property name="size">
+          <value>18</value>
+        </property>
+        <property name="family">
+          <value>Verdana</value>
+        </property>
+        <property name="underline">
+          <value>false</value>
+        </property>
+        <property name="bold">
+          <value>false</value>
+        </property>
+        <property name="italic">
+          <value>false</value>
+        </property>
+      </value>
+    </property>
+    <property name="floating">
+      <value>false</value>
+    </property>
+    <property name="text">
+      <value>Uploader</value>
+    </property>
+    <property name="width">
+      <value>100</value>
+    </property>
+    <property name="textColor">
+      <value>0</value>
+    </property>
+    <topic id="A4076DB9-E53C-83D1-B6FC-E0A53F4B659E">
+      <property name="height">
+        <value>27</value>
+      </property>
+      <property name="textBackgroundColor" null="true"/>
+      <property name="shape">
+        <value _type="com.brownsoft.kafka.model.shape::RoundedRectShape">
+          <property name="background">
+            <value _type="com.brownsoft::SolidBrush">
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="color">
+                <value>16777215</value>
+              </property>
+            </value>
+          </property>
+          <property name="border">
+            <value _type="com.brownsoft::SolidPen">
+              <property name="color">
+                <value>3355443</value>
+              </property>
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="weight">
+                <value>1</value>
+              </property>
+            </value>
+          </property>
+        </value>
+      </property>
+      <property name="font">
+        <value _type="com.brownsoft::Font">
+          <property name="size">
+            <value>14</value>
+          </property>
+          <property name="family">
+            <value>Verdana</value>
+          </property>
+          <property name="underline">
+            <value>false</value>
+          </property>
+          <property name="bold">
+            <value>false</value>
+          </property>
+          <property name="italic">
+            <value>false</value>
+          </property>
+        </value>
+      </property>
+      <property name="floating">
+        <value>false</value>
+      </property>
+      <property name="text">
+        <value>핵심 기능</value>
+      </property>
+      <property name="width">
+        <value>100</value>
+      </property>
+      <property name="textColor">
+        <value>0</value>
+      </property>
+      <topic id="FD4E19FD-FD7C-1DA1-3F73-E0A5537A0465">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>SD 카드에 저장되어 있는 동영상 및 관련 파일들을PC로 읽어 들인다.</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+      </topic>
+      <topic id="8CA6CC10-D0F8-BB87-E4BA-E0A5EF183BFD">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>PC 동영상 및 관련 파일들을 Server로 전송한다.</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+      </topic>
+      <topic id="97D6B8AB-AAB8-7171-1FB0-E0AB78805DC6">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>전송 로그를 관리한다.</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+      </topic>
+      <link target="FD4E19FD-FD7C-1DA1-3F73-E0A5537A0465"/>
+      <link target="8CA6CC10-D0F8-BB87-E4BA-E0A5EF183BFD"/>
+      <link target="97D6B8AB-AAB8-7171-1FB0-E0AB78805DC6"/>
+    </topic>
+    <topic id="78401644-DC25-E1A4-92BC-E0AB6990ED52">
+      <property name="height">
+        <value>27</value>
+      </property>
+      <property name="textBackgroundColor" null="true"/>
+      <property name="shape">
+        <value _type="com.brownsoft.kafka.model.shape::RoundedRectShape">
+          <property name="background">
+            <value _type="com.brownsoft::SolidBrush">
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="color">
+                <value>16777215</value>
+              </property>
+            </value>
+          </property>
+          <property name="border">
+            <value _type="com.brownsoft::SolidPen">
+              <property name="color">
+                <value>3355443</value>
+              </property>
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="weight">
+                <value>1</value>
+              </property>
+            </value>
+          </property>
+        </value>
+      </property>
+      <property name="font">
+        <value _type="com.brownsoft::Font">
+          <property name="size">
+            <value>14</value>
+          </property>
+          <property name="family">
+            <value>Verdana</value>
+          </property>
+          <property name="underline">
+            <value>false</value>
+          </property>
+          <property name="bold">
+            <value>false</value>
+          </property>
+          <property name="italic">
+            <value>false</value>
+          </property>
+        </value>
+      </property>
+      <property name="floating">
+        <value>false</value>
+      </property>
+      <property name="text">
+        <value>Data Import</value>
+      </property>
+      <property name="width">
+        <value>100</value>
+      </property>
+      <property name="textColor">
+        <value>0</value>
+      </property>
+      <topic id="A3A9BBF5-0665-697D-271F-E0ACBAB8315F">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>SD 카드가 삽입되어 새로운 드라이브가 설정되면사용자에게 알리고,전송 완료 시 방금 생성된 드라이브를 구별할 수 있도록 구분 문자 등을 지정할 수 있게 한다.</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+      </topic>
+      <topic id="8B626346-1B03-A0AB-B0A1-E0AF04475CD2">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>전송 진행 상태를 표시하고,Pause/Stop/Resume/Retry 기능을 제공한다.</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+      </topic>
+      <link target="A3A9BBF5-0665-697D-271F-E0ACBAB8315F"/>
+      <link target="8B626346-1B03-A0AB-B0A1-E0AF04475CD2"/>
+    </topic>
+    <topic id="38F3CF7E-73BA-0FB0-092A-E0AC3F075B19">
+      <property name="height">
+        <value>27</value>
+      </property>
+      <property name="textBackgroundColor" null="true"/>
+      <property name="shape">
+        <value _type="com.brownsoft.kafka.model.shape::RoundedRectShape">
+          <property name="background">
+            <value _type="com.brownsoft::SolidBrush">
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="color">
+                <value>16777215</value>
+              </property>
+            </value>
+          </property>
+          <property name="border">
+            <value _type="com.brownsoft::SolidPen">
+              <property name="color">
+                <value>3355443</value>
+              </property>
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="weight">
+                <value>1</value>
+              </property>
+            </value>
+          </property>
+        </value>
+      </property>
+      <property name="font">
+        <value _type="com.brownsoft::Font">
+          <property name="size">
+            <value>14</value>
+          </property>
+          <property name="family">
+            <value>Verdana</value>
+          </property>
+          <property name="underline">
+            <value>false</value>
+          </property>
+          <property name="bold">
+            <value>false</value>
+          </property>
+          <property name="italic">
+            <value>false</value>
+          </property>
+        </value>
+      </property>
+      <property name="floating">
+        <value>false</value>
+      </property>
+      <property name="text">
+        <value>Data 전송</value>
+      </property>
+      <property name="width">
+        <value>100</value>
+      </property>
+      <property name="textColor">
+        <value>0</value>
+      </property>
+      <topic id="707CD529-AE98-FA04-795D-E1B7706C1D52">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>PC -&gt; Stroage 데이터 전송</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+      </topic>
+      <link target="707CD529-AE98-FA04-795D-E1B7706C1D52"/>
+    </topic>
+    <topic id="7A53E17C-0B5B-D1E0-A8A9-E0AC7756BF0C">
+      <property name="height">
+        <value>27</value>
+      </property>
+      <property name="textBackgroundColor" null="true"/>
+      <property name="shape">
+        <value _type="com.brownsoft.kafka.model.shape::RoundedRectShape">
+          <property name="background">
+            <value _type="com.brownsoft::SolidBrush">
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="color">
+                <value>16777215</value>
+              </property>
+            </value>
+          </property>
+          <property name="border">
+            <value _type="com.brownsoft::SolidPen">
+              <property name="color">
+                <value>3355443</value>
+              </property>
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="weight">
+                <value>1</value>
+              </property>
+            </value>
+          </property>
+        </value>
+      </property>
+      <property name="font">
+        <value _type="com.brownsoft::Font">
+          <property name="size">
+            <value>14</value>
+          </property>
+          <property name="family">
+            <value>Verdana</value>
+          </property>
+          <property name="underline">
+            <value>false</value>
+          </property>
+          <property name="bold">
+            <value>false</value>
+          </property>
+          <property name="italic">
+            <value>false</value>
+          </property>
+        </value>
+      </property>
+      <property name="floating">
+        <value>false</value>
+      </property>
+      <property name="text">
+        <value>Logging</value>
+      </property>
+      <property name="width">
+        <value>100</value>
+      </property>
+      <property name="textColor">
+        <value>0</value>
+      </property>
+    </topic>
+    <topic id="23BDBA0F-6CCE-13F1-DE02-E0B2DF387DDE">
+      <property name="height">
+        <value>27</value>
+      </property>
+      <property name="textBackgroundColor" null="true"/>
+      <property name="shape">
+        <value _type="com.brownsoft.kafka.model.shape::RoundedRectShape">
+          <property name="background">
+            <value _type="com.brownsoft::SolidBrush">
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="color">
+                <value>16777215</value>
+              </property>
+            </value>
+          </property>
+          <property name="border">
+            <value _type="com.brownsoft::SolidPen">
+              <property name="color">
+                <value>3355443</value>
+              </property>
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="weight">
+                <value>1</value>
+              </property>
+            </value>
+          </property>
+        </value>
+      </property>
+      <property name="font">
+        <value _type="com.brownsoft::Font">
+          <property name="size">
+            <value>14</value>
+          </property>
+          <property name="family">
+            <value>Verdana</value>
+          </property>
+          <property name="underline">
+            <value>false</value>
+          </property>
+          <property name="bold">
+            <value>false</value>
+          </property>
+          <property name="italic">
+            <value>false</value>
+          </property>
+        </value>
+      </property>
+      <property name="floating">
+        <value>false</value>
+      </property>
+      <property name="text">
+        <value>모델</value>
+      </property>
+      <property name="width">
+        <value>100</value>
+      </property>
+      <property name="textColor">
+        <value>0</value>
+      </property>
+      <topic id="3300DDEA-0617-F6CD-07E5-E0B2F4E892D0">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>Uploading</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+        <topic id="485EAC12-9510-D27D-74AF-E0B37E680827">
+          <property name="height">
+            <value>27</value>
+          </property>
+          <property name="textBackgroundColor" null="true"/>
+          <property name="shape">
+            <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+              <property name="background">
+                <value _type="com.brownsoft::SolidBrush">
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="color">
+                    <value>16777215</value>
+                  </property>
+                </value>
+              </property>
+              <property name="border">
+                <value _type="com.brownsoft::SolidPen">
+                  <property name="color">
+                    <value>3355443</value>
+                  </property>
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="weight">
+                    <value>1</value>
+                  </property>
+                </value>
+              </property>
+            </value>
+          </property>
+          <property name="font">
+            <value _type="com.brownsoft::Font">
+              <property name="size">
+                <value>11</value>
+              </property>
+              <property name="family">
+                <value>Verdana</value>
+              </property>
+              <property name="underline">
+                <value>false</value>
+              </property>
+              <property name="bold">
+                <value>false</value>
+              </property>
+              <property name="italic">
+                <value>false</value>
+              </property>
+            </value>
+          </property>
+          <property name="floating">
+            <value>false</value>
+          </property>
+          <property name="text">
+            <value>SD 카드에 저장된 1회 분의 데이터를PC에 등록하고,추후 정해진 시점에 서버로 전송.</value>
+          </property>
+          <property name="width">
+            <value>100</value>
+          </property>
+          <property name="textColor">
+            <value>0</value>
+          </property>
+        </topic>
+        <link target="485EAC12-9510-D27D-74AF-E0B37E680827"/>
+      </topic>
+      <topic id="F0DF6356-9560-F2B4-C78D-E0B590E8BA22">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>Driver</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+        <topic id="60423DF7-B676-E718-F811-E0B5A368E33A">
+          <property name="height">
+            <value>27</value>
+          </property>
+          <property name="textBackgroundColor" null="true"/>
+          <property name="shape">
+            <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+              <property name="background">
+                <value _type="com.brownsoft::SolidBrush">
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="color">
+                    <value>16777215</value>
+                  </property>
+                </value>
+              </property>
+              <property name="border">
+                <value _type="com.brownsoft::SolidPen">
+                  <property name="color">
+                    <value>3355443</value>
+                  </property>
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="weight">
+                    <value>1</value>
+                  </property>
+                </value>
+              </property>
+            </value>
+          </property>
+          <property name="font">
+            <value _type="com.brownsoft::Font">
+              <property name="size">
+                <value>11</value>
+              </property>
+              <property name="family">
+                <value>Verdana</value>
+              </property>
+              <property name="underline">
+                <value>false</value>
+              </property>
+              <property name="bold">
+                <value>false</value>
+              </property>
+              <property name="italic">
+                <value>false</value>
+              </property>
+            </value>
+          </property>
+          <property name="floating">
+            <value>false</value>
+          </property>
+          <property name="text">
+            <value>SD 카드 소유자</value>
+          </property>
+          <property name="width">
+            <value>100</value>
+          </property>
+          <property name="textColor">
+            <value>0</value>
+          </property>
+        </topic>
+        <link target="60423DF7-B676-E718-F811-E0B5A368E33A"/>
+      </topic>
+      <topic id="337F9048-DF61-4E7F-9BEA-E12AEE3048AF">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>Vehicle</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+        <topic id="3D57F398-9CFE-7C33-3A2A-E12B33A81683">
+          <property name="height">
+            <value>27</value>
+          </property>
+          <property name="textBackgroundColor" null="true"/>
+          <property name="shape">
+            <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+              <property name="background">
+                <value _type="com.brownsoft::SolidBrush">
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="color">
+                    <value>16777215</value>
+                  </property>
+                </value>
+              </property>
+              <property name="border">
+                <value _type="com.brownsoft::SolidPen">
+                  <property name="color">
+                    <value>3355443</value>
+                  </property>
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="weight">
+                    <value>1</value>
+                  </property>
+                </value>
+              </property>
+            </value>
+          </property>
+          <property name="font">
+            <value _type="com.brownsoft::Font">
+              <property name="size">
+                <value>11</value>
+              </property>
+              <property name="family">
+                <value>Verdana</value>
+              </property>
+              <property name="underline">
+                <value>false</value>
+              </property>
+              <property name="bold">
+                <value>false</value>
+              </property>
+              <property name="italic">
+                <value>false</value>
+              </property>
+            </value>
+          </property>
+          <property name="floating">
+            <value>false</value>
+          </property>
+          <property name="text">
+            <value>차량</value>
+          </property>
+          <property name="width">
+            <value>100</value>
+          </property>
+          <property name="textColor">
+            <value>0</value>
+          </property>
+        </topic>
+        <link target="3D57F398-9CFE-7C33-3A2A-E12B33A81683"/>
+      </topic>
+      <link target="3300DDEA-0617-F6CD-07E5-E0B2F4E892D0"/>
+      <link target="F0DF6356-9560-F2B4-C78D-E0B590E8BA22"/>
+      <link target="337F9048-DF61-4E7F-9BEA-E12AEE3048AF"/>
+    </topic>
+    <topic id="FEB45818-40EF-8636-FA53-E1410D08BBF4">
+      <property name="height">
+        <value>27</value>
+      </property>
+      <property name="textBackgroundColor" null="true"/>
+      <property name="shape">
+        <value _type="com.brownsoft.kafka.model.shape::RoundedRectShape">
+          <property name="background">
+            <value _type="com.brownsoft::SolidBrush">
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="color">
+                <value>16777215</value>
+              </property>
+            </value>
+          </property>
+          <property name="border">
+            <value _type="com.brownsoft::SolidPen">
+              <property name="color">
+                <value>3355443</value>
+              </property>
+              <property name="alpha">
+                <value>1</value>
+              </property>
+              <property name="weight">
+                <value>1</value>
+              </property>
+            </value>
+          </property>
+        </value>
+      </property>
+      <property name="font">
+        <value _type="com.brownsoft::Font">
+          <property name="size">
+            <value>14</value>
+          </property>
+          <property name="family">
+            <value>Verdana</value>
+          </property>
+          <property name="underline">
+            <value>false</value>
+          </property>
+          <property name="bold">
+            <value>false</value>
+          </property>
+          <property name="italic">
+            <value>false</value>
+          </property>
+        </value>
+      </property>
+      <property name="floating">
+        <value>false</value>
+      </property>
+      <property name="text">
+        <value>Techiniques</value>
+      </property>
+      <property name="width">
+        <value>100</value>
+      </property>
+      <property name="textColor">
+        <value>0</value>
+      </property>
+      <topic id="72A232F3-9D8F-E449-7802-E14129C87D34">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>SD 카드 삽입 인지</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+        <topic id="07EE7ABB-131B-D004-4145-E1DED8039AD8">
+          <property name="height">
+            <value>27</value>
+          </property>
+          <property name="textBackgroundColor" null="true"/>
+          <property name="shape">
+            <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+              <property name="background">
+                <value _type="com.brownsoft::SolidBrush">
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="color">
+                    <value>16777215</value>
+                  </property>
+                </value>
+              </property>
+              <property name="border">
+                <value _type="com.brownsoft::SolidPen">
+                  <property name="color">
+                    <value>3355443</value>
+                  </property>
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="weight">
+                    <value>1</value>
+                  </property>
+                </value>
+              </property>
+            </value>
+          </property>
+          <property name="font">
+            <value _type="com.brownsoft::Font">
+              <property name="size">
+                <value>11</value>
+              </property>
+              <property name="family">
+                <value>Verdana</value>
+              </property>
+              <property name="underline">
+                <value>false</value>
+              </property>
+              <property name="bold">
+                <value>false</value>
+              </property>
+              <property name="italic">
+                <value>false</value>
+              </property>
+            </value>
+          </property>
+          <property name="floating">
+            <value>false</value>
+          </property>
+          <property name="text">
+            <value>배출 가능 표시</value>
+          </property>
+          <property name="width">
+            <value>100</value>
+          </property>
+          <property name="textColor">
+            <value>0</value>
+          </property>
+        </topic>
+        <topic id="A0E89497-9777-6478-7E7C-E1DF175147B7">
+          <property name="height">
+            <value>27</value>
+          </property>
+          <property name="textBackgroundColor" null="true"/>
+          <property name="shape">
+            <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+              <property name="background">
+                <value _type="com.brownsoft::SolidBrush">
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="color">
+                    <value>16777215</value>
+                  </property>
+                </value>
+              </property>
+              <property name="border">
+                <value _type="com.brownsoft::SolidPen">
+                  <property name="color">
+                    <value>3355443</value>
+                  </property>
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="weight">
+                    <value>1</value>
+                  </property>
+                </value>
+              </property>
+            </value>
+          </property>
+          <property name="font">
+            <value _type="com.brownsoft::Font">
+              <property name="size">
+                <value>11</value>
+              </property>
+              <property name="family">
+                <value>Verdana</value>
+              </property>
+              <property name="underline">
+                <value>false</value>
+              </property>
+              <property name="bold">
+                <value>false</value>
+              </property>
+              <property name="italic">
+                <value>false</value>
+              </property>
+            </value>
+          </property>
+          <property name="floating">
+            <value>false</value>
+          </property>
+          <property name="text">
+            <value>삽입시 탐색기 다이얼로그 대신자체 다이얼로그 표시</value>
+          </property>
+          <property name="width">
+            <value>100</value>
+          </property>
+          <property name="textColor">
+            <value>0</value>
+          </property>
+        </topic>
+        <link target="07EE7ABB-131B-D004-4145-E1DED8039AD8"/>
+        <link target="A0E89497-9777-6478-7E7C-E1DF175147B7"/>
+      </topic>
+      <topic id="056DA1A7-D1E6-3656-F741-E14192C0E7B9">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>Storage 파일 전송</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+        <topic id="5234EBF6-2A51-07F0-668F-E142AF586472">
+          <property name="height">
+            <value>27</value>
+          </property>
+          <property name="textBackgroundColor" null="true"/>
+          <property name="shape">
+            <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+              <property name="background">
+                <value _type="com.brownsoft::SolidBrush">
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="color">
+                    <value>16777215</value>
+                  </property>
+                </value>
+              </property>
+              <property name="border">
+                <value _type="com.brownsoft::SolidPen">
+                  <property name="color">
+                    <value>3355443</value>
+                  </property>
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="weight">
+                    <value>1</value>
+                  </property>
+                </value>
+              </property>
+            </value>
+          </property>
+          <property name="font">
+            <value _type="com.brownsoft::Font">
+              <property name="size">
+                <value>11</value>
+              </property>
+              <property name="family">
+                <value>Verdana</value>
+              </property>
+              <property name="underline">
+                <value>false</value>
+              </property>
+              <property name="bold">
+                <value>false</value>
+              </property>
+              <property name="italic">
+                <value>false</value>
+              </property>
+            </value>
+          </property>
+          <property name="floating">
+            <value>false</value>
+          </property>
+          <property name="text">
+            <value>ftp, sync</value>
+          </property>
+          <property name="width">
+            <value>100</value>
+          </property>
+          <property name="textColor">
+            <value>0</value>
+          </property>
+        </topic>
+        <link target="5234EBF6-2A51-07F0-668F-E142AF586472"/>
+      </topic>
+      <topic id="10098A60-6462-35FC-5AC5-E141ADF8FC0D">
+        <property name="height">
+          <value>27</value>
+        </property>
+        <property name="textBackgroundColor" null="true"/>
+        <property name="shape">
+          <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+            <property name="background">
+              <value _type="com.brownsoft::SolidBrush">
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="color">
+                  <value>16777215</value>
+                </property>
+              </value>
+            </property>
+            <property name="border">
+              <value _type="com.brownsoft::SolidPen">
+                <property name="color">
+                  <value>3355443</value>
+                </property>
+                <property name="alpha">
+                  <value>1</value>
+                </property>
+                <property name="weight">
+                  <value>1</value>
+                </property>
+              </value>
+            </property>
+          </value>
+        </property>
+        <property name="font">
+          <value _type="com.brownsoft::Font">
+            <property name="size">
+              <value>11</value>
+            </property>
+            <property name="family">
+              <value>Verdana</value>
+            </property>
+            <property name="underline">
+              <value>false</value>
+            </property>
+            <property name="bold">
+              <value>false</value>
+            </property>
+            <property name="italic">
+              <value>false</value>
+            </property>
+          </value>
+        </property>
+        <property name="floating">
+          <value>false</value>
+        </property>
+        <property name="text">
+          <value>전송 이벤트 notify</value>
+        </property>
+        <property name="width">
+          <value>100</value>
+        </property>
+        <property name="textColor">
+          <value>0</value>
+        </property>
+        <topic id="21A890C9-A1C8-E0DC-FF1F-E142E9387193">
+          <property name="height">
+            <value>27</value>
+          </property>
+          <property name="textBackgroundColor" null="true"/>
+          <property name="shape">
+            <value _type="com.brownsoft.kafka.model.shape::BottomLineShape">
+              <property name="background">
+                <value _type="com.brownsoft::SolidBrush">
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="color">
+                    <value>16777215</value>
+                  </property>
+                </value>
+              </property>
+              <property name="border">
+                <value _type="com.brownsoft::SolidPen">
+                  <property name="color">
+                    <value>3355443</value>
+                  </property>
+                  <property name="alpha">
+                    <value>1</value>
+                  </property>
+                  <property name="weight">
+                    <value>1</value>
+                  </property>
+                </value>
+              </property>
+            </value>
+          </property>
+          <property name="font">
+            <value _type="com.brownsoft::Font">
+              <property name="size">
+                <value>11</value>
+              </property>
+              <property name="family">
+                <value>Verdana</value>
+              </property>
+              <property name="underline">
+                <value>false</value>
+              </property>
+              <property name="bold">
+                <value>false</value>
+              </property>
+              <property name="italic">
+                <value>false</value>
+              </property>
+            </value>
+          </property>
+          <property name="floating">
+            <value>false</value>
+          </property>
+          <property name="text">
+            <value>messaging</value>
+          </property>
+          <property name="width">
+            <value>100</value>
+          </property>
+          <property name="textColor">
+            <value>0</value>
+          </property>
+        </topic>
+        <link target="21A890C9-A1C8-E0DC-FF1F-E142E9387193"/>
+      </topic>
+      <link target="72A232F3-9D8F-E449-7802-E14129C87D34"/>
+      <link target="056DA1A7-D1E6-3656-F741-E14192C0E7B9"/>
+      <link target="10098A60-6462-35FC-5AC5-E141ADF8FC0D"/>
+    </topic>
+    <link target="A4076DB9-E53C-83D1-B6FC-E0A53F4B659E"/>
+    <link target="78401644-DC25-E1A4-92BC-E0AB6990ED52"/>
+    <link target="38F3CF7E-73BA-0FB0-092A-E0AC3F075B19"/>
+    <link target="7A53E17C-0B5B-D1E0-A8A9-E0AC7756BF0C"/>
+    <link target="23BDBA0F-6CCE-13F1-DE02-E0B2DF387DDE"/>
+    <link target="FEB45818-40EF-8636-FA53-E1410D08BBF4"/>
+  </topic>
+</kafka12>

@@ -1,0 +1,10 @@
+C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.Enterprise\bin\Debug\Viewer.Enterprise.dll
+C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.Enterprise\bin\Debug\Viewer.Enterprise.pdb
+C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.Enterprise\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.Enterprise\obj\Debug\Viewer.Enterprise.dll
+C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.Enterprise\obj\Debug\Viewer.Enterprise.pdb
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Enterprise\bin\Debug\Viewer.Enterprise.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Enterprise\bin\Debug\Viewer.Enterprise.pdb
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Enterprise\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Enterprise\obj\Debug\Viewer.Enterprise.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Enterprise\obj\Debug\Viewer.Enterprise.pdb

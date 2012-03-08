@@ -1,0 +1,11 @@
+﻿<Window x:Class="HelloMap.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <m:Map CredentialsProvider="AosumA1E-mxjZ4_ALxdHLCOoJ9a_erVc6ss4L6bifCa4-rQK_HbnRzJq3C8jIVyD">
+            
+        </m:Map>
+    </Grid>
+</Window>
