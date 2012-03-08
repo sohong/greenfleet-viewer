@@ -11,9 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Viewer.Model;
+using Viewer.Common.Model;
 
-namespace Viewer.Loader {
+namespace Viewer.Common.Loader {
 
     public interface ITrackLoader {
 

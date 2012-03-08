@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
 
-namespace Viewer.Model {
+namespace Viewer.Common.Model {
 
     /// <summary>
     /// Track을 구성하는 한 지점 정보.

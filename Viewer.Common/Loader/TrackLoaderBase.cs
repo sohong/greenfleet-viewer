@@ -12,10 +12,10 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Viewer.Model;
+using Viewer.Common.Model;
 using System.IO;
 
-namespace Viewer.Loader {
+namespace Viewer.Common.Loader {
     
     /// <summary>
     /// ITrackLoader

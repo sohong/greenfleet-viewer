@@ -5,14 +5,14 @@ library
 C#
 .cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\
-Viewer
+Viewer.Common
 none
 false
 DEBUG;TRACE
 
 3-342360716
 3977069125
-11-1195230207
+12-2101377245
 15-1363454891
 View\BingMapView.xaml;View\GoogleMapView.xaml;View\VideoView.xaml;
 

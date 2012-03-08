@@ -15,7 +15,7 @@ using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
 using System.Collections.ObjectModel;
 
-namespace Viewer.Model {
+namespace Viewer.Common.Model {
 
     /// <summary>
     /// SD 카드에 저장되는 한 단위의 트랙 정보.

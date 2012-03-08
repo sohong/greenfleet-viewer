@@ -26,5 +26,9 @@ namespace GreenFleet.Viewer.ViewModel {
         }
 
         #endregion // constructors
+
+
+        #region properties
+        #endregion // properties
     }
 }

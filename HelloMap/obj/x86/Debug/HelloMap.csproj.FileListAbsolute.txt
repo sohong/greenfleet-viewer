@@ -15,7 +15,6 @@ C:\Users\Administrator\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap
 C:\Users\Administrator\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\HelloMap.exe
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\HelloMap.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\MainWindow.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\MainWindow.g.cs

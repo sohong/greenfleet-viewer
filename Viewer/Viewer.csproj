@@ -73,12 +73,10 @@
     <Compile Include="ViewerBootstrapper.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ShellViewModel.cs" />
+    <Compile Include="ViewModel\TrackViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\StorageView.xaml.cs">
-      <DependentUpon>StorageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
@@ -96,10 +94,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\HomeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\StorageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

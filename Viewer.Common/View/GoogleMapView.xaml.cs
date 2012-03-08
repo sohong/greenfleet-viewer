@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Viewer.View {
+namespace Viewer.Common.View {
 
     /// <summary>
     /// Interaction logic for GoogleMapView.xaml

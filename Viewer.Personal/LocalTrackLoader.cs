@@ -12,8 +12,8 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Viewer.Loader;
-using Viewer.Model;
+using Viewer.Common.Loader;
+using Viewer.Common.Model;
 using System.IO;
 
 namespace Viewer.Personal {

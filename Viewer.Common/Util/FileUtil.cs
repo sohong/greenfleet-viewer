@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace SilkRiver {
+namespace Viewer.Common.Util {
 
     /// <summary>
     /// File 관련 유틸리티들.
