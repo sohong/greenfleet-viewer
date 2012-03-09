@@ -15,6 +15,7 @@ using System.Text;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Viewer.Personal.Model;
+using Viewer.Common.Util;
 
 namespace Viewer.Personal {
 
@@ -26,6 +27,7 @@ namespace Viewer.Personal {
     
         public void Initialize() {
             Debug.WriteLine("Personal Module initialize...");
+            LogUtil.Debug("Personal Module initialize...");
             PersonalDomain.Domain.Start();
         }
     }

@@ -25,6 +25,13 @@ namespace Viewer.Personal.Model {
     /// </summary>
     public class Preferences : NotificationObject {
 
+        #region const
+
+        private const string ROOT_ELEMENT = "GreenFleet";
+        
+        #endregion // const
+
+
         #region constructors
 
         public Preferences() {
@@ -94,6 +101,13 @@ namespace Viewer.Personal.Model {
                 return;
             }
 
+            XDocument doc = XDocument.Load(path);
+            XElement root = doc.Root;
+            if (!ROOT_ELEMENT.Equals(root.Name.LocalName)) {
+                throw new Exception("Xml is not a GreenFleet perferences document.");
+            }
+
+            new XmlTransformer().Deserialze(root, this);
             Debug.WriteLine("Preferences loaded.");
         }
 
@@ -105,9 +119,9 @@ namespace Viewer.Personal.Model {
             Debug.WriteLine("Preferences save...");
             
             XDocument doc = new XDocument();
-            XElement root = new XElement("GreenFleet");
+            XElement root = new XElement(ROOT_ELEMENT);
             doc.Add(root);
-            new XmlTransformer().Serialize<Preferences>(this, root);
+            new XmlTransformer().Serialize(this, root);
 
             doc.Save(path);
 

@@ -72,6 +72,8 @@ namespace Viewer.Personal.Test {
             Preferences target = new Preferences();
             string path = "preferences.xml";
             target.Load(path);
+
+            target.Save(path);
         }
     }
 }

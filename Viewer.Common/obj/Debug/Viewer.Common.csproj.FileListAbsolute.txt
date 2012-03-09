@@ -30,3 +30,4 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\o
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.g.resources
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.pdb
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\log4net.dll

@@ -12,7 +12,8 @@
             <Button Content="Open"/>    
         </StackPanel>
         <Grid Grid.Row="1">
-            
+            <TabControl Name="tabMain">
+            </TabControl>   
         </Grid>
         <StatusBar Grid.Row="2">
             <StatusBar.ItemsPanel>

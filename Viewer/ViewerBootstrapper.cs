@@ -20,6 +20,8 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using GreenFleet.Viewer.View;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.Regions;
+using Viewer.Common;
 
 namespace GreenFleet.Viewer {
 
@@ -37,6 +39,10 @@ namespace GreenFleet.Viewer {
 
 
         #region overriden methods
+
+        protected override ILoggerFacade CreateLogger() {
+            return new Log4NetLogger("GFViewer");
+        }
 
         protected override DependencyObject CreateShell() {
             return ServiceLocator.Current.GetInstance<Shell>();
@@ -80,8 +86,8 @@ namespace GreenFleet.Viewer {
         }
 
 
-        protected override ILoggerFacade CreateLogger() {
-            return base.CreateLogger();
+        protected override RegionAdapterMappings ConfigureRegionAdapterMappings() {
+            return base.ConfigureRegionAdapterMappings();
         }
 
         #endregion // overriden methods

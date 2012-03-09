@@ -8,10 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("lib/microsoft.practices.prism.dll")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("lib/microsoft.practices.prism.mefextensions.dll")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("lib/microsoft.practices.prism.mefextensions.pdb")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("lib/microsoft.practices.prism.pdb")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("lib/microsoft.practices.servicelocation.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("log4net.xml")]
 
 
