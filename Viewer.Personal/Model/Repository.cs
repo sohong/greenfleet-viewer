@@ -49,6 +49,9 @@ namespace Viewer.Personal.Model {
         public void Open() {
             LogUtil.Info("Repository open...");
 
+            // 가장 최근 일자의 트랙들을 가져온다.
+
+
             LogUtil.Info("Repository opened.");
         }
 
