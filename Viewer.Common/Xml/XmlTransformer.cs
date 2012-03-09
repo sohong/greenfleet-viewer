@@ -27,56 +27,82 @@ namespace Viewer.Common.Xml {
     /// </summary>
     public class XmlTransformer {
 
+        #region static members
+
+        private static readonly Type[] EMPTY_TYPES = new Type[0];
+        private static readonly object[] EMPTY_OBJECTS = new object[0];
+
+        #endregion // static members
+
+
         #region methods
 
-        public void Serialize<T>(T model, XElement target) {
-            Type t = typeof(T);
+        public void Serialize(object model, XContainer target) {
+            Type t = model.GetType();
             PropertyInfo[] props = t.GetProperties();
             
             foreach (PropertyInfo p in props) {
                 if (!IsTransient(p)) {
                     XElement elt = new XElement(p.Name);
+                    target.Add(elt);
                     object value = p.GetValue(model, null);
 
-                    if (value != null) {
-                        Type pt = p.PropertyType;
-                        if (pt.IsClass && pt != typeof(string)) {
-                            Serialize(value, elt);
-                        } else {
-                            elt.Value = value.ToString();
-                        }
+                    if (value == null) {
+                        elt.Value = "{null}";
+                    } else if (IsObject(p)) {
+                        Serialize(value, elt);
                     } else {
-                        XAttribute attr = new XAttribute("isNull", "true");
-                        elt.Add(attr);
+                        elt.Value = value.ToString();
                     }
-
-                    target.Add(elt);
                 }
             }
         }
 
-        public void Deserialze<T>(XElement source, T model) {
-            Type t = typeof(T);
+        public object Deserialze(XContainer source, object modelOrType) {
+            if (modelOrType == null) {
+                throw new ArgumentNullException("modelOrType");
+            }
+
+            Type t = modelOrType is Type ? (Type)modelOrType : modelOrType.GetType();
             PropertyInfo[] props = t.GetProperties();
+            object model = modelOrType; 
+
+            if (modelOrType is Type) {
+                ConstructorInfo ctor = t.GetConstructor(EMPTY_TYPES);
+                model = ctor.Invoke(EMPTY_OBJECTS);
+            }
 
             foreach (PropertyInfo p in props) {
                 if (!IsTransient(p)) {
-                    Type pt = p.PropertyType;
+                    XElement elt = source.Element(p.Name);
+                    if (elt != null) {
+                        Type pt = p.PropertyType;
+                        string s = elt.Value;
+                        object val = null;
 
-                    if (pt.IsClass && pt != typeof(string)) {
-                        if (p.CanWrite) {
-                            XAttribute attr = source.Attribute("isNull");
-                            if (attr != null) {
+                        if ("{null}".Equals(s, StringComparison.InvariantCultureIgnoreCase)) {
+                            val = null;
+                        } else if (IsObject(p)) {
+                            val = p.GetValue(model, null);
+                            val = Deserialze(elt, (val != null) ? val : pt);
+                        } else if (pt.IsEnum) {
+                            try {
+                                val = Enum.Parse(pt, s, true);
+                            } catch (Exception) {
+                                val = Enum.ToObject(pt, 0);
                             }
-
-                        } else if (p.CanRead) {
+                        } else {
+                            val = Convert.ChangeType(s, pt);
                         }
 
-                    } else {
-
+                        if (p.CanWrite) {
+                            p.SetValue(model, val, EMPTY_OBJECTS);
+                        }
                     }
                 }
             }
+
+            return model;
         }
 
         #endregion // methods
@@ -86,6 +112,11 @@ namespace Viewer.Common.Xml {
 
         private bool IsTransient(PropertyInfo prop) {
             return ObjectUtil.HasAttr(prop.GetCustomAttributes(false), typeof(TransientAttribute));
+        }
+
+        private bool IsObject(PropertyInfo prop) {
+            Type t = prop.PropertyType;
+            return t.IsClass && t != typeof(string);
         }
 
         #endregion // internal methods
