@@ -78,7 +78,9 @@ namespace Viewer.Personal.Model {
         #region methods
 
         public void Start() {
+            LogUtil.Info("Personal Domain start...");
             m_preferences.Load(Path.Combine(FileUtil.GetAppFolder(), PREFERS_PATH));
+            m_repository.Open();
         }
 
         #endregion // methods

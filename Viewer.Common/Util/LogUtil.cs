@@ -40,7 +40,11 @@ namespace Viewer.Common.Util {
 
         private static void Log(string message, Category category) {
             ILoggerFacade logger = (ILoggerFacade)ServiceLocator.Current.GetInstance(typeof(ILoggerFacade));
-            logger.Log(message, category, Priority.None);
+            if (logger != null) {
+                logger.Log(message, category, Priority.None);
+            } else {
+                System.Diagnostics.Debug.WriteLine(message);
+            }
         }
     }
 }

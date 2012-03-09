@@ -26,6 +26,7 @@ namespace Viewer.Common.Model {
         #region fields
 
         private ObservableCollection<TrackPoint> m_points;
+        private ObservableCollection<TrackImpulse> m_impulses;
         
         #endregion // fields
 
@@ -34,6 +35,7 @@ namespace Viewer.Common.Model {
 
         public Track() {
             m_points = new ObservableCollection<TrackPoint>();
+            m_impulses = new ObservableCollection<TrackImpulse>();
         }
 
         #endregion // constructors
@@ -42,24 +44,50 @@ namespace Viewer.Common.Model {
         #region properties
 
         /// <summary>
-        /// 생성일시.
+        /// 시작 시각.
         /// </summary>
-        public DateTime CreateDate {
-            get { return m_createDate; }
+        public DateTime StartTime {
+            get { return m_startTime; }
             set {
-                if (value != m_createDate) {
-                    m_createDate = value;
-                    RaisePropertyChanged(() => CreateDate);
+                if (value != m_startTime) {
+                    m_startTime = value;
+                    RaisePropertyChanged(() => StartTime);
                 }
             }
         }
-        private DateTime m_createDate;
+        private DateTime m_startTime;
+
+        /// <summary>
+        /// 종료 시각.
+        /// </summary>
+        public DateTime EndTime {
+            get { return m_endTime; }
+            set {
+                if (value != m_endTime) {
+                    m_endTime = value;
+                    RaisePropertyChanged(() => EndTime);
+                }
+            }
+        }
+        private DateTime m_endTime;
+
+        /// <summary>
+        /// 동영상 파일 경로.
+        /// </summary>
+        public string MovieFile { get; set; }
 
         /// <summary>
         /// Track points
         /// </summary>
         public ObservableCollection<TrackPoint> Points {
             get { return m_points; }
+        }
+
+        /// <summary>
+        /// Track Impulses
+        /// </summary>
+        public ObservableCollection<TrackImpulse> Impulses {
+            get { return m_impulses; }
         }
 
         #endregion // properties

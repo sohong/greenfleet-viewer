@@ -72,7 +72,9 @@
       <Name>Viewer.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Doc\Repository 구성.txt" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\RepositoryView.resx">
       <DependentUpon>RepositoryView.cs</DependentUpon>

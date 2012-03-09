@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Viewer.Common.Model;
+using Viewer.Common.Util;
 
 namespace Viewer.Personal.Model {
     
@@ -46,6 +47,9 @@ namespace Viewer.Personal.Model {
         /// Repository를 연다.
         /// </summary>
         public void Open() {
+            LogUtil.Info("Repository open...");
+
+            LogUtil.Info("Repository opened.");
         }
 
         /// <summary>
@@ -72,7 +76,14 @@ namespace Viewer.Personal.Model {
             return null;
         }
 
+        private Track LoadTrack(DateTime time) {
+            return null;
+        }
+
         private void SaveTracks(IEnumerable<Track> tracks) {
+        }
+
+        private void SaveTrack(Track track) {
         }
 
         #endregion // internal methods
