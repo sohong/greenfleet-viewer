@@ -31,3 +31,7 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\o
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\log4net.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\GFLib.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\Apache.NMS.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\Apache.NMS.ActiveMQ.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\GFLib.pdb

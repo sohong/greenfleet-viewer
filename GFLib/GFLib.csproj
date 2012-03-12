@@ -60,6 +60,7 @@
   <ItemGroup>
     <Content Include="Lib\Apache.NMS.ActiveMQ.dll" />
     <Content Include="Lib\Apache.NMS.dll" />
+    <Content Include="Lib\log4net.dll" />
     <Content Include="Lib\Microsoft.Maps.MapControl.WPF.dll" />
   </ItemGroup>
   <ItemGroup />

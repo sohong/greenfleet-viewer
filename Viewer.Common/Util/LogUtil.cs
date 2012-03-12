@@ -22,6 +22,21 @@ namespace Viewer.Common.Util {
     /// </summary>
     public class LogUtil {
 
+        #region static fileds
+
+        private static ILoggerFacade m_logger;
+
+        #endregion // static fields
+
+
+        #region static methods
+
+        public static void InitLog4Net(string logName) {
+            if (m_logger == null) {
+                m_logger = new Log4NetLogger(logName);
+            }
+        }
+
         public static void Debug(string message) {
             Log(message, Category.Debug);
         }
@@ -38,13 +53,23 @@ namespace Viewer.Common.Util {
             Log(message, Category.Exception);
         }
 
+        #endregion // static methods
+
+
+        #region // static internal methods
+
         private static void Log(string message, Category category) {
-            ILoggerFacade logger = (ILoggerFacade)ServiceLocator.Current.GetInstance(typeof(ILoggerFacade));
-            if (logger != null) {
-                logger.Log(message, category, Priority.None);
+            if (m_logger == null) {
+                m_logger = (ILoggerFacade)ServiceLocator.Current.GetInstance(typeof(ILoggerFacade));
+            }
+
+            if (m_logger != null) {
+                m_logger.Log(message, category, Priority.None);
             } else {
                 System.Diagnostics.Debug.WriteLine(message);
             }
         }
+
+        #endregion // static internal methods
     }
 }

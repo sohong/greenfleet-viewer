@@ -10,15 +10,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <MediaElement Name="mediaMain"/>
+        <MediaElement Name="mediaMain" LoadedBehavior="Manual" UnloadedBehavior="Stop" MediaOpened="mediaMain_MediaOpened" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3">
-            <Button Margin="2" Padding="2">Play</Button>
+            <Button Name="btnPlay" Margin="2" Padding="2" Click="btnPlay_Click">Play</Button>
             <Button Margin="2" Padding="2">Stop</Button>
             <Button Margin="2" Padding="2">Pause</Button>
             <Button Margin="2" Padding="2">Home</Button>
             <Button Margin="2" Padding="2">Previous</Button>
             <Button Margin="2" Padding="2">Next</Button>
             <Button Margin="2" Padding="2">End</Button>
+            <Slider Name="timelineSlider" Margin="2" Width="200"/>
         </StackPanel>
     </Grid>
 </UserControl>
