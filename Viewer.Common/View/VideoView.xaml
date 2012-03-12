@@ -10,16 +10,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <MediaElement Name="mediaMain" LoadedBehavior="Manual" UnloadedBehavior="Stop" MediaOpened="mediaMain_MediaOpened" />
+        <MediaElement Name="mediaMain" LoadedBehavior="Manual" UnloadedBehavior="Stop" MediaOpened="mediaMain_MediaOpened" MediaEnded="mediaMain_MediaEnded" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3">
             <Button Name="btnPlay" Margin="2" Padding="2" Click="btnPlay_Click">Play</Button>
-            <Button Margin="2" Padding="2">Stop</Button>
-            <Button Margin="2" Padding="2">Pause</Button>
-            <Button Margin="2" Padding="2">Home</Button>
-            <Button Margin="2" Padding="2">Previous</Button>
-            <Button Margin="2" Padding="2">Next</Button>
-            <Button Margin="2" Padding="2">End</Button>
-            <Slider Name="timelineSlider" Margin="2" Width="200"/>
+            <Button Name="btnStop" Margin="2" Padding="2" Click="btnStop_Click">Stop</Button>
+            <Button Name="btnPause" Margin="2" Padding="2" Click="btnPause_Click">Pause</Button>
+            <Button Name="btnHome" Margin="2" Padding="2" Click="btnHome_Click">Home</Button>
+            <Button Name="btnPrevious" Margin="2" Padding="2" Click="btnPrevious_Click" Content=" &lt; "></Button>
+            <Button Name="btnNext" Margin="2" Padding="2" Click="btnNext_Click" Content=" &gt; "></Button>
+            <Button Name="btnEnd" Margin="2" Padding="2" Click="btnEnd_Click">End</Button>
+            <Slider Name="timelineSlider" Margin="2" Width="200" ValueChanged="timelineSlider_ValueChanged" PreviewMouseUp="timelineSlider_PreviewMouseUp" Value="{Binding ElementName=mediaMain, Path=Position}" PreviewMouseDown="timelineSlider_PreviewMouseDown" IsSnapToTickEnabled="False" />
         </StackPanel>
     </Grid>
 </UserControl>
