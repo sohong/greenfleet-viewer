@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="566">
+             d:DesignHeight="396" d:DesignWidth="646" Loaded="UserControl_Loaded">
     <Grid>
-            
+        <m:Map Name="mapView" CredentialsProvider="AosumA1E-mxjZ4_ALxdHLCOoJ9a_erVc6ss4L6bifCa4-rQK_HbnRzJq3C8jIVyD" ZoomLevel="7" />
     </Grid>
 </UserControl>

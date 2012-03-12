@@ -35,3 +35,5 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\b
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\Apache.NMS.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\Apache.NMS.ActiveMQ.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\GFLib.pdb
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\Microsoft.Maps.MapControl.WPF.xml

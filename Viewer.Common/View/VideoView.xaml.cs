@@ -42,7 +42,7 @@ namespace Viewer.Common.View {
 
         #region events 
 
-        public event Action<VideoView, double, double> PositionChanged;
+        public event Action<VideoView, double/* length */, double/* current */> PositionChanged;
 
         #endregion // events
 
@@ -84,6 +84,12 @@ namespace Viewer.Common.View {
             set { mediaMain.Source = value; }
         }
 
+        public int Steps {
+            get { return m_steps; }
+            set { m_steps = Math.Max(1, Math.Min(100, value)); }
+        }
+        private int m_steps = 20;
+
         #endregion // properties
 
 
@@ -109,6 +115,16 @@ namespace Viewer.Common.View {
 
         public void Home() {
             mediaMain.Position = TimeSpan.FromSeconds(0);
+        }
+
+        public void Previous() {
+            double v = Math.Max(0, mediaMain.Position.TotalMilliseconds - m_videoLength / Steps);
+            mediaMain.Position = TimeSpan.FromMilliseconds(v);
+        }
+
+        public void Next() {
+            double v = Math.Min(m_videoLength, mediaMain.Position.TotalMilliseconds + m_videoLength / Steps);
+            mediaMain.Position = TimeSpan.FromMilliseconds(v);
         }
 
         public void End() {
@@ -151,23 +167,15 @@ namespace Viewer.Common.View {
         }
 
         private void btnPrevious_Click(object sender, RoutedEventArgs e) {
-            
+            Previous(); 
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e) {
-
+            Next();
         }
 
         private void btnEnd_Click(object sender, RoutedEventArgs e) {
             End();
-        }
-
-        private void timelineSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            //LogUtil.Debug("timeLineSlider.ValueChanged: " + timelineSlider.Value);
-            //mediaMain.Position = TimeSpan.FromMilliseconds(timelineSlider.Value);
-        }
-
-        private void timelineSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
         }
 
         private void timelineSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e) {
