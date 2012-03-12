@@ -17,7 +17,7 @@ using Microsoft.Practices.Prism.ViewModel;
 namespace Viewer.Common.Model {
 
     /// <summary>
-    /// Track을 구성하는 한 지점 정보.
+    /// Track을 구성하는 한 시점 정보.
     /// </summary>
     public class TrackPoint : NotificationObject {
 
@@ -32,7 +32,21 @@ namespace Viewer.Common.Model {
         #region properties
 
         /// <summary>
-        /// 위도.
+        /// Sampling 시각.
+        /// </summary>
+        public DateTime PointTime {
+            get { return m_pointTime; }
+            set {
+                if (value != m_pointTime) {
+                    m_pointTime = value;
+                    RaisePropertyChanged(() => PointTime);
+                }
+            }
+        }
+        private DateTime m_pointTime;
+
+        /// <summary>
+        /// GPS 샘플링 위도.
         /// </summary>
         public double Lattitude {
             get { return m_lattitude; }
@@ -46,7 +60,7 @@ namespace Viewer.Common.Model {
         private double m_lattitude = 0.0;
 
         /// <summary>
-        /// 경도.
+        /// GPS 샘플링 경도.
         /// </summary>
         public double Longitude {
             get { return m_longitude; }
@@ -60,7 +74,7 @@ namespace Viewer.Common.Model {
         private double m_longitude = 0.0;
 
         /// <summary>
-        /// 가속도.
+        /// GPS 샘플링 속도.
         /// </summary>
         public double Velocity {
             get { return m_velocity; }

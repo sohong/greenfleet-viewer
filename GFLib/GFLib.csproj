@@ -55,22 +55,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lib\Apache.NMS.ActiveMQ.Test.nunit" />
     <None Include="Lib\nmsprovider-test.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\Apache.NMS.ActiveMQ.dll" />
-    <Content Include="Lib\Apache.NMS.ActiveMQ.pdb" />
-    <Content Include="Lib\Apache.NMS.ActiveMQ.Test.dll" />
-    <Content Include="Lib\Apache.NMS.ActiveMQ.Test.pdb" />
-    <Content Include="Lib\Apache.NMS.ActiveMQ.Test.xml" />
-    <Content Include="Lib\Apache.NMS.ActiveMQ.xml" />
     <Content Include="Lib\Apache.NMS.dll" />
-    <Content Include="Lib\Apache.NMS.pdb" />
-    <Content Include="Lib\Apache.NMS.Test.dll" />
-    <Content Include="Lib\Apache.NMS.Test.pdb" />
-    <Content Include="Lib\Apache.NMS.Test.xml" />
-    <Content Include="Lib\Apache.NMS.xml" />
+    <Content Include="Lib\Microsoft.Maps.MapControl.WPF.dll" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,10 +13,6 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\bin\Debug
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\bin\Debug\GFLib.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\bin\Debug\Apache.NMS.ActiveMQ.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\bin\Debug\Apache.NMS.dll
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\bin\Debug\Apache.NMS.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\bin\Debug\Apache.NMS.xml
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\bin\Debug\Apache.NMS.ActiveMQ.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\bin\Debug\Apache.NMS.ActiveMQ.xml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\obj\Debug\GFLib.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\GFLib\obj\Debug\GFLib.pdb

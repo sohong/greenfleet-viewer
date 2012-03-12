@@ -63,7 +63,7 @@
     <Compile Include="Loader\ITrackLoader.cs" />
     <Compile Include="Loader\TrackLoaderBase.cs" />
     <Compile Include="Log4NetLogger.cs" />
-    <Compile Include="Model\TrackImpulse.cs" />
+    <Compile Include="Model\Incident.cs" />
     <Compile Include="Model\RetentionMode.cs" />
     <Compile Include="Model\Track.cs" />
     <Compile Include="Model\TrackPoint.cs" />

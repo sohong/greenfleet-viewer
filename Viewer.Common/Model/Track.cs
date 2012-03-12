@@ -26,7 +26,7 @@ namespace Viewer.Common.Model {
         #region fields
 
         private ObservableCollection<TrackPoint> m_points;
-        private ObservableCollection<TrackImpulse> m_impulses;
+        private ObservableCollection<Incident> m_incidents;
         
         #endregion // fields
 
@@ -35,13 +35,55 @@ namespace Viewer.Common.Model {
 
         public Track() {
             m_points = new ObservableCollection<TrackPoint>();
-            m_impulses = new ObservableCollection<TrackImpulse>();
+            m_incidents = new ObservableCollection<Incident>();
         }
 
         #endregion // constructors
 
 
         #region properties
+
+        /// <summary>
+        /// 단말기 id
+        /// </summary>
+        public string TerminalId {
+            get { return m_terminalId; }
+            set {
+                if (value != m_terminalId) {
+                    m_terminalId = value;
+                    RaisePropertyChanged(() => TerminalId);
+                }
+            }
+        }
+        private string m_terminalId;
+
+        /// <summary>
+        /// 차량 id
+        /// </summary>
+        public string VehicleId {
+            get { return m_vehicleId; }
+            set {
+                if (value != m_vehicleId) {
+                    m_vehicleId = value;
+                    RaisePropertyChanged(() => VehicleId);
+                }
+            }
+        }
+        private string m_vehicleId;
+
+        /// <summary>
+        /// 운전자 id
+        /// </summary>
+        public string DriverId {
+            get { return m_driverId; }
+            set {
+                if (value != m_driverId) {
+                    m_driverId = value;
+                    RaisePropertyChanged(() => DriverId);
+                }
+            }
+        }
+        private string m_driverId;
 
         /// <summary>
         /// 시작 시각.
@@ -86,8 +128,8 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// Track Impulses
         /// </summary>
-        public ObservableCollection<TrackImpulse> Impulses {
-            get { return m_impulses; }
+        public ObservableCollection<Incident> Incidents {
+            get { return m_incidents; }
         }
 
         #endregion // properties
