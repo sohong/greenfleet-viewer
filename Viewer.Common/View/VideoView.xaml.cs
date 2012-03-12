@@ -24,12 +24,19 @@ using System.Windows.Shapes;
 namespace Viewer.Common.View {
 
     /// <summary>
-    /// Interaction logic for VideoView.xaml
     /// </summary>
     public partial class VideoView : UserControl {
-    
+
+        #region constructor
+
         public VideoView() {
             InitializeComponent();
         }
+
+        #endregion // constructor
+
+
+        #region properties
+        #endregion // properties
     }
 }

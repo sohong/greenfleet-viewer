@@ -24,7 +24,6 @@ using System.Windows.Shapes;
 namespace Viewer.Common.View {
 
     /// <summary>
-    /// Interaction logic for BingMapView.xaml
     /// </summary>
     public partial class BingMapView : UserControl {
 
