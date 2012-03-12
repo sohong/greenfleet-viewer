@@ -1,0 +1,19 @@
+﻿<Window x:Class="Viewer.Common.Tester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:gf="clr-namespace:Viewer.Common.View;assembly=Viewer.Common"
+        Title="Viewer.Common.Tester" Height="460" Width="705" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Video">
+                <gf:VideoView Name="videoView"/>    
+            </TabItem>
+            <TabItem Header="BingMap">
+                <gf:BingMapView Name="bingView"/>
+            </TabItem>
+            <TabItem Header="GoogleMap">
+                <gf:GoogleMapView Name="googleView"/>
+            </TabItem>
+        </TabControl>    
+    </Grid>
+</Window>
