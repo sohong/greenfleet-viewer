@@ -19,7 +19,7 @@
             <Button Name="btnPrevious" Margin="2" Padding="2" Click="btnPrevious_Click" Content=" &lt; "></Button>
             <Button Name="btnNext" Margin="2" Padding="2" Click="btnNext_Click" Content=" &gt; "></Button>
             <Button Name="btnEnd" Margin="2" Padding="2" Click="btnEnd_Click">End</Button>
-            <Slider Name="timelineSlider" Margin="2" Width="200" ValueChanged="timelineSlider_ValueChanged" PreviewMouseUp="timelineSlider_PreviewMouseUp" Value="{Binding ElementName=mediaMain, Path=Position}" PreviewMouseDown="timelineSlider_PreviewMouseDown" IsSnapToTickEnabled="False" />
+            <Slider Name="timelineSlider" Margin="2" Width="200" ValueChanged="timelineSlider_ValueChanged" PreviewMouseUp="timelineSlider_PreviewMouseUp" PreviewMouseDown="timelineSlider_PreviewMouseDown" IsMoveToPointEnabled="True"/>
         </StackPanel>
     </Grid>
 </UserControl>

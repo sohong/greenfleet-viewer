@@ -23,6 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Viewer.Common.Util;
 using System.Windows.Threading;
+using System.Windows.Controls.Primitives;
 
 namespace Viewer.Common.View {
 
@@ -54,11 +55,19 @@ namespace Viewer.Common.View {
             m_timer = new DispatcherTimer();
             m_timer.Interval = TimeSpan.FromMilliseconds(50);
             m_timer.Tick += new EventHandler(timer_Tick);
+
+            timelineSlider.AddHandler(Slider.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler((obj, args) => {
+                if (VisualUtil.FindAncestor<Thumb>((DependencyObject)args.OriginalSource) != null) {
+                    m_sliding = true;
+                } else {
+                    mediaMain.Position = TimeSpan.FromMilliseconds(timelineSlider.Value);
+                }
+            }), true);
         }
 
         void timer_Tick(object sender, EventArgs e) {
             if (!m_sliding) {
-                timelineSlider.Value = Math.Max(timelineSlider.Value, mediaMain.Position.TotalMilliseconds);
+                timelineSlider.Value = mediaMain.Position.TotalMilliseconds;
             }
             if (PositionChanged != null) {
                 PositionChanged(this, m_videoLength, mediaMain.Position.TotalMilliseconds);
@@ -109,6 +118,11 @@ namespace Viewer.Common.View {
         #endregion // methods
 
 
+        #region internal methods
+
+        #endregion // internal methods
+
+
         #region event handlers
 
         private void mediaMain_MediaOpened(object sender, RoutedEventArgs e) {
@@ -154,13 +168,13 @@ namespace Viewer.Common.View {
         }
 
         private void timelineSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
-            m_sliding = true;
         }
 
         private void timelineSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e) {
-            mediaMain.Position = TimeSpan.FromMilliseconds(timelineSlider.Value);
-            mediaMain.Play();
-            m_sliding = false;
+            if (m_sliding) {
+                mediaMain.Position = TimeSpan.FromMilliseconds(timelineSlider.Value);
+                m_sliding = false;
+            }
         }
 
         #endregion // event handlers
