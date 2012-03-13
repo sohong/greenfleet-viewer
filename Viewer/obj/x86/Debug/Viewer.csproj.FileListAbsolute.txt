@@ -43,3 +43,4 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debu
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\Debug\Viewer_Content.g.cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\ffmpeg.exe
