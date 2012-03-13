@@ -61,6 +61,7 @@ namespace Viewer.Common.Tester {
             videoView.Source = new Uri(@"w.wmv", UriKind.RelativeOrAbsolute);
 
             // bing map
+            bingView.Track = track;
 
             // googl map
 
