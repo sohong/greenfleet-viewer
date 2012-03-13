@@ -8,12 +8,12 @@
              d:DesignHeight="418" d:DesignWidth="580" Loaded="UserControl_Loaded"> 
     <Grid>
         <charting:Chart Name="chartMain">
-            <charting:ColumnSeries Name="seriesX" DependentValuePath="PointTime" IndependentValuePath="ImpulseX" ItemsSource="{Binding}" />
-            <charting:ColumnSeries Name="seriesY" DependentValuePath="PointTime" IndependentValuePath="ImpulseY" ItemsSource="{Binding}" />
-            <charting:ColumnSeries Name="seriesZ" DependentValuePath="PointTime" IndependentValuePath="ImpulseX" ItemsSource="{Binding}" />
+            <charting:LineSeries Name="seriesX" DependentValuePath="AccelerationX" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel X" />
+            <charting:LineSeries Name="seriesY" DependentValuePath="AccelerationY" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel Y" />
+            <charting:LineSeries Name="seriesZ" DependentValuePath="AccelerationZ" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel Z" />
             <charting:Chart.Axes>
-                <charting:CategoryAxis/>
-                <charting:LinearAxis/>
+                <charting:DateTimeAxis Orientation="X" Location="Bottom"/>
+                <charting:LinearAxis Orientation="Y" Location="Left" ShowGridLines="True"/>
             </charting:Chart.Axes>
         </charting:Chart>
     </Grid>

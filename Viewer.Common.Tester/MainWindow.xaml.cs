@@ -22,6 +22,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Viewer.Common.Util;
 using Viewer.Common.Model;
+using Viewer.Common.Loader;
 
 namespace Viewer.Common.Tester {
 
@@ -41,8 +42,8 @@ namespace Viewer.Common.Tester {
         #region internal methods
 
         private Track LoadTrack() {
-            Track track = new Track();
-
+            string source = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"sample\all_2012_03_11_20_37_31.inc");
+            Track track = new LocalTrackLoader().Load(source);
             return track;
         }
         
