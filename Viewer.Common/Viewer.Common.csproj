@@ -75,6 +75,7 @@
     <Compile Include="Util\FileUtil.cs" />
     <Compile Include="Util\LogUtil.cs" />
     <Compile Include="Util\ObjectUtil.cs" />
+    <Compile Include="Util\VideoUtil.cs" />
     <Compile Include="Util\VisualUtil.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\BingMapView.xaml.cs">

@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("ffmpeg.exe")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("log4net.xml")]
 
 
