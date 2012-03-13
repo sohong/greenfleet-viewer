@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Viewer.Common.View.ImpactView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="418" d:DesignWidth="580" Loaded="UserControl_Loaded"> 
+    <Grid>
+        <charting:Chart Name="chartMain">
+            <charting:ColumnSeries Name="seriesX" DependentValuePath="PointTime" IndependentValuePath="ImpulseX" ItemsSource="{Binding}" />
+            <charting:ColumnSeries Name="seriesY" DependentValuePath="PointTime" IndependentValuePath="ImpulseY" ItemsSource="{Binding}" />
+            <charting:ColumnSeries Name="seriesZ" DependentValuePath="PointTime" IndependentValuePath="ImpulseX" ItemsSource="{Binding}" />
+        </charting:Chart>
+    </Grid>
+</UserControl>

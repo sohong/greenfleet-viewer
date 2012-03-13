@@ -26,9 +26,12 @@ namespace Viewer.Personal {
         #region ITrackLoader
 
         public Track Load(object source) {
+            /*
             FileStream stream = new FileStream((string)source, FileMode.Open);
             Track track = LoadFromStream(stream);
             return track;
+             */
+            return null;
         }
 
         #endregion // ITrackLoader

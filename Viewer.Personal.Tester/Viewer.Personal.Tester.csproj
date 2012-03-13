@@ -93,6 +93,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="sample\all_2012_03_11_20_37_31.264" />
+    <None Include="sample\all_2012_03_11_20_37_31.log" />
+    <None Include="sample\all_2012_03_11_20_38_00.264" />
+    <None Include="sample\all_2012_03_11_20_38_00.log" />
+    <None Include="sample\event_2012_03_11_20_38_31.264" />
+    <None Include="sample\event_2012_03_11_20_38_31.log" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Viewer.Common\Viewer.Common.csproj">
@@ -108,6 +114,9 @@
     <Content Include="ffmpeg.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="sample\all_2012_03_11_20_37_31.inc" />
+    <Content Include="sample\all_2012_03_11_20_38_00.inc" />
+    <Content Include="sample\event_2012_03_11_20_38_31.inc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

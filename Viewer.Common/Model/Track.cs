@@ -26,7 +26,6 @@ namespace Viewer.Common.Model {
         #region fields
 
         private ObservableCollection<TrackPoint> m_points;
-        private ObservableCollection<Incident> m_incidents;
         
         #endregion // fields
 
@@ -35,7 +34,6 @@ namespace Viewer.Common.Model {
 
         public Track() {
             m_points = new ObservableCollection<TrackPoint>();
-            m_incidents = new ObservableCollection<Incident>();
         }
 
         #endregion // constructors
@@ -123,13 +121,6 @@ namespace Viewer.Common.Model {
         /// </summary>
         public ObservableCollection<TrackPoint> Points {
             get { return m_points; }
-        }
-
-        /// <summary>
-        /// Track Impulses
-        /// </summary>
-        public ObservableCollection<Incident> Incidents {
-            get { return m_incidents; }
         }
 
         #endregion // properties

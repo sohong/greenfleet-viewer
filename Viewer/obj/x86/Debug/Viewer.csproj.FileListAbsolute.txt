@@ -44,3 +44,7 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\ffmpeg.exe
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\WPFToolkit.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.pdb
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\WPFToolkit.pdb
