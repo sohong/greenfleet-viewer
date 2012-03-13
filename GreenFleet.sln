@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransMonitor", "TransMonito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer.Common.Tester", "Viewer.Common.Tester\Viewer.Common.Tester.csproj", "{BFE87827-9FB0-4AD3-B25B-FCD754348FD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hatio.UI.WPF", "Hatio.UI.WPF\Hatio.UI.WPF.csproj", "{494516DC-E887-4F5B-AB04-F06489526164}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GreenFleet.vsmdi
@@ -205,6 +207,18 @@ Global
 		{BFE87827-9FB0-4AD3-B25B-FCD754348FD4}.Release|Win32.ActiveCfg = Release|x86
 		{BFE87827-9FB0-4AD3-B25B-FCD754348FD4}.Release|x86.ActiveCfg = Release|x86
 		{BFE87827-9FB0-4AD3-B25B-FCD754348FD4}.Release|x86.Build.0 = Release|x86
+		{494516DC-E887-4F5B-AB04-F06489526164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Release|Win32.ActiveCfg = Release|Any CPU
+		{494516DC-E887-4F5B-AB04-F06489526164}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

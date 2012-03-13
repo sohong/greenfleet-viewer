@@ -15,7 +15,7 @@
                 <gf:GoogleMapView Name="googleView"/>
             </TabItem>
             <TabItem Header="Chart">
-                <gf:ImpactView Name="impactView"/>
+                <gf:AccelerationView Name="accelView"/>
             </TabItem>
         </TabControl>    
     </Grid>

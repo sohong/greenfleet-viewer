@@ -26,7 +26,7 @@ namespace Viewer.Common.View {
 
     /// <summary>
     /// </summary>
-    public partial class ImpactView : UserControl {
+    public partial class AccelerationView : UserControl {
 
         #region static members
 
@@ -37,7 +37,7 @@ namespace Viewer.Common.View {
 
         #region constructor
 
-        public ImpactView() {
+        public AccelerationView() {
             InitializeComponent();
         }
 

@@ -15,6 +15,9 @@ using Viewer.Common.Model;
 
 namespace Viewer.Common.Loader {
 
+    /// <summary>
+    /// 임의의 소스에서 트랙정보를 읽어들인다.
+    /// </summary>
     public interface ITrackLoader {
 
         Track Load(object source);

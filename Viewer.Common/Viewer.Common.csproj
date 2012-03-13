@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Loader\ITrackLoader.cs" />
+    <Compile Include="Loader\LocalTrackLoader.cs" />
     <Compile Include="Loader\TrackLoaderBase.cs" />
     <Compile Include="Log4NetLogger.cs" />
     <Compile Include="Model\Incident.cs" />
@@ -88,8 +89,8 @@
     <Compile Include="View\GoogleMapView.xaml.cs">
       <DependentUpon>GoogleMapView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ImpactView.xaml.cs">
-      <DependentUpon>ImpactView.xaml</DependentUpon>
+    <Compile Include="View\AccelerationView.xaml.cs">
+      <DependentUpon>AccelerationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\VideoView.xaml.cs">
       <DependentUpon>VideoView.xaml</DependentUpon>
@@ -111,7 +112,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ImpactView.xaml">
+    <Page Include="View\AccelerationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

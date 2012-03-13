@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Viewer.Common.Util;
+using Viewer.Common.Model;
 
 namespace Viewer.Common.Tester {
 
@@ -37,13 +38,33 @@ namespace Viewer.Common.Tester {
         #endregion // constructors
 
 
+        #region internal methods
+
+        private Track LoadTrack() {
+            Track track = new Track();
+
+            return track;
+        }
+        
+        #endregion // internal methods
+
+
         #region event handlers
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             LogUtil.InitLog4Net("Viewer.Common.Tester");
+            Track track = LoadTrack();
 
+            // video
             //videoView.Source = new Uri(@".\v.mp4", UriKind.RelativeOrAbsolute);
             videoView.Source = new Uri(@"w.wmv", UriKind.RelativeOrAbsolute);
+
+            // bing map
+
+            // googl map
+
+            // chart
+            accelView.Track = track;
         }
 
         #endregion // event handlers

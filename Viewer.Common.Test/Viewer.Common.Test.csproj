@@ -69,6 +69,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocalTrackLoaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrackLoaderBaseTest.cs" />
     <Compile Include="XmlTransformerTest.cs" />
@@ -84,7 +85,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="points.inc">
+    <Content Include="sample\all_2012_03_11_20_37_31.inc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sample\track_log.inc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

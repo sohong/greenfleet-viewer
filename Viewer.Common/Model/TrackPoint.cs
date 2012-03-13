@@ -87,62 +87,47 @@ namespace Viewer.Common.Model {
         }
         private double m_velocity = 0.0;
 
-
-        /// <summary>
-        /// 감지 충격량 절대값.
-        /// </summary>
-        public double Impluse {
-            get { return m_impulse; }
-            set {
-                if (value != m_impulse) {
-                    m_impulse = value;
-                    RaisePropertyChanged(() => Impluse);
-                }
-            }
-        }
-        private double m_impulse;
-
         /// <summary>
         /// 감지 충격량 X축
         /// </summary>
-        public double ImpulseX {
-            get { return m_impulseX; }
+        public double AccelerationX {
+            get { return m_accelerationX; }
             set {
-                if (value != m_impulseX) {
-                    m_impulseX = value;
-                    RaisePropertyChanged(() => ImpulseX);
+                if (value != m_accelerationX) {
+                    m_accelerationX = value;
+                    RaisePropertyChanged(() => AccelerationX);
                 }
             }
         }
-        private double m_impulseX;
+        private double m_accelerationX;
 
         /// <summary>
         /// 감지 충격량 Y축
         /// </summary>
-        public double ImpulseY {
-            get { return m_impulseY; }
+        public double AccelerationY {
+            get { return m_accelerationY; }
             set {
-                if (value != m_impulseY) {
-                    m_impulseY = value;
-                    RaisePropertyChanged(() => ImpulseY);
+                if (value != m_accelerationY) {
+                    m_accelerationY = value;
+                    RaisePropertyChanged(() => AccelerationY);
                 }
             }
         }
-        private double m_impulseY;
+        private double m_accelerationY;
 
         /// <summary>
         /// 감지 충격량 Z축
         /// </summary>
-        public double ImpulseZ {
-            get { return m_impulseZ; }
+        public double AccelerationZ {
+            get { return m_accelerationZ; }
             set {
-                if (value != m_impulseZ) {
-                    m_impulseZ = value;
-                    RaisePropertyChanged(() => ImpulseZ);
+                if (value != m_accelerationZ) {
+                    m_accelerationZ = value;
+                    RaisePropertyChanged(() => AccelerationZ);
                 }
             }
         }
-        private double m_impulseZ;
+        private double m_accelerationZ;
 
         #endregion // properties
     }

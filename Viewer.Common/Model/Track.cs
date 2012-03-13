@@ -84,6 +84,20 @@ namespace Viewer.Common.Model {
         private string m_driverId;
 
         /// <summary>
+        /// 파일 생성 일시.
+        /// </summary>
+        public DateTime CreateDate {
+            get { return m_createDate; }
+            set {
+                if (value != m_createDate) {
+                    m_createDate = value;
+                    RaisePropertyChanged(() => CreateDate);
+                }
+            }
+        }
+        private DateTime m_createDate;
+
+        /// <summary>
         /// 시작 시각.
         /// </summary>
         public DateTime StartTime {

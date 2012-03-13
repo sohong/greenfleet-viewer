@@ -23,6 +23,21 @@ namespace Viewer.Common.Loader {
     /// </summary>
     public class TrackLoaderBase {
 
+        #region consts
+
+        private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+        #endregion // consts
+
+
+        #region internal methods
+
+        /// <summary>
+        /// .inc 파일을 읽어 각 라인을 TopicPoint로 생성하고,
+        /// track에 추가한다.
+        /// </summary>
+        /// <param name="track"></param>
+        /// <param name="reader"></param>
         protected void LoadPoints(Track track, TextReader reader) {
             if (track == null)
                 throw new ArgumentNullException("track");
@@ -35,11 +50,20 @@ namespace Viewer.Common.Loader {
                     string[] items = line.Split2(',');
                     if (items.Length >= 7) {
                         TrackPoint p = new TrackPoint();
+                        p.PointTime = DateTime.ParseExact(items[0], DATE_FORMAT, null);
+                        p.Lattitude = Convert.ToDouble(items[1]);
+                        p.Longitude = Convert.ToDouble(items[2]);
+                        p.Velocity = Convert.ToDouble(items[3]);
+                        p.AccelerationX = Convert.ToDouble(items[4]);
+                        p.AccelerationY = Convert.ToDouble(items[5]);
+                        p.AccelerationZ = Convert.ToDouble(items[6]);
 
                         track.Points.Add(p);
                     }
                 }
             }
         }
+
+        #endregion // internal methods
     }
 }

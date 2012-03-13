@@ -1,17 +1,17 @@
 ﻿using Viewer.Common.Loader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Viewer.Common.Model;
 using System.IO;
+using Viewer.Common.Model;
 
 namespace Viewer.Common.Test
 {
     /// <summary>
-    ///This is a test class for TrackLoaderBaseTest and is intended
-    ///to contain all TrackLoaderBaseTest Unit Tests
+    ///This is a test class for LocalTrackLoaderTest and is intended
+    ///to contain all LocalTrackLoaderTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class TrackLoaderBaseTest {
+    public class LocalTrackLoaderTest {
 
 
         private TestContext testContextInstance;
@@ -61,22 +61,17 @@ namespace Viewer.Common.Test
 
 
         /// <summary>
-        ///A test for LoadPoints
+        ///A test for Load
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("Viewer.Common.dll")]
-        public void LoadPointsTest() {
-            TrackLoaderBase_Accessor target = new TrackLoaderBase_Accessor();
-            Track track = new Track();
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            StreamReader reader = new StreamReader(Path.Combine(path, "track_log.inc"));
-            target.LoadPoints(track, reader);
-            Assert.AreEqual(track.Points.Count, 26);
+        public void LoadTest() {
+            LocalTrackLoader loader = new LocalTrackLoader();
+            string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"sample\all_2012_03_11_20_37_31.inc");
+            Track target = loader.Load(source);
+            Assert.IsNotNull(target);
 
-            // 시간 순으로 정렬되어 있는가?
-            for (int i = 1; i < track.Points.Count; i++) {
-                Assert.IsTrue(track.Points[i].PointTime >= track.Points[i - 1].PointTime);
-            }
+            DateTime d = new DateTime(2012, 3, 11, 20, 37, 31);
+            Assert.AreEqual(d, target.CreateDate);
         }
     }
 }
