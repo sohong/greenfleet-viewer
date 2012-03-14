@@ -80,7 +80,7 @@ namespace Viewer.Personal.Model {
         public void Start() {
             LogUtil.Info("Personal Domain start...");
             m_preferences.Load(Path.Combine(FileUtil.GetAppFolder(), PREFERS_PATH));
-            m_repository.Open();
+            m_repository.Open(m_preferences.StorageRoot);
         }
 
         #endregion // methods

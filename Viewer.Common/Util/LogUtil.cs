@@ -25,6 +25,7 @@ namespace Viewer.Common.Util {
         #region static fileds
 
         private static ILoggerFacade m_logger;
+        private static bool m_tracing;
 
         #endregion // static fields
 
@@ -59,8 +60,12 @@ namespace Viewer.Common.Util {
         #region // static internal methods
 
         private static void Log(string message, Category category) {
-            if (m_logger == null) {
-                m_logger = (ILoggerFacade)ServiceLocator.Current.GetInstance(typeof(ILoggerFacade));
+            if (m_logger == null && !m_tracing) {
+                try {
+                    m_logger = (ILoggerFacade)ServiceLocator.Current.GetInstance(typeof(ILoggerFacade));
+                } catch (Exception) {
+                    m_tracing = true;
+                }
             }
 
             if (m_logger != null) {

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using Viewer.ViewModel.Common;
 using Viewer.Personal.Model;
+using System.Windows.Data;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -22,9 +23,17 @@ namespace Viewer.Personal.ViewModel {
     /// </summary>
     public class RepositoryViewModel : ViewModelBase {
 
+        #region fields
+
+        private ListCollectionView m_tracks;
+
+        #endregion // fields
+
+
         #region constructors
 
         public RepositoryViewModel() {
+            m_tracks = Repository.GetTracks();
         }
 
         #endregion // constructors
@@ -34,6 +43,10 @@ namespace Viewer.Personal.ViewModel {
 
         public Repository Repository {
             get { return PersonalDomain.Domain.Repository; }
+        }
+
+        public ListCollectionView Tracks {
+            get { return m_tracks; }
         }
 
         #endregion // properties

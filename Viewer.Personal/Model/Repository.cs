@@ -13,6 +13,9 @@ using System.Linq;
 using System.Text;
 using Viewer.Common.Model;
 using Viewer.Common.Util;
+using System.Collections.ObjectModel;
+using System.Windows.Data;
+using System.IO;
 
 namespace Viewer.Personal.Model {
     
@@ -23,7 +26,8 @@ namespace Viewer.Personal.Model {
 
         #region fields
 
-        private List<Track> m_tracks;
+        private ObservableCollection<Track> m_tracks;
+        private string m_rootPath;
         
         #endregion // fields
 
@@ -31,7 +35,7 @@ namespace Viewer.Personal.Model {
         #region constructors
 
         public Repository() {
-            m_tracks = new List<Track>();
+            m_tracks = new ObservableCollection<Track>();
         }
 
         #endregion // constructors
@@ -46,24 +50,19 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// Repository를 연다.
         /// </summary>
-        public void Open() {
+        public void Open(string rootPath) {
             LogUtil.Info("Repository open...");
 
-            // 가장 최근 일자의 트랙들을 가져온다.
-
+            m_rootPath = rootPath;
+            if (!Directory.Exists(m_rootPath)) {
+                Directory.CreateDirectory(m_rootPath);
+            }
 
             LogUtil.Info("Repository opened.");
         }
 
-        /// <summary>
-        /// froTime에서 toTime까지의 track들을 가져온다.
-        /// </summary>
-        /// <param name="fromTime"></param>
-        /// <param name="toTime"></param>
-        /// <param name="inclusive">fromTime, toTime을 검색 범위에 포함시킬 것인가?</param>
-        /// <returns></returns>
-        public IEnumerable<Track> GetTracks(DateTime fromTime, DateTime toTime, bool inclusive = true) {
-            return null;
+        public ListCollectionView GetTracks() {
+            return new ListCollectionView(m_tracks);
         }
 
         #endregion // methods

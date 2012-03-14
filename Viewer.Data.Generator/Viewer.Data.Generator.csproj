@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5E70E173-AC6E-4619-B579-0292C0A38C78}</ProjectGuid>
+    <ProjectGuid>{86733BAB-1738-423D-8BC2-5D29C713925A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Viewer.Personal.Tester</RootNamespace>
-    <AssemblyName>Viewer.Personal.Tester</AssemblyName>
+    <RootNamespace>Viewer.Data.Generator</RootNamespace>
+    <AssemblyName>Viewer.Data.Generator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -87,39 +86,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="sample\all_2012_03_11_20_37_31.264" />
-    <None Include="sample\all_2012_03_11_20_37_31.log" />
-    <None Include="sample\all_2012_03_11_20_38_00.264" />
-    <None Include="sample\all_2012_03_11_20_38_00.log" />
-    <None Include="sample\event_2012_03_11_20_38_31.264" />
-    <None Include="sample\event_2012_03_11_20_38_31.log" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Viewer.Common\Viewer.Common.csproj">
-      <Project>{47599D42-A513-45BD-8D75-61A48DAD810C}</Project>
-      <Name>Viewer.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Viewer.Personal\Viewer.Personal.csproj">
-      <Project>{B49BA28E-3F99-46F0-B6CF-0D19A09E46EC}</Project>
-      <Name>Viewer.Personal</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ffmpeg.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="log4net.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="sample\all_2012_03_11_20_37_31.inc" />
-    <Content Include="sample\all_2012_03_11_20_38_00.inc" />
-    <Content Include="sample\event_2012_03_11_20_38_31.inc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

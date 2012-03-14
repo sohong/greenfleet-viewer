@@ -20,6 +20,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Viewer.Personal.ViewModel;
+using Viewer.Personal.Model;
 
 namespace Viewer.Personal.Tester {
 
@@ -29,6 +31,8 @@ namespace Viewer.Personal.Tester {
     
         public MainWindow() {
             InitializeComponent();
+
+            PersonalDomain.Domain.Start();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -36,6 +40,8 @@ namespace Viewer.Personal.Tester {
             Height = SystemParameters.PrimaryScreenHeight * 3 / 4;
             Left = (SystemParameters.PrimaryScreenWidth - Width) / 2;
             Top = (SystemParameters.PrimaryScreenHeight - Height) / 2;
+
+            repoView.DataContext = new RepositoryViewModel();
         }
     }
 }

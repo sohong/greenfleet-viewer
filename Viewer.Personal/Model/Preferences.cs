@@ -28,6 +28,7 @@ namespace Viewer.Personal.Model {
         #region const
 
         private const string ROOT_ELEMENT = "GreenFleet";
+        private const string STORAGE_ROOT = @"C:\GreenFleet\storage";
         
         #endregion // const
 
@@ -46,7 +47,9 @@ namespace Viewer.Personal.Model {
         /// 트랙 파일 저장소 루트 경로.
         /// </summary>
         public string StorageRoot {
-            get { return m_storageRoot; }
+            get { 
+                return string.IsNullOrWhiteSpace(m_storageRoot) ? STORAGE_ROOT : m_storageRoot; 
+            }
             set {
                 if (value != m_storageRoot) {
                     m_storageRoot = value;
@@ -54,7 +57,7 @@ namespace Viewer.Personal.Model {
                 }
             }
         }
-        private string m_storageRoot = @"C:\GreenFleet\storage";
+        private string m_storageRoot = STORAGE_ROOT;
 
         /// <summary>
         /// Retention 적용 방법.

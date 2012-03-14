@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// StorageView.cs
+// RepositoryView.cs
 // 2012.03.09, created by sohong
 //
 // =============================================================================
@@ -20,15 +20,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Viewer.Personal.Model;
 
 namespace Viewer.Personal.View {
 
     /// <summary>
     /// </summary>
     public partial class RepositoryView : UserControl {
-    
+
+        #region constructor
+
         public RepositoryView() {
             InitializeComponent();
+
+            dateFrom.SelectedDate = DateTime.Today;
+            dateTo.SelectedDate = DateTime.Today;
         }
+
+        #endregion // constructor
     }
 }

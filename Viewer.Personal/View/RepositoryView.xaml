@@ -4,8 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="384" d:DesignWidth="481">
+             d:DesignHeight="136" d:DesignWidth="862">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>        
+        <StackPanel Orientation="Horizontal" Margin="6,3,6,3">
+            <Label>차랑:</Label>
+            <ComboBox Name="cmbVehicle" MinWidth="100"/>
+            <Label Margin="8,0,0,0">검색 기간:</Label>
+            <DatePicker Name="dateFrom"/>
+            <Label>~</Label>
+            <DatePicker Name="dateTo"/>
+            <CheckBox Name="chkAll" VerticalAlignment="Center" Margin="8,0,0,0">모두 가져오기</CheckBox>
+            <Button Name="chkSearch" MinWidth="60" Margin="8,0,0,0">검색</Button>
+            <Button Name="chkImport" MinWidth="60" HorizontalAlignment="Right" Margin="8,0,0,0">Import</Button>
+        </StackPanel>
+        <ListView Name="lvMain" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="차량" DisplayMemberBinding="{Binding Path=VehicleId}" Width="100"/>
+                        <GridViewColumn Header="생성일시" DisplayMemberBinding="{Binding Path=CreateDate}" Width="100"/>
+                        <GridViewColumn Header="생성일시" DisplayMemberBinding="{Binding Path=StartTime}" Width="100"/>
+                        <GridViewColumn Header="생성일시" DisplayMemberBinding="{Binding Path=EndTime}" Width="100"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>
