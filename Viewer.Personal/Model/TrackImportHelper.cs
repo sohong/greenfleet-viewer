@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Viewer.Common.Util;
 
 namespace Viewer.Personal.Model {
 
@@ -21,16 +22,40 @@ namespace Viewer.Personal.Model {
     /// </summary>
     public class TrackImportHelper {
 
-        #region static methods
+        #region fields
+
+        private Repository m_owner;
+
+        #endregion // fields
+
+
+        #region constructors
+
+        public TrackImportHelper(Repository owner) {
+            Debug.Assert(owner != null, "owner is null");
+            m_owner = owner;
+        }
+
+        #endregion // constructors
+
+
+        #region methods
 
         /// <summary>
         /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
-        /// files에는 확장자 없는 파일명들이 들어있다.
         /// </summary>
-        public static void Import(IEnumerable<string> files, Repository repository) {
+        public void Import(IEnumerable<string> files, bool overwrite) {
             foreach (string file in files) {
-                ImportTrackFile(file, repository);
+                ImportTrackFile(file, overwrite);
             }
+        }
+
+        /// <summary>
+        /// 외부 폴더에 있는 모든 트랙파일들을 스토리지의 각 위치에 추가한다.
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="overwrite"></param>
+        public void ImportAll(string folder, bool overwrite) {
         }
 
         #endregion // static methods
@@ -39,14 +64,48 @@ namespace Viewer.Personal.Model {
         #region internal methods
 
         /// <summary>
-        /// file명에 해당하는 log, inc, 264 파일들을 해당하는 스토리지에 복사한다.
+        /// file명에 해당하는 inc, log, 264 파일들을 해당하는 스토리지에 복사한다.
         /// 264파일은 mp4파일로 변환하여 저장한다.
         /// 264파을을 삭제하지는 않는다.
         /// </summary>
-        /// <param name="file"></param>
-        private static void ImportTrackFile(string file, Repository repository) {
-            string path = Path.Combine(file, ".inc");
-            if (File.Exists(path)) {
+        private void ImportTrackFile(string file, bool overwrite) {
+            // inc 파일은 반드시 존재해야 한다.
+            string source = Path.ChangeExtension(file, ".inc");
+            if (File.Exists(source)) {
+                string folder = m_owner.GetFolder(file, false);
+                if (string.IsNullOrWhiteSpace(folder)) {
+                    return;
+                }
+                string name = Path.GetFileName(source);
+
+                // inc
+                string target = Path.Combine(folder, name);
+                if (overwrite || !File.Exists(target)) {
+                    File.Copy(source, target, true);
+                }
+
+                // log
+                source = Path.ChangeExtension(file, ".log");
+                if (File.Exists(source)) {
+                    target = Path.Combine(folder, name);
+                    target = Path.ChangeExtension(target, ".log");
+                    if (overwrite || !File.Exists(target)) {
+                        File.Copy(source, target, true);
+                    }
+                }
+
+                // 264
+                source = Path.ChangeExtension(file, ".264");
+                if (File.Exists(source)) {
+                    target = Path.Combine(folder, name);
+                    target = Path.ChangeExtension(target, ".264");
+                    if (overwrite || !File.Exists(target)) {
+                        File.Copy(source, target, true);
+                    }
+
+                    // convert to mp4;
+                    VideoUtil.RawToMpeg(target);
+                }
             }
         }
 

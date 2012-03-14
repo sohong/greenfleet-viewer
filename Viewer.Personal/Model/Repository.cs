@@ -36,6 +36,8 @@ namespace Viewer.Personal.Model {
 
         private ObservableCollection<Track> m_tracks;
         private string m_rootPath;
+        private TrackFolderManager m_folderManager;
+        private TrackImportHelper m_importHelper;
         
         #endregion // fields
 
@@ -44,6 +46,8 @@ namespace Viewer.Personal.Model {
 
         public Repository() {
             m_tracks = new ObservableCollection<Track>();
+            m_folderManager = new TrackFolderManager(this);
+            m_importHelper = new TrackImportHelper(this);
         }
 
         #endregion // constructors
@@ -82,12 +86,21 @@ namespace Viewer.Personal.Model {
         }
 
         /// <summary>
+        /// track file이 저장될 폴더명을 리턴한다.
+        /// relative가 true이면 repository root 상대 경로로 리턴한다.
+        /// 기존하지 않으면 생성한 후 리턴한다.
+        /// </summary>
+        public string GetFolder(string trackFile, bool relative) {
+            return m_folderManager.GetFolder(trackFile, relative);
+        }
+
+        /// <summary>
         /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
         /// files에는 확장자 없는 파일명들이 들어있다.
         /// </summary>
-        public void ImportTrackFiles(IEnumerable<string> files) {
+        public void ImportTrackFiles(IEnumerable<string> files, bool overwrite) {
             LogUtil.Debug("Import track files...");
-            TrackImportHelper.Import(files, this);
+            m_importHelper.Import(files, overwrite);
         }
 
         #endregion // methods

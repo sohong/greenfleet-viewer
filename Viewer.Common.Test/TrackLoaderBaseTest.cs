@@ -1,4 +1,13 @@
-﻿using Viewer.Common.Loader;
+﻿////////////////////////////////////////////////////////////////////////////////
+// TrackLoaderBaseTest.cs
+// 2012.03.14, created by sohong
+//
+// =============================================================================
+// Copyright (C) 2012 PalmVision.
+// All Rights Reserved.
+////////////////////////////////////////////////////////////////////////////////
+
+using Viewer.Common.Loader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Viewer.Common.Model;
@@ -6,10 +15,6 @@ using System.IO;
 
 namespace Viewer.Common.Test
 {
-    /// <summary>
-    ///This is a test class for TrackLoaderBaseTest and is intended
-    ///to contain all TrackLoaderBaseTest Unit Tests
-    ///</summary>
     [TestClass()]
     public class TrackLoaderBaseTest {
 
@@ -69,7 +74,7 @@ namespace Viewer.Common.Test
             TrackLoaderBase_Accessor target = new TrackLoaderBase_Accessor();
             Track track = new Track();
             string path = AppDomain.CurrentDomain.BaseDirectory;
-            StreamReader reader = new StreamReader(Path.Combine(path, "track_log.inc"));
+            StreamReader reader = new StreamReader(Path.Combine(path, @"sample\track_log.inc"));
             target.LoadPoints(track, reader);
             Assert.AreEqual(track.Points.Count, 26);
 

@@ -69,6 +69,7 @@
     <Compile Include="PreferencesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrackFolderManagerTest.cs" />
+    <Compile Include="TrackImportHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Viewer.Common\Viewer.Common.csproj">

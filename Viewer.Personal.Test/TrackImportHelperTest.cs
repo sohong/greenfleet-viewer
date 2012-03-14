@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackFolderManagerTest.cs
+// TrackImportHelperTest.cs
 // 2012.03.14, created by sohong
 //
 // =============================================================================
@@ -10,11 +10,12 @@
 using Viewer.Personal.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace Viewer.Personal.Test
 {
     [TestClass()]
-    public class TrackFolderManagerTest {
+    public class TrackImportHelperTest {
 
         private TestContext testContextInstance;
 
@@ -63,16 +64,20 @@ namespace Viewer.Personal.Test
 
 
         /// <summary>
-        ///A test for GetFolder
+        ///A test for Import
         ///</summary>
         [TestMethod()]
-        public void GetFolderTest() {
+        public void ImportTest() {
             Repository repo = new Repository();
             repo.Open(@"c:\GreenFleet\storage");
-            TrackFolderManager manager = new TrackFolderManager(repo);
-            string trackFile = "all_2012_03_11_20_37_31";
-            string folder = manager.GetFolder(trackFile, true);
-            Assert.AreEqual(folder, @"2012\03\11");
+            TrackImportHelper helper = new TrackImportHelper(repo);
+
+            List<string> files = new List<string>();
+            files.Add(@"C:\GreenFleet\samples\all_2012_03_11_20_37_31");
+            files.Add(@"C:\GreenFleet\samples\all_2012_03_11_20_38_00");
+            files.Add(@"C:\GreenFleet\samples\event_2012_03_11_20_38_31");
+            
+            helper.Import(files, true);
         }
     }
 }

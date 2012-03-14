@@ -60,16 +60,20 @@ namespace Viewer.Personal.Model {
         }
 
         /// <summary>
-        /// track file이 저장될 폴더명을 repository root 상대 경로로 리턴한다.
+        /// track file이 저장될 폴더명을 리턴한다.
+        /// relative가 true이면 repository root 상대 경로로 리턴한다.
         /// 기존하지 않으면 생성한 후 리턴한다.
         /// </summary>
-        public string GetFolder(string trackFile) {
+        public string GetFolder(string trackFile, bool relative) {
             string folder = ParseFolder(trackFile);
 
             if (folder != null) {
                 string path = Path.Combine(m_owner.RootPath, folder);
                 if (!Directory.Exists(path)) {
                     Directory.CreateDirectory(path);
+                }
+                if (!relative) {
+                    folder = path;
                 }
             }
 
@@ -84,7 +88,8 @@ namespace Viewer.Personal.Model {
         private string ParseFolder(string trackFile) {
             Match match = Repository.TRACK_DATE_PATTERN.Match(trackFile);
             if (match.Success) {
-                string folder = match.Value;
+                string[] arr = match.Value.Split('_');
+                string folder = arr[0] + '\\' + arr[1] + '\\' + arr[2];
                 return folder;
             }
             return null;

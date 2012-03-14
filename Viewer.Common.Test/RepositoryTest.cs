@@ -76,7 +76,7 @@ namespace Viewer.Common.Test
             Repository target = new Repository();
             List<string> files = new List<string>();
             files.Add(@"C:\GreenFleet\samples\all_2012_03_11_20_37_31");
-            target.ImportTrackFiles(files);
+            target.ImportTrackFiles(files, true);
         }
     }
 }
