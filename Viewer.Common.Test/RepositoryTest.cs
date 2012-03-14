@@ -73,10 +73,11 @@ namespace Viewer.Common.Test
         ///</summary>
         [TestMethod()]
         public void ImportTrackFilesTest() {
-            Repository target = new Repository();
+            Repository repo = new Repository();
+            repo.Open(@"c:\GreenFleet\test\storage");
             List<string> files = new List<string>();
-            files.Add(@"C:\GreenFleet\samples\all_2012_03_11_20_37_31");
-            target.ImportTrackFiles(files, true);
+            files.Add(@"C:\GreenFleet\test\samples\all_2012_03_11_20_37_31");
+            repo.ImportTrackFiles(files, true);
         }
     }
 }

@@ -69,15 +69,28 @@ namespace Viewer.Personal.Test
         [TestMethod()]
         public void ImportTest() {
             Repository repo = new Repository();
-            repo.Open(@"c:\GreenFleet\storage");
+            repo.Open(@"c:\GreenFleet\test\storage");
             TrackImportHelper helper = new TrackImportHelper(repo);
 
             List<string> files = new List<string>();
-            files.Add(@"C:\GreenFleet\samples\all_2012_03_11_20_37_31");
-            files.Add(@"C:\GreenFleet\samples\all_2012_03_11_20_38_00");
-            files.Add(@"C:\GreenFleet\samples\event_2012_03_11_20_38_31");
+            files.Add(@"C:\GreenFleet\test\samples\all_2012_03_11_20_37_31");
+            files.Add(@"C:\GreenFleet\test\samples\all_2012_03_11_20_38_00");
+            files.Add(@"C:\GreenFleet\test\samples\event_2012_03_11_20_38_31");
             
             helper.Import(files, true);
+        }
+
+        /// <summary>
+        ///A test for ImportAll
+        ///</summary>
+        [TestMethod()]
+        public void ImportAllTest() {
+            string repoDir = @"c:\GreenFleet\test\storage";
+            string sourceDir = @"C:\GreenFleet\test\samples";
+            Repository repo = new Repository();
+            repo.Open(repoDir);
+            TrackImportHelper helper = new TrackImportHelper(repo);
+            helper.ImportAll(sourceDir, true);
         }
     }
 }

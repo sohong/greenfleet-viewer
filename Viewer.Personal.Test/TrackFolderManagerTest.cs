@@ -68,7 +68,7 @@ namespace Viewer.Personal.Test
         [TestMethod()]
         public void GetFolderTest() {
             Repository repo = new Repository();
-            repo.Open(@"c:\GreenFleet\storage");
+            repo.Open(@"c:\GreenFleet\test\storage");
             TrackFolderManager manager = new TrackFolderManager(repo);
             string trackFile = "all_2012_03_11_20_37_31";
             string folder = manager.GetFolder(trackFile, true);
