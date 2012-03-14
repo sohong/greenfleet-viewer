@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LocalTrackLoader.cs" />
+    <Compile Include="Model\TrackFolderManager.cs" />
+    <Compile Include="Model\TrackImportHelper.cs" />
     <Compile Include="Model\PersonalDomain.cs" />
     <Compile Include="Model\Preferences.cs" />
     <Compile Include="Model\Repository.cs" />

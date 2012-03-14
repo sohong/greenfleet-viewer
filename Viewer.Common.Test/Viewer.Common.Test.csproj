@@ -49,6 +49,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -71,6 +72,7 @@
   <ItemGroup>
     <Compile Include="LocalTrackLoaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryTest.cs" />
     <Compile Include="TrackLoaderBaseTest.cs" />
     <Compile Include="XmlTransformerTest.cs" />
   </ItemGroup>
@@ -82,6 +84,10 @@
     <ProjectReference Include="..\Viewer.Common\Viewer.Common.csproj">
       <Project>{47599D42-A513-45BD-8D75-61A48DAD810C}</Project>
       <Name>Viewer.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Viewer.Personal\Viewer.Personal.csproj">
+      <Project>{B49BA28E-3F99-46F0-B6CF-0D19A09E46EC}</Project>
+      <Name>Viewer.Personal</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
