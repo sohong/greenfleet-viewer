@@ -15,6 +15,7 @@ using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 using Viewer.Common.Model;
+using Viewer.Common.Util;
 
 namespace Viewer.Common.Loader {
 
@@ -64,15 +65,26 @@ namespace Viewer.Common.Loader {
         }
 
         protected Track CreateTrack(string path) {
-            string fileName = Path.GetFileNameWithoutExtension(path);
-            if (fileName.StartsWith("all_")) {
-                fileName = fileName.Substring(4);
-            } else { // "event_"
-                fileName = fileName.Substring(6);
+            if (!File.Exists(path)) {
+                return null;
             }
 
             Track track = new Track();
-            track.CreateDate = DateTime.ParseExact(fileName, DATE_FORMAT, null);
+            
+            // video file
+            string s = Path.ChangeExtension(path, "264");
+            if (File.Exists(s)) {
+                track.VideoFile = VideoUtil.RawToMpeg(s);
+            }
+            
+            // create date
+            s = Path.GetFileNameWithoutExtension(path);
+            if (s.StartsWith("all_")) {
+                s = s.Substring(4);
+            } else { // "event_"
+                s = s.Substring(6);
+            }
+            track.CreateDate = DateTime.ParseExact(s, DATE_FORMAT, null);
 
             return track;
         }

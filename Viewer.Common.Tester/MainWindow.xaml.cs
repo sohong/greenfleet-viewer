@@ -57,13 +57,12 @@ namespace Viewer.Common.Tester {
             Track track = LoadTrack();
 
             // video
-            //videoView.Source = new Uri(@".\v.mp4", UriKind.RelativeOrAbsolute);
-            videoView.Source = new Uri(@"w.wmv", UriKind.RelativeOrAbsolute);
+            videoView.Track = track;
 
             // bing map
             bingView.Track = track;
 
-            // googl map
+            // google map
 
             // chart
             accelView.Track = track;

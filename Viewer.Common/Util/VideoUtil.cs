@@ -25,14 +25,15 @@ namespace Viewer.Common.Util {
         /// h264 raw 영상을 mpeg4 컨테이너로 변환한다.
         /// </summary>
         public static string RawToMpeg(string sourcePath, string extension = "mp4") {
-            string path = Path.Combine(Path.GetFileNameWithoutExtension(sourcePath), extension);
+            string path = Path.ChangeExtension(sourcePath, extension);
             
             Process proc = new Process();
             proc.StartInfo.FileName = Path.Combine(FileUtil.GetAppFolder(), "ffmpeg.exe");
-            proc.StartInfo.Arguments = "-y -i " + sourcePath + " -vcode copy " + path;
+            proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -vcodec copy \"" + path + "\"";
             proc.StartInfo.CreateNoWindow = true;
             proc.StartInfo.UseShellExecute = false;
             proc.Start();
+            proc.WaitForExit();
 
             return path;
         }

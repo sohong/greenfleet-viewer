@@ -23,7 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Viewer.Common.Util;
 using System.Windows.Threading;
-using System.Windows.Controls.Primitives;
+using Viewer.Common.Model;
 
 namespace Viewer.Common.View {
 
@@ -57,7 +57,7 @@ namespace Viewer.Common.View {
             m_timer.Tick += new EventHandler(timer_Tick);
 
             timelineSlider.AddHandler(Slider.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler((obj, args) => {
-                if (VisualUtil.FindAncestor<Thumb>((DependencyObject)args.OriginalSource) != null) {
+                if (VisualUtil.FindAncestor<System.Windows.Controls.Primitives.Thumb>((DependencyObject)args.OriginalSource) != null) {
                     m_sliding = true;
                 } else {
                     mediaMain.Position = TimeSpan.FromMilliseconds(timelineSlider.Value);
@@ -79,10 +79,23 @@ namespace Viewer.Common.View {
 
         #region properties
 
-        public Uri Source {
-            get { return mediaMain.Source; }
-            set { mediaMain.Source = value; }
+        /// <summary>
+        /// Track 정보.
+        /// </summary>
+        public Track Track {
+            set {
+                if (value != m_track) {
+                    Stop();
+                    m_track = value;
+                    if (m_track != null && !string.IsNullOrWhiteSpace(m_track.VideoFile)) {
+                        mediaMain.Source = new Uri(m_track.VideoFile, UriKind.Absolute);
+                    } else {
+                        mediaMain.Source = null;
+                    }
+                }
+            }
         }
+        private Track m_track;
 
         public int Steps {
             get { return m_steps; }

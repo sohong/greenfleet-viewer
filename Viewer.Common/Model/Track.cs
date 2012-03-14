@@ -128,7 +128,7 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 동영상 파일 경로.
         /// </summary>
-        public string MovieFile { get; set; }
+        public string VideoFile { get; set; }
 
         /// <summary>
         /// Track points
