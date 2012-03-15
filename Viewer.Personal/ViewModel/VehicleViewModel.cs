@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// VehicleView.cs
+// VehicleViewModel.cs
 // 2012.03.15, created by sohong
 //
 // =============================================================================
@@ -8,27 +8,20 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Viewer.Common.ViewModel;
 
-namespace Viewer.Personal.View {
-
-    /// <summary>
-    /// </summary>
-    public partial class VehicleView : UserControl {
+namespace Viewer.Personal.ViewModel {
     
-        public VehicleView() {
-            InitializeComponent();
-        }
+    /// <summary>
+    /// View model for VehicleView.
+    /// </summary>
+    public class VehicleViewModel : DialogViewModel {
+
+        #region constructor
+        #endregion // constructor
     }
 }
