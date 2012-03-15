@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// ViewModelBase.cs
-// 2012.03.08, created by sohong
+// DialogView.cs
+// 2012.03.15, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -8,16 +8,26 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
-namespace Viewer.ViewModel.Common {
-    
+namespace Viewer.Common.View {
+
     /// <summary>
-    /// View model abstract.
     /// </summary>
-    public abstract class ViewModelBase {
+    public partial class DialogView : Window {
+
+        public DialogView() {
+            InitializeComponent();
+        }
     }
 }

@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Hatio.UI.WPF")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("PalmVision")]
 [assembly: AssemblyProduct("Hatio.UI.WPF")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright © PalmVision 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

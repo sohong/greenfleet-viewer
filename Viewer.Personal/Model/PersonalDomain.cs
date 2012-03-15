@@ -14,6 +14,8 @@ using System.Linq;
 using System.Text;
 using Viewer.Common.Util;
 using System.IO;
+using System.Collections.ObjectModel;
+using Viewer.Common.Xml;
 
 namespace Viewer.Personal.Model {
 
@@ -47,6 +49,7 @@ namespace Viewer.Personal.Model {
         #region fields
 
         private Preferences m_preferences;
+        private VehicleManager m_vehicles;
         private Repository m_repository;
 
         #endregion // fields
@@ -56,6 +59,7 @@ namespace Viewer.Personal.Model {
 
         private PersonalDomain() {
             m_preferences = new Preferences();
+            m_vehicles = new VehicleManager();
             m_repository = new Repository();
         }
 
@@ -79,7 +83,8 @@ namespace Viewer.Personal.Model {
 
         public void Start() {
             LogUtil.Info("Personal Domain start...");
-            m_preferences.Load(Path.Combine(FileUtil.GetAppFolder(), PREFERS_PATH));
+            m_preferences.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERS_PATH));
+            m_vehicles.Load();
             m_repository.Open(m_preferences.StorageRoot);
         }
 
