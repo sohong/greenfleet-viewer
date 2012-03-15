@@ -86,7 +86,7 @@ namespace Viewer.Common.Test
             Debug.WriteLine(doc.ToString());
 
             mo = new MainObject();
-            mo = (MainObject)trans.Deserialze(root, mo);
+            mo = (MainObject)trans.Deserialize(root, mo);
             Assert.AreEqual(mo.Name, "name");
             Assert.AreEqual(mo.Region, Region.Bbb);
             Assert.AreEqual(mo.Age, 33);
@@ -95,7 +95,7 @@ namespace Viewer.Common.Test
             Assert.AreEqual(mo.Boy.Region, Region.AAA);
 
             Type t = typeof(MainObject);
-            mo = (MainObject)trans.Deserialze(root, t);
+            mo = (MainObject)trans.Deserialize(root, t);
             Assert.AreEqual(mo.Name, "name");
             Assert.AreEqual(mo.Region, Region.Bbb);
             Assert.AreEqual(mo.Age, 33);

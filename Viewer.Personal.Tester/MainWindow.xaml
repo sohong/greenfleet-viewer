@@ -8,7 +8,7 @@
             <TabItem Header="List">
                 <gf:RepositoryView Name="repoView"/>  
             </TabItem>
-            <TabItem Header="Detail">
+            <TabItem Header="Track">
                 <gf:TrackView Name="trackView"/>
             </TabItem>
         </TabControl>

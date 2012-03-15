@@ -95,6 +95,7 @@
     <Compile Include="View\VideoView.xaml.cs">
       <DependentUpon>VideoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Xml\CollectionSerializer.cs" />
     <Compile Include="Xml\IXmlValueConverter.cs" />
     <Compile Include="Xml\TransientAttribute.cs" />
     <Compile Include="Xml\XmlModelTransformer.cs" />

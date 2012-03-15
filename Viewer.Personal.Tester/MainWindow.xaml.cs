@@ -33,15 +33,16 @@ namespace Viewer.Personal.Tester {
             InitializeComponent();
 
             PersonalDomain.Domain.Start();
-        }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
             Width = SystemParameters.PrimaryScreenWidth * 2 / 3;
             Height = SystemParameters.PrimaryScreenHeight * 3 / 4;
             Left = (SystemParameters.PrimaryScreenWidth - Width) / 2;
             Top = (SystemParameters.PrimaryScreenHeight - Height) / 2;
 
             repoView.DataContext = new RepositoryViewModel();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
         }
     }
 }

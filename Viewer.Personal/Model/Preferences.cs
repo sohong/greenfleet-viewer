@@ -110,7 +110,7 @@ namespace Viewer.Personal.Model {
                 throw new Exception("Xml is not a GreenFleet perferences document.");
             }
 
-            new XmlTransformer().Deserialze(root, this);
+            new XmlTransformer().Deserialize(root, this);
             Debug.WriteLine("Preferences loaded.");
         }
 

@@ -15,6 +15,7 @@ using System.Text;
 using System.Xml.Linq;
 using System.Reflection;
 using Viewer.Common.Util;
+using System.Collections;
 
 namespace Viewer.Common.Xml {
     
@@ -37,6 +38,14 @@ namespace Viewer.Common.Xml {
 
         #region methods
 
+        public void Serialize(IEnumerable list, XContainer target, string elementName) {
+            foreach (object model in list) {
+                XElement elt = new XElement(elementName);
+                Serialize(model, elt);
+                target.Add(elt);
+            }
+        }
+
         public void Serialize(object model, XContainer target) {
             Type t = model.GetType();
             PropertyInfo[] props = t.GetProperties();
@@ -58,7 +67,21 @@ namespace Viewer.Common.Xml {
             }
         }
 
-        public object Deserialze(XContainer source, object modelOrType) {
+        public IList Deserialize(XContainer source, string elementName, Type modelType, IList target) {
+            if (target == null) {
+                target = new List<object>();
+            }
+
+            IEnumerable<XElement> elts = source.Elements(elementName);
+            foreach (XElement elt in elts) {
+                object model = Deserialize(elt, modelType);
+                target.Add(model);
+            }
+
+            return target;
+        }
+
+        public object Deserialize(XContainer source, object modelOrType) {
             if (modelOrType == null) {
                 throw new ArgumentNullException("modelOrType");
             }
@@ -84,7 +107,7 @@ namespace Viewer.Common.Xml {
                             val = null;
                         } else if (IsObject(p)) {
                             val = p.GetValue(model, null);
-                            val = Deserialze(elt, (val != null) ? val : pt);
+                            val = Deserialize(elt, (val != null) ? val : pt);
                         } else if (pt.IsEnum) {
                             try {
                                 val = Enum.Parse(pt, s, true);
