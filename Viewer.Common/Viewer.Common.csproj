@@ -67,6 +67,7 @@
     <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DialogManager.cs" />
     <Compile Include="Loader\ITrackLoader.cs" />
     <Compile Include="Loader\LocalTrackLoader.cs" />
     <Compile Include="Loader\TrackLoaderBase.cs" />
@@ -93,6 +94,8 @@
     <Compile Include="Util\ObjectUtil.cs" />
     <Compile Include="Util\VideoUtil.cs" />
     <Compile Include="Util\VisualUtil.cs" />
+    <Compile Include="ViewModel\DialogViewModel.cs" />
+    <Compile Include="ViewModel\IDialogViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\BingMapView.xaml.cs">
       <DependentUpon>BingMapView.xaml</DependentUpon>

@@ -13,10 +13,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Viewer.Personal.View {
+
     /// <summary>
-    /// Interaction logic for VehicleView.xaml
     /// </summary>
     public partial class VehicleView : UserControl {
+    
         public VehicleView() {
             InitializeComponent();
         }

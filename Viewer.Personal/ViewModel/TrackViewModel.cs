@@ -12,7 +12,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Viewer.ViewModel.Common;
+using Viewer.Common.ViewModel;
 using Viewer.Common.Model;
 using System.Collections.ObjectModel;
 

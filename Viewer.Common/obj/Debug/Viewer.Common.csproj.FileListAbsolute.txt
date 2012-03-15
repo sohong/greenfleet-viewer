@@ -46,3 +46,5 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\o
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.Properties.Resources.resources
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\GenerateResource.read.1.tlog
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\DialogView.baml
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\DialogView.g.cs

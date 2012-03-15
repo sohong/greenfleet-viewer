@@ -19,5 +19,13 @@ namespace Viewer.Common.ViewModel {
     /// View model interface for DialogView.
     /// </summary>
     public interface IDialogViewModel {
+
+        string CancelText { get; }
+        string ConfirmText { get; }
+        bool IsCancelable { get; }
+        bool IsConfirmable { get; }
+
+        bool Cancel();
+        bool Confirm();
     }
 }

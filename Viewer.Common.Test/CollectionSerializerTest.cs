@@ -124,6 +124,10 @@ namespace Viewer.Common.Test
                 TestModel m = obj as TestModel;
                 return (m != null) && m.Name.Equals(Name) && m.Address.Equals(Address);
             }
+
+            public override int GetHashCode() {
+                return (Name + Address).GetHashCode();
+            }
         }
     }
 }
