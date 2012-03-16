@@ -35,21 +35,8 @@ namespace Viewer.Personal.View {
 
         public RepositoryView() {
             InitializeComponent();
-
-            dateFrom.SelectedDate = DateTime.Today;
-            dateTo.SelectedDate = DateTime.Today;
         }
 
         #endregion // constructor
-
-
-        #region event handlers
-
-        // Test
-        private void btnTest_Click(object sender, RoutedEventArgs e) {
-            DialogService.Run("차량 정보 관리", new VehicleListView(), new VehicleListViewModel());
-        }
-
-        #endregion // event handlers
     }
 }

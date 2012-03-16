@@ -12,17 +12,20 @@
         </Grid.RowDefinitions>        
         <StackPanel Orientation="Horizontal" Margin="6,3,6,3">
             <Label>차랑:</Label>
-            <ComboBox Name="cmbVehicle" MinWidth="100"/>
+            <ComboBox Name="cmbVehicle" MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
             <Label Margin="8,0,0,0">검색 기간:</Label>
-            <DatePicker Name="dateFrom"/>
+            <DatePicker Name="dateFrom" SelectedDate="{Binding SearchFrom}"/>
             <Label>~</Label>
-            <DatePicker Name="dateTo"/>
-            <CheckBox Name="chkAll" VerticalAlignment="Center" Margin="8,0,0,0">모두 가져오기</CheckBox>
-            <Button Name="btnSearch" MinWidth="60" Margin="8,0,0,0">검색</Button>
-            <Button Name="btnImport" MinWidth="60" Margin="8,0,0,0">Import</Button>
-            <Button Name="btnTest" MinWidth="60" Margin="8,0,0,0" Click="btnTest_Click">Test</Button>
+            <DatePicker Name="dateTo" SelectedDate="{Binding SearchTo}"/>
+            <CheckBox Name="chkAll" VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding SearchAll}">모두 가져오기</CheckBox>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding SearchCommand}">검색</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ImportCommand}">Import</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ExportCommand}">Export</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding DeleteCommand}">삭제</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding VehicleCommand}">차량 정보</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding TestCommand}">Test</Button>
         </StackPanel>
-        <ListView Name="lvMain" Grid.Row="1">
+        <ListView Name="lvMain" Grid.Row="1" IsSynchronizedWithCurrentItem="True">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>

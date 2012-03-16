@@ -96,5 +96,14 @@ namespace Viewer.Personal.Model {
         }
 
         #endregion // methods
+
+
+        #region overriden methods
+
+        public override string ToString() {
+            return string.IsNullOrWhiteSpace(Name) ? VehicleId : Name;
+        }
+
+        #endregion // overriden methods
     }
 }
