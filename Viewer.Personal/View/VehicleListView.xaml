@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Viewer.Personal.View.VehicleListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             Width="487" Height="339">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>           
+        <Label Grid.Row="0">차량 정보 목록:</Label>
+        <ListView Name="lvMain" Grid.Row="1" Margin="3" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="200" Header="이름"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=VehicleId}" Width="100" Header="Id"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="3" HorizontalAlignment="Stretch">
+            <Button Name="btnAdd" MinWidth="60" Margin="3" Command="{Binding AddCommand}">추가</Button>
+            <Button Name="btnEdit" MinWidth="60" Margin="3" Command="{Binding EditCommand}">수정</Button>
+            <Button Name="btnDelete" MinWidth="60" Margin="3" Command="{Binding DeleteCommand}">삭제</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

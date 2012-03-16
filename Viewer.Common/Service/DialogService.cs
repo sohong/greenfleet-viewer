@@ -15,6 +15,7 @@ using System.Text;
 using System.Windows.Controls;
 using Viewer.Common.ViewModel;
 using Viewer.Common.View;
+using System.Windows;
 
 namespace Viewer.Common.Service {
 
@@ -34,14 +35,21 @@ namespace Viewer.Common.Service {
         #region methods
 
         public static void Run(string title, UserControl view, IDialogViewModel viewModel, Action<object> callback = null, bool modal = true) {
+            if (view == null)
+                throw new ArgumentNullException("view");
+            if (viewModel == null)
+                throw new ArgumentNullException("viewModel");
+
             DialogView dialog = new DialogView();
             dialog.Title = title;
             dialog.View = view;
             dialog.Model = viewModel;
+            dialog.SubmitText = viewModel.SubmitText;
+            dialog.CancelText = viewModel.SubmitText;
+            dialog.IsCancelable = viewModel.IsCancelable;
 
             if (modal) {
                 dialog.ShowCallback(callback);
-            
             } else {
                 dialog.Show();
             }

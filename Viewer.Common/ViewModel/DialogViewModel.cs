@@ -50,8 +50,23 @@ namespace Viewer.Common.ViewModel {
             get { return GetSubmitData(); }
         }
 
+        public bool IsCancelable {
+            get;
+            set;
+        }
+
         public bool Cancel() {
             return DoCancel();
+        }
+
+        public string SubmitText {
+            get;
+            set;
+        }
+
+        public string CancelText {
+            get;
+            set;
         }
 
         #endregion // IDialogViewModel

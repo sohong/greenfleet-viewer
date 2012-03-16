@@ -68,12 +68,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\RepositoryViewModel.cs" />
     <Compile Include="ViewModel\TrackViewModel.cs" />
+    <Compile Include="ViewModel\VehicleListViewModel.cs" />
     <Compile Include="ViewModel\VehicleViewModel.cs" />
     <Compile Include="View\RepositoryView.xaml.cs">
       <DependentUpon>RepositoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VehicleListView.xaml.cs">
+      <DependentUpon>VehicleListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\VehicleView.xaml.cs">
       <DependentUpon>VehicleView.xaml</DependentUpon>
@@ -94,6 +98,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TrackView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VehicleListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

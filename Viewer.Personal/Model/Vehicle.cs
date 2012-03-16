@@ -19,14 +19,14 @@ namespace Viewer.Personal.Model {
     /// <summary>
     /// 차량 정보.
     /// </summary>
-    public class Vehicle : NotificationObject {
+    public class Vehicle : NotificationObject, ICloneable {
 
-        #region constructor
+        #region constructors
 
         public Vehicle() {
         }
 
-        #endregion // constructor
+        #endregion // constructors
 
 
         #region properties
@@ -43,7 +43,7 @@ namespace Viewer.Personal.Model {
                 }
             }
         }
-        private string m_vehicleId;
+        private string m_vehicleId = "-1";
 
         /// <summary>
         /// Name
@@ -74,5 +74,27 @@ namespace Viewer.Personal.Model {
         private string m_description;
 
         #endregion // properties
+
+
+        #region IConneable 
+
+        public object Clone() {
+            Vehicle v = new Vehicle();
+            AssignTo(v);
+            return v;
+        }
+
+        #endregion // ICloneable
+
+
+        #region methods
+
+        public void AssignTo(Vehicle target) {
+            target.VehicleId = this.VehicleId;
+            target.Name = this.Name;
+            target.Description = this.Description;
+        }
+
+        #endregion // methods
     }
 }

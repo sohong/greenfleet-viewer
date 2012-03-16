@@ -92,6 +92,37 @@ namespace Viewer.Common.View {
         }
         private UserControl m_view;
 
+        /// <summary>
+        /// Submit button content
+        /// </summary>
+        public string SubmitText {
+            set {
+                if (!string.IsNullOrWhiteSpace(value)) {
+                    btnOK.Content = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Cancel button content
+        /// </summary>
+        public string CancelText {
+            set {
+                if (!string.IsNullOrWhiteSpace(value)) {
+                    btnCancel.Content = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Cancel 버튼을 표시할 것인가?
+        /// </summary>
+        public bool IsCancelable {
+            set {
+                btnCancel.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
         #endregion // properties
 
 
@@ -99,7 +130,33 @@ namespace Viewer.Common.View {
 
         public void ShowCallback(Action<object> callback) {
             m_callback = callback;
+
+            if (m_view != null) {
+                SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
+            } 
+
             ShowDialog();
+        }
+
+        protected override void OnRender(DrawingContext drawingContext) {
+            base.OnRender(drawingContext);
+        }
+
+        protected override Size MeasureOverride(Size availableSize) {
+            Size sz = base.MeasureOverride(availableSize);
+            if (m_view != null && !Double.IsNaN(m_view.Width) && ActualWidth > 0) {
+                this.Width = ActualWidth;
+                this.Height = ActualHeight;
+                SizeToContent = System.Windows.SizeToContent.Manual;
+                m_view.Width = Double.NaN;
+                m_view.Height = Double.NaN;
+            }
+            return sz;
+        }
+
+        protected override Size ArrangeOverride(Size arrangeBounds) {
+            Size sz = base.ArrangeOverride(arrangeBounds);
+            return sz;
         }
 
         #endregion // methods

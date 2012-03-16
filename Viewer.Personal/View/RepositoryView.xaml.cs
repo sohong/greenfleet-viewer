@@ -47,15 +47,7 @@ namespace Viewer.Personal.View {
 
         // Test
         private void btnTest_Click(object sender, RoutedEventArgs e) {
-            Vehicle v = new Vehicle() {
-                VehicleId = "Id",
-                Name = "Name",
-                Description = "..."
-            };
-            DialogService.Run("차량 추가", new VehicleView(), new VehicleViewModel() { Vehicle = v }, (obj) => {
-                Vehicle v2 = (Vehicle)obj;
-                MessageUtil.Show(v2.Name);
-            });
+            DialogService.Run("차량 정보 관리", new VehicleListView(), new VehicleListViewModel());
         }
 
         #endregion // event handlers

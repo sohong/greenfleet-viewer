@@ -23,9 +23,18 @@ namespace Viewer.Personal.ViewModel {
     /// </summary>
     public class VehicleViewModel : DialogViewModel {
 
+        #region fields
+
+        private Vehicle m_source;
+        
+        #endregion // fields
+
+
         #region constructor
 
-        public VehicleViewModel() {
+        public VehicleViewModel(Vehicle source) {
+            m_source = source;
+            Vehicle = (source != null) ? (Vehicle)source.Clone() : new Vehicle();
         }
 
         #endregion // constructor
@@ -35,7 +44,7 @@ namespace Viewer.Personal.ViewModel {
 
         public Vehicle Vehicle {
             get;
-            set;
+            private set;
         }
 
         #endregion // properties
@@ -44,7 +53,7 @@ namespace Viewer.Personal.ViewModel {
         #region overriden methods
 
         protected override object GetSubmitData() {
-            return this.Vehicle;
+            return (m_source != null) ? m_source : Vehicle;
         }
 
         protected override bool CanSubmit(object data) {
@@ -52,6 +61,13 @@ namespace Viewer.Personal.ViewModel {
         }
 
         protected override void DoSubmit(object data) {
+            if (m_source == null) {
+                // 추가
+                PersonalDomain.Domain.Vehicles.Add(Vehicle);
+            } else {
+                // 수정
+                Vehicle.AssignTo(m_source);
+            }
         }
 
         #endregion // overriden methods

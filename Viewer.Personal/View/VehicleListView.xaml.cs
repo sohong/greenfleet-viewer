@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// IDialogViewModel.cs
-// 2012.03.15, created by sohong
+// VehicleListView.cs
+// 2012.03.16, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -8,26 +8,27 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace Viewer.Common.ViewModel {
+namespace Viewer.Personal.View {
 
     /// <summary>
-    /// View model interface for DialogView.
     /// </summary>
-    public interface IDialogViewModel {
-
-        ICommand SubmitCommand { get; }
-        object SubmitData { get; }
-
-        bool IsCancelable { get; }
-        bool Cancel();
-
-        string SubmitText { get; }
-        string CancelText { get; }
+    public partial class VehicleListView : UserControl {
+    
+        public VehicleListView() {
+            InitializeComponent();
+        }
     }
 }

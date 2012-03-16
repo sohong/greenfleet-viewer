@@ -72,6 +72,10 @@ namespace Viewer.Personal.Model {
             get { return m_preferences; }
         }
 
+        public ObservableCollection<Vehicle> Vehicles {
+            get { return m_vehicles.Vehicles; }
+        }
+
         public Repository Repository {
             get { return m_repository; }
         }
