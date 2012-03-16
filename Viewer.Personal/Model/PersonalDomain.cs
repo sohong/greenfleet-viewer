@@ -16,6 +16,7 @@ using Viewer.Common.Util;
 using System.IO;
 using System.Collections.ObjectModel;
 using Viewer.Common.Xml;
+using System.Collections.Specialized;
 
 namespace Viewer.Personal.Model {
 
@@ -90,8 +91,19 @@ namespace Viewer.Personal.Model {
             m_preferences.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERS_PATH));
             m_vehicles.Load();
             m_repository.Open(m_preferences.StorageRoot);
+
+            m_vehicles.Vehicles.CollectionChanged += new NotifyCollectionChangedEventHandler(Vehicles_CollectionChanged);
         }
 
         #endregion // methods
+
+
+        #region internal methods
+
+        private void Vehicles_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            m_vehicles.Save();
+        }
+
+        #endregion // internal methods
     }
 }

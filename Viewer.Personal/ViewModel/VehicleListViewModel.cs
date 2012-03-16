@@ -106,7 +106,12 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoDelete(object data) {
-            MessageUtil.Show("Delete");
+            Vehicle current = Vehicles.CurrentItem as Vehicle;
+            if (current != null) {
+                if (MessageUtil.Conform("차량 삭제", "선택한 차량 정보를 삭제하시겠습니까?")) {
+                    PersonalDomain.Domain.Vehicles.Remove(current);
+                }
+            }
         }
 
         private bool CanDelete(object data) {
