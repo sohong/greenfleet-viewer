@@ -22,9 +22,18 @@ namespace Viewer.Common.ViewModel {
     /// </summary>
     public class DialogViewModel : ViewModelBase, IDialogViewModel {
 
+        #region fields
+
+        private bool m_submitable;
+
+        #endregion // fields
+
+
         #region constructor
 
         public DialogViewModel() {
+            SubmitCommand = new DelegateCommand<object>(OnSubmit, IsSubmitable);
+            m_submitable = CanSubmit(SubmitData);
         }
 
         #endregion // constructor
@@ -32,33 +41,17 @@ namespace Viewer.Common.ViewModel {
 
         #region IDialogViewModel
 
-        public virtual string CancelText {
-            get { return "Cancel"; }
+        public ICommand SubmitCommand {
+            get;
+            private set;
         }
 
-        public virtual string ConfirmText {
-            get { return "OK"; }
+        public object SubmitData {
+            get { return GetSubmitData(); }
         }
 
-        public virtual bool IsCancelable {
-            get { return true; }
-        }
-
-        public virtual bool IsConfirmable {
-            get { return false; }
-        }
-
-        public virtual bool Cancel() {
-            return true;
-        }
-
-        public virtual bool Confirm() {
-            ICommand command = GetCommand();
-            if (command != null) {
-                command.Execute(null);
-                return true;
-            }
-            return false;
+        public bool Cancel() {
+            return DoCancel();
         }
 
         #endregion // IDialogViewModel
@@ -66,8 +59,38 @@ namespace Viewer.Common.ViewModel {
 
         #region internal methods
 
-        protected virtual ICommand GetCommand() {
+        private void OnSubmit(object data) {
+            DoSubmit(data);
+        }
+
+        private bool IsSubmitable(object data) {
+            return m_submitable;
+        }
+
+        protected virtual object GetSubmitData() {
             return null;
+        }
+
+        protected virtual bool CanSubmit(object data) {
+            return false;
+        }
+
+        protected virtual void DoSubmit(object data) {
+        }
+
+        protected virtual bool DoCancel() {
+            return true;
+        }
+
+        /// <summary>
+        /// Submit 가능 상태가 변경될 수 있을 때 호출한다.
+        /// </summary>
+        public void CheckSubmit() {
+            bool v = CanSubmit(GetSubmitData());
+            if (v != m_submitable) {
+                m_submitable = v;
+                ((DelegateCommand)SubmitCommand).RaiseCanExecuteChanged();
+            }
         }
 
         #endregion // internal methods

@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Viewer.Common.ViewModel;
+using Viewer.Personal.Model;
+using System.Windows.Input;
 
 namespace Viewer.Personal.ViewModel {
     
@@ -22,6 +24,36 @@ namespace Viewer.Personal.ViewModel {
     public class VehicleViewModel : DialogViewModel {
 
         #region constructor
+
+        public VehicleViewModel() {
+        }
+
         #endregion // constructor
+
+
+        #region properties
+
+        public Vehicle Vehicle {
+            get;
+            set;
+        }
+
+        #endregion // properties
+
+
+        #region overriden methods
+
+        protected override object GetSubmitData() {
+            return this.Vehicle;
+        }
+
+        protected override bool CanSubmit(object data) {
+            return true;
+        }
+
+        protected override void DoSubmit(object data) {
+        }
+
+        #endregion // overriden methods
     }
 }

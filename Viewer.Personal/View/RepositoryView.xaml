@@ -18,8 +18,9 @@
             <Label>~</Label>
             <DatePicker Name="dateTo"/>
             <CheckBox Name="chkAll" VerticalAlignment="Center" Margin="8,0,0,0">모두 가져오기</CheckBox>
-            <Button Name="chkSearch" MinWidth="60" Margin="8,0,0,0">검색</Button>
-            <Button Name="chkImport" MinWidth="60" HorizontalAlignment="Right" Margin="8,0,0,0">Import</Button>
+            <Button Name="btnSearch" MinWidth="60" Margin="8,0,0,0">검색</Button>
+            <Button Name="btnImport" MinWidth="60" Margin="8,0,0,0">Import</Button>
+            <Button Name="btnTest" MinWidth="60" Margin="8,0,0,0" Click="btnTest_Click">Test</Button>
         </StackPanel>
         <ListView Name="lvMain" Grid.Row="1">
             <ListView.View>

@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 
 namespace Viewer.Common.ViewModel {
 
@@ -20,12 +21,9 @@ namespace Viewer.Common.ViewModel {
     /// </summary>
     public interface IDialogViewModel {
 
-        string CancelText { get; }
-        string ConfirmText { get; }
-        bool IsCancelable { get; }
-        bool IsConfirmable { get; }
+        ICommand SubmitCommand { get; }
+        object SubmitData { get; }
 
         bool Cancel();
-        bool Confirm();
     }
 }

@@ -20,12 +20,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Viewer.Common.ViewModel;
+using Microsoft.Practices.Prism.Commands;
 
 namespace Viewer.Common.View {
 
     /// <summary>
     /// </summary>
     public partial class DialogView : Window {
+
+        #region fields
+
+        private Action<object> m_callback;
+        
+        #endregion // fields
+
 
         #region constructor
 
@@ -45,15 +53,26 @@ namespace Viewer.Common.View {
             get { return DataContext as IDialogViewModel; }
             set {
                 if (value != DataContext) {
+                    if (DataContext is IDialogViewModel) {
+                        DelegateCommand<object> cmd = ((IDialogViewModel)DataContext).SubmitCommand as DelegateCommand<object>;
+                        if (cmd != null) {
+                            cmd.CanExecuteChanged -= new EventHandler(Submit_CanExecuteChanged);
+                        }
+                    }
+
                     DataContext = value;
 
-                    if (value != null) {
-                        RefreshView();
+                    if (DataContext is IDialogViewModel) {
+                        DelegateCommand<object> cmd = ((IDialogViewModel)DataContext).SubmitCommand as DelegateCommand<object>;
+                        if (cmd != null) {
+                            cmd.CanExecuteChanged += new EventHandler(Submit_CanExecuteChanged);
+                        }
                     }
+                    RefreshDialog();
                 }
             }
         }
-
+        
         /// <summary>
         /// Dialog content view
         /// </summary>
@@ -76,35 +95,55 @@ namespace Viewer.Common.View {
         #endregion // properties
 
 
+        #region methods
+
+        public void ShowCallback(Action<object> callback) {
+            m_callback = callback;
+            ShowDialog();
+        }
+
+        #endregion // methods
+
+
         #region internal methods
 
-        protected virtual void RefreshView() {
+        void Submit_CanExecuteChanged(object sender, EventArgs e) {
+            RefreshDialog();
+        }
+
+        protected virtual void RefreshDialog() {
             IDialogViewModel model = this.Model;
-            
-            if (model != null) {
-                btnCancel.Content = model.CancelText;
-                btnCancel.IsEnabled = model.IsCancelable;
-                btnOK.Content = model.ConfirmText;
+            ICommand cmd = (model != null) ? model.SubmitCommand : null;
+
+            if (cmd != null) {
+                btnOK.IsEnabled = cmd.CanExecute(model.SubmitData);
             
             } else {
-                btnCancel.IsEnabled = true;
                 btnOK.IsEnabled = false;
+                btnCancel.IsEnabled = true;
             }
         }
 
         protected virtual void DoConfirm() {
-            if (Model != null && Model.Confirm()) {
+            IDialogViewModel model = this.Model;
+            ICommand cmd = (model != null) ? model.SubmitCommand : null;
+
+            if (cmd != null) {
+                object data = model.SubmitData;
+                cmd.Execute(data);
                 DialogResult = true;
                 Close();
+
+                if (m_callback != null) {
+                    m_callback(data);
+                }
             }
         }
 
         protected virtual void DoCancel() {
-            if (Model != null && !Model.Cancel()) {
-                return;
+            if (Model != null && Model.Cancel()) {
+                Close();
             }
-
-            Close();
         }
 
         #endregion // internal methods

@@ -16,16 +16,16 @@ using System.Windows.Controls;
 using Viewer.Common.ViewModel;
 using Viewer.Common.View;
 
-namespace Viewer.Common {
+namespace Viewer.Common.Service {
 
     /// <summary>
     /// Dialog를 실행 시킨다.
     /// </summary>
-    public class DialogManager {
+    public class DialogService {
 
         #region constructor 
 
-        public DialogManager() {
+        public DialogService() {
         }
 
         #endregion // constructor
@@ -33,13 +33,14 @@ namespace Viewer.Common {
 
         #region methods
 
-        public void Run(UserControl view, IDialogViewModel viewModel, Action callback, bool modal = true) {
+        public static void Run(string title, UserControl view, IDialogViewModel viewModel, Action<object> callback = null, bool modal = true) {
             DialogView dialog = new DialogView();
+            dialog.Title = title;
             dialog.View = view;
             dialog.Model = viewModel;
 
             if (modal) {
-                dialog.ShowDialog();
+                dialog.ShowCallback(callback);
             
             } else {
                 dialog.Show();
