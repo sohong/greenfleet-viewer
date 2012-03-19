@@ -38,9 +38,9 @@ namespace Viewer.Personal.Command {
 
         /*
          이 커맨드에 바인딩하는 컨트롤(버튼 등)들이 이벤트에 subscribe하는 
-         시점을 viewmodel 쪽에서 잡아낼 수 없다.
-         viewmodel이 view의 datacontext로 설정되는 초기 시점에 command parameter가
-         넘기지 못하고 있다. 위의 commandManager 메카니즘을 이용한다.
+         시점을 viewmodel 쪽에서 잡아낼 수 없다. 즉, subscribe한 후 바로 이 함수를 호출하고
+         싶은데 못하고 있다(viewmodel이 view의 datacontext로 설정되는 초기 시점(등)에 command parameter를
+         넘기지 못하고 있다). 위에서 commandManager 메카니즘을 이용한다.
         public void RaiseCanExeuteChanged() {
             EventHandler eh = CanExecuteChanged;
             if (eh != null) {
