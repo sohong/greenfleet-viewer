@@ -25,7 +25,7 @@
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding VehicleCommand}">차량 정보</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding TestCommand}">Test</Button>
         </StackPanel>
-        <ListView Name="lvMain" Grid.Row="1" IsSynchronizedWithCurrentItem="True">
+        <ListView Name="lvMain" Grid.Row="1" ItemsSource="{Binding Tracks}" IsSynchronizedWithCurrentItem="True">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>

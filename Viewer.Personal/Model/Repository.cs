@@ -29,6 +29,19 @@ namespace Viewer.Personal.Model {
 
         public static readonly Regex TRACK_DATE_PATTERN = new Regex(@"\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}");
 
+        public static bool ParseTrackFile(string fileName, ref DateTime date) {
+            Match match = Repository.TRACK_DATE_PATTERN.Match(fileName);
+            if (match.Success) {
+                string[] arr = match.Value.Split('_');
+                if (arr.Length >= 6) {
+                    date = new DateTime(int.Parse(arr[0]), int.Parse(arr[1]), int.Parse(arr[2]),
+                        int.Parse(arr[3]), int.Parse(arr[4]), int.Parse(arr[5]));
+                    return true;
+                }
+            }
+            return false;
+        }
+
         #endregion // static members
 
 

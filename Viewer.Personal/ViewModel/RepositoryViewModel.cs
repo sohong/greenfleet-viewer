@@ -41,7 +41,12 @@ namespace Viewer.Personal.ViewModel {
             m_tracks = Repository.GetTracks();
             m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
 
+            SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
+            ImportCommand = new DelegateCommand<object>(DoImport, CanImport);
+            ExportCommand = new DelegateCommand<object>(DoExport, CanExport);
+            DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
             VehicleCommand = new DelegateCommand<object>(DoVechicle, CanVehicle);
+            TestCommand = new DelegateCommand<object>(DoTest, CanTest);
         }
 
         #endregion // constructors
@@ -157,13 +162,53 @@ namespace Viewer.Personal.ViewModel {
 
         #region internal methods
 
-        // VehicleCommand
+        // Search Command
+        private bool CanSearch(object data) {
+            return true;
+        }
+
+        private void DoSearch(object data) {
+        }
+
+        // Import command
+        private bool CanImport(object data) {
+            return true;
+        }
+
+        private void DoImport(object data) {
+        }
+
+        // Export command
+        private bool CanExport(object data) {
+            return true;
+        }
+
+        private void DoExport(object data) {
+        }
+
+        // Delete command
+        private bool CanDelete(object data) {
+            return true;
+        }
+
+        private void DoDelete(object data) {
+        }
+
+        // Vehicle Command
         private bool CanVehicle(object data) {
             return true;
         }
 
         private void DoVechicle(object data) {
             DialogService.Run("차량 정보 관리", new VehicleListView(), new VehicleListViewModel());
+        }
+
+        // Test command
+        private bool CanTest(object data) {
+            return true;
+        }
+
+        private void DoTest(object data) {
         }
 
         #endregion // internal methods
