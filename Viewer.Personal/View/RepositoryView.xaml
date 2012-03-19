@@ -19,7 +19,7 @@
             <DatePicker Name="dateTo" SelectedDate="{Binding SearchTo}"/>
             <CheckBox Name="chkAll" VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding SearchAll}">모두 가져오기</CheckBox>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding SearchCommand}">검색</Button>
-            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ImportCommand}">Import</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding Path=Commands.Import}" CommandParameter="{Binding SelectedVehicle}">Import</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ExportCommand}">Export</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding DeleteCommand}">삭제</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding VehicleCommand}">차량 정보</Button>

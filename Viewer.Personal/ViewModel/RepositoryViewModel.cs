@@ -19,6 +19,8 @@ using System.Windows.Input;
 using Viewer.Common.Service;
 using Viewer.Personal.View;
 using Microsoft.Practices.Prism.Commands;
+using Viewer.Common.Util;
+using Viewer.Personal.Command;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -39,10 +41,11 @@ namespace Viewer.Personal.ViewModel {
 
         public RepositoryViewModel() {
             m_tracks = Repository.GetTracks();
+
             m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
+            m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
-            ImportCommand = new DelegateCommand<object>(DoImport, CanImport);
             ExportCommand = new DelegateCommand<object>(DoExport, CanExport);
             DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
             VehicleCommand = new DelegateCommand<object>(DoVechicle, CanVehicle);
@@ -65,6 +68,21 @@ namespace Viewer.Personal.ViewModel {
         public ListCollectionView Vehicles {
             get { return m_vehicles; }
         }
+
+        /// <summary>
+        /// 현재 선택되어 있는 vehicle.
+        /// 선택 변경이 command들의 parameter에 반영될 수 있도록 setter를 작성한다.
+        /// </summary>
+        public Vehicle SelectedVehicle {
+            get { return m_selectedVehicle; }
+            set {
+                if (value != m_selectedVehicle) {
+                    m_selectedVehicle = value;
+                    RaisePropertyChanged(() => SelectedVehicle);
+                }
+            }
+        }
+        private Vehicle m_selectedVehicle;
 
         /// <summary>
         /// 검색 조건 - 시작 시간
@@ -108,19 +126,14 @@ namespace Viewer.Personal.ViewModel {
         }
         private bool m_searchAll;
 
+        public Commands Commands {
+            get { return Commands.Instance; }
+        }
+
         /// <summary>
         /// Search command
         /// </summary>
         public ICommand SearchCommand {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Repository 바깥(sd 카드 등)에 존재하는 트랙 정보들을 Repository의 지정된
-        /// 위치로 복사한다.
-        /// </summary>
-        public ICommand ImportCommand {
             get;
             private set;
         }
@@ -162,20 +175,22 @@ namespace Viewer.Personal.ViewModel {
 
         #region internal methods
 
+        private void Vehicles_CurrentChanged(object sender, EventArgs e) {
+            SelectedVehicle = Vehicles.CurrentItem as Vehicle;
+            CheckCommands();
+        }
+
+        private void CheckCommands() {
+            ((DelegateCommand<object>)DeleteCommand).RaiseCanExecuteChanged();
+            CommandManager.InvalidateRequerySuggested();
+        }
+
         // Search Command
         private bool CanSearch(object data) {
             return true;
         }
 
         private void DoSearch(object data) {
-        }
-
-        // Import command
-        private bool CanImport(object data) {
-            return true;
-        }
-
-        private void DoImport(object data) {
         }
 
         // Export command

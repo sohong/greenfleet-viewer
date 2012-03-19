@@ -24,6 +24,7 @@ using Viewer.Personal.Model;
 using Viewer.Common.Service;
 using Viewer.Personal.ViewModel;
 using Viewer.Common.Util;
+using Viewer.Personal.Command;
 
 namespace Viewer.Personal.View {
 
