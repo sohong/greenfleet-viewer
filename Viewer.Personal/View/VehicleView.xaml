@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <!-- Id -->
         <Label Grid.Row="0" HorizontalAlignment="Right">Id:</Label>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Path=Vehicle.VehicleId}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Path=Vehicle.VehicleId}" IsReadOnly="True" Background="#eeeeee"/>
         <!-- Name -->
         <Label Grid.Row="1" HorizontalAlignment="Right">Name:</Label>
         <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Path=Vehicle.Name}"/>

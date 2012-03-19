@@ -88,11 +88,14 @@ namespace Viewer.Personal.Model {
 
         public void Start() {
             LogUtil.Info("Personal Domain start...");
+
             m_preferences.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERS_PATH));
             m_vehicles.Load();
-            m_repository.Open(m_preferences.StorageRoot);
+            m_repository.Open(m_preferences.StorageRoot, m_vehicles.Vehicles);
 
             m_vehicles.Vehicles.CollectionChanged += new NotifyCollectionChangedEventHandler(Vehicles_CollectionChanged);
+            
+            LogUtil.Info("Personal Domain started.");
         }
 
         #endregion // methods

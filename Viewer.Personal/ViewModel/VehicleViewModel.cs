@@ -34,7 +34,13 @@ namespace Viewer.Personal.ViewModel {
 
         public VehicleViewModel(Vehicle source) {
             m_source = source;
-            Vehicle = (source != null) ? (Vehicle)source.Clone() : new Vehicle();
+            if (source != null) {
+                Vehicle = (Vehicle)source.Clone();
+            } else {
+                Vehicle = new Vehicle();
+                string id = Guid.NewGuid().ToString();
+                Vehicle.VehicleId = "v" + id.Substring(id.Length - 12, 12);
+            }
         }
 
         #endregion // constructor

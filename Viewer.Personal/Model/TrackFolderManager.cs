@@ -21,15 +21,18 @@ namespace Viewer.Personal.Model {
     /// Repository track 파일들이 저장되는 폴더 구조를 관리한다.
     /// 
     /// (** 아래와 같은 계층구조를 갖는다.
-    ///   YYYY -> MM -> DD
-    ///              -> DD
-    ///              -> DD
-    ///        -> MM -> DD
-    ///              -> DD
-    ///   YYYY -> MM
-    ///        -> MM
-    ///   YYYY
+    ///   vehicle1 -> YYYY -> MM -> DD
+    ///                          -> DD
+    ///                          -> DD
+    ///                    -> MM -> DD
+    ///                          -> DD
+    ///               YYYY -> MM
+    ///                    -> MM
+    ///               YYYY
+    ///   vehicle2 -> YYYY ...
     /// ********************************)
+    ///  각 vehicle 폴더 아래 카타로그 파일들이 생성된다.
+    /// 
     /// </summary>
     public class TrackFolderManager {
 
@@ -64,8 +67,8 @@ namespace Viewer.Personal.Model {
         /// relative가 true이면 repository root 상대 경로로 리턴한다.
         /// 기존하지 않으면 생성한 후 리턴한다.
         /// </summary>
-        public string GetFolder(string trackFile, bool relative) {
-            string folder = ParseFolder(trackFile);
+        public string GetFolder(Vehicle vehicle, string trackFile, bool relative) {
+            string folder = Path.Combine(vehicle.VehicleId, ParseFolder(trackFile));
 
             if (folder != null) {
                 string path = Path.Combine(m_owner.RootPath, folder);

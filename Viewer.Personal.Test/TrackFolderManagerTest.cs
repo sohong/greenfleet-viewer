@@ -68,11 +68,14 @@ namespace Viewer.Personal.Test
         [TestMethod()]
         public void GetFolderTest() {
             Repository repo = new Repository();
-            repo.Open(@"c:\GreenFleet\test\storage");
+            repo.Open(@"c:\GreenFleet\test\storage", null);
             TrackFolderManager manager = new TrackFolderManager(repo);
+            Vehicle vehicle = new Vehicle() {
+                VehicleId = "v121212121212"
+            };
             string trackFile = "all_2012_03_11_20_37_31";
-            string folder = manager.GetFolder(trackFile, true);
-            Assert.AreEqual(folder, @"2012\03\11");
+            string folder = manager.GetFolder(vehicle, trackFile, true);
+            Assert.AreEqual(folder, vehicle.VehicleId + @"\2012\03\11");
         }
     }
 }

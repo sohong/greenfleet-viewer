@@ -44,10 +44,10 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
         /// </summary>
-        public int Import(IEnumerable<string> files, bool overwrite) {
+        public int Import(Vehicle vehicle, IEnumerable<string> files, bool overwrite) {
             int count = 0;
             foreach (string file in files) {
-                if (ImportTrackFile(file, overwrite)) {
+                if (ImportTrackFile(vehicle, file, overwrite)) {
                     count++;
                 }
             }
@@ -59,12 +59,12 @@ namespace Viewer.Personal.Model {
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="overwrite"></param>
-        public int ImportAll(string folder, bool overwrite) {
+        public int ImportAll(Vehicle vehicle, string folder, bool overwrite) {
             int count = 0;
             if (Directory.Exists(folder)) {
                 string[] files = Directory.GetFiles(folder, "*.inc");
                 foreach (string file in files) {
-                    if (ImportTrackFile(file, overwrite)) {
+                    if (ImportTrackFile(vehicle, file, overwrite)) {
                         count++;
                     }
                 }
@@ -82,11 +82,11 @@ namespace Viewer.Personal.Model {
         /// 264파일은 mp4파일로 변환하여 저장한다.
         /// 264파을을 삭제하지는 않는다.
         /// </summary>
-        private bool ImportTrackFile(string file, bool overwrite) {
+        private bool ImportTrackFile(Vehicle vehicle, string file, bool overwrite) {
             // inc 파일은 반드시 존재해야 한다.
             string source = Path.ChangeExtension(file, ".inc");
             if (File.Exists(source)) {
-                string folder = m_owner.GetFolder(file, false);
+                string folder = m_owner.GetFolder(vehicle, file, false);
                 if (string.IsNullOrWhiteSpace(folder)) {
                     return false;
                 }

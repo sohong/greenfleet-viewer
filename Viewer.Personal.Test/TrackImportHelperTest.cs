@@ -19,10 +19,6 @@ namespace Viewer.Personal.Test
 
         private TestContext testContextInstance;
 
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
         public TestContext TestContext {
             get {
                 return testContextInstance;
@@ -69,7 +65,8 @@ namespace Viewer.Personal.Test
         [TestMethod()]
         public void ImportTest() {
             Repository repo = new Repository();
-            repo.Open(@"c:\GreenFleet\test\storage");
+            repo.Open(@"c:\GreenFleet\test\storage", null);
+            Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
             TrackImportHelper helper = new TrackImportHelper(repo);
 
             List<string> files = new List<string>();
@@ -77,7 +74,7 @@ namespace Viewer.Personal.Test
             files.Add(@"C:\GreenFleet\test\samples\all_2012_03_11_20_38_00");
             files.Add(@"C:\GreenFleet\test\samples\event_2012_03_11_20_38_31");
             
-            helper.Import(files, true);
+            helper.Import(vehicle, files, true);
         }
 
         /// <summary>
@@ -88,9 +85,10 @@ namespace Viewer.Personal.Test
             string repoDir = @"c:\GreenFleet\test\storage";
             string sourceDir = @"C:\GreenFleet\test\samples";
             Repository repo = new Repository();
-            repo.Open(repoDir);
+            repo.Open(repoDir, null);
+            Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
             TrackImportHelper helper = new TrackImportHelper(repo);
-            helper.ImportAll(sourceDir, true);
+            helper.ImportAll(vehicle, sourceDir, true);
         }
     }
 }

@@ -47,6 +47,7 @@ namespace Viewer.Personal.Model {
 
         #region fields
 
+        private Dictionary<Vehicle, List<TrackCatalog>> m_catalogs;
         private ObservableCollection<Track> m_tracks;
         private string m_rootPath;
         private TrackFolderManager m_folderManager;
@@ -58,6 +59,7 @@ namespace Viewer.Personal.Model {
         #region constructors
 
         public Repository() {
+            m_catalogs = new Dictionary<Vehicle, List<TrackCatalog>>();
             m_tracks = new ObservableCollection<Track>();
             m_folderManager = new TrackFolderManager(this);
             m_importHelper = new TrackImportHelper(this);
@@ -80,7 +82,7 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// Repository를 연다.
         /// </summary>
-        public void Open(string rootPath) {
+        public void Open(string rootPath, IEnumerable<Vehicle> vehicles) {
             LogUtil.Info("Repository open...");
 
             m_rootPath = rootPath;
@@ -88,7 +90,18 @@ namespace Viewer.Personal.Model {
                 Directory.CreateDirectory(m_rootPath);
             }
 
+            LoadTrackCatalogs(vehicles);
+
             LogUtil.Info("Repository opened.");
+        }
+
+        /// <summary>
+        /// 기존에 스토리지에 없는 차량이 추가되면 해당 폴더를 생성한다.
+        /// </summary>
+        public void AddVehicle(Vehicle vehicle) {
+            if (!m_catalogs.ContainsKey(vehicle)) {
+                CreateVehicleStorage(vehicle);
+            }
         }
 
         /// <summary>
@@ -103,23 +116,58 @@ namespace Viewer.Personal.Model {
         /// relative가 true이면 repository root 상대 경로로 리턴한다.
         /// 기존하지 않으면 생성한 후 리턴한다.
         /// </summary>
-        public string GetFolder(string trackFile, bool relative) {
-            return m_folderManager.GetFolder(trackFile, relative);
+        public string GetFolder(Vehicle vehicle, string trackFile, bool relative) {
+            return m_folderManager.GetFolder(vehicle, trackFile, relative);
         }
 
         /// <summary>
         /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
         /// files에는 확장자 없는 파일명들이 들어있다.
         /// </summary>
-        public void ImportTrackFiles(IEnumerable<string> files, bool overwrite) {
+        public void ImportTrackFiles(Vehicle vehicle, IEnumerable<string> files, bool overwrite) {
             LogUtil.Debug("Import track files...");
-            m_importHelper.Import(files, overwrite);
+            m_importHelper.Import(vehicle, files, overwrite);
         }
 
         #endregion // methods
 
 
         #region internal methods
+
+        private void CreateVehicleStorage(Vehicle vehicle) {
+            // vehicle's storage folder
+            string folder = Path.Combine(RootPath, vehicle.VehicleId);
+            Directory.CreateDirectory(folder);
+        }
+
+        private void LoadTrackCatalogs(IEnumerable<Vehicle> vehicles) {
+            if (vehicles == null)
+                return;
+
+            foreach (Vehicle v in vehicles) {
+                // vehicle's storage folder
+                string folder = Path.Combine(RootPath, v.VehicleId);
+                if (Directory.Exists(folder)) {
+                    List<TrackCatalog> catalogs = LoadTrackCatalog(v, folder);
+                    m_catalogs.Add(v, catalogs);
+                } else {
+                    CreateVehicleStorage(v);
+                }
+            }
+        }
+
+        private List<TrackCatalog> LoadTrackCatalog(Vehicle vehicle, string folder) {
+            List<TrackCatalog> catalogs = new List<TrackCatalog>();
+            string[] files = Directory.GetFiles(folder, "*.xml");
+
+            foreach (string file in files) {
+                TrackCatalog cat = new TrackCatalog(vehicle, 1, 1);
+                cat.Load(file);
+                catalogs.Add(cat);
+            }
+
+            return catalogs;
+        }
 
         private Track Find(DateTime time) {
             return null;

@@ -69,6 +69,7 @@
     <Compile Include="PersonalDomainTest.cs" />
     <Compile Include="PreferencesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrackCatalogTest.cs" />
     <Compile Include="TrackFolderManagerTest.cs" />
     <Compile Include="TrackImportHelperTest.cs" />
     <Compile Include="VehicleListViewModelTest.cs" />
