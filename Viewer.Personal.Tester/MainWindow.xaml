@@ -4,11 +4,20 @@
         xmlns:gf="clr-namespace:Viewer.Personal.View;assembly=Viewer.Personal"
         Title="Viewer.Personal.Tester" Height="224" Width="790" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Margin="6">
-        <TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="3,0,3,6">
+            <Button MinWidth="60" Margin="0,0,0,0" Command="{Binding VehicleCommand}">차량 정보</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding PreferencesCommand}">환경 설정</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding TestCommand}">Test</Button>
+        </StackPanel>
+        <TabControl Grid.Row="1">
             <TabItem Header="SD Card">
                 <gf:DeviceRepositoryView Name="deviceView"/>  
             </TabItem>
-            <TabItem Header="Repository">
+            <TabItem Header="저장소">
                 <gf:RepositoryView Name="repoView"/>
             </TabItem>
             <!--

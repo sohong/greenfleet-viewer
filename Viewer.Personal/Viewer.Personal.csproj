@@ -76,6 +76,7 @@
     <Compile Include="PersonalModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\DeviceRepositoryViewModel.cs" />
+    <Compile Include="ViewModel\PersonalViewModel.cs" />
     <Compile Include="ViewModel\RepositoryViewModel.cs" />
     <Compile Include="ViewModel\TrackViewModel.cs" />
     <Compile Include="ViewModel\VehicleListViewModel.cs" />

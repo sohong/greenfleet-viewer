@@ -208,6 +208,12 @@ namespace Viewer.Common.View {
 
         #region event handlers
 
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Escape && Model.IsCancelable) {
+                DoCancel();
+            }
+        }
+
         private void btnOK_Click(object sender, RoutedEventArgs e) {
             DoConfirm();
         }

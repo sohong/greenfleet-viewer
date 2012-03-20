@@ -3,28 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             xmlns:gf="clr-namespace:Viewer.Common.View;assembly=Viewer.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="136" d:DesignWidth="862">
+             d:DesignHeight="344" d:DesignWidth="858">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>        
-        <StackPanel Orientation="Horizontal" Margin="6,3,6,3">
+        <StackPanel Orientation="Horizontal" Margin="6,3,6,5">
             <Label>차랑:</Label>
             <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
             <Label Margin="8,0,0,0">검색 기간:</Label>
-            <DatePicker SelectedDate="{Binding SearchFrom}"/>
+            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchFrom}"/>
             <Label>~</Label>
-            <DatePicker SelectedDate="{Binding SearchTo}"/>
+            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchTo}"/>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding SearchAll}">모두 가져오기</CheckBox>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding SearchCommand}">검색</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding Path=Commands.Import}" CommandParameter="{Binding SelectedVehicle}">Import</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ExportCommand}">Export</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding DeleteCommand}">삭제</Button>
-            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding VehicleCommand}">차량 정보</Button>
-            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding TestCommand}">Test</Button>
         </StackPanel>
+        <!--
         <ListView Name="lvMain" Grid.Row="1" ItemsSource="{Binding Tracks}" IsSynchronizedWithCurrentItem="True">
             <ListView.View>
                 <GridView>
@@ -37,5 +38,73 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="210"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TreeView Name="tvMain" Grid.Row="1" ItemsSource="{Binding Path=TrackGroup.Children}">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="True" />
+                        <!--
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ModelType}" Value="CustomerCategory">
+                            <Setter Property="Foreground" Value="#000088"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ModelType}" Value="GameCategory">
+                            <Setter Property="Foreground" Value="#000088"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                    -->
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <StackPanel Orientation="Horizontal" Margin="2">
+                            <CheckBox IsChecked="{Binding IsChecked,Mode=TwoWay}" Margin="0, 0, 4, 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" MinHeight="60"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="240" MinHeight="20"/>
+                    </Grid.RowDefinitions>
+                    <gf:VideoView/>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                    <Grid Grid.Row="2">
+                        <gf:AccelerationView/>
+                    </Grid>
+                </Grid>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*" MinHeight="40"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="4*" MinHeight="20"/>
+                    </Grid.RowDefinitions>
+                    <gf:BingMapView/>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                    <Grid Grid.Row="2" Background="Gray">
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

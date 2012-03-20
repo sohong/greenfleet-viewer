@@ -48,8 +48,9 @@ namespace Viewer.Personal.ViewModel {
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
             ExportCommand = new DelegateCommand<object>(DoExport, CanExport);
             DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
-            VehicleCommand = new DelegateCommand<object>(DoVechicle, CanVehicle);
-            TestCommand = new DelegateCommand<object>(DoTest, CanTest);
+
+            SearchFrom = DateTime.Today;
+            SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
         }
 
         #endregion // constructors
@@ -96,7 +97,7 @@ namespace Viewer.Personal.ViewModel {
                 }
             }
         }
-        private DateTime m_searchFrom = DateTime.Today;
+        private DateTime m_searchFrom;
 
         /// <summary>
         /// 검색 조건 - 끝 일시
@@ -110,7 +111,7 @@ namespace Viewer.Personal.ViewModel {
                 }
             }
         }
-        private DateTime m_searchTo = DateTime.Today;
+        private DateTime m_searchTo;
 
         /// <summary>
         /// 모드 가져오기
@@ -154,22 +155,6 @@ namespace Viewer.Personal.ViewModel {
             private set;
         }
 
-        /// <summary>
-        /// 차량 관리 command
-        /// </summary>
-        public ICommand VehicleCommand {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Test command
-        /// </summary>
-        public ICommand TestCommand {
-            get;
-            private set;
-        }
-
         #endregion // properties
 
 
@@ -207,23 +192,6 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoDelete(object data) {
-        }
-
-        // Vehicle Command
-        private bool CanVehicle(object data) {
-            return true;
-        }
-
-        private void DoVechicle(object data) {
-            DialogService.Run("차량 정보 관리", new VehicleListView(), new VehicleListViewModel());
-        }
-
-        // Test command
-        private bool CanTest(object data) {
-            return true;
-        }
-
-        private void DoTest(object data) {
         }
 
         #endregion // internal methods
