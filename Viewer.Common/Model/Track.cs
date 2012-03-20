@@ -17,6 +17,11 @@ using System.Collections.ObjectModel;
 
 namespace Viewer.Common.Model {
 
+    public enum TrackType {
+        All,    // 상시
+        Event   // 이벤트
+    };
+
     /// <summary>
     /// SD 카드에 저장되는 한 단위의 트랙 정보.
     /// 주행 영상, TrackPoint들로 구성된다.
@@ -40,6 +45,20 @@ namespace Viewer.Common.Model {
 
 
         #region properties
+
+        /// <summary>
+        /// 상시 or 이벤트.
+        /// </summary>
+        public TrackType TrackType {
+            get { return m_trackType; }
+            set {
+                if (value != m_trackType) {
+                    m_trackType = value;
+                    RaisePropertyChanged(() => TrackType);
+                }
+            }
+        }
+        private TrackType m_trackType;
 
         /// <summary>
         /// 단말기 id
@@ -138,5 +157,14 @@ namespace Viewer.Common.Model {
         }
 
         #endregion // properties
+
+
+        #region overriden methods
+
+        public override string ToString() {
+            return "[" + TrackType + "] " + CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        #endregion // overriden methods
     }
 }

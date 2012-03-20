@@ -61,6 +61,7 @@
     <Compile Include="Command\ImportCommand.cs" />
     <Compile Include="Command\SimpleCommand.cs" />
     <Compile Include="LocalTrackLoader.cs" />
+    <Compile Include="Model\DeviceRepository.cs" />
     <Compile Include="Model\TrackCatalog.cs" />
     <Compile Include="Model\TrackFolderManager.cs" />
     <Compile Include="Model\TrackImportHelper.cs" />

@@ -47,9 +47,9 @@ namespace Viewer.Personal.Model {
 
         #region fields
 
+        private string m_rootPath;
         private Dictionary<Vehicle, List<TrackCatalog>> m_catalogs;
         private ObservableCollection<Track> m_tracks;
-        private string m_rootPath;
         private TrackFolderManager m_folderManager;
         private TrackImportHelper m_importHelper;
         
