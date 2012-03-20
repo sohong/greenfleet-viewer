@@ -5,8 +5,11 @@
         Title="Viewer.Personal.Tester" Height="224" Width="790" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Margin="6">
         <TabControl>
-            <TabItem Header="List">
-                <gf:RepositoryView Name="repoView"/>  
+            <TabItem Header="SD Card">
+                <gf:DeviceRepositoryView Name="deviceView"/>  
+            </TabItem>
+            <TabItem Header="Repository">
+                <gf:RepositoryView Name="repoView"/>
             </TabItem>
             <TabItem Header="Track">
                 <gf:TrackView Name="trackView"/>

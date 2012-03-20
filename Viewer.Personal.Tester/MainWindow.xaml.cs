@@ -39,6 +39,7 @@ namespace Viewer.Personal.Tester {
             Left = (SystemParameters.PrimaryScreenWidth - Width) / 2;
             Top = (SystemParameters.PrimaryScreenHeight - Height) / 2;
 
+            deviceView.DataContext = new DeviceRepositoryViewModel();
             repoView.DataContext = new RepositoryViewModel();
         }
 

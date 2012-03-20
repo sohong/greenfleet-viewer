@@ -55,6 +55,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\Viewer.Common\Lib\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\Commands.cs" />
@@ -72,10 +75,14 @@
     <Compile Include="Model\VehicleManager.cs" />
     <Compile Include="PersonalModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\DeviceRepositoryViewModel.cs" />
     <Compile Include="ViewModel\RepositoryViewModel.cs" />
     <Compile Include="ViewModel\TrackViewModel.cs" />
     <Compile Include="ViewModel\VehicleListViewModel.cs" />
     <Compile Include="ViewModel\VehicleViewModel.cs" />
+    <Compile Include="View\DeviceRepositoryView.xaml.cs">
+      <DependentUpon>DeviceRepositoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RepositoryView.xaml.cs">
       <DependentUpon>RepositoryView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +106,10 @@
     <Content Include="Doc\Repository 구성.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\DeviceRepositoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\RepositoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

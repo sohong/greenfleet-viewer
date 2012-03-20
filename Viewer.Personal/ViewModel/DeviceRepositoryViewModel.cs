@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// StorageViewModel.cs
-// 2012.03.08, created by sohong
+// DeviceRepositoryViewModel.cs
+// 2012.03.20, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision
@@ -15,41 +15,40 @@ using System.Text;
 using Viewer.Common.ViewModel;
 using Viewer.Personal.Model;
 using System.Windows.Data;
-using System.Windows.Input;
-using Viewer.Common.Service;
-using Viewer.Personal.View;
-using Microsoft.Practices.Prism.Commands;
-using Viewer.Common.Util;
 using Viewer.Personal.Command;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
+using System.Windows.Forms;
+using Viewer.Common.Model;
 
 namespace Viewer.Personal.ViewModel {
 
     /// <summary>
-    /// View model for RepositoryView
+    /// View model for DeviceRepositoryView
     /// </summary>
-    public class RepositoryViewModel : ViewModelBase {
+    public class DeviceRepositoryViewModel : ViewModelBase {
 
         #region fields
 
-        private ListCollectionView m_tracks;
         private ListCollectionView m_vehicles;
-
+        private DeviceRepository m_repository;
+        private ListCollectionView m_tracks;
+        
         #endregion // fields
 
 
         #region constructors
 
-        public RepositoryViewModel() {
-            m_tracks = Repository.GetTracks();
+        public DeviceRepositoryViewModel() {
+            m_repository = new DeviceRepository();
 
             m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
             m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
-            SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
-            ExportCommand = new DelegateCommand<object>(DoExport, CanExport);
-            DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
-            VehicleCommand = new DelegateCommand<object>(DoVechicle, CanVehicle);
-            TestCommand = new DelegateCommand<object>(DoTest, CanTest);
+            SearchFrom = DateTime.Today;
+            SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
+
+            LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
         }
 
         #endregion // constructors
@@ -57,17 +56,24 @@ namespace Viewer.Personal.ViewModel {
 
         #region properties
 
-        public Repository Repository {
-            get { return PersonalDomain.Domain.Repository; }
-        }
-
-        public ListCollectionView Tracks {
-            get { return m_tracks; }
-        }
-
         public ListCollectionView Vehicles {
             get { return m_vehicles; }
         }
+
+        public DeviceRepository Repository {
+            get { return m_repository; }
+        }
+
+        public TrackGroup TrackGroup {
+            get { return m_trackGroup; }
+            set {
+                if (value != m_trackGroup) {
+                    m_trackGroup = value;
+                    RaisePropertyChanged(() => TrackGroup);
+                }
+            }
+        }
+        private TrackGroup m_trackGroup;
 
         /// <summary>
         /// 현재 선택되어 있는 vehicle.
@@ -84,8 +90,9 @@ namespace Viewer.Personal.ViewModel {
         }
         private Vehicle m_selectedVehicle;
 
+
         /// <summary>
-        /// 검색 조건 - 시작 일시
+        /// 검색 조건 - 시작 시각(시/분)
         /// </summary>
         public DateTime SearchFrom {
             get { return m_searchFrom; }
@@ -96,10 +103,10 @@ namespace Viewer.Personal.ViewModel {
                 }
             }
         }
-        private DateTime m_searchFrom = DateTime.Today;
+        private DateTime m_searchFrom;
 
         /// <summary>
-        /// 검색 조건 - 끝 일시
+        /// 검색 조건 - 끝 시각(시/분)
         /// </summary>
         public DateTime SearchTo {
             get { return m_searchTo; }
@@ -110,7 +117,7 @@ namespace Viewer.Personal.ViewModel {
                 }
             }
         }
-        private DateTime m_searchTo = DateTime.Today;
+        private DateTime m_searchTo;
 
         /// <summary>
         /// 모드 가져오기
@@ -130,42 +137,7 @@ namespace Viewer.Personal.ViewModel {
             get { return Commands.Instance; }
         }
 
-        /// <summary>
-        /// Search command
-        /// </summary>
-        public ICommand SearchCommand {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 선택한 트랙 정보들을 지정한 폴더로 이동 시킨다.
-        /// </summary>
-        public ICommand ExportCommand {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 삭제 command
-        /// </summary>
-        public ICommand DeleteCommand {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// 차량 관리 command
-        /// </summary>
-        public ICommand VehicleCommand {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Test command
-        /// </summary>
-        public ICommand TestCommand {
+        public ICommand LoadCommand {
             get;
             private set;
         }
@@ -181,49 +153,22 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void CheckCommands() {
-            ((DelegateCommand<object>)DeleteCommand).RaiseCanExecuteChanged();
-            CommandManager.InvalidateRequerySuggested();
+            //((DelegateCommand<object>)DeleteCommand).RaiseCanExecuteChanged();
+            //CommandManager.InvalidateRequerySuggested();
         }
 
-        // Search Command
-        private bool CanSearch(object data) {
+        // Load command
+        private bool CanLoad(object data) {
             return true;
         }
 
-        private void DoSearch(object data) {
-        }
-
-        // Export command
-        private bool CanExport(object data) {
-            return true;
-        }
-
-        private void DoExport(object data) {
-        }
-
-        // Delete command
-        private bool CanDelete(object data) {
-            return true;
-        }
-
-        private void DoDelete(object data) {
-        }
-
-        // Vehicle Command
-        private bool CanVehicle(object data) {
-            return true;
-        }
-
-        private void DoVechicle(object data) {
-            DialogService.Run("차량 정보 관리", new VehicleListView(), new VehicleListViewModel());
-        }
-
-        // Test command
-        private bool CanTest(object data) {
-            return true;
-        }
-
-        private void DoTest(object data) {
+        private void DoLoad(object data) {
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            if (dlg.ShowDialog() == DialogResult.OK) {
+                m_repository.Open(SelectedVehicle, dlg.SelectedPath);
+                m_tracks = m_repository.GetTracks();
+                this.TrackGroup = m_repository.LoadGroups(m_tracks);
+            }
         }
 
         #endregion // internal methods

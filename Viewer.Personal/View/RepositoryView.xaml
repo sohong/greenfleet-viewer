@@ -12,12 +12,12 @@
         </Grid.RowDefinitions>        
         <StackPanel Orientation="Horizontal" Margin="6,3,6,3">
             <Label>차랑:</Label>
-            <ComboBox Name="cmbVehicle" MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
+            <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
             <Label Margin="8,0,0,0">검색 기간:</Label>
-            <DatePicker Name="dateFrom" SelectedDate="{Binding SearchFrom}"/>
+            <DatePicker SelectedDate="{Binding SearchFrom}"/>
             <Label>~</Label>
-            <DatePicker Name="dateTo" SelectedDate="{Binding SearchTo}"/>
-            <CheckBox Name="chkAll" VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding SearchAll}">모두 가져오기</CheckBox>
+            <DatePicker SelectedDate="{Binding SearchTo}"/>
+            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding SearchAll}">모두 가져오기</CheckBox>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding SearchCommand}">검색</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding Path=Commands.Import}" CommandParameter="{Binding SelectedVehicle}">Import</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ExportCommand}">Export</Button>

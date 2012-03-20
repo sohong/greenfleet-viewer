@@ -12,6 +12,8 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Viewer.Common.Xml;
+using Microsoft.Practices.Prism.ViewModel;
 
 namespace Viewer.Common.Model {
 
@@ -27,7 +29,7 @@ namespace Viewer.Common.Model {
     /// 시간/일 단위로 묶여진 track group.
     /// 트랙 목록을 트리로 표현할 때 사용.
     /// </summary>
-    public class TrackGroup {
+    public class TrackGroup : NotificationObject {
 
         #region fields
 
@@ -58,6 +60,29 @@ namespace Viewer.Common.Model {
         public List<object> Children {
             get { return m_children; }
         }
+
+        /// <summary>
+        /// 선택 상태. view에서 사용한다.
+        /// </summary>
+        [Transient]
+        public bool IsChecked {
+            get { return m_checked; }
+            set {
+                if (value != m_checked) {
+                    m_checked = value;
+                    RaisePropertyChanged(() => IsChecked);
+
+                    foreach (object obj in m_children) {
+                        if (obj is Track) {
+                            ((Track)obj).IsChecked = IsChecked;
+                        } else if (obj is TrackGroup) {
+                            ((TrackGroup)obj).IsChecked = IsChecked;
+                        }
+                    }
+                }
+            }
+        }
+        private bool m_checked;
         
         #endregion // properties
 

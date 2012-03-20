@@ -64,6 +64,10 @@ namespace Viewer.Personal.Model {
             m_vehicle = vehicle;
             m_rootPath = rootPath;
 
+            if (m_tracks != null) {
+                m_tracks.Clear();
+                m_tracks = null;
+            }
             if (Directory.Exists(rootPath)) {
                 m_tracks = new ObservableCollection<Track>();
                 LoadTracks();
@@ -117,6 +121,7 @@ namespace Viewer.Personal.Model {
                     Track track = new Track();
                     track.TrackType = name.StartsWith("event") ? TrackType.Event : TrackType.All;
                     track.CreateDate = d;
+
                     m_tracks.Add(track);
                 }
             }

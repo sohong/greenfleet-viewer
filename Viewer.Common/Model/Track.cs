@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
 using System.Collections.ObjectModel;
+using Viewer.Common.Xml;
 
 namespace Viewer.Common.Model {
 
@@ -155,6 +156,21 @@ namespace Viewer.Common.Model {
         public ObservableCollection<TrackPoint> Points {
             get { return m_points; }
         }
+
+        /// <summary>
+        /// 선택 상태. view에서 사용한다.
+        /// </summary>
+        [Transient]
+        public bool IsChecked {
+            get { return m_checked; }
+            set {
+                if (value != m_checked) {
+                    m_checked = value;
+                    RaisePropertyChanged(() => IsChecked);
+                }
+            }
+        }
+        private bool m_checked;
 
         #endregion // properties
 
