@@ -43,7 +43,7 @@ namespace Viewer.Common.Tester {
 
         private Track LoadTrack() {
             string source = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"sample\all_2012_03_11_20_37_31.inc");
-            Track track = new LocalTrackLoader().Load(source);
+            Track track = new LocalTrackLoader().Load(source, true);
             return track;
         }
         

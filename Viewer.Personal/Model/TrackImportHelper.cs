@@ -118,7 +118,7 @@ namespace Viewer.Personal.Model {
                     }
 
                     // convert to mp4;
-                    VideoUtil.RawToMpeg(target);
+                    VideoUtil.RawToMpeg(target, null);
                 }
 
                 return true;

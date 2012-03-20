@@ -67,7 +67,7 @@ namespace Viewer.Common.Test
         public void LoadTest() {
             LocalTrackLoader loader = new LocalTrackLoader();
             string source = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"sample\all_2012_03_11_20_37_31.inc");
-            Track target = loader.Load(source);
+            Track target = loader.Load(source, true);
             Assert.IsNotNull(target);
 
             DateTime d = new DateTime(2012, 3, 11, 20, 37, 31);

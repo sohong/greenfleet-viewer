@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Data;
 using System.IO;
 using Viewer.Common.Model;
+using Viewer.Common.Loader;
 
 namespace Viewer.Personal.Model {
 
@@ -29,6 +30,7 @@ namespace Viewer.Personal.Model {
         private Vehicle m_vehicle;
         private string m_rootPath;
         private ObservableCollection<Track> m_tracks;
+        private LocalTrackLoader m_loader;
         
         #endregion // fields
 
@@ -36,6 +38,7 @@ namespace Viewer.Personal.Model {
         #region constructor
 
         public DeviceRepository() {
+            m_loader = new LocalTrackLoader();
         }
 
         #endregion // constructor
@@ -81,6 +84,11 @@ namespace Viewer.Personal.Model {
             return new ListCollectionView(m_tracks);
         }
 
+        /// <summary>
+        /// 트랙 목록으로부터 트랙 그룹 hierarchy를 생성한다.
+        /// </summary>
+        /// <param name="tracks"></param>
+        /// <returns></returns>
         public TrackGroup LoadGroups(ListCollectionView tracks) {
             if (tracks.Count > 0) {
                 Track track = (Track)tracks.GetItemAt(0);
@@ -115,6 +123,12 @@ namespace Viewer.Personal.Model {
         private void LoadTracks() {
             string[] files = Directory.GetFiles(m_rootPath, "*.inc");
             foreach (string file in files) {
+                Track track = m_loader.Load(file, false);
+                if (track != null) {
+                    m_tracks.Add(track);
+                }
+
+                /*
                 string name = Path.GetFileNameWithoutExtension(file);
                 DateTime d = new DateTime();
                 if (Repository.ParseTrackFile(name, ref d)) {
@@ -124,6 +138,7 @@ namespace Viewer.Personal.Model {
 
                     m_tracks.Add(track);
                 }
+                 */
             }
         }
 

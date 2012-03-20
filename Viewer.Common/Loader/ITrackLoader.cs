@@ -20,6 +20,6 @@ namespace Viewer.Common.Loader {
     /// </summary>
     public interface ITrackLoader {
 
-        Track Load(object source);
+        Track Load(object source, bool convertVideo);
     }
 }

@@ -41,9 +41,9 @@ namespace Viewer.Common.Loader {
 
         #region ITrackLoader
 
-        public Track Load(object source) {
+        public Track Load(object source, bool convertVideo) {
             string path = source.ToString();
-            Track track = LoadTrack(path);
+            Track track = LoadTrack(path, convertVideo);
             return track;
         }
 
@@ -52,9 +52,9 @@ namespace Viewer.Common.Loader {
 
         #region internal methods
 
-        private Track LoadTrack(string path) {
+        private Track LoadTrack(string path, bool convertVideo) {
             // track 정보
-            Track track = CreateTrack(path);
+            Track track = CreateTrack(path, convertVideo);
 
             // track points
             using (StreamReader reader = new StreamReader(path)) {
@@ -64,27 +64,35 @@ namespace Viewer.Common.Loader {
             return track;
         }
 
-        protected Track CreateTrack(string path) {
+        protected Track CreateTrack(string path, bool convertVideo) {
             if (!File.Exists(path)) {
                 return null;
             }
 
-            Track track = new Track();
-            
-            // video file
-            string s = Path.ChangeExtension(path, "264");
-            if (File.Exists(s)) {
-                track.VideoFile = VideoUtil.RawToMpeg(s);
-            }
-            
             // create date
-            s = Path.GetFileNameWithoutExtension(path);
+            TrackType tt = TrackType.All;
+            string s = Path.GetFileNameWithoutExtension(path);
             if (s.StartsWith("all_")) {
                 s = s.Substring(4);
-            } else { // "event_"
+            } else if (s.StartsWith("event_")) {
                 s = s.Substring(6);
+                tt = TrackType.Event;
+            } else {
+                return null;
             }
-            track.CreateDate = DateTime.ParseExact(s, DATE_FORMAT, null);
+            DateTime d = DateTime.ParseExact(s, DATE_FORMAT, null);
+
+            Track track = new Track();
+
+            // create date
+            track.CreateDate = d;
+            // track type
+            track.TrackType = tt;
+            // video file
+            s = Path.ChangeExtension(path, "264");
+            if (File.Exists(s)) {
+                track.VideoFile = convertVideo ? VideoUtil.RawToMpeg(s, null) : s;
+            }
 
             return track;
         }

@@ -31,7 +31,7 @@ namespace Viewer.Common.Util {
         /// <summary>
         /// h264 raw 영상을 mpeg4 컨테이너로 변환한다.
         /// </summary>
-        public static string RawToMpeg(string sourcePath, string extension = "mp4") {
+        public static string RawToMpeg(string sourcePath, string targetFolder, string extension = "mp4") {
             string exeName = Path.Combine(FileUtil.GetAppFolder(), FFMPEG);
             if (!File.Exists(exeName)) {
                 exeName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FFMPEG);
@@ -39,7 +39,13 @@ namespace Viewer.Common.Util {
             if (!File.Exists(exeName)) {
                 exeName = FFMPEG;
             }
-            string path = Path.ChangeExtension(sourcePath, extension);
+
+            string path;
+            if (string.IsNullOrWhiteSpace(targetFolder)) {
+                path = Path.ChangeExtension(sourcePath, extension);
+            } else {
+                path = Path.Combine(targetFolder, Path.GetFileNameWithoutExtension(Path.ChangeExtension(sourcePath, extension)));
+            }
             
             Process proc = new Process();
             //proc.StartInfo.FileName = Path.Combine(FileUtil.GetAppFolder(), "ffmpeg.exe");
