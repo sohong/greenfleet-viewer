@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:tk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             xmlns:gf="clr-namespace:Viewer.Common.View;assembly=Viewer.Common"
              mc:Ignorable="d" 
              d:DesignHeight="193" d:DesignWidth="689">
     <Grid>
@@ -11,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Margin="6,3,6,3">
+        <StackPanel Orientation="Horizontal" Margin="6,3,6,5">
             <Label>차랑:</Label>
             <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding LoadCommand}">열기</Button>
@@ -25,8 +26,9 @@
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="210"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TreeView Name="tvMain" Grid.Row="1" ItemsSource="{Binding Path=TrackGroup.Children}">
                 <TreeView.ItemContainerStyle>
@@ -56,6 +58,38 @@
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" MinHeight="60"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="240" MinHeight="20"/>
+                    </Grid.RowDefinitions>
+                    <gf:VideoView/>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                    <Grid Grid.Row="2">
+                        <gf:AccelerationView/>
+                    </Grid>
+                </Grid>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*" MinHeight="40"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="4*" MinHeight="20"/>
+                    </Grid.RowDefinitions>
+                    <gf:BingMapView/>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                    <Grid Grid.Row="2" Background="Gray">
+                    </Grid>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

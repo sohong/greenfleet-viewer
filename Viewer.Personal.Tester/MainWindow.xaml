@@ -11,9 +11,11 @@
             <TabItem Header="Repository">
                 <gf:RepositoryView Name="repoView"/>
             </TabItem>
+            <!--
             <TabItem Header="Track">
                 <gf:TrackView Name="trackView"/>
             </TabItem>
+            -->
         </TabControl>
     </Grid>
 </Window>

@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="451" d:DesignWidth="638">
-    <Grid>
+    <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <MediaElement Name="mediaMain" LoadedBehavior="Manual" UnloadedBehavior="Stop" MediaOpened="mediaMain_MediaOpened" MediaEnded="mediaMain_MediaEnded" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3" Background="Gray">
             <Button Name="btnPlay" Margin="2" Padding="2" Click="btnPlay_Click">Play</Button>
             <Button Name="btnStop" Margin="2" Padding="2" Click="btnStop_Click">Stop</Button>
             <Button Name="btnPause" Margin="2" Padding="2" Click="btnPause_Click">Pause</Button>
