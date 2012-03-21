@@ -38,7 +38,8 @@ namespace Viewer.Personal.ViewModel {
             this.EditCommand = new DelegateCommand<object>(DoEdit, CanEdit);
             this.DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
 
-            IsCancelable = false;
+            IsCancelable = true;
+            CancelText = null; // cancel 버튼이 표시되지 않고 esc 키만 동작하도록.
             SubmitText = "Close";
         }
 

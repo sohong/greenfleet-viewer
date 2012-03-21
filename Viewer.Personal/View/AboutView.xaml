@@ -2,8 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             Height="327" Width="440">
+             Height="200" Width="413">
     <Grid>
-            
+        <Image Height="160" HorizontalAlignment="Left" Margin="12,12,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="173" Source="/Viewer.Personal;component/Images/Desert.jpg" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="207,12,0,0" Name="label1" VerticalAlignment="Top">GreenFleets Personal Viewer</Label>
+        <Label Height="28" HorizontalAlignment="Left" Margin="207,37,0,0" Name="label2" VerticalAlignment="Top" ContentStringFormat="{}Version {0}" Content="{Binding Version}"/>
+        <Label Height="28" HorizontalAlignment="Left" Margin="207,71,0,0" Name="label3" VerticalAlignment="Top">Copyright 2012 PalmVision Inc.</Label>
+        <Label Height="28" HorizontalAlignment="Left" Margin="207,96,0,0" Name="label4" VerticalAlignment="Top">All rights Reserved.</Label>
     </Grid>
 </UserControl>

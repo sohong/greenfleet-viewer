@@ -32,6 +32,9 @@ namespace Viewer.Common.ViewModel {
         #region constructor
 
         public DialogViewModel() {
+            SubmitText = "OK";
+            CancelText = "Cancel";
+
             SubmitCommand = new DelegateCommand<object>(OnSubmit, IsSubmitable);
             m_submitable = CanSubmit(SubmitData);
         }

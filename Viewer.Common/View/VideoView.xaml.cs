@@ -31,6 +31,48 @@ namespace Viewer.Common.View {
     /// </summary>
     public partial class VideoView : UserControl {
 
+        #region dependency properties
+
+        /// <summary>
+        /// Track
+        /// </summary>
+        public static readonly DependencyProperty TrackProperty =
+            DependencyProperty.Register(
+                "Track",
+                typeof(Track),
+                typeof(VideoView),
+                new PropertyMetadata(TrackPropertyChanged));
+
+        private static void TrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+            VideoView view = (VideoView)obj;
+            Track track = e.NewValue as Track;
+
+            view.Stop();
+            if (track != null && !string.IsNullOrWhiteSpace(track.VideoFile)) {
+                view.mediaMain.Source = new Uri(track.VideoFile, UriKind.Absolute);
+            } else {
+                view.mediaMain.Source = null;
+            }
+        }
+
+        /// <summary>
+        /// Steps
+        /// </summary>
+        public static readonly DependencyProperty StepsProperty =
+            DependencyProperty.Register(
+                "Steps",
+                typeof(int),
+                typeof(VideoView), 
+                new PropertyMetadata(20, null), 
+                StepsPropertyValidate);
+
+        private static bool StepsPropertyValidate(object newValue) {
+            return (int)newValue >= 2 && (int)newValue <= 100;
+        }
+
+        #endregion dependency properties
+
+        
         #region fields
 
         private DispatcherTimer m_timer;
@@ -51,6 +93,8 @@ namespace Viewer.Common.View {
 
         public VideoView() {
             InitializeComponent();
+
+            Steps = 20;
 
             m_timer = new DispatcherTimer();
             m_timer.Interval = TimeSpan.FromMilliseconds(50);
@@ -83,25 +127,14 @@ namespace Viewer.Common.View {
         /// Track 정보.
         /// </summary>
         public Track Track {
-            set {
-                if (value != m_track) {
-                    Stop();
-                    m_track = value;
-                    if (m_track != null && !string.IsNullOrWhiteSpace(m_track.VideoFile)) {
-                        mediaMain.Source = new Uri(m_track.VideoFile, UriKind.Absolute);
-                    } else {
-                        mediaMain.Source = null;
-                    }
-                }
-            }
+            get { return (Track)GetValue(TrackProperty); }
+            set { SetValue(TrackProperty, value); }
         }
-        private Track m_track;
 
         public int Steps {
-            get { return m_steps; }
-            set { m_steps = Math.Max(1, Math.Min(100, value)); }
+            get { return (int)GetValue(StepsProperty); }
+            set { SetValue(StepsProperty, value); }
         }
-        private int m_steps = 20;
 
         #endregion // properties
 
@@ -131,12 +164,14 @@ namespace Viewer.Common.View {
         }
 
         public void Previous() {
-            double v = Math.Max(0, mediaMain.Position.TotalMilliseconds - m_videoLength / Steps);
+            int steps = Math.Max(2, Steps);
+            double v = Math.Max(0, mediaMain.Position.TotalMilliseconds - m_videoLength / steps);
             mediaMain.Position = TimeSpan.FromMilliseconds(v);
         }
 
         public void Next() {
-            double v = Math.Min(m_videoLength, mediaMain.Position.TotalMilliseconds + m_videoLength / Steps);
+            int steps = Math.Max(2, Steps);
+            double v = Math.Min(m_videoLength, mediaMain.Position.TotalMilliseconds + m_videoLength / steps);
             mediaMain.Position = TimeSpan.FromMilliseconds(v);
         }
 

@@ -117,7 +117,7 @@ namespace Viewer.Common.View {
         /// <summary>
         /// Cancel 버튼을 표시할 것인가?
         /// </summary>
-        public bool IsCancelable {
+        public bool ShowCancel {
             set {
                 btnCancel.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
             }

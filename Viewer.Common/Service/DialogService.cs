@@ -45,8 +45,8 @@ namespace Viewer.Common.Service {
             dialog.View = view;
             dialog.Model = viewModel;
             dialog.SubmitText = viewModel.SubmitText;
-            dialog.CancelText = viewModel.SubmitText;
-            dialog.IsCancelable = viewModel.IsCancelable;
+            dialog.CancelText = viewModel.CancelText;
+            dialog.ShowCancel = viewModel.IsCancelable && !string.IsNullOrWhiteSpace(viewModel.CancelText);
 
             if (modal) {
                 dialog.ShowCallback(callback);

@@ -14,6 +14,9 @@ using System.Linq;
 using System.Text;
 using Viewer.Common.ViewModel;
 using Viewer.Personal.Model;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
+using Viewer.Common.Util;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -33,6 +36,10 @@ namespace Viewer.Personal.ViewModel {
 
         public PreferencesViewModel() {
             m_prefers = PersonalDomain.Domain.Preferences.Clone();
+
+            StorageCommand = new DelegateCommand(DoStorage, CanStorage);
+
+            IsCancelable = true;
         }
 
         #endregion // constructors
@@ -44,10 +51,19 @@ namespace Viewer.Personal.ViewModel {
             get { return m_prefers; }
         }
 
+        public ICommand StorageCommand {
+            get;
+            private set;
+        }
+
         #endregion // properties
 
 
         #region overriden methods
+
+        protected override bool CanSubmit(object data) {
+            return true;
+        }
 
         protected override void DoSubmit(object data) {
             m_prefers.Assign(PersonalDomain.Domain.Preferences);
@@ -55,5 +71,19 @@ namespace Viewer.Personal.ViewModel {
         }
 
         #endregion // overriden methods
+
+
+        #region internal methods
+
+        // Storage command
+        private bool CanStorage() {
+            return true;
+        }
+
+        private void DoStorage() {
+            DialogUtil.SelectFolder("", "");
+        }
+
+        #endregion // internal methods
     }
 }

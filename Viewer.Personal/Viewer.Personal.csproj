@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\AboutCommand.cs" />
     <Compile Include="Command\Commands.cs" />
     <Compile Include="Command\ImportCommand.cs" />
     <Compile Include="Command\SimpleCommand.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Model\VehicleManager.cs" />
     <Compile Include="PersonalModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\DeviceRepositoryViewModel.cs" />
     <Compile Include="ViewModel\PersonalViewModel.cs" />
     <Compile Include="ViewModel\PreferencesViewModel.cs" />
@@ -81,6 +83,9 @@
     <Compile Include="ViewModel\TrackViewModel.cs" />
     <Compile Include="ViewModel\VehicleListViewModel.cs" />
     <Compile Include="ViewModel\VehicleViewModel.cs" />
+    <Compile Include="View\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DeviceRepositoryView.xaml.cs">
       <DependentUpon>DeviceRepositoryView.xaml</DependentUpon>
     </Compile>
@@ -108,8 +113,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\Repository 구성.txt" />
+    <Resource Include="Images\Desert.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DeviceRepositoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

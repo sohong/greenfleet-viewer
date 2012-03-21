@@ -6,7 +6,7 @@
     <Grid Margin="6">
         <TabControl>
             <TabItem Header="Video">
-                <gf:VideoView Name="videoView"/>    
+                <gf:VideoView Name="videoView"/>
             </TabItem>
             <TabItem Header="BingMap">
                 <gf:BingMapView Name="bingView"/>

@@ -112,6 +112,9 @@
     <Compile Include="View\AccelerationView.xaml.cs">
       <DependentUpon>AccelerationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TrackTreeView.xaml.cs">
+      <DependentUpon>TrackTreeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\VideoView.xaml.cs">
       <DependentUpon>VideoView.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AccelerationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TrackTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,7 +9,7 @@
     <Grid>
         <m:Map Name="mapView" CredentialsProvider="AosumA1E-mxjZ4_ALxdHLCOoJ9a_erVc6ss4L6bifCa4-rQK_HbnRzJq3C8jIVyD" ZoomLevel="7" MouseDoubleClick="mapView_MouseDoubleClick">
             <m:MapLayer Name="trackLayer" Margin="10">
-                <TextBlock FontSize="20">Green Fleet</TextBlock>
+                <TextBlock FontSize="20" Opacity="0.6">Green Fleet</TextBlock>
             </m:MapLayer>
             <m:MapLayer Name="pinLayer">
             </m:MapLayer>

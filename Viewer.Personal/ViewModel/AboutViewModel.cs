@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Viewer.Common.ViewModel;
+using Viewer.Common.Util;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -20,5 +21,36 @@ namespace Viewer.Personal.ViewModel {
     /// View mode for AboutView
     /// </summary>
     public class AboutViewModel : DialogViewModel {
+
+        #region fields
+        #endregion // fields
+
+
+        #region constructors
+
+        public AboutViewModel() {
+            IsCancelable = true;
+            CancelText = null;
+        }
+
+        #endregion // constructors
+
+
+        #region properties
+
+        public string Version {
+            get { return FileUtil.GetVersion(FileUtil.GetAppFilePath()); }
+        }
+
+        #endregion // properties
+
+
+        #region overriden methods
+
+        protected override bool CanSubmit(object data) {
+            return true;
+        }
+
+        #endregion // overriden methods
     }
 }

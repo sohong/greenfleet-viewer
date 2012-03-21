@@ -20,7 +20,7 @@
                     <!-- StorageRoot-->
                     <Label Grid.Row="0" HorizontalAlignment="Right" Margin="3">저장소 위치:</Label>
                     <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Path=Prefers.StorageRoot}"/>
-                    <Button Grid.Row="0" Grid.Column="2" MinWidth="30" Margin="3">...</Button>
+                    <Button Grid.Row="0" Grid.Column="2" MinWidth="30" Margin="3" Command="{Binding StorageCommand}">...</Button>
                 </Grid>
             </TabItem>
         </TabControl>            

@@ -12,6 +12,9 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Viewer.Common.Service;
+using Viewer.Personal.View;
+using Viewer.Personal.ViewModel;
 
 namespace Viewer.Personal.Command {
 
@@ -23,6 +26,7 @@ namespace Viewer.Personal.Command {
         #region overriden methods
 
         public override void Execute(object parameter) {
+            DialogService.Run("About GreenFleets Viewer", new AboutView(), new AboutViewModel());
         }
 
         #endregion // overriden methods
