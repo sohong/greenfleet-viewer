@@ -146,9 +146,14 @@ namespace Viewer.Common.Model {
         private DateTime m_endTime;
 
         /// <summary>
-        /// 동영상 파일 경로.
+        /// 동영상 원본 파일 경로.
         /// </summary>
         public string VideoFile { get; set; }
+
+        /// <summary>
+        /// 실제 출력할 변환된 동영상 파일 경로.
+        /// </summary>
+        public string MpegFile { get; set; }
 
         /// <summary>
         /// Track points

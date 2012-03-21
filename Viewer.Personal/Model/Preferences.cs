@@ -28,7 +28,7 @@ namespace Viewer.Personal.Model {
         #region const
 
         private const string ROOT_ELEMENT = "GreenFleet";
-        private const string STORAGE_ROOT = @"C:\GreenFleet\storage";
+        private const string STORAGE_ROOT = @"C:\GreenFleets\storage";
         
         #endregion // const
 

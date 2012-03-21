@@ -48,8 +48,8 @@ namespace Viewer.Common.View {
             Track track = e.NewValue as Track;
 
             view.Stop();
-            if (track != null && !string.IsNullOrWhiteSpace(track.VideoFile)) {
-                view.mediaMain.Source = new Uri(track.VideoFile, UriKind.Absolute);
+            if (track != null && !string.IsNullOrWhiteSpace(track.MpegFile)) {
+                view.mediaMain.Source = new Uri(track.MpegFile, UriKind.Absolute);
             } else {
                 view.mediaMain.Source = null;
             }
@@ -142,8 +142,7 @@ namespace Viewer.Common.View {
         #region methods
 
         public void Play() {
-            // TODO 항상 false를 리턴하고 있다.
-            //if (mediaMain.HasVideo) { 
+            //if (mediaMain.HasVideo) { // TODO 항상 false를 리턴하고 있다.
                 mediaMain.Play();
                 m_timer.Start();
             //}

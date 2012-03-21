@@ -15,6 +15,7 @@ using System.Text;
 using Viewer.Common.ViewModel;
 using Viewer.Personal.Model;
 using System.Windows.Data;
+using System.IO;
 using Viewer.Personal.Command;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
@@ -132,6 +133,27 @@ namespace Viewer.Personal.ViewModel {
             }
         }
         private bool m_searchAll;
+
+        /// <summary>
+        /// 현재 상영 중인 track.
+        /// </summary>
+        public Track ActiveTrack {
+            get { return m_activeTrack; }
+            set {
+                if (value != m_activeTrack) {
+                    m_activeTrack = value;
+
+                    if (value != null) {
+                        if (string.IsNullOrWhiteSpace(value.MpegFile) || !File.Exists(value.MpegFile)) {
+                            value.MpegFile = VideoUtil.RawToMpeg(value.MpegFile, PersonalDomain.Domain.WorkingFolder);
+                        } 
+                    }
+
+                    RaisePropertyChanged(() => ActiveTrack);
+                }
+            }
+        }
+        private Track m_activeTrack;
 
         public Commands Commands {
             get { return Commands.Instance; }

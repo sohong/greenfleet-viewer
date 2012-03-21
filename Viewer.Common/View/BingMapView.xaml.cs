@@ -30,6 +30,30 @@ namespace Viewer.Common.View {
     /// </summary>
     public partial class BingMapView : UserControl {
 
+        #region dependency properties
+
+        /// <summary>
+        /// Track
+        /// </summary>
+        public static readonly DependencyProperty TrackProperty =
+            DependencyProperty.Register(
+                "Track",
+                typeof(Track),
+                typeof(BingMapView),
+                new PropertyMetadata(TrackPropertyChanged));
+
+        private static void TrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+            BingMapView view = (BingMapView)obj;
+            Track track = e.NewValue as Track;
+            view.RefreshLocations(track);
+            view.RefreshRegion(track);
+            view.RefreshRoutes(track);
+            view.RefreshPins(track);
+        }
+
+        #endregion dependency properties
+
+        
         #region fields
 
         private MapPolygon m_region;
@@ -54,20 +78,12 @@ namespace Viewer.Common.View {
         #region properties
 
         /// <summary>
-        /// chart에 표시할 Track 정보.
+        /// map에 표시할 Track 정보.
         /// </summary>
         public Track Track {
-            set {
-                if (value != m_track) {
-                    m_track = value;
-                    RefreshLocations();
-                    RefreshRegion();
-                    RefreshRoutes();
-                    RefreshPins();
-                }
-            }
+            get { return (Track)GetValue(TrackProperty); }
+            set { SetValue(TrackProperty, value); }
         }
-        private Track m_track;
         
         #endregion // properties
 
@@ -89,28 +105,28 @@ namespace Viewer.Common.View {
         private void CreateRoutes() {
         }
 
-        private void RefreshLocations() {
+        private void RefreshLocations(Track track) {
             if (m_locations == null) {
                 m_locations = new List<Location>();
             } else {
                 m_locations.Clear();
             }
 
-            if (m_track != null) {
-                foreach (TrackPoint p in m_track.Points) {
+            if (track != null) {
+                foreach (TrackPoint p in track.Points) {
                     Location loc = new Location(p.Lattitude, p.Longitude);
                     m_locations.Add(loc);
                 }
             }
         }
 
-        private void RefreshRegion() {
+        private void RefreshRegion(Track track) {
         }
 
-        private void RefreshRoutes() {
+        private void RefreshRoutes(Track track) {
         }
 
-        private void RefreshPins() {
+        private void RefreshPins(Track track) {
             pinLayer.Children.Clear();
             foreach (Location loc in m_locations) {
                 Pushpin pin = new Pushpin();

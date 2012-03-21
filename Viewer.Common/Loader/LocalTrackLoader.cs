@@ -91,7 +91,10 @@ namespace Viewer.Common.Loader {
             // video file
             s = Path.ChangeExtension(path, "264");
             if (File.Exists(s)) {
-                track.VideoFile = convertVideo ? VideoUtil.RawToMpeg(s, null) : s;
+                track.VideoFile = s;
+                if (convertVideo) {
+                    track.MpegFile = VideoUtil.RawToMpeg(s, null);
+                }
             }
 
             return track;

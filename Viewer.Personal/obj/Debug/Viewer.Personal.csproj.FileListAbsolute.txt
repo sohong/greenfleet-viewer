@@ -18,10 +18,16 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Personal.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Personal.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\AboutView.baml
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceRepositoryView.baml
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\PreferencesView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\RepositoryView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\TrackView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\VehicleListView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\VehicleView.baml
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\AboutView.g.cs
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceRepositoryView.g.cs
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\PreferencesView.g.cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\RepositoryView.g.cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\TrackView.g.cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\VehicleListView.g.cs
@@ -30,9 +36,3 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.g.resources
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceRepositoryView.baml
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceRepositoryView.g.cs
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\PreferencesView.baml
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\PreferencesView.g.cs
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\AboutView.baml
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\AboutView.g.cs

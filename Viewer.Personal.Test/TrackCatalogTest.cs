@@ -102,7 +102,7 @@ namespace Viewer.Personal.Test
             cat.Add(files);
             Assert.AreEqual(cat.Tracks.Count, 2);
 
-            string catalogPath = Path.Combine(@"c:\GreenFleet\test\storage", vehicle.VehicleId, TrackCatalog.MakeFileName(year, month));
+            string catalogPath = Path.Combine(@"c:\GreenFleets\test\storage", vehicle.VehicleId, TrackCatalog.MakeFileName(year, month));
             cat.Save(catalogPath);
 
             Assert.IsTrue(File.Exists(catalogPath));
@@ -122,7 +122,7 @@ namespace Viewer.Personal.Test
             int month = 03;
             TrackCatalog cat = new TrackCatalog(vehicle, year, month);
 
-            string catalogPath = Path.Combine(@"c:\GreenFleet\test\storage", vehicle.VehicleId, TrackCatalog.MakeFileName(year, month));
+            string catalogPath = Path.Combine(@"c:\GreenFleets\test\storage", vehicle.VehicleId, TrackCatalog.MakeFileName(year, month));
             cat.Load(catalogPath);
 
             Assert.AreEqual(cat.Tracks.Count, 2);

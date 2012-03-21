@@ -35,6 +35,27 @@ namespace Viewer.Common.View {
         #endregion // static members
 
 
+        #region dependency properties
+
+        /// <summary>
+        /// Track
+        /// </summary>
+        public static readonly DependencyProperty TrackProperty =
+            DependencyProperty.Register(
+                "Track",
+                typeof(Track),
+                typeof(AccelerationView),
+                new PropertyMetadata(TrackPropertyChanged));
+
+        private static void TrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+            AccelerationView view = (AccelerationView)obj;
+            Track track = e.NewValue as Track;
+            view.chartMain.DataContext = (track != null) ? (IEnumerable<TrackPoint>)track.Points : EMPTY_POINTS;
+        }
+
+        #endregion dependency properties
+
+        
         #region constructor
 
         public AccelerationView() {
@@ -50,14 +71,9 @@ namespace Viewer.Common.View {
         /// chart에 표시할 Track 정보.
         /// </summary>
         public Track Track {
-            set {
-                if (value != m_track) {
-                    m_track = value;
-                    chartMain.DataContext = (m_track != null) ? (IEnumerable<TrackPoint>)m_track.Points : EMPTY_POINTS;
-                }
-            }
+            get { return (Track)GetValue(TrackProperty); }
+            set { SetValue(TrackProperty, value); }
         }
-        private Track m_track;
 
         #endregion // properties
 

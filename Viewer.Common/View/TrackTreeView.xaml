@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TreeView Name="tvMain" Grid.Row="1">
+        <TreeView Name="tvMain" Grid.Row="1" MouseDoubleClick="tvMain_MouseDoubleClick">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="TreeViewItem">
                     <Setter Property="IsExpanded" Value="True" />

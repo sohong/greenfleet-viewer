@@ -23,6 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections;
+using Viewer.Common.Model;
 
 namespace Viewer.Common.View {
 
@@ -51,6 +52,14 @@ namespace Viewer.Common.View {
         #endregion dependency properties
 
 
+        #region events 
+
+        public event Action<object, TrackGroup> ActivateGroup;
+        public event Action<object, Track> ActivateTrack;
+
+        #endregion // events
+
+
         #region constructors
 
         public TrackTreeView() {
@@ -68,5 +77,27 @@ namespace Viewer.Common.View {
         }
 
         #endregion // propertis
+
+
+        #region event handlers
+
+        private void tvMain_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            Track track = tvMain.SelectedItem as Track;
+            if (track != null) {
+                if (ActivateTrack != null) {
+                    ActivateTrack(this, track);
+                }
+                return;
+            }
+
+            TrackGroup group = tvMain.SelectedItem as TrackGroup;
+            if (group != null) {
+                if (ActivateGroup != null) {
+                    ActivateGroup(this, group);
+                }
+            }
+        }
+
+        #endregion // event handlers
     }
 }

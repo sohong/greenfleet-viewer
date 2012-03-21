@@ -44,10 +44,10 @@
                         <RowDefinition Height="4"/>
                         <RowDefinition Height="240" MinHeight="20"/>
                     </Grid.RowDefinitions>
-                    <gf:VideoView/>
+                    <gf:VideoView Track="{Binding ActiveTrack}"/>
                     <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                     <Grid Grid.Row="2">
-                        <gf:AccelerationView/>
+                        <gf:AccelerationView Track="{Binding ActiveTrack}"/>
                     </Grid>
                 </Grid>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
@@ -57,7 +57,7 @@
                         <RowDefinition Height="4"/>
                         <RowDefinition Height="4*" MinHeight="20"/>
                     </Grid.RowDefinitions>
-                    <gf:BingMapView/>
+                    <gf:BingMapView Track="{Binding ActiveTrack}"/>
                     <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                     <Grid Grid.Row="2" Background="Gray">
                     </Grid>

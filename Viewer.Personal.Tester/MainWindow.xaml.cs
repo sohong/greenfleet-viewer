@@ -22,6 +22,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Viewer.Personal.ViewModel;
 using Viewer.Personal.Model;
+using Microsoft.Practices.Prism.Events;
 
 namespace Viewer.Personal.Tester {
 
@@ -32,6 +33,7 @@ namespace Viewer.Personal.Tester {
         public MainWindow() {
             InitializeComponent();
 
+            PersonalDomain.Domain.EventAggregator = new EventAggregator();
             PersonalDomain.Domain.Start();
 
             Width = SystemParameters.PrimaryScreenWidth * 2 / 3;
