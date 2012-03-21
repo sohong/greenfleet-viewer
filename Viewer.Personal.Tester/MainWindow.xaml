@@ -12,6 +12,7 @@
             <Button MinWidth="60" Margin="0,0,0,0" Command="{Binding VehicleCommand}">차량 정보</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding PreferencesCommand}">환경 설정</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding TestCommand}">Test</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding Commands.About}">About</Button>
         </StackPanel>
         <TabControl Grid.Row="1">
             <TabItem Header="SD Card">

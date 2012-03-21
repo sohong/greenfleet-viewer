@@ -36,6 +36,7 @@ namespace Viewer.Personal.Command {
         #region fields
 
         private ICommand m_import;
+        private ICommand m_about;
         
         #endregion // fields
 
@@ -44,6 +45,7 @@ namespace Viewer.Personal.Command {
 
         internal Commands() {
             m_import = new ImportCommand();
+            m_about = new AboutCommand();
         }
         
         #endregion // constructor
@@ -53,6 +55,10 @@ namespace Viewer.Personal.Command {
 
         public ICommand Import {
             get { return m_import; }
+        }
+
+        public ICommand About {
+            get { return m_about; }
         }
 
         #endregion // properties

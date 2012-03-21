@@ -18,6 +18,7 @@ using System.Windows.Input;
 using Viewer.Common.Service;
 using Viewer.Personal.View;
 using Viewer.Common.Util;
+using Viewer.Personal.Command;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -38,6 +39,10 @@ namespace Viewer.Personal.ViewModel {
 
 
         #region properties
+
+        public Commands Commands {
+            get { return Commands.Instance; }
+        }
 
         /// <summary>
         /// 차량 관리 command
@@ -83,7 +88,7 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoPreferences(object data) {
-            MessageUtil.Show("Preferences?");
+            DialogService.Run("환경 설정", new PreferencesView(), new PreferencesViewModel());
         }
 
         // Test command

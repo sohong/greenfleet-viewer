@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// VehicleListView.cs
-// 2012.03.16, created by sohong
+// PreferencesView.cs
+// 2012.03.21, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -24,11 +24,11 @@ using System.Windows.Shapes;
 namespace Viewer.Personal.View {
 
     /// <summary>
-    /// 차량 목록을 표시하고 관리한다.
+    /// Personal viewer 환경 설정.
     /// </summary>
-    public partial class VehicleListView : UserControl {
+    public partial class PreferencesView : UserControl {
     
-        public VehicleListView() {
+        public PreferencesView() {
             InitializeComponent();
         }
     }

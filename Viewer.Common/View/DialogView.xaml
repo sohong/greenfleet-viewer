@@ -9,9 +9,9 @@
         </Grid.RowDefinitions>
         <Grid Name="grdContent">
         </Grid>
-        <StackPanel Name="panButton" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
-            <Button Name="btnOK" MinWidth="60" Margin="3" Click="btnOK_Click">OK</Button>
-            <Button Name="btnCancel" MinWidth="60" Margin="3" IsCancel="True" Click="btnCancel_Click">Cancel</Button>
+        <StackPanel Name="panButton" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,10">
+            <Button Name="btnOK" MinWidth="80" Margin="3,3,3,0" Click="btnOK_Click">OK</Button>
+            <Button Name="btnCancel" MinWidth="80" Margin="3,3,0,0" IsCancel="True" Click="btnCancel_Click">Cancel</Button>
         </StackPanel>
     </Grid>
 </Window>

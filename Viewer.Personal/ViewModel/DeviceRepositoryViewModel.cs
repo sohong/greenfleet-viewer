@@ -18,8 +18,8 @@ using System.Windows.Data;
 using Viewer.Personal.Command;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using System.Windows.Forms;
 using Viewer.Common.Model;
+using Viewer.Common.Util;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -163,9 +163,9 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoLoad(object data) {
-            FolderBrowserDialog dlg = new FolderBrowserDialog();
-            if (dlg.ShowDialog() == DialogResult.OK) {
-                m_repository.Open(SelectedVehicle, dlg.SelectedPath);
+            string folder = DialogUtil.SelectFolder("트랙 파일들이 저장된 위치를 선택하세요.", null);
+            if (folder != null) {
+                m_repository.Open(SelectedVehicle, folder);
                 m_tracks = m_repository.GetTracks();
                 this.TrackGroup = m_repository.LoadGroups(m_tracks);
             }

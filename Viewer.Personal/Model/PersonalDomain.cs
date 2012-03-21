@@ -89,7 +89,7 @@ namespace Viewer.Personal.Model {
         public void Start() {
             LogUtil.Info("Personal Domain start...");
 
-            m_preferences.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERS_PATH));
+            m_preferences.Load(PrefersPath);
             m_vehicles.Load();
             m_repository.Open(m_preferences.StorageRoot, m_vehicles.Vehicles);
 
@@ -98,7 +98,20 @@ namespace Viewer.Personal.Model {
             LogUtil.Info("Personal Domain started.");
         }
 
+        public void SavePreferences() {
+            m_preferences.Save(PrefersPath);
+        }
+
         #endregion // methods
+
+
+        #region internal properties
+
+        private string PrefersPath {
+            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERS_PATH); }
+        }
+        
+        #endregion // internal properties
 
 
         #region internal methods

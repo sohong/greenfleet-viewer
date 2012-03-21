@@ -18,7 +18,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="3" HorizontalAlignment="Stretch">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="3,3,3,0" HorizontalAlignment="Stretch">
             <Button Name="btnAdd" MinWidth="60" Margin="3" Command="{Binding AddCommand}">추가</Button>
             <Button Name="btnEdit" MinWidth="60" Margin="3" Command="{Binding EditCommand}">수정</Button>
             <Button Name="btnDelete" MinWidth="60" Margin="3" Command="{Binding DeleteCommand}">삭제</Button>

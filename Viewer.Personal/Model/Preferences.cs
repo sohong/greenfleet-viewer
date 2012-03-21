@@ -132,6 +132,20 @@ namespace Viewer.Personal.Model {
             Debug.WriteLine(doc.ToString());
         }
 
+        public Preferences Clone() {
+            Preferences prefers = new Preferences();
+            Assign(prefers);
+            return prefers;
+        }
+
+        public void Assign(Preferences target) {
+            if (target != null) {
+                target.StorageRoot = StorageRoot;
+                target.RetentionMode = RetentionMode;
+                target.Retention = Retention;
+            }
+        }
+
         #endregion // methods
     }
 }
