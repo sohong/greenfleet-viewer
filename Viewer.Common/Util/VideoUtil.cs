@@ -44,17 +44,20 @@ namespace Viewer.Common.Util {
             if (string.IsNullOrWhiteSpace(targetFolder)) {
                 path = Path.ChangeExtension(sourcePath, extension);
             } else {
-                path = Path.Combine(targetFolder, Path.GetFileNameWithoutExtension(Path.ChangeExtension(sourcePath, extension)));
+                path = Path.Combine(targetFolder, Path.ChangeExtension(Path.GetFileNameWithoutExtension(sourcePath), extension));
+                Directory.CreateDirectory(targetFolder);
             }
-            
-            Process proc = new Process();
-            //proc.StartInfo.FileName = Path.Combine(FileUtil.GetAppFolder(), "ffmpeg.exe");
-            proc.StartInfo.FileName = exeName;
-            proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -vcodec copy \"" + path + "\"";
-            proc.StartInfo.CreateNoWindow = true;
-            proc.StartInfo.UseShellExecute = false;
-            proc.Start();
-            proc.WaitForExit();
+
+            if (File.Exists(exeName)) {
+                Process proc = new Process();
+                //proc.StartInfo.FileName = Path.Combine(FileUtil.GetAppFolder(), "ffmpeg.exe");
+                proc.StartInfo.FileName = exeName;
+                proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -vcodec copy \"" + path + "\"";
+                proc.StartInfo.CreateNoWindow = true;
+                proc.StartInfo.UseShellExecute = false;
+                proc.Start();
+                proc.WaitForExit();
+            }
 
             return path;
         }

@@ -21,6 +21,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Windows.Controls;
+using Viewer.Personal.Model;
+using Viewer.Common.Event;
 
 namespace Viewer.Personal.View {
 
@@ -29,8 +31,24 @@ namespace Viewer.Personal.View {
     /// </summary>
     public partial class DeviceRepositoryView : UserControl {
 
+        #region constructors
+
         public DeviceRepositoryView() {
             InitializeComponent();
         }
+
+        #endregion // constructors
+
+
+        #region event handlers
+
+        private void TrackTreeView_ActivateGroup(object sender, Common.Model.TrackGroup group) {
+        }
+
+        private void TrackTreeView_ActivateTrack(object sender, Common.Model.Track track) {
+            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
+        }
+
+        #endregion // event handlers
     }
 }

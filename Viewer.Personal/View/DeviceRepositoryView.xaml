@@ -30,7 +30,8 @@
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <gf:TrackTreeView Grid.Row="1" ItemsSource="{Binding Path=TrackGroup.Children}"/>
+            <gf:TrackTreeView Grid.Row="1" ItemsSource="{Binding Path=TrackGroup.Children}"
+                              ActivateGroup="TrackTreeView_ActivateGroup" ActivateTrack="TrackTreeView_ActivateTrack"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>

@@ -21,6 +21,7 @@ using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Viewer.Common.Model;
 using Viewer.Common.Util;
+using Viewer.Common.Event;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -50,6 +51,10 @@ namespace Viewer.Personal.ViewModel {
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
 
             LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
+
+            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
+                ActiveTrack = track;
+            });
         }
 
         #endregion // constructors
@@ -143,9 +148,9 @@ namespace Viewer.Personal.ViewModel {
                 if (value != m_activeTrack) {
                     m_activeTrack = value;
 
-                    if (value != null) {
+                    if (value != null && !string.IsNullOrWhiteSpace(value.VideoFile)) {
                         if (string.IsNullOrWhiteSpace(value.MpegFile) || !File.Exists(value.MpegFile)) {
-                            value.MpegFile = VideoUtil.RawToMpeg(value.MpegFile, PersonalDomain.Domain.WorkingFolder);
+                            value.MpegFile = VideoUtil.RawToMpeg(value.VideoFile, PersonalDomain.Domain.WorkingFolder);
                         } 
                     }
 

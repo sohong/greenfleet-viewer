@@ -57,6 +57,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -75,6 +76,7 @@
     <Compile Include="RepositoryTest.cs" />
     <Compile Include="TrackGroupTest.cs" />
     <Compile Include="TrackLoaderBaseTest.cs" />
+    <Compile Include="VideoUtilTest.cs" />
     <Compile Include="XmlTransformerTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +94,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ffmpeg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sample\all_2012_03_11_20_37_31.inc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -101,6 +106,14 @@
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\Viewer.Common.accessor" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sample\all_2012_03_11_20_37_31.264">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sample\all_2012_03_11_20_37_31.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
