@@ -27,12 +27,11 @@ namespace Viewer.Personal.ViewModel {
     /// <summary>
     /// View model for RepositoryView
     /// </summary>
-    public class RepositoryViewModel : ViewModelBase {
+    public class RepositoryViewModel : RepoViewModelBase {
 
         #region fields
 
         private ListCollectionView m_tracks;
-        private ListCollectionView m_vehicles;
 
         #endregion // fields
 
@@ -41,9 +40,6 @@ namespace Viewer.Personal.ViewModel {
 
         public RepositoryViewModel() {
             m_tracks = Repository.GetTracks();
-
-            m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
-            m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
             ExportCommand = new DelegateCommand<object>(DoExport, CanExport);
@@ -64,71 +60,6 @@ namespace Viewer.Personal.ViewModel {
 
         public ListCollectionView Tracks {
             get { return m_tracks; }
-        }
-
-        public ListCollectionView Vehicles {
-            get { return m_vehicles; }
-        }
-
-        /// <summary>
-        /// 현재 선택되어 있는 vehicle.
-        /// 선택 변경이 command들의 parameter에 반영될 수 있도록 setter를 작성한다.
-        /// </summary>
-        public Vehicle SelectedVehicle {
-            get { return m_selectedVehicle; }
-            set {
-                if (value != m_selectedVehicle) {
-                    m_selectedVehicle = value;
-                    RaisePropertyChanged(() => SelectedVehicle);
-                }
-            }
-        }
-        private Vehicle m_selectedVehicle;
-
-        /// <summary>
-        /// 검색 조건 - 시작 일시
-        /// </summary>
-        public DateTime SearchFrom {
-            get { return m_searchFrom; }
-            set {
-                if (value != m_searchFrom) {
-                    m_searchFrom = value;
-                    RaisePropertyChanged(() => SearchFrom);
-                }
-            }
-        }
-        private DateTime m_searchFrom;
-
-        /// <summary>
-        /// 검색 조건 - 끝 일시
-        /// </summary>
-        public DateTime SearchTo {
-            get { return m_searchTo; }
-            set {
-                if (value != m_searchTo) {
-                    m_searchTo = value;
-                    RaisePropertyChanged(() => SearchTo);
-                }
-            }
-        }
-        private DateTime m_searchTo;
-
-        /// <summary>
-        /// 모드 가져오기
-        /// </summary>
-        public bool SearchAll {
-            get { return m_searchAll; }
-            set {
-                if (value != m_searchAll) {
-                    m_searchAll = value;
-                    RaisePropertyChanged(() => SearchAll);
-                }
-            }
-        }
-        private bool m_searchAll;
-
-        public Commands Commands {
-            get { return Commands.Instance; }
         }
 
         /// <summary>
@@ -158,17 +89,18 @@ namespace Viewer.Personal.ViewModel {
         #endregion // properties
 
 
-        #region internal methods
+        #region overriden methods
 
-        private void Vehicles_CurrentChanged(object sender, EventArgs e) {
-            SelectedVehicle = Vehicles.CurrentItem as Vehicle;
-            CheckCommands();
-        }
-
-        private void CheckCommands() {
+        protected override void CheckCommands() {
+            base.CheckCommands();
             ((DelegateCommand<object>)DeleteCommand).RaiseCanExecuteChanged();
             CommandManager.InvalidateRequerySuggested();
         }
+
+        #endregion // overriden methods
+
+
+        #region internal methods
 
         // Search Command
         private bool CanSearch(object data) {

@@ -28,11 +28,10 @@ namespace Viewer.Personal.ViewModel {
     /// <summary>
     /// View model for DeviceRepositoryView
     /// </summary>
-    public class DeviceRepositoryViewModel : ViewModelBase {
+    public class DeviceRepositoryViewModel : RepoViewModelBase {
 
         #region fields
 
-        private ListCollectionView m_vehicles;
         private DeviceRepository m_repository;
         private ListCollectionView m_tracks;
         
@@ -44,17 +43,10 @@ namespace Viewer.Personal.ViewModel {
         public DeviceRepositoryViewModel() {
             m_repository = new DeviceRepository();
 
-            m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
-            m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
-
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
 
             LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
-
-            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
-                ActiveTrack = track;
-            });
         }
 
         #endregion // constructors
@@ -62,106 +54,8 @@ namespace Viewer.Personal.ViewModel {
 
         #region properties
 
-        public ListCollectionView Vehicles {
-            get { return m_vehicles; }
-        }
-
         public DeviceRepository Repository {
             get { return m_repository; }
-        }
-
-        public TrackGroup TrackGroup {
-            get { return m_trackGroup; }
-            set {
-                if (value != m_trackGroup) {
-                    m_trackGroup = value;
-                    RaisePropertyChanged(() => TrackGroup);
-                }
-            }
-        }
-        private TrackGroup m_trackGroup;
-
-        /// <summary>
-        /// 현재 선택되어 있는 vehicle.
-        /// 선택 변경이 command들의 parameter에 반영될 수 있도록 setter를 작성한다.
-        /// </summary>
-        public Vehicle SelectedVehicle {
-            get { return m_selectedVehicle; }
-            set {
-                if (value != m_selectedVehicle) {
-                    m_selectedVehicle = value;
-                    RaisePropertyChanged(() => SelectedVehicle);
-                }
-            }
-        }
-        private Vehicle m_selectedVehicle;
-
-
-        /// <summary>
-        /// 검색 조건 - 시작 시각(시/분)
-        /// </summary>
-        public DateTime SearchFrom {
-            get { return m_searchFrom; }
-            set {
-                if (value != m_searchFrom) {
-                    m_searchFrom = value;
-                    RaisePropertyChanged(() => SearchFrom);
-                }
-            }
-        }
-        private DateTime m_searchFrom;
-
-        /// <summary>
-        /// 검색 조건 - 끝 시각(시/분)
-        /// </summary>
-        public DateTime SearchTo {
-            get { return m_searchTo; }
-            set {
-                if (value != m_searchTo) {
-                    m_searchTo = value;
-                    RaisePropertyChanged(() => SearchTo);
-                }
-            }
-        }
-        private DateTime m_searchTo;
-
-        /// <summary>
-        /// 모드 가져오기
-        /// </summary>
-        public bool SearchAll {
-            get { return m_searchAll; }
-            set {
-                if (value != m_searchAll) {
-                    m_searchAll = value;
-                    RaisePropertyChanged(() => SearchAll);
-                }
-            }
-        }
-        private bool m_searchAll;
-
-        /// <summary>
-        /// 현재 상영 중인 track.
-        /// </summary>
-        public Track ActiveTrack {
-            get { return m_activeTrack; }
-            set {
-                if (value != m_activeTrack) {
-                    m_activeTrack = value;
-
-                    if (value != null && !string.IsNullOrWhiteSpace(value.VideoFile)) {
-                        if (string.IsNullOrWhiteSpace(value.MpegFile) || !File.Exists(value.MpegFile)) {
-                            value.MpegFile = VideoUtil.RawToMpeg(value.VideoFile, PersonalDomain.Domain.WorkingFolder);
-                        } 
-                    }
-
-                    RaisePropertyChanged(() => ActiveTrack);
-                }
-            }
-        }
-        private Track m_activeTrack;
-
-        public Commands Commands {
-            get { return Commands.Instance; }
         }
 
         public ICommand LoadCommand {
@@ -172,17 +66,16 @@ namespace Viewer.Personal.ViewModel {
         #endregion // properties
 
 
+        #region overriden methods
+
+        protected override void CheckCommands() {
+            base.CheckCommands();
+        }
+
+        #endregion // overriden methods
+
+
         #region internal methods
-
-        private void Vehicles_CurrentChanged(object sender, EventArgs e) {
-            SelectedVehicle = Vehicles.CurrentItem as Vehicle;
-            CheckCommands();
-        }
-
-        private void CheckCommands() {
-            //((DelegateCommand<object>)DeleteCommand).RaiseCanExecuteChanged();
-            //CommandManager.InvalidateRequerySuggested();
-        }
 
         // Load command
         private bool CanLoad(object data) {

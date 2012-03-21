@@ -15,6 +15,9 @@
         <StackPanel Orientation="Horizontal" Margin="6,3,6,5">
             <Label>차랑:</Label>
             <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
+            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AutoPlay}" ToolTip="트리나 맵에서 더블클릭으로 트랙이 선택되면 재생 시작">자동 재생</CheckBox>
+            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding LoopPlay}" ToolTip="재생 완료 후 처음부터 다시 재생">반복 재생</CheckBox>
+            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AllPlay}" ToolTip="선택된 트랙들을 순서대로 재생">연속 재생</CheckBox>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding LoadCommand}">열기</Button>
             <Label Margin="8,0,0,0">검색 시간:</Label>
             <tk:DateTimeUpDown Format="Custom" FormatString="HH:mm" Value="{Binding SearchFrom}"/>
@@ -30,8 +33,17 @@
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <gf:TrackTreeView Grid.Row="1" ItemsSource="{Binding Path=TrackGroup.Children}"
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <gf:TrackTreeView Grid.Row="0" ItemsSource="{Binding Path=TrackGroup.Children}"
                               ActivateGroup="TrackTreeView_ActivateGroup" ActivateTrack="TrackTreeView_ActivateTrack"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3">
+                    <CheckBox VerticalAlignment="Center">모두 선택</CheckBox>
+                </StackPanel>
+            </Grid>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>

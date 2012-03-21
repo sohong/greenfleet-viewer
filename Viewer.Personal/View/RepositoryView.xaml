@@ -15,6 +15,9 @@
         <StackPanel Orientation="Horizontal" Margin="6,3,6,5">
             <Label>차랑:</Label>
             <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
+            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AutoPlay}" ToolTip="트리나 맵에서 더블클릭으로 트랙이 선택되면 재생 시작">자동 재생</CheckBox>
+            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding LoopPlay}" ToolTip="재생 완료 후 처음부터 다시 재생">반복 재생</CheckBox>
+            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AllPlay}" ToolTip="선택된 트랙들을 순서대로 재생">연속 재생</CheckBox>
             <Label Margin="8,0,0,0">검색 기간:</Label>
             <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchFrom}"/>
             <Label>~</Label>

@@ -80,6 +80,7 @@
     <Compile Include="ViewModel\PersonalViewModel.cs" />
     <Compile Include="ViewModel\PreferencesViewModel.cs" />
     <Compile Include="ViewModel\RepositoryViewModel.cs" />
+    <Compile Include="ViewModel\RepoViewModelBase.cs" />
     <Compile Include="ViewModel\TrackViewModel.cs" />
     <Compile Include="ViewModel\VehicleListViewModel.cs" />
     <Compile Include="ViewModel\VehicleViewModel.cs" />
