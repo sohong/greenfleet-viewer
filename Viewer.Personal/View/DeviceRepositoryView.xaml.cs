@@ -8,6 +8,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,5 +51,9 @@ namespace Viewer.Personal.View {
         }
 
         #endregion // event handlers
+
+        private void BingMapView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            Debug.WriteLine("xxx");
+        }
     }
 }

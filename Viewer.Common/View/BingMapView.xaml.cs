@@ -25,6 +25,7 @@ using Microsoft.Maps.MapControl.WPF;
 using Viewer.Common.Model;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Viewer.Common.View {
 
@@ -55,18 +56,44 @@ namespace Viewer.Common.View {
         /// </summary>
         public static readonly DependencyProperty TracksProperty =
             DependencyProperty.Register(
-                "Track",
+                "Tracks",
                 typeof(IEnumerable),
                 typeof(BingMapView),
                 new PropertyMetadata(TracksPropertyChanged));
 
         private static void TracksPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
-            ObservableCollection<Track> tracks = e.OldValue as ObservableCollection<Track>;
-            if (tracks != null) {
+            BingMapView view = (BingMapView)obj;
+            view.ResetTracks(e.OldValue as ObservableCollection<Track>, e.NewValue as ObservableCollection<Track>);
+        }
+
+        private void ResetTracks(ObservableCollection<Track> oldTracks, ObservableCollection<Track> tracks) {
+            if (oldTracks != null) {
+                oldTracks.CollectionChanged -= new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
             }
 
-            tracks = e.NewValue as ObservableCollection<Track>;
             if (tracks != null) {
+                tracks.CollectionChanged += new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
+            }
+        }
+
+        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            switch (e.Action) {
+            case NotifyCollectionChangedAction.Add:
+                foreach (Track track in e.NewItems) {
+                    AddTrack(track);
+                }
+                break;
+            case NotifyCollectionChangedAction.Remove:
+                foreach (Track track in e.OldItems) {
+                    RemoveTrack(track);
+                }
+                break;
+            case NotifyCollectionChangedAction.Reset:
+                Clear();
+                foreach (Track track in e.NewItems) {
+                    AddTrack(track);
+                }
+                break;
             }
         }
 
@@ -139,6 +166,12 @@ namespace Viewer.Common.View {
                 m_tracks.Remove(track);
 
                 RefreshPins();
+            }
+        }
+
+        public void Clear() {
+            foreach (Track track in m_tracks) {
+                RemoveTrack(track);
             }
         }
 
