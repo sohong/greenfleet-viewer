@@ -92,7 +92,7 @@ namespace Viewer.Personal.Test
             string rootPath = @"C:\GreenFleets\test\samples";
             repo.Open(vehicle, rootPath);
 
-            TrackGroup root = repo.LoadGroups(repo.GetTracks());
+            TrackGroup root = repo.CreateGroupsFromTracks(repo.GetTracks());
             Assert.IsNotNull(root);
         }
     }

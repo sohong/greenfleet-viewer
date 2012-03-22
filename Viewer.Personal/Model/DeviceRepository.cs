@@ -89,7 +89,7 @@ namespace Viewer.Personal.Model {
         /// </summary>
         /// <param name="tracks"></param>
         /// <returns></returns>
-        public TrackGroup LoadGroups(ListCollectionView tracks) {
+        public TrackGroup CreateGroupsFromTracks(ListCollectionView tracks) {
             if (tracks.Count > 0) {
                 Track track = (Track)tracks.GetItemAt(0);
                 TrackGroup root = new TrackGroup(track.CreateDate, TrackGroupLevel.Day);

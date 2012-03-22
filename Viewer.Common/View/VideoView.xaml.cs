@@ -50,6 +50,9 @@ namespace Viewer.Common.View {
             view.Stop();
             if (track != null && !string.IsNullOrWhiteSpace(track.MpegFile)) {
                 view.mediaMain.Source = new Uri(track.MpegFile, UriKind.Absolute);
+                if (view.AutoPlay) {
+                    view.Play();
+                }
             } else {
                 view.mediaMain.Source = null;
             }
@@ -69,6 +72,17 @@ namespace Viewer.Common.View {
         private static bool StepsPropertyValidate(object newValue) {
             return (int)newValue >= 2 && (int)newValue <= 100;
         }
+
+        /// <summary>
+        /// AutoPlay.
+        /// track이 재설정되면 자동으로 play
+        /// </summary>
+        public static readonly DependencyProperty AutoPlayProperty =
+            DependencyProperty.Register(
+                "AutoPlay",
+                typeof(bool),
+                typeof(VideoView),
+                new PropertyMetadata(false, null));
 
         #endregion dependency properties
 
@@ -134,6 +148,11 @@ namespace Viewer.Common.View {
         public int Steps {
             get { return (int)GetValue(StepsProperty); }
             set { SetValue(StepsProperty, value); }
+        }
+
+        public bool AutoPlay {
+            get { return (bool)GetValue(AutoPlayProperty); }
+            set { SetValue(AutoPlayProperty, value); }
         }
 
         #endregion // properties

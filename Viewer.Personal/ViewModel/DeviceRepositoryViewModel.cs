@@ -46,6 +46,8 @@ namespace Viewer.Personal.ViewModel {
 
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
+            SearchAll = true;
+            AutoPlay = true;
 
             LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
         }
@@ -98,7 +100,7 @@ namespace Viewer.Personal.ViewModel {
             if (folder != null) {
                 m_repository.Open(SelectedVehicle, folder);
                 m_tracks = m_repository.GetTracks();
-                this.TrackGroup = m_repository.LoadGroups(m_tracks);
+                this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
             
             } else {
                 //PersonalDomain.Domain.EventAggregator.GetEvent<NoDriveEvent>().Publish(null);

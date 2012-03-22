@@ -47,6 +47,8 @@ namespace Viewer.Personal.ViewModel {
 
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
+            SearchAll = true;
+            AutoPlay = true;
         }
 
         #endregion // constructors

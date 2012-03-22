@@ -71,18 +71,32 @@ namespace Viewer.Personal.Model {
 
         #region properties
 
+        /// <summary>
+        /// 프로그램 환경 설정
+        /// </summary>
         public Preferences Preferences {
             get { return m_preferences; }
         }
 
+        /// <summary>
+        /// 차량 목록
+        /// </summary>
         public ObservableCollection<Vehicle> Vehicles {
             get { return m_vehicles.Vehicles; }
         }
 
+        /// <summary>
+        /// 저장소
+        /// </summary>
         public Repository Repository {
             get { return m_repository; }
         }
 
+        /// <summary>
+        /// Prism global event 사서함.
+        /// * 실행 환경에서는 bootstrapper가 설정해줘야 한다.
+        /// null인 상태로 domain을 시작하면 예외를 발생시키도록 했다.
+        /// </summary>
         public EventAggregator EventAggregator {
             get;
             set;
@@ -103,6 +117,10 @@ namespace Viewer.Personal.Model {
 
         public void Start() {
             Logger.Info("Personal Domain start...");
+
+            if (EventAggregator == null) {
+                throw new Exception("Event aggregator가 설정되지 않았습니다.");
+            }
 
             m_preferences.Load(PrefersPath);
             m_vehicles.Load();

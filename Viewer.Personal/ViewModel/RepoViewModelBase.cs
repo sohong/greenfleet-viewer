@@ -42,6 +42,7 @@ namespace Viewer.Personal.ViewModel {
             m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
             PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
+                track.IsChecked = true;
                 ActiveTrack = track;
             });
         }
@@ -126,12 +127,12 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// ActiveTrack이 설정되면 자동으로 재생할 것인 지 설정.
         /// </summary>
-        public bool AutoPaly {
+        public bool AutoPlay {
             get { return m_autoPlay; }
             set {
                 if (value != m_autoPlay) {
                     m_autoPlay = value;
-                    RaisePropertyChanged(() => AutoPaly);
+                    RaisePropertyChanged(() => AutoPlay);
                 }
             }
         }

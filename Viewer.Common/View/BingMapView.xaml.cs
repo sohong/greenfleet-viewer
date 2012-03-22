@@ -45,10 +45,7 @@ namespace Viewer.Common.View {
         private static void TrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
             BingMapView view = (BingMapView)obj;
             Track track = e.NewValue as Track;
-            view.RefreshLocations(track);
-            view.RefreshRegion(track);
-            view.RefreshRoutes(track);
-            view.RefreshPins(track);
+            view.SetActive(track);
         }
 
         #endregion dependency properties
@@ -56,6 +53,8 @@ namespace Viewer.Common.View {
         
         #region fields
 
+        private List<Track> m_tracks;
+        private Track m_activeTrack;
         private MapPolygon m_region;
         private MapPolyline m_route;
         private List<Location> m_locations;
@@ -68,6 +67,7 @@ namespace Viewer.Common.View {
         public BingMapView() {
             InitializeComponent();
 
+            m_tracks = new List<Track>();
             CreateRegion();
             CreateRoutes();
         }
@@ -88,7 +88,48 @@ namespace Viewer.Common.View {
         #endregion // properties
 
 
+        #region methods
+
+        public bool AddTrack(Track track) {
+            if (track != null && !m_tracks.Contains(track)) {
+                m_tracks.Add(track);
+                
+                //RefreshLocations(track);
+                //RefreshRegion(track);
+                //RefreshRoutes(track);
+                RefreshPins();
+
+                return true;
+            }
+            return false;
+        }
+
+        public void RemoveTrack(Track track) {
+            if (track != null && m_tracks.Contains(track)) {
+                m_tracks.Remove(track);
+
+                RefreshPins();
+            }
+        }
+
+        #endregion // methods
+
+
         #region internal methods
+
+        private void SetActive(Track track) {
+            if (track != m_activeTrack) {
+                ClearActive();
+                m_activeTrack = track;
+                if (AddTrack(m_activeTrack)) {
+                }
+            }
+        }
+
+        private void ClearActive() {
+            if (m_activeTrack != null) {
+            }
+        }
 
         private void CreateRegion() {
             m_region = new MapPolygon();
@@ -126,12 +167,22 @@ namespace Viewer.Common.View {
         private void RefreshRoutes(Track track) {
         }
 
-        private void RefreshPins(Track track) {
+        private void RefreshPins() {
             pinLayer.Children.Clear();
+            /*
             foreach (Location loc in m_locations) {
                 Pushpin pin = new Pushpin();
                 pin.Location = loc;
                 pinLayer.Children.Add(pin);
+            }
+             */
+            foreach (Track track in m_tracks) {
+                if (track.Points.Count > 0) {
+                    TrackPoint p = track.Points[0];
+                    Pushpin pin = new Pushpin();
+                    pin.Location = new Location(p.Lattitude, p.Longitude);
+                    pinLayer.Children.Add(pin);
+                }
             }
         }
 

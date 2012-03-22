@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using Viewer.Common.Xml;
 using Microsoft.Practices.Prism.ViewModel;
+using System.ComponentModel;
 
 namespace Viewer.Common.Model {
 
@@ -25,9 +26,18 @@ namespace Viewer.Common.Model {
         Hour
     };
 
+    
+    public interface ITrackStateObserver {
+
+        void TrackChanged(Track track, string propName);
+    }
+
+
     /// <summary>
     /// 시간/일 단위로 묶여진 track group.
     /// 트랙 목록을 트리로 표현할 때 사용.
+    /// 
+    /// * 데이터 모델이 아니라 View를 위한 모델이다.
     /// </summary>
     public class TrackGroup : NotificationObject {
 
@@ -35,7 +45,8 @@ namespace Viewer.Common.Model {
 
         private DateTime m_date;
         private TrackGroupLevel m_level;
-        private List<object> m_children;
+        private List<NotificationObject> m_children;
+        private ITrackStateObserver m_observer;
         
         #endregion // fields
 
@@ -45,7 +56,7 @@ namespace Viewer.Common.Model {
         public TrackGroup(DateTime date, TrackGroupLevel level) {
             m_date = date;
             m_level = level;
-            m_children = new List<object>();
+            m_children = new List<NotificationObject>();
         }
 
         #endregion // constructor
@@ -57,7 +68,7 @@ namespace Viewer.Common.Model {
             get { return m_date; }
         }
 
-        public List<object> Children {
+        public List<NotificationObject> Children {
             get { return m_children; }
         }
 
@@ -72,7 +83,7 @@ namespace Viewer.Common.Model {
                     m_checked = value;
                     RaisePropertyChanged(() => IsChecked);
 
-                    foreach (object obj in m_children) {
+                    foreach (NotificationObject obj in m_children) {
                         if (obj is Track) {
                             ((Track)obj).IsChecked = IsChecked;
                         } else if (obj is TrackGroup) {
@@ -83,6 +94,16 @@ namespace Viewer.Common.Model {
             }
         }
         private bool m_checked;
+
+        public ITrackStateObserver Observer {
+            set {
+                m_observer = value;
+                foreach (object obj in Children) {
+                    TrackGroup group = obj as TrackGroup;
+                    group.Observer = value;
+                }
+            }
+        }
         
         #endregion // properties
 
@@ -95,6 +116,19 @@ namespace Viewer.Common.Model {
 
         public void Add(Track track) {
             m_children.Add(track);
+            RegisterTrackEvents(track);
+        }
+
+        public void Clear() {
+            foreach (object obj in Children) {
+                if (obj is Track) {
+                    UnregisterTrackEvents((Track)obj);
+                } else if (obj is TrackGroup) {
+                    ((TrackGroup)obj).Clear();
+                }
+            }
+
+            m_children.Clear();
         }
 
         #endregion // methods
@@ -119,5 +153,24 @@ namespace Viewer.Common.Model {
         }
 
         #endregion // overriden methods
+
+
+        #region internal methods
+
+        private void track_PropertyChanged(object sender, PropertyChangedEventArgs e) {
+            if (m_observer != null) {
+                m_observer.TrackChanged((Track)sender, e.PropertyName);
+            }
+        }
+
+        private void RegisterTrackEvents(Track track) {
+            track.PropertyChanged += new PropertyChangedEventHandler(track_PropertyChanged);
+        }
+
+        private void UnregisterTrackEvents(Track track) {
+            track.PropertyChanged -= new PropertyChangedEventHandler(track_PropertyChanged);
+        }
+
+        #endregion // internal methods
     }
 }

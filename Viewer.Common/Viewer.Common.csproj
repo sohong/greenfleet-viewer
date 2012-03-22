@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event\TrackActivatedEvent.cs" />
+    <Compile Include="Event\TrackChangedEvent.cs" />
     <Compile Include="Model\TrackGroup.cs" />
     <Compile Include="Service\DialogService.cs" />
     <Compile Include="Loader\ITrackLoader.cs" />
