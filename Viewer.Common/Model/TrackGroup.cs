@@ -46,7 +46,6 @@ namespace Viewer.Common.Model {
         private DateTime m_date;
         private TrackGroupLevel m_level;
         private List<NotificationObject> m_children;
-        private ITrackStateObserver m_observer;
         
         #endregion // fields
 
@@ -95,15 +94,22 @@ namespace Viewer.Common.Model {
         }
         private bool m_checked;
 
+        /// <summary>
+        /// 트랙 상태 관찰자 설정.
+        /// </summary>
         public ITrackStateObserver Observer {
+            get { return m_observer; }
             set {
                 m_observer = value;
                 foreach (object obj in Children) {
                     TrackGroup group = obj as TrackGroup;
-                    group.Observer = value;
+                    if (group != null) {
+                        group.Observer = value;
+                    }
                 }
             }
         }
+        private ITrackStateObserver m_observer;
         
         #endregion // properties
 

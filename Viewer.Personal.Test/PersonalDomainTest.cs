@@ -10,6 +10,7 @@
 using Viewer.Personal.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Microsoft.Practices.Prism.Events;
 
 namespace Viewer.Personal.Test
 {
@@ -71,8 +72,9 @@ namespace Viewer.Personal.Test
         ///</summary>
         [TestMethod()]
         public void StartTest() {
-            PersonalDomain_Accessor target = new PersonalDomain_Accessor();
-            target.Start();
+            PersonalDomain_Accessor domain = new PersonalDomain_Accessor();
+            domain.EventAggregator = new EventAggregator();
+            domain.Start();
         }
     }
 }

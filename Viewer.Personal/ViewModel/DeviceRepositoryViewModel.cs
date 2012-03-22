@@ -23,19 +23,21 @@ using Viewer.Common.Model;
 using Viewer.Common.Util;
 using Viewer.Common.Event;
 using Viewer.Personal.Event;
+using System.Collections.ObjectModel;
 
 namespace Viewer.Personal.ViewModel {
 
     /// <summary>
     /// View model for DeviceRepositoryView
     /// </summary>
-    public class DeviceRepositoryViewModel : RepoViewModelBase {
+    public class DeviceRepositoryViewModel : RepoViewModelBase, ITrackStateObserver {
 
         #region fields
 
         private DeviceRepository m_repository;
         private ListCollectionView m_tracks;
-        
+        private ObservableCollection<Track> m_selectedTracks;
+
         #endregion // fields
 
 
@@ -43,6 +45,7 @@ namespace Viewer.Personal.ViewModel {
 
         public DeviceRepositoryViewModel() {
             m_repository = new DeviceRepository();
+            m_selectedTracks = new ObservableCollection<Track>();
 
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
@@ -55,10 +58,32 @@ namespace Viewer.Personal.ViewModel {
         #endregion // constructors
 
 
+        #region ITrackStateObserver
+
+        public void TrackChanged(Track track, string propName) {
+            // 현재 재생 중인 것은 그냥 놔둔다.
+            if (track == ActiveTrack && !track.IsChecked) {
+                track.IsChecked = true;
+            }
+
+            if (track.IsChecked) {
+                m_selectedTracks.Add(track);
+            } else {
+                m_selectedTracks.Remove(track);
+            }
+        }
+
+        #endregion // ITrackStateObserver
+
+
         #region properties
 
         public DeviceRepository Repository {
             get { return m_repository; }
+        }
+
+        public ObservableCollection<Track> SelectedTracks {
+            get { return m_selectedTracks; }
         }
 
         public ICommand LoadCommand {
@@ -101,6 +126,7 @@ namespace Viewer.Personal.ViewModel {
                 m_repository.Open(SelectedVehicle, folder);
                 m_tracks = m_repository.GetTracks();
                 this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
+                this.TrackGroup.Observer = this;
             
             } else {
                 //PersonalDomain.Domain.EventAggregator.GetEvent<NoDriveEvent>().Publish(null);

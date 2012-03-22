@@ -23,6 +23,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Maps.MapControl.WPF;
 using Viewer.Common.Model;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace Viewer.Common.View {
 
@@ -33,19 +35,39 @@ namespace Viewer.Common.View {
         #region dependency properties
 
         /// <summary>
-        /// Track
+        /// Active Track
         /// </summary>
-        public static readonly DependencyProperty TrackProperty =
+        public static readonly DependencyProperty ActiveTrackProperty =
             DependencyProperty.Register(
-                "Track",
+                "ActiveTrack",
                 typeof(Track),
                 typeof(BingMapView),
-                new PropertyMetadata(TrackPropertyChanged));
+                new PropertyMetadata(ActiveTrackPropertyChanged));
 
-        private static void TrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void ActiveTrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
             BingMapView view = (BingMapView)obj;
             Track track = e.NewValue as Track;
             view.SetActive(track);
+        }
+
+        /// <summary>
+        /// Track List
+        /// </summary>
+        public static readonly DependencyProperty TracksProperty =
+            DependencyProperty.Register(
+                "Track",
+                typeof(IEnumerable),
+                typeof(BingMapView),
+                new PropertyMetadata(TracksPropertyChanged));
+
+        private static void TracksPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+            ObservableCollection<Track> tracks = e.OldValue as ObservableCollection<Track>;
+            if (tracks != null) {
+            }
+
+            tracks = e.NewValue as ObservableCollection<Track>;
+            if (tracks != null) {
+            }
         }
 
         #endregion dependency properties
@@ -56,7 +78,7 @@ namespace Viewer.Common.View {
         private List<Track> m_tracks;
         private Track m_activeTrack;
         private MapPolygon m_region;
-        private MapPolyline m_route;
+        //private MapPolyline m_route;
         private List<Location> m_locations;
         
         #endregion // fields
@@ -78,11 +100,19 @@ namespace Viewer.Common.View {
         #region properties
 
         /// <summary>
-        /// map에 표시할 Track 정보.
+        /// 현재 재생 중인 트랙.
         /// </summary>
-        public Track Track {
-            get { return (Track)GetValue(TrackProperty); }
-            set { SetValue(TrackProperty, value); }
+        public Track ActiveTrack {
+            get { return (Track)GetValue(ActiveTrackProperty); }
+            set { SetValue(ActiveTrackProperty, value); }
+        }
+
+        /// <summary>
+        /// map에 표시할 Track 정보들.
+        /// </summary>
+        public IEnumerable Tracks {
+            get { return (IEnumerable)GetValue(TracksProperty); }
+            set { SetValue(TracksProperty, value); }
         }
         
         #endregion // properties

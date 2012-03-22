@@ -60,7 +60,7 @@ namespace Viewer.Common.Tester {
             videoView.Track = track;
 
             // bing map
-            bingView.Track = track;
+            bingView.ActiveTrack = track;
 
             // google map
 

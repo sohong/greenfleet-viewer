@@ -79,5 +79,34 @@ namespace Viewer.Common.Test
             group = new TrackGroup(date, TrackGroupLevel.Day);
             Assert.AreEqual("2012-03-20", group.ToString());
         }
+
+        /// <summary>
+        ///A test for Observer
+        ///</summary>
+        [TestMethod()]
+        public void ObserverTest() {
+            TrackGroup root = new TrackGroup(DateTime.Today, TrackGroupLevel.Day);
+            TrackGroup group1 = new TrackGroup(DateTime.Now, TrackGroupLevel.Hour);
+            root.Add(group1);
+            TrackGroup group2 = new TrackGroup(DateTime.Now, TrackGroupLevel.Hour);
+            root.Add(group2);
+            TrackGroup group3 = new TrackGroup(DateTime.Now, TrackGroupLevel.Hour);
+            group1.Add(group3);
+
+            ITrackStateObserver observer = new TrackStateObserver();
+            root.Observer = observer;
+
+            Assert.AreEqual(root.Observer, observer);
+            Assert.AreEqual(group1.Observer, observer);
+            Assert.AreEqual(group2.Observer, observer);
+            Assert.AreEqual(group3.Observer, observer);
+        }
+
+
+        public class TrackStateObserver : ITrackStateObserver {
+
+            void ITrackStateObserver.TrackChanged(Track track, string propName) {
+            }
+        }
     }
 }
