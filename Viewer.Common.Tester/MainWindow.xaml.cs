@@ -53,7 +53,7 @@ namespace Viewer.Common.Tester {
         #region event handlers
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            LogUtil.InitLog4Net("Viewer.Common.Tester");
+            Logger.InitLog4Net("Viewer.Common.Tester");
             Track track = LoadTrack();
 
             // video

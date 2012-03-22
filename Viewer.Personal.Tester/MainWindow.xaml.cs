@@ -23,13 +23,16 @@ using System.Windows.Shapes;
 using Viewer.Personal.ViewModel;
 using Viewer.Personal.Model;
 using Microsoft.Practices.Prism.Events;
+using Viewer.Common.Util;
 
 namespace Viewer.Personal.Tester {
 
     /// <summary>
     /// </summary>
     public partial class MainWindow : Window {
-    
+
+        #region constructors
+
         public MainWindow() {
             InitializeComponent();
 
@@ -47,7 +50,16 @@ namespace Viewer.Personal.Tester {
             repoView.DataContext = new RepositoryViewModel();
         }
 
+        #endregion // constructors
+
+
+        #region event handlers
+
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+            Logger.InitLog4Net("Viewer.Personal.Tester");
+            Logger.Debug("Starting tester...");
         }
+
+        #endregion // event handlers
     }
 }

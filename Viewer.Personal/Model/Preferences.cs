@@ -44,6 +44,20 @@ namespace Viewer.Personal.Model {
         #region properties
 
         /// <summary>
+        /// 프로그램 테스팅 중인가?
+        /// </summary>
+        public bool Testing {
+            get { return m_testing; }
+            set {
+                if (value != m_testing) {
+                    m_testing = value;
+                    RaisePropertyChanged(() => Testing);
+                }
+            }
+        }
+        private bool m_testing;
+
+        /// <summary>
         /// 트랙 파일 저장소 루트 경로.
         /// </summary>
         public string StorageRoot {

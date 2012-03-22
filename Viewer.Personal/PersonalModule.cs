@@ -27,7 +27,7 @@ namespace Viewer.Personal {
     
         public void Initialize() {
             Debug.WriteLine("Personal Module initialize...");
-            LogUtil.Debug("Personal Module initialize...");
+            Logger.Debug("Personal Module initialize...");
             PersonalDomain.Domain.Start();
         }
     }

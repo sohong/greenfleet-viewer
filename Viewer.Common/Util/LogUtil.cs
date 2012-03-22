@@ -20,7 +20,7 @@ namespace Viewer.Common.Util {
     /// <summary>
     /// Logging관련 함수들.
     /// </summary>
-    public class LogUtil {
+    public class Logger {
 
         #region static fileds
 

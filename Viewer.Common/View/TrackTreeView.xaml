@@ -6,11 +6,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TreeView Name="tvMain" Grid.Row="1" MouseDoubleClick="tvMain_MouseDoubleClick">
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="TreeViewItem">
-                    <Setter Property="IsExpanded" Value="True" />
-                    <!--
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TreeView Name="tvMain" Grid.Row="0" MouseDoubleClick="tvMain_MouseDoubleClick">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="True" />
+                        <!--
                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
                     <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                     <Setter Property="FontWeight" Value="Normal" />
@@ -23,16 +28,20 @@
                         </DataTrigger>
                     </Style.Triggers>
                     -->
-                </Style>
-            </TreeView.ItemContainerStyle>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                    <StackPanel Orientation="Horizontal" Margin="2">
-                        <CheckBox IsChecked="{Binding IsChecked,Mode=TwoWay}" Margin="0, 0, 4, 0" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding}" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <StackPanel Orientation="Horizontal" Margin="2">
+                            <CheckBox IsChecked="{Binding IsChecked,Mode=TwoWay}" Margin="0, 0, 4, 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3">
+                <CheckBox Name="chkAll" VerticalAlignment="Center" Click="chkAll_Click">모두 선택</CheckBox>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

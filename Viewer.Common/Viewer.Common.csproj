@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="StringExtension.cs" />
     <Compile Include="Util\DialogUtil.cs" />
+    <Compile Include="Util\DriveUtil.cs" />
     <Compile Include="Util\FileUtil.cs" />
     <Compile Include="Util\LogUtil.cs" />
     <Compile Include="Util\MessageUtil.cs" />

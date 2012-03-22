@@ -102,7 +102,7 @@ namespace Viewer.Personal.Model {
         #region methods
 
         public void Start() {
-            LogUtil.Info("Personal Domain start...");
+            Logger.Info("Personal Domain start...");
 
             m_preferences.Load(PrefersPath);
             m_vehicles.Load();
@@ -114,7 +114,7 @@ namespace Viewer.Personal.Model {
                 EmptyWorkingFolder();
             });
 
-            LogUtil.Info("Personal Domain started.");
+            Logger.Info("Personal Domain started.");
         }
 
         public void SavePreferences() {

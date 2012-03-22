@@ -83,7 +83,7 @@ namespace Viewer.Personal.Model {
         /// Repository를 연다.
         /// </summary>
         public void Open(string rootPath, IEnumerable<Vehicle> vehicles) {
-            LogUtil.Info("Repository open...");
+            Logger.Info("Repository open...");
 
             m_rootPath = rootPath;
             if (!Directory.Exists(m_rootPath)) {
@@ -92,7 +92,7 @@ namespace Viewer.Personal.Model {
 
             LoadTrackCatalogs(vehicles);
 
-            LogUtil.Info("Repository opened.");
+            Logger.Info("Repository opened.");
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Viewer.Personal.Model {
         /// files에는 확장자 없는 파일명들이 들어있다.
         /// </summary>
         public void ImportTrackFiles(Vehicle vehicle, IEnumerable<string> files, bool overwrite) {
-            LogUtil.Debug("Import track files...");
+            Logger.Debug("Import track files...");
             m_importHelper.Import(vehicle, files, overwrite);
         }
 

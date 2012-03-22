@@ -189,7 +189,7 @@ namespace Viewer.Common.View {
         #region event handlers
 
         private void mediaMain_MediaOpened(object sender, RoutedEventArgs e) {
-            LogUtil.Debug("Media opened");
+            Logger.Debug("Media opened");
             timelineSlider.Maximum = m_videoLength = mediaMain.NaturalDuration.TimeSpan.TotalMilliseconds;
         }
 

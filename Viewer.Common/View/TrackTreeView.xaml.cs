@@ -24,6 +24,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections;
 using Viewer.Common.Model;
+using Viewer.Common.Util;
 
 namespace Viewer.Common.View {
 
@@ -79,8 +80,41 @@ namespace Viewer.Common.View {
         #endregion // propertis
 
 
+        #region methods
+
+        /// <summary>
+        /// 전체를 선택하거나 선택하지 않는다.
+        /// </summary>
+        public void SelectAll(bool select) {
+            if (ItemsSource != null) {
+                foreach (TrackGroup group in ItemsSource) {
+                    SelectAll(group, select);
+                }
+            }
+        }
+
+        #endregion // methods
+
+
+        #region internal methods
+
+        private void SelectAll(TrackGroup group, bool select) {
+            group.IsChecked = select;
+            foreach (object obj in group.Children) {
+                if (obj is Track) {
+                    ((Track)obj).IsChecked = select;
+                } else if (obj is TrackGroup) {
+                    SelectAll((TrackGroup)obj, select);
+                }
+            }
+        }
+
+        #endregion // internal methods
+
+
         #region event handlers
 
+        // tvMain
         private void tvMain_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             Track track = tvMain.SelectedItem as Track;
             if (track != null) {
@@ -96,6 +130,12 @@ namespace Viewer.Common.View {
                     ActivateGroup(this, group);
                 }
             }
+        }
+
+        // chkAll
+        private void chkAll_Click(object sender, RoutedEventArgs e) {
+            Logger.Debug("chkAll: " + chkAll.IsChecked);
+            SelectAll(chkAll.IsChecked == true);
         }
 
         #endregion // event handlers

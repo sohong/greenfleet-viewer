@@ -22,6 +22,7 @@ using Microsoft.Practices.Prism.Commands;
 using Viewer.Common.Model;
 using Viewer.Common.Util;
 using Viewer.Common.Event;
+using Viewer.Personal.Event;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -83,11 +84,26 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoLoad(object data) {
+            /*
             string folder = DialogUtil.SelectFolder("트랙 파일들이 저장된 위치를 선택하세요.", null);
             if (folder != null) {
                 m_repository.Open(SelectedVehicle, folder);
                 m_tracks = m_repository.GetTracks();
                 this.TrackGroup = m_repository.LoadGroups(m_tracks);
+            }
+             */
+
+            DriveManager dm = new DriveManager();
+            string folder = dm.FindTrackDrive(PersonalDomain.Domain.Preferences.Testing);
+            if (folder != null) {
+                m_repository.Open(SelectedVehicle, folder);
+                m_tracks = m_repository.GetTracks();
+                this.TrackGroup = m_repository.LoadGroups(m_tracks);
+            
+            } else {
+                //PersonalDomain.Domain.EventAggregator.GetEvent<NoDriveEvent>().Publish(null);
+                // TODO 테스트 가능하도록 MessageUtil을 서비스 인터페이스로 구현해야 한다.
+                MessageUtil.Show("트랙 데이터 드라이브가 존재하지 않습니다.");
             }
         }
 
