@@ -132,6 +132,9 @@
     <Content Include="Lib\Microsoft.Practices.Prism.MefExtensions.dll" />
     <Content Include="Lib\Microsoft.Practices.ServiceLocation.dll" />
     <Content Include="Lib\WPFToolkit.Extended.dll" />
+    <Content Include="map.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Page Include="View\BingMapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

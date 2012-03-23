@@ -32,6 +32,7 @@ namespace Viewer.Common.Model {
         #region fields
 
         private ObservableCollection<TrackPoint> m_points;
+        private string m_id;
         
         #endregion // fields
 
@@ -40,12 +41,18 @@ namespace Viewer.Common.Model {
 
         public Track() {
             m_points = new ObservableCollection<TrackPoint>();
+            m_id = Guid.NewGuid().ToString();
         }
 
         #endregion // constructors
 
 
         #region properties
+
+        [Transient]
+        public string Id {
+            get { return m_id; }
+        }
 
         /// <summary>
         /// 상시 or 이벤트.

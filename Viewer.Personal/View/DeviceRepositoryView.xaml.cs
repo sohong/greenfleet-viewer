@@ -24,6 +24,7 @@ using System.Windows.Shapes;
 using Microsoft.Windows.Controls;
 using Viewer.Personal.Model;
 using Viewer.Common.Event;
+using Viewer.Common.Model;
 
 namespace Viewer.Personal.View {
 
@@ -43,17 +44,24 @@ namespace Viewer.Personal.View {
 
         #region event handlers
 
-        private void TrackTreeView_ActivateGroup(object sender, Common.Model.TrackGroup group) {
+        // trackTreeView
+        private void TrackTreeView_ActivateGroup(object sender, TrackGroup group) {
         }
 
-        private void TrackTreeView_ActivateTrack(object sender, Common.Model.Track track) {
+        private void TrackTreeView_ActivateTrack(object sender, Track track) {
             PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
         }
 
-        #endregion // event handlers
+        // googleMapView
+        private void GoogleMapView_TrackDoubleClicked(object sender, Track track) {
+            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
+        }
 
+        // bingMapView
         private void BingMapView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e) {
             Debug.WriteLine("xxx");
         }
+
+        #endregion // event handlers
     }
 }

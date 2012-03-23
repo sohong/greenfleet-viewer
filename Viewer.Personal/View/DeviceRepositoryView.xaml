@@ -61,7 +61,14 @@
                         <RowDefinition Height="4"/>
                         <RowDefinition Height="4*" MinHeight="20"/>
                     </Grid.RowDefinitions>
-                    <gf:BingMapView ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" PreviewMouseDoubleClick="BingMapView_PreviewMouseDoubleClick" />
+                    <TabControl TabStripPlacement="Bottom">
+                        <TabItem Header="Google">
+                            <gf:GoogleMapView  ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" TrackDoubleClicked="GoogleMapView_TrackDoubleClicked"/>
+                        </TabItem>
+                        <TabItem Header="Bing">
+                            <gf:BingMapView ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" PreviewMouseDoubleClick="BingMapView_PreviewMouseDoubleClick" />
+                        </TabItem>
+                    </TabControl>
                     <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                     <Grid Grid.Row="2" Background="Gray">
                     </Grid>
