@@ -73,6 +73,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapScriptHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,6 +103,20 @@
       <Project>{C5793621-68C3-431B-92EF-778EC8FAB6E4}</Project>
       <Name>GFLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GoogleMaps.swf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Lib\AxShockwaveFlashObjects.dll" />
+    <Content Include="Lib\GMap.NET.Core.dll" />
+    <Content Include="map.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Lib\GMap.NET.Core.xml" />
+    <Content Include="Lib\GMap.NET.WindowsPresentation.dll" />
+    <Resource Include="Lib\GMap.NET.WindowsPresentation.xml" />
+    <Content Include="Lib\ShockwaveFlashObjects.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

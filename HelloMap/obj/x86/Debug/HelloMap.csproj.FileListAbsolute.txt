@@ -33,3 +33,6 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x8
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap.exe
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap.pdb
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap_Content.g.cs
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\GoogleMaps.swf
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\map.html
