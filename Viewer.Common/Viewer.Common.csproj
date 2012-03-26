@@ -71,6 +71,8 @@
     <Compile Include="Event\TrackActivatedEvent.cs" />
     <Compile Include="Event\TrackChangedEvent.cs" />
     <Compile Include="Model\TrackGroup.cs" />
+    <Compile Include="NotificationObjectEx.cs" />
+    <Compile Include="PropertyInfoExtension.cs" />
     <Compile Include="Service\DialogService.cs" />
     <Compile Include="Loader\ITrackLoader.cs" />
     <Compile Include="Loader\LocalTrackLoader.cs" />
@@ -123,8 +125,7 @@
     </Compile>
     <Compile Include="Xml\CollectionSerializer.cs" />
     <Compile Include="Xml\IXmlValueConverter.cs" />
-    <Compile Include="Xml\TransientAttribute.cs" />
-    <Compile Include="Xml\XmlModelTransformer.cs" />
+    <Compile Include="TransientAttribute.cs" />
     <Compile Include="Xml\XmlTransformer.cs" />
   </ItemGroup>
   <ItemGroup>

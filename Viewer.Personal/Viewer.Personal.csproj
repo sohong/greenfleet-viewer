@@ -65,6 +65,8 @@
     <Compile Include="Command\ImportCommand.cs" />
     <Compile Include="Command\SimpleCommand.cs" />
     <Compile Include="Event\NoDriveEvent.cs" />
+    <Compile Include="Model\DeviceConfig.cs" />
+    <Compile Include="Model\DeviceConfigManager.cs" />
     <Compile Include="Model\DeviceRepository.cs" />
     <Compile Include="Model\DriveManager.cs" />
     <Compile Include="Model\TrackCatalog.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="PersonalModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
+    <Compile Include="ViewModel\DeviceConfigViewModel.cs" />
     <Compile Include="ViewModel\DeviceRepositoryViewModel.cs" />
     <Compile Include="ViewModel\PersonalViewModel.cs" />
     <Compile Include="ViewModel\PreferencesViewModel.cs" />
@@ -88,6 +91,9 @@
     <Compile Include="ViewModel\VehicleViewModel.cs" />
     <Compile Include="View\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceConfigView.xaml.cs">
+      <DependentUpon>DeviceConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DeviceRepositoryView.xaml.cs">
       <DependentUpon>DeviceRepositoryView.xaml</DependentUpon>
@@ -120,6 +126,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

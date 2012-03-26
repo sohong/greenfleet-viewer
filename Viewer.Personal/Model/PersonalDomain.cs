@@ -53,6 +53,7 @@ namespace Viewer.Personal.Model {
 
         private Preferences m_preferences;
         private VehicleManager m_vehicles;
+        private DeviceConfig m_deviceConfig;
         private Repository m_repository;
 
         #endregion // fields
@@ -83,6 +84,13 @@ namespace Viewer.Personal.Model {
         /// </summary>
         public ObservableCollection<Vehicle> Vehicles {
             get { return m_vehicles.Vehicles; }
+        }
+
+        /// <summary>
+        /// 기기 설정 정보
+        /// </summary>
+        public DeviceConfig DeviceConfig {
+            get { return m_deviceConfig; }
         }
 
         /// <summary>
@@ -124,6 +132,7 @@ namespace Viewer.Personal.Model {
 
             m_preferences.Load(PrefersPath);
             m_vehicles.Load();
+            m_deviceConfig = new DeviceConfigManager().Load("");
             m_repository.Open(m_preferences.StorageRoot, m_vehicles.Vehicles);
             EmptyWorkingFolder();
 
@@ -137,6 +146,11 @@ namespace Viewer.Personal.Model {
 
         public void SavePreferences() {
             m_preferences.Save(PrefersPath);
+        }
+
+        public void SaveDeviceConfig(DeviceConfig config) {
+            new DeviceConfigManager().Save(config);
+            config.AssignTo(m_deviceConfig);
         }
 
         #endregion // methods

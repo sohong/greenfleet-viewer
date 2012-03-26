@@ -18,6 +18,11 @@ using Viewer.Common.Xml;
 namespace Viewer.Common.Util {
 
     public class ObjectUtil {
+
+        public static readonly Type[] EMPTY_TYPES = new Type[0];
+        public static readonly object[] EMPTY_OBJECTS = new object[0];
+
+
         public static string ToString(Object obj) {
             if (obj == null) {
                 return "null";

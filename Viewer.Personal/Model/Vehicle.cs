@@ -13,13 +13,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
+using Viewer.Common;
 
 namespace Viewer.Personal.Model {
     
     /// <summary>
     /// 차량 정보.
     /// </summary>
-    public class Vehicle : NotificationObject, ICloneable {
+    public class Vehicle : NotificationObjectEx {
 
         #region constructors
 
@@ -76,23 +77,10 @@ namespace Viewer.Personal.Model {
         #endregion // properties
 
 
-        #region IConneable 
-
-        public object Clone() {
-            Vehicle v = new Vehicle();
-            AssignTo(v);
-            return v;
-        }
-
-        #endregion // ICloneable
-
-
         #region methods
 
-        public void AssignTo(Vehicle target) {
-            target.VehicleId = this.VehicleId;
-            target.Name = this.Name;
-            target.Description = this.Description;
+        public Vehicle Clone() {
+            return (Vehicle)base.Clone();
         }
 
         #endregion // methods

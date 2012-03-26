@@ -280,7 +280,7 @@ namespace Viewer.Common.View {
         private void MarkerClicked(string trackId) {
             Track track = FindTrack(trackId);
             if (track != null) {
-                MessageBox.Show("marker clicked at " + track.Id, "map");
+                //MessageBox.Show("marker clicked at " + track.Id, "map");
                 Action<object, Track> eh = TrackClicked;
                 if (eh != null) {
                     eh(this, track);
@@ -291,7 +291,7 @@ namespace Viewer.Common.View {
         private void MarkerDoubleClicked(string trackId) {
             Track track = FindTrack(trackId);
             if (track != null) {
-                MessageBox.Show("marker double clicked at " + track.Id, "map");
+                //MessageBox.Show("marker double clicked at " + track.Id, "map");
                 Action<object, Track> eh = TrackDoubleClicked;
                 if (eh != null) {
                     eh(this, track);
@@ -341,6 +341,10 @@ namespace Viewer.Common.View {
 
 
             #region javascript functions 
+
+            public void MarkerClicked(string track) {
+                m_view.MarkerClicked(track);
+            }
 
             public void MarkerDblClicked(string track) {
                 m_view.MarkerDoubleClicked(track);

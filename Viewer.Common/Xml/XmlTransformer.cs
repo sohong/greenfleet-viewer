@@ -14,8 +14,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.Reflection;
-using Viewer.Common.Util;
 using System.Collections;
+using Viewer.Common;
+using Viewer.Common.Util;
 
 namespace Viewer.Common.Xml {
     
@@ -27,14 +28,6 @@ namespace Viewer.Common.Xml {
     /// object 형식의 value인 속성이 readOnly이면 읽어들일 때 그 타입의 개체를 생성하지 않고 속성들만 설정한다.
     /// </summary>
     public class XmlTransformer {
-
-        #region static members
-
-        private static readonly Type[] EMPTY_TYPES = new Type[0];
-        private static readonly object[] EMPTY_OBJECTS = new object[0];
-
-        #endregion // static members
-
 
         #region methods
 
@@ -51,14 +44,14 @@ namespace Viewer.Common.Xml {
             PropertyInfo[] props = t.GetProperties();
             
             foreach (PropertyInfo p in props) {
-                if (!IsTransient(p)) {
+                if (!p.IsTransient()) {
                     XElement elt = new XElement(p.Name);
                     target.Add(elt);
                     object value = p.GetValue(model, null);
 
                     if (value == null) {
                         elt.Value = "{null}";
-                    } else if (IsObject(p)) {
+                    } else if (p.IsObject()) {
                         Serialize(value, elt);
                     } else {
                         elt.Value = value.ToString();
@@ -91,12 +84,12 @@ namespace Viewer.Common.Xml {
             object model = modelOrType; 
 
             if (modelOrType is Type) {
-                ConstructorInfo ctor = t.GetConstructor(EMPTY_TYPES);
-                model = ctor.Invoke(EMPTY_OBJECTS);
+                ConstructorInfo ctor = t.GetConstructor(ObjectUtil.EMPTY_TYPES);
+                model = ctor.Invoke(ObjectUtil.EMPTY_OBJECTS);
             }
 
             foreach (PropertyInfo p in props) {
-                if (!IsTransient(p)) {
+                if (!p.IsTransient()) {
                     XElement elt = source.Element(p.Name);
                     if (elt != null) {
                         Type pt = p.PropertyType;
@@ -105,7 +98,7 @@ namespace Viewer.Common.Xml {
 
                         if ("{null}".Equals(s, StringComparison.InvariantCultureIgnoreCase)) {
                             val = null;
-                        } else if (IsObject(p)) {
+                        } else if (p.IsObject()) {
                             val = p.GetValue(model, null);
                             val = Deserialize(elt, (val != null) ? val : pt);
                         } else if (pt.IsEnum) {
@@ -119,7 +112,7 @@ namespace Viewer.Common.Xml {
                         }
 
                         if (p.CanWrite) {
-                            p.SetValue(model, val, EMPTY_OBJECTS);
+                            p.SetValue(model, val, ObjectUtil.EMPTY_OBJECTS);
                         }
                     }
                 }
@@ -133,14 +126,6 @@ namespace Viewer.Common.Xml {
 
         #region internal methods
 
-        private bool IsTransient(PropertyInfo prop) {
-            return ObjectUtil.HasAttr(prop.GetCustomAttributes(false), typeof(TransientAttribute));
-        }
-
-        private bool IsObject(PropertyInfo prop) {
-            Type t = prop.PropertyType;
-            return t.IsClass && t != typeof(string);
-        }
 
         #endregion // internal methods
     }

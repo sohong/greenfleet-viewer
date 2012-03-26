@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Viewer.Common.Xml {
+namespace Viewer.Common {
 
     /// <summary>
     /// 저장하지 않는 필드.
