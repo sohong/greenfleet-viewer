@@ -24,6 +24,8 @@ using Viewer.Common.Util;
 using Viewer.Common.Event;
 using Viewer.Personal.Event;
 using System.Collections.ObjectModel;
+using Viewer.Common.Service;
+using Viewer.Personal.View;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -53,6 +55,7 @@ namespace Viewer.Personal.ViewModel {
             AutoPlay = true;
 
             LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
+            ConfigDeviceCommand = new DelegateCommand<object>(DoConfigDevice, CanConfigDevice);
         }
 
         #endregion // constructors
@@ -87,6 +90,11 @@ namespace Viewer.Personal.ViewModel {
         }
 
         public ICommand LoadCommand {
+            get;
+            private set;
+        }
+
+        public ICommand ConfigDeviceCommand {
             get;
             private set;
         }
@@ -133,6 +141,15 @@ namespace Viewer.Personal.ViewModel {
                 // TODO 테스트 가능하도록 MessageUtil을 서비스 인터페이스로 구현해야 한다.
                 MessageUtil.Show("트랙 데이터 드라이브가 존재하지 않습니다.");
             }
+        }
+
+        // Config device command
+        private bool CanConfigDevice(object data) {
+            return true;
+        }
+
+        private void DoConfigDevice(object data) {
+            DialogService.Run("기기 설정", new DeviceConfigView(), new DeviceConfigViewModel());
         }
 
         #endregion // internal methods

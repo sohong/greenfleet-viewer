@@ -31,7 +31,7 @@ namespace Viewer.Personal.Model {
         #region methods
 
         public DeviceConfig Load(string filename) {
-            return null;
+            return new DeviceConfig();
         }
 
         public void Save(DeviceConfig config) {

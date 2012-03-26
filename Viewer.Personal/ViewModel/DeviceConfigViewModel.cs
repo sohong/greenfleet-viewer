@@ -33,6 +33,7 @@ namespace Viewer.Personal.ViewModel {
 
         public DeviceConfigViewModel() {
             m_config = PersonalDomain.Domain.DeviceConfig.Clone();
+            IsCancelable = true;
         }
 
         #endregion // constructor

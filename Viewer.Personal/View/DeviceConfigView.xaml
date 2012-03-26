@@ -24,14 +24,14 @@
                 <!-- 녹화 해상도 -->
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">녹화 해상도:</Label>
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                    <RadioButton Margin="3">1920 X 1080</RadioButton>
+                    <RadioButton Margin="3" IsChecked="True">1920 X 1080</RadioButton>
                     <Label Width="20"/>
                     <RadioButton Margin="3">1280 X 720</RadioButton>
                 </StackPanel>
                 <!-- 녹화 화질 -->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">녹화 화질:</Label>
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <RadioButton Margin="3">상</RadioButton>
+                    <RadioButton Margin="3" IsChecked="True">상</RadioButton>
                     <Label Width="20"/>
                     <RadioButton Margin="3">중</RadioButton>
                     <Label Width="20"/>
@@ -40,14 +40,14 @@
                 <!-- 전송 해상도 -->
                 <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">전송 해상도:</Label>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                    <RadioButton Margin="3">1280 X 720</RadioButton>
+                    <RadioButton Margin="3" IsChecked="True">1280 X 720</RadioButton>
                     <Label Width="20"/>
                     <RadioButton Margin="3">640 X 480</RadioButton>
                 </StackPanel>
                 <!-- 전송 화질 -->
                 <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">전송 화질:</Label>
                 <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <RadioButton Margin="3">상</RadioButton>
+                    <RadioButton Margin="3" IsChecked="True">상</RadioButton>
                     <Label Width="20"/>
                     <RadioButton Margin="3">중</RadioButton>
                     <Label Width="20"/>

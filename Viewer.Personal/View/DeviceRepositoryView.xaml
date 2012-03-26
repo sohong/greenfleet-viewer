@@ -6,7 +6,7 @@
              xmlns:tk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
              xmlns:gf="clr-namespace:Viewer.Common.View;assembly=Viewer.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="378" d:DesignWidth="701">
+             d:DesignHeight="378" d:DesignWidth="786">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,6 +26,7 @@
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AutoPlay}" ToolTip="트리나 맵에서 더블클릭으로 트랙이 선택되면 재생 시작">자동</CheckBox>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding LoopPlay}" ToolTip="재생 완료 후 처음부터 다시 재생">반복</CheckBox>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AllPlay}" ToolTip="선택된 트랙들을 순서대로 재생">연속</CheckBox>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ConfigDeviceCommand}">기기 설정</Button>
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
