@@ -68,8 +68,11 @@
     <Compile Include="Model\DeviceConfig.cs" />
     <Compile Include="Model\DeviceConfigManager.cs" />
     <Compile Include="Model\DeviceRepository.cs" />
+    <Compile Include="Model\DeviceSaveHelper.cs" />
     <Compile Include="Model\DriveManager.cs" />
+    <Compile Include="Model\SaveOption.cs" />
     <Compile Include="Model\TrackCatalog.cs" />
+    <Compile Include="Model\TrackCatalogCollection.cs" />
     <Compile Include="Model\TrackFolderManager.cs" />
     <Compile Include="Model\TrackImportHelper.cs" />
     <Compile Include="Model\PersonalDomain.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="ViewModel\PreferencesViewModel.cs" />
     <Compile Include="ViewModel\RepositoryViewModel.cs" />
     <Compile Include="ViewModel\RepoViewModelBase.cs" />
+    <Compile Include="ViewModel\SaveViewModel.cs" />
     <Compile Include="ViewModel\TrackViewModel.cs" />
     <Compile Include="ViewModel\VehicleListViewModel.cs" />
     <Compile Include="ViewModel\VehicleViewModel.cs" />
@@ -103,6 +107,9 @@
     </Compile>
     <Compile Include="View\RepositoryView.xaml.cs">
       <DependentUpon>RepositoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SaveView.xaml.cs">
+      <DependentUpon>SaveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TrackView.xaml.cs">
       <DependentUpon>TrackView.xaml</DependentUpon>
@@ -142,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RepositoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SaveView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

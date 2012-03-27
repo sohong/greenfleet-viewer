@@ -46,8 +46,25 @@ namespace Viewer.Personal.Model {
 
         #region properties
 
+        public Vehicle Vehicle {
+            get { return m_vehicle; }
+        }
+
         public string RootPath {
             get { return m_rootPath; }
+        }
+
+        public IEnumerable<Track> Tracks {
+            get { return m_tracks; }
+        }
+
+        public IEnumerable<Track> Selection {
+            get {
+                if (m_tracks != null) {
+                    m_tracks.Where((t) => t.IsChecked == true);
+                }
+                return null;
+            }
         }
 
         public int TrackCount {

@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// DeviceConfigViewModel.cs
-// 2012.03.26, created by sohong
+// SaveViewModel.cs
+// 2012.03.27, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -18,23 +18,29 @@ using Viewer.Personal.Model;
 namespace Viewer.Personal.ViewModel {
 
     /// <summary>
-    /// View model for DeviceConfigView
+    /// View model for SaveView
     /// </summary>
-    public class DeviceConfigViewModel : DialogViewModel {
+    public class SaveViewModel : DialogViewModel {
 
-        #region constructor
+        #region constructors
 
-        public DeviceConfigViewModel() {
-            Config = PersonalDomain.Domain.DeviceConfig.Clone();
+        public SaveViewModel(DeviceRepository repository) {
+            Repository = repository;
+            Options = new SaveOption();
             IsCancelable = true;
         }
 
-        #endregion // constructor
+        #endregion // constructors
 
 
         #region properties
 
-        public DeviceConfig Config {
+        public DeviceRepository Repository {
+            get;
+            private set;
+        }
+
+        public SaveOption Options {
             get;
             private set;
         }
@@ -45,7 +51,7 @@ namespace Viewer.Personal.ViewModel {
         #region overriden methods
 
         protected override object GetSubmitData() {
-            return Config;
+            return Options;
         }
 
         protected override bool CanSubmit(object data) {
@@ -53,7 +59,7 @@ namespace Viewer.Personal.ViewModel {
         }
 
         protected override void DoSubmit(object data) {
-            PersonalDomain.Domain.SaveDeviceConfig(Config);
+            PersonalDomain.Domain.SaveDevice(Repository, Options);
         }
 
         #endregion // overriden methods

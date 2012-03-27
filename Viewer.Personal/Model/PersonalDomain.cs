@@ -153,6 +153,10 @@ namespace Viewer.Personal.Model {
             config.AssignTo(m_deviceConfig);
         }
 
+        public void SaveDevice(DeviceRepository source, SaveOption options) {
+            new DeviceSaveHelper().Save(source, Repository, options);
+        }
+
         #endregion // methods
 
 

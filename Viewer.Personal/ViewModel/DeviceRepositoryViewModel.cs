@@ -99,6 +99,11 @@ namespace Viewer.Personal.ViewModel {
             private set;
         }
 
+        public ICommand SaveCommand {
+            get;
+            private set;
+        }
+
         #endregion // properties
 
 
@@ -150,6 +155,14 @@ namespace Viewer.Personal.ViewModel {
 
         private void DoConfigDevice(object data) {
             DialogService.Run("기기 설정", new DeviceConfigView(), new DeviceConfigViewModel());
+        }
+
+        // Save(sd card -> local storage) command
+        private bool CanSave(object data) {
+            return true;
+        }
+
+        private void DoSave(object data) {
         }
 
         #endregion // internal methods

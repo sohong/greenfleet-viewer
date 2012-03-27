@@ -153,6 +153,12 @@ namespace Viewer.Common.Model {
         private DateTime m_endTime;
 
         /// <summary>
+        /// 트랙 파일 경로.
+        /// </summary>
+        [Transient]
+        public string TrackFile { get; set; }
+
+        /// <summary>
         /// 동영상 원본 파일 경로.
         /// </summary>
         public string VideoFile { get; set; }

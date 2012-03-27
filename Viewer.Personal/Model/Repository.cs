@@ -48,7 +48,7 @@ namespace Viewer.Personal.Model {
         #region fields
 
         private string m_rootPath;
-        private Dictionary<Vehicle, List<TrackCatalog>> m_catalogs;
+        private Dictionary<Vehicle, TrackCatalogCollection> m_catalogs;
         private ObservableCollection<Track> m_tracks;
         private TrackFolderManager m_folderManager;
         private TrackImportHelper m_importHelper;
@@ -59,7 +59,7 @@ namespace Viewer.Personal.Model {
         #region constructors
 
         public Repository() {
-            m_catalogs = new Dictionary<Vehicle, List<TrackCatalog>>();
+            m_catalogs = new Dictionary<Vehicle, TrackCatalogCollection>();
             m_tracks = new ObservableCollection<Track>();
             m_folderManager = new TrackFolderManager(this);
             m_importHelper = new TrackImportHelper(this);
@@ -100,7 +100,9 @@ namespace Viewer.Personal.Model {
         /// </summary>
         public void AddVehicle(Vehicle vehicle) {
             if (!m_catalogs.ContainsKey(vehicle)) {
-                CreateVehicleStorage(vehicle);
+                TrackCatalogCollection cats = new TrackCatalogCollection();
+                cats.Open(vehicle, RootPath);
+                m_catalogs.Add(vehicle, cats);
             }
         }
 
@@ -134,39 +136,12 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
-        private void CreateVehicleStorage(Vehicle vehicle) {
-            // vehicle's storage folder
-            string folder = Path.Combine(RootPath, vehicle.VehicleId);
-            Directory.CreateDirectory(folder);
-        }
-
         private void LoadTrackCatalogs(IEnumerable<Vehicle> vehicles) {
-            if (vehicles == null)
-                return;
-
-            foreach (Vehicle v in vehicles) {
-                // vehicle's storage folder
-                string folder = Path.Combine(RootPath, v.VehicleId);
-                if (Directory.Exists(folder)) {
-                    List<TrackCatalog> catalogs = LoadTrackCatalog(v, folder);
-                    m_catalogs.Add(v, catalogs);
-                } else {
-                    CreateVehicleStorage(v);
+            if (vehicles != null) {
+                foreach (Vehicle v in vehicles) {
+                    AddVehicle(v);
                 }
             }
-        }
-
-        private List<TrackCatalog> LoadTrackCatalog(Vehicle vehicle, string folder) {
-            List<TrackCatalog> catalogs = new List<TrackCatalog>();
-            string[] files = Directory.GetFiles(folder, "*.xml");
-
-            foreach (string file in files) {
-                TrackCatalog cat = new TrackCatalog(vehicle, 1, 1);
-                cat.Load(file);
-                catalogs.Add(cat);
-            }
-
-            return catalogs;
         }
 
         private Track Find(DateTime time) {

@@ -39,3 +39,5 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\map.html
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceConfigView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceConfigView.g.cs
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\SaveView.baml
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\SaveView.g.cs

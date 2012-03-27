@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="Viewer.Personal.View.SaveView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:tk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             Height="229" Width="401">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>            
+        <!-- 전체 -->
+        <RadioButton Grid.Row="0" Margin="6" IsChecked="True">전체 트랙 저장</RadioButton>
+        <RadioButton Grid.Row="1" Margin="6">선택 트랙들 저장</RadioButton>
+        <RadioButton Grid.Row="2" Margin="6">구간 내 트랙들 저장</RadioButton>
+        <StackPanel Grid.Row="3" Margin="13,3,6,6" Orientation="Horizontal">
+            <Label Margin="4,0,0,0">시작:</Label>
+            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchFrom}"/>
+            <Label>~</Label>
+            <Label Margin="0,0,0,0">종료:</Label>
+            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchTo}"/>
+        </StackPanel>
+        <CheckBox Grid.Row="4" Margin="6">존재하는 파일 덮어쓰기</CheckBox>
+    </Grid>
+</UserControl>

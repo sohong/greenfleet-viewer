@@ -84,6 +84,8 @@ namespace Viewer.Common.Loader {
 
             Track track = new Track();
 
+            // track file
+            track.TrackFile = path;
             // create date
             track.CreateDate = d;
             // track type
