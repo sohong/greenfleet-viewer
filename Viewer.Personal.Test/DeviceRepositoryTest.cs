@@ -74,7 +74,7 @@ namespace Viewer.Personal.Test
         public void OpenTest() {
             DeviceRepository repo = new DeviceRepository();
             Vehicle vehicle = new Vehicle();
-            string rootPath = @"C:\GreenFleets\test\samples";
+            string rootPath = PersonalTest.SampleRoot;
             repo.Open(vehicle, rootPath);
 
             string[] files = Directory.GetFiles(rootPath, "*.inc");
@@ -89,7 +89,7 @@ namespace Viewer.Personal.Test
         public void LoadGroupsTest() {
             DeviceRepository repo = new DeviceRepository();
             Vehicle vehicle = new Vehicle();
-            string rootPath = @"C:\GreenFleets\test\samples";
+            string rootPath = PersonalTest.SampleRoot;
             repo.Open(vehicle, rootPath);
 
             TrackGroup root = repo.CreateGroupsFromTracks(repo.GetTracks());

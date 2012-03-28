@@ -68,7 +68,7 @@ namespace Viewer.Personal.Test
         [TestMethod()]
         public void GetFolderTest() {
             Repository repo = new Repository();
-            repo.Open(@"c:\GreenFleets\test\storage", null);
+            repo.Open(PersonalTest.StorageRoot, null);
             TrackFolderManager manager = new TrackFolderManager(repo);
             Vehicle vehicle = new Vehicle() {
                 VehicleId = "v121212121212"

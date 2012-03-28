@@ -11,6 +11,7 @@ using Viewer.Personal.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Viewer.Personal.Test
 {
@@ -65,15 +66,15 @@ namespace Viewer.Personal.Test
         [TestMethod()]
         public void ImportTest() {
             Repository repo = new Repository();
-            repo.Open(@"c:\GreenFleets\test\storage", null);
+            repo.Open(PersonalTest.StorageRoot, null);
             Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
             TrackImportHelper helper = new TrackImportHelper(repo);
 
             List<string> files = new List<string>();
-            files.Add(@"C:\GreenFleets\test\samples\all_2012_03_11_20_37_31");
-            files.Add(@"C:\GreenFleets\test\samples\all_2012_03_11_20_38_00");
-            files.Add(@"C:\GreenFleets\test\samples\event_2012_03_11_20_38_31");
-            
+            files.Add(Path.Combine(PersonalTest.SampleRoot, @"all_2012_03_11_20_37_31"));
+            files.Add(Path.Combine(PersonalTest.SampleRoot, @"all_2012_03_11_20_38_00"));
+            files.Add(Path.Combine(PersonalTest.SampleRoot, @"event_2012_03_11_20_38_31"));
+
             helper.Import(vehicle, files, true);
         }
 
@@ -82,8 +83,8 @@ namespace Viewer.Personal.Test
         ///</summary>
         [TestMethod()]
         public void ImportAllTest() {
-            string repoDir = @"c:\GreenFleets\test\storage";
-            string sourceDir = @"C:\GreenFleets\test\samples";
+            string repoDir = PersonalTest.StorageRoot;
+            string sourceDir = PersonalTest.SampleRoot;
             Repository repo = new Repository();
             repo.Open(repoDir, null);
             Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
