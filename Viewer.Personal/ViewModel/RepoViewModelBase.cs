@@ -31,6 +31,7 @@ namespace Viewer.Personal.ViewModel {
         #region fields
 
         private ListCollectionView m_vehicles;
+        private bool m_loading;
 
         #endregion // fields
 
@@ -41,10 +42,12 @@ namespace Viewer.Personal.ViewModel {
             m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
             m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
-            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
-                track.IsChecked = true;
-                ActiveTrack = track;
-            });
+            if (PersonalDomain.Domain.EventAggregator != null) {
+                PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
+                    track.IsChecked = true;
+                    ActiveTrack = track;
+                });
+            }
         }
 
         #endregion // constructors
@@ -91,6 +94,9 @@ namespace Viewer.Personal.ViewModel {
                 if (value != m_searchFrom) {
                     m_searchFrom = value;
                     RaisePropertyChanged(() => SearchFrom);
+                    if (!IsLoading) {
+                        SearchAll = false;
+                    }
                 }
             }
         }
@@ -105,6 +111,9 @@ namespace Viewer.Personal.ViewModel {
                 if (value != m_searchTo) {
                     m_searchTo = value;
                     RaisePropertyChanged(() => SearchTo);
+                    if (!IsLoading) {
+                        SearchAll = false;
+                    }
                 }
             }
         }
@@ -196,7 +205,24 @@ namespace Viewer.Personal.ViewModel {
         #endregion // properties
 
 
+        #region internal properties
+
+        protected bool IsLoading {
+            get { return m_loading; }
+        }
+
+        #endregion // internal properties
+
+
         #region internal methods
+
+        protected void BeginLoading() {
+            m_loading = true;
+        }
+
+        protected void EndLoading() {
+            m_loading = false;
+        }
 
         private void Vehicles_CurrentChanged(object sender, EventArgs e) {
             SelectedVehicle = Vehicles.CurrentItem as Vehicle;

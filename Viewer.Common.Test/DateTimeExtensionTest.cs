@@ -1,25 +1,35 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackImportHelperTest.cs
-// 2012.03.14, created by sohong
+// TrackGroupTest.cs
+// 2012.03.28, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
 // All Rights Reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-using Viewer.Personal.Model;
+using Viewer.Common.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.IO;
+using Viewer.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
-namespace Viewer.Personal.Test
+namespace Viewer.Common.Test
 {
+    /// <summary>
+    ///This is a test class for DateTimeExtensionTest and is intended
+    ///to contain all DateTimeExtensionTest Unit Tests
+    ///</summary>
     [TestClass()]
-    public class TrackImportHelperTest {
+    public class DateTimeExtensionTest {
+
 
         private TestContext testContextInstance;
 
+        /// <summary>
+        ///Gets or sets the test context which provides
+        ///information about and functionality for the current test run.
+        ///</summary>
         public TestContext TestContext {
             get {
                 return testContextInstance;
@@ -61,35 +71,14 @@ namespace Viewer.Personal.Test
 
 
         /// <summary>
-        ///A test for Import
+        ///A test for StripSeconds
         ///</summary>
         [TestMethod()]
-        public void ImportTest() {
-            Repository repo = new Repository();
-            repo.Open(PersonalTest.StorageRoot, null);
-            Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
-            TrackImportHelper helper = new TrackImportHelper(repo);
-
-            List<string> files = new List<string>();
-            files.Add(Path.Combine(PersonalTest.DeviceRoot, @"all_2012_03_11_20_37_31"));
-            files.Add(Path.Combine(PersonalTest.DeviceRoot, @"all_2012_03_11_20_38_00"));
-            files.Add(Path.Combine(PersonalTest.DeviceRoot, @"event_2012_03_11_20_38_31"));
-
-            helper.Import(vehicle, files, true);
-        }
-
-        /// <summary>
-        ///A test for ImportAll
-        ///</summary>
-        [TestMethod()]
-        public void ImportAllTest() {
-            string repoDir = PersonalTest.StorageRoot;
-            string sourceDir = PersonalTest.DeviceRoot;
-            Repository repo = new Repository();
-            repo.Open(repoDir, null);
-            Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
-            TrackImportHelper helper = new TrackImportHelper(repo);
-            helper.ImportAll(vehicle, sourceDir, true);
+        public void StripSecondsTest() {
+            DateTime d = new DateTime(2012, 3, 11, 11, 12, 13);
+            DateTime expected = new DateTime(2012, 3, 11, 11, 12, 0);
+            DateTime actual = DateTimeExtension.StripSeconds(d);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

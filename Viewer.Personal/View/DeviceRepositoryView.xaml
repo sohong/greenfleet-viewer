@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:tk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
              xmlns:gf="clr-namespace:Viewer.Common.View;assembly=Viewer.Common"
+             xmlns:ui="clr-namespace:Viewer.Common.UI;assembly=Viewer.Common"
              mc:Ignorable="d" 
              d:DesignHeight="378" d:DesignWidth="786">
     <Grid>
@@ -17,16 +18,17 @@
             <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding LoadCommand}">열기</Button>
             <Label Margin="4,0,0,0">검색 시간:</Label>
-            <tk:DateTimeUpDown Format="Custom" FormatString="HH:mm" Value="{Binding SearchFrom}"/>
+            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchFrom}"/>
             <Label>~</Label>
-            <tk:DateTimeUpDown Format="Custom" FormatString="HH:mm" Value="{Binding SearchTo}"/>
+            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchTo}"/>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding SearchAll}">전체</CheckBox>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding SearchCommand}">검색</Button>
-            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding SaveCommand}">저장</Button>
-            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AutoPlay}" ToolTip="트리나 맵에서 더블클릭으로 트랙이 선택되면 재생 시작">자동</CheckBox>
+            <Label Margin="8,0,0,0">재생:</Label>
+            <CheckBox VerticalAlignment="Center" Margin="0,0,0,0" IsChecked="{Binding AutoPlay}" ToolTip="트리나 맵에서 더블클릭으로 트랙이 선택되면 재생 시작">자동</CheckBox>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding LoopPlay}" ToolTip="재생 완료 후 처음부터 다시 재생">반복</CheckBox>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AllPlay}" ToolTip="선택된 트랙들을 순서대로 재생">연속</CheckBox>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ConfigDeviceCommand}">기기 설정</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding SaveCommand}">저장</Button>
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -38,42 +40,51 @@
                             ActivateGroup="TrackTreeView_ActivateGroup" ActivateTrack="TrackTreeView_ActivateTrack"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="4"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" MinHeight="60"/>
-                        <RowDefinition Height="4"/>
-                        <RowDefinition Height="240" MinHeight="20"/>
-                    </Grid.RowDefinitions>
-                    <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}"/>
-                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                    <Grid Grid.Row="2">
-                        <gf:AccelerationView Track="{Binding ActiveTrack}"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="4"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="4"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" MinHeight="60"/>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="240" MinHeight="20"/>
+                        </Grid.RowDefinitions>
+                        <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}"/>
+                        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                        <Grid Grid.Row="2">
+                            <gf:AccelerationView Track="{Binding ActiveTrack}"/>
+                        </Grid>
+                    </Grid>
+                    <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="6*" MinHeight="40"/>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="4*" MinHeight="20"/>
+                        </Grid.RowDefinitions>
+                        <TabControl TabStripPlacement="Bottom">
+                            <TabItem Header="Google">
+                                <gf:GoogleMapView  ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" TrackDoubleClicked="GoogleMapView_TrackDoubleClicked"/>
+                            </TabItem>
+                            <TabItem Header="Bing">
+                                <gf:BingMapView ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" PreviewMouseDoubleClick="BingMapView_PreviewMouseDoubleClick" />
+                            </TabItem>
+                        </TabControl>
+                        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                        <Grid Grid.Row="2" Background="Gray">
+                        </Grid>
                     </Grid>
                 </Grid>
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="6*" MinHeight="40"/>
-                        <RowDefinition Height="4"/>
-                        <RowDefinition Height="4*" MinHeight="20"/>
-                    </Grid.RowDefinitions>
-                    <TabControl TabStripPlacement="Bottom">
-                        <TabItem Header="Google">
-                            <gf:GoogleMapView  ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" TrackDoubleClicked="GoogleMapView_TrackDoubleClicked"/>
-                        </TabItem>
-                        <TabItem Header="Bing">
-                            <gf:BingMapView ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" PreviewMouseDoubleClick="BingMapView_PreviewMouseDoubleClick" />
-                        </TabItem>
-                    </TabControl>
-                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                    <Grid Grid.Row="2" Background="Gray">
-                    </Grid>
-                </Grid>
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                <ui:HelloBox Grid.Row="2"/>
             </Grid>
         </Grid>
     </Grid>

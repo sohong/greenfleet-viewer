@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionSerializerTest.cs" />
+    <Compile Include="DateTimeExtensionTest.cs" />
     <Compile Include="LocalTrackLoaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryTest.cs" />

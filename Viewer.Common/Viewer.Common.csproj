@@ -68,6 +68,7 @@
     <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeExtension.cs" />
     <Compile Include="Event\TrackActivatedEvent.cs" />
     <Compile Include="Event\TrackChangedEvent.cs" />
     <Compile Include="Model\TrackGroup.cs" />
@@ -94,6 +95,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="StringExtension.cs" />
+    <Compile Include="UI\HelloBox.cs" />
+    <Compile Include="UI\TimelineBar.cs" />
     <Compile Include="Util\DialogUtil.cs" />
     <Compile Include="Util\DriveUtil.cs" />
     <Compile Include="Util\FileUtil.cs" />
@@ -179,6 +182,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

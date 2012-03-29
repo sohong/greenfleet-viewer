@@ -17,6 +17,7 @@ using System.Windows.Data;
 using System.IO;
 using Viewer.Common.Model;
 using Viewer.Common.Loader;
+using System.ComponentModel;
 
 namespace Viewer.Personal.Model {
 
@@ -31,6 +32,8 @@ namespace Viewer.Personal.Model {
         private string m_rootPath;
         private ObservableCollection<Track> m_tracks;
         private LocalTrackLoader m_loader;
+        private DateTime m_startTime;
+        private DateTime m_endTime;
         
         #endregion // fields
 
@@ -71,6 +74,22 @@ namespace Viewer.Personal.Model {
             get { return m_tracks != null ? m_tracks.Count : 0; }
         }
 
+        /// <summary>
+        /// 포함된 트랙들 중 가장 먼저인 놈의 파일 표시 시간값.
+        /// 즉, Track.CreateDate.
+        /// event_2012_03_11_20_38_31.inc => 2012-03-11 20:38:31
+        /// </summary>
+        public DateTime StartTime {
+            get { return m_startTime; }
+        }
+
+        /// <summary>
+        /// 포함된 트랙들 중 가장 나중인 놈의 파일 표시 시간값.
+        /// </summary>
+        public DateTime EndTime {
+            get { return m_endTime; }
+        }
+
         #endregion // properties
 
 
@@ -78,6 +97,7 @@ namespace Viewer.Personal.Model {
 
         /// <summary>
         /// 입력 디바이스의 트랙 목록을 읽어들인다.
+        /// 시작/끝 일시를 계산한다.
         /// </summary>
         /// <param name="rootPath"></param>
         public void Open(Vehicle vehicle, string rootPath) {
@@ -98,7 +118,9 @@ namespace Viewer.Personal.Model {
         /// Track 컬렉션 원본에 대한 뷰를 생성한다.
         /// </summary>
         public ListCollectionView GetTracks() {
-            return new ListCollectionView(m_tracks);
+            ListCollectionView view = new ListCollectionView(m_tracks);
+            view.SortDescriptions.Add(new SortDescription("CreateDate", ListSortDirection.Ascending));
+            return view;
         }
 
         /// <summary>
@@ -132,6 +154,15 @@ namespace Viewer.Personal.Model {
             return null;
         }
 
+        /// <summary>
+        /// 모든 track을 check되지 않은 상태로 변경한다.
+        /// </summary>
+        public void ClearSelection() {
+            foreach (Track t in m_tracks) {
+                t.IsChecked = false;
+            }
+        }
+
         #endregion // methods
 
 
@@ -139,23 +170,21 @@ namespace Viewer.Personal.Model {
 
         private void LoadTracks() {
             string[] files = Directory.GetFiles(m_rootPath, "*.inc");
-            foreach (string file in files) {
-                Track track = m_loader.Load(file, false);
-                if (track != null) {
-                    m_tracks.Add(track);
-                }
+            if (files.Length > 0) {
+                m_startTime = DateTime.MaxValue;
+                m_endTime = DateTime.MinValue;
+                
+                foreach (string file in files) {
+                    Track track = m_loader.Load(file, false);
+                    if (track != null) {
+                        m_tracks.Add(track);
 
-                /*
-                string name = Path.GetFileNameWithoutExtension(file);
-                DateTime d = new DateTime();
-                if (Repository.ParseTrackFile(name, ref d)) {
-                    Track track = new Track();
-                    track.TrackType = name.StartsWith("event") ? TrackType.Event : TrackType.All;
-                    track.CreateDate = d;
-
-                    m_tracks.Add(track);
+                        if (track.CreateDate < m_startTime)
+                            m_startTime = track.CreateDate;
+                        if (track.CreateDate > m_startTime)
+                            m_endTime = track.CreateDate;
+                    }
                 }
-                 */
             }
         }
 

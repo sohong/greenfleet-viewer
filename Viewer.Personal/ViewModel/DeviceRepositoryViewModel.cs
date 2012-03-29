@@ -26,6 +26,7 @@ using Viewer.Personal.Event;
 using System.Collections.ObjectModel;
 using Viewer.Common.Service;
 using Viewer.Personal.View;
+using Viewer.Common;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -46,6 +47,7 @@ namespace Viewer.Personal.ViewModel {
         #region constructors
 
         public DeviceRepositoryViewModel() {
+            this.DriveManager = new DriveManager();
             m_repository = new DeviceRepository();
             m_selectedTracks = new ObservableCollection<Track>();
 
@@ -55,6 +57,7 @@ namespace Viewer.Personal.ViewModel {
             AutoPlay = true;
 
             LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
+            SearchCommand = new DelegateCommand(DoSearch, CanSearch);
             ConfigDeviceCommand = new DelegateCommand<object>(DoConfigDevice, CanConfigDevice);
         }
 
@@ -81,8 +84,17 @@ namespace Viewer.Personal.ViewModel {
 
         #region properties
 
+        public IDriveManager DriveManager {
+            get;
+            set;
+        }
+
         public DeviceRepository Repository {
             get { return m_repository; }
+        }
+
+        public ListCollectionView Tracks {
+            get { return m_tracks; }
         }
 
         public ObservableCollection<Track> SelectedTracks {
@@ -90,6 +102,11 @@ namespace Viewer.Personal.ViewModel {
         }
 
         public ICommand LoadCommand {
+            get;
+            private set;
+        }
+
+        public ICommand SearchCommand {
             get;
             private set;
         }
@@ -133,18 +150,41 @@ namespace Viewer.Personal.ViewModel {
             }
              */
 
-            DriveManager dm = new DriveManager();
-            string folder = dm.FindTrackDrive(PersonalDomain.Domain.Preferences.Testing);
+            string folder = DriveManager.FindTrackDrive(PersonalDomain.Domain.Preferences.Testing);
             if (folder != null) {
-                m_repository.Open(SelectedVehicle, folder);
-                m_tracks = m_repository.GetTracks();
-                this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
-                this.TrackGroup.Observer = this;
+                BeginLoading();
+                try {
+                    m_repository.Open(SelectedVehicle, folder);
+                    m_tracks = m_repository.GetTracks();
+                    this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
+                    this.TrackGroup.Observer = this;
+                    this.SearchFrom = m_repository.StartTime.StripSeconds();
+                    this.SearchTo = m_repository.EndTime.StripSeconds();
+                } finally {
+                    EndLoading();
+                }
             
             } else {
                 //PersonalDomain.Domain.EventAggregator.GetEvent<NoDriveEvent>().Publish(null);
                 // TODO 테스트 가능하도록 MessageUtil을 서비스 인터페이스로 구현해야 한다.
                 MessageUtil.Show("트랙 데이터 드라이브가 존재하지 않습니다.");
+            }
+        }
+
+        // Search command
+        private bool CanSearch() {
+            return true;
+        }
+
+        private void DoSearch() {
+            if (m_tracks != null) {
+                //Repository.ClearSelection(); // 기존 선택들을 굳이 해제시킬 필요는 없을것 같다.
+
+                m_tracks.Filter = (track) => {
+                    DateTime d = ((Track)track).CreateDate.StripSeconds();
+                    return d >= SearchFrom && d <= SearchTo;
+                };
+                this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
             }
         }
 

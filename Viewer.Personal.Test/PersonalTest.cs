@@ -40,7 +40,7 @@ namespace Viewer.Personal.Test {
             }
         }
 
-        public static string SampleRoot {
+        public static string DeviceRoot {
             get {
                 return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples");
             }

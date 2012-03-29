@@ -20,9 +20,9 @@ namespace Viewer.Personal.Model {
     /// <summary>
     /// 외부 입력 장치(SD 카드등) 관련...
     /// </summary>
-    public class DriveManager {
+    public class DriveManager : IDriveManager {
 
-        #region methods
+        #region IDriveManager
 
         /// <summary>
         /// (외부 입력 장치로 연결된)드라이브들 중 greenfleet 트랙 데이터를 포함했는 지
@@ -51,7 +51,7 @@ namespace Viewer.Personal.Model {
             return null;
         }
 
-        #endregion // methods
+        #endregion // IDriveManager
 
 
         #region internal methods

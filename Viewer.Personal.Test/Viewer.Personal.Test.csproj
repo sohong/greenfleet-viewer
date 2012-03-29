@@ -71,6 +71,8 @@
   <ItemGroup>
     <Compile Include="DeviceConfigTest.cs" />
     <Compile Include="DeviceRepositoryTest.cs" />
+    <Compile Include="DeviceRepositoryViewModelTest.cs" />
+    <Compile Include="Mocks\MockDriveManager.cs" />
     <Compile Include="PersonalDomainTest.cs" />
     <Compile Include="PersonalTest.cs" />
     <Compile Include="PreferencesTest.cs" />
