@@ -16,6 +16,7 @@ C:\Users\Administrator\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\b
 C:\Users\Administrator\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Microsoft.Practices.Prism.MefExtensions.dll
 C:\Users\Administrator\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\ffmpeg.exe
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\map.html
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\log4net.xml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.exe.config
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.exe
@@ -48,4 +49,3 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\Debug\Viewer.exe
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\Debug\Viewer.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\map.html

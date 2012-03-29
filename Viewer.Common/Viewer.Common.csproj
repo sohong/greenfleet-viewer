@@ -96,7 +96,11 @@
     </Compile>
     <Compile Include="StringExtension.cs" />
     <Compile Include="UI\HelloBox.cs" />
+    <Compile Include="UI\Timeline\RangeMarkerVisual.cs" />
     <Compile Include="UI\TimelineBar.cs" />
+    <Compile Include="UI\Timeline\TimelineElement.cs" />
+    <Compile Include="UI\Timeline\TimeRangeVisual.cs" />
+    <Compile Include="UI\Timeline\TrackerVisual.cs" />
     <Compile Include="Util\DialogUtil.cs" />
     <Compile Include="Util\DriveUtil.cs" />
     <Compile Include="Util\FileUtil.cs" />

@@ -14,6 +14,7 @@ C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.C
 C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\VideoView.baml
 C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\GoogleMapView.g.cs
 C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\VideoView.g.cs
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\map.html
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\Viewer.Common.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\Viewer.Common.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\GFLib.dll
@@ -50,4 +51,3 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\o
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\GenerateResource.write.1.tlog
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\bin\Debug\map.html

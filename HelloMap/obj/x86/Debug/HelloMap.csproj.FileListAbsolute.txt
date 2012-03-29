@@ -13,6 +13,8 @@ C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\HelloMap
 C:\Users\Administrator\documents\visual studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap.pdb
 C:\Users\Administrator\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
 C:\Users\Administrator\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\GoogleMaps.swf
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\map.html
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\HelloMap.exe.config
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\HelloMap.exe
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\HelloMap.pdb
@@ -26,6 +28,7 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x8
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\MainWindow.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\MainWindow.g.cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\App.g.cs
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap_Content.g.cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap_MarkupCompile.cache
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap.g.resources
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap.Properties.Resources.resources
@@ -33,6 +36,3 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x8
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap.exe
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\obj\x86\Debug\HelloMap_Content.g.cs
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\GoogleMaps.swf
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\HelloMap\bin\Debug\map.html
