@@ -82,6 +82,7 @@ namespace Viewer.Common.UI.Timeline {
             }
         }
         private double m_height;
+
         
         #endregion // properties
 

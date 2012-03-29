@@ -12,9 +12,74 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Viewer.Common.UI.Timeline {
     
-    public class RangeMarkerVisual {
+    public class RangeMarkerVisual : TimelineElement {
+
+        #region constructor
+
+        public RangeMarkerVisual(FrameworkElement container) 
+            : base(container) {
+        }
+
+        #endregion // constructor
+
+        
+        #region properties
+
+        /// <summary>
+        /// Background fill
+        /// </summary>
+        public Brush Fill {
+            get { return m_fill; }
+            set {
+                if (value != m_fill) {
+                    m_fill = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Brush m_fill;
+
+        /// <summary>
+        /// Border
+        /// </summary>
+        public Pen Border {
+            get { return m_border; }
+            set {
+                if (value != m_border) {
+                    m_border = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Pen m_border;
+
+        #endregion // properties
+
+
+        #region overriden methods
+
+        protected override void DoDraw(DrawingContext dc) {
+            PathGeometry geom = new PathGeometry();
+            PathFigure figure = new PathFigure();
+            geom.Figures.Add(figure);
+
+            figure.StartPoint = new Point(0, 0);
+            figure.Segments.Add(new LineSegment() {
+                Point = new Point(Width, Height / 2)
+            });
+            figure.Segments.Add(new LineSegment() {
+                Point = new Point(0, Height)
+            });
+
+            dc.DrawGeometry(Fill, Border, geom);
+        }
+
+        #endregion // overriden methods
     }
 }
