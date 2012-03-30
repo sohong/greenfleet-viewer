@@ -78,7 +78,7 @@ namespace Viewer.Personal.Test
                 ClientApKey = "ddd"
             };
 
-            DeviceConfig target = config.Clone();
+            DeviceConfig target = (DeviceConfig)config.Clone();
             Assert.IsTrue(config.EqualsTo(target));
         }
     }

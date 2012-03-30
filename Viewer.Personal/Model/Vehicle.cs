@@ -77,15 +77,6 @@ namespace Viewer.Personal.Model {
         #endregion // properties
 
 
-        #region methods
-
-        public Vehicle Clone() {
-            return (Vehicle)base.Clone();
-        }
-
-        #endregion // methods
-
-
         #region overriden methods
 
         public override string ToString() {

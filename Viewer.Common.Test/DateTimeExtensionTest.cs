@@ -11,8 +11,6 @@ using Viewer.Common.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Viewer.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Viewer.Common.Test
 {

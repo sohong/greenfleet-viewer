@@ -33,6 +33,7 @@ namespace Viewer.Common.UI.Timeline {
 
         public TimelineElement(FrameworkElement container) {
             m_container = container;
+            
         }
 
         #endregion // constructor

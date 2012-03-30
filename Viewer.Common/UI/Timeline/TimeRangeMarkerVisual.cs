@@ -18,11 +18,11 @@ using System.Windows.Shapes;
 
 namespace Viewer.Common.UI.Timeline {
     
-    public class RangeMarkerVisual : TimelineElement {
+    public class TimeRangeMarkerVisual : TimelineElement {
 
         #region constructor
 
-        public RangeMarkerVisual(FrameworkElement container) 
+        public TimeRangeMarkerVisual(FrameworkElement container) 
             : base(container) {
         }
 

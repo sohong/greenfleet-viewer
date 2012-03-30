@@ -25,7 +25,7 @@ namespace Viewer.Personal.ViewModel {
         #region constructor
 
         public DeviceConfigViewModel() {
-            Config = PersonalDomain.Domain.DeviceConfig.Clone();
+            Config = (DeviceConfig)PersonalDomain.Domain.DeviceConfig.Clone();
             IsCancelable = true;
         }
 

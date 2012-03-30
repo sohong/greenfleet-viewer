@@ -84,7 +84,7 @@
                     </Grid>
                 </Grid>
                 <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                <ui:HelloBox Grid.Row="2"/>
+                <ui:TimelineBar Grid.Row="2" Tracks="{Binding SelectedTracks}"/>
             </Grid>
         </Grid>
     </Grid>

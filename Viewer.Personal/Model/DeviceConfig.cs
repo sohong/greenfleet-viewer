@@ -145,14 +145,5 @@ namespace Viewer.Personal.Model {
         private string m_clientKey;
 
         #endregion // properties
-
-
-        #region methods
-
-        public DeviceConfig Clone() {
-            return (DeviceConfig)base.Clone();
-        }
-
-        #endregion // methods
     }
 }

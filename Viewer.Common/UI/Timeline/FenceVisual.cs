@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackerVisual.cs
-// 2012.03.29, created by sohong
+// FenceVisual.cs
+// 2012.03.30, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -18,13 +18,13 @@ using System.Windows.Media;
 namespace Viewer.Common.UI.Timeline {
 
     /// <summary>
-    /// Timeline tracker.
+    /// TimelineBar 배경.
     /// </summary>
-    public class TrackerVisual : TimelineElement {
+    public class FenceVisual : TimelineElement {
 
         #region constructor
 
-        public TrackerVisual(FrameworkElement container)
+        public FenceVisual(FrameworkElement container)
             : base(container) {
         }
 
@@ -47,20 +47,6 @@ namespace Viewer.Common.UI.Timeline {
         }
         private Brush m_fill;
 
-        /// <summary>
-        /// Border
-        /// </summary>
-        public Pen Border {
-            get { return m_border; }
-            set {
-                if (value != m_border) {
-                    m_border = value;
-                    Invalidate();
-                }
-            }
-        }
-        private Pen m_border;
-
         #endregion // properties
 
 
@@ -68,7 +54,7 @@ namespace Viewer.Common.UI.Timeline {
 
         protected override void DoDraw(DrawingContext dc) {
             Rect r = new Rect(0, 0, Width, Height);
-            dc.DrawRectangle(Fill, Border, r);
+            dc.DrawRectangle(Fill, null, r);
         }
 
         #endregion // overriden methods
