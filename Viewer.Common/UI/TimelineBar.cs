@@ -17,6 +17,7 @@ using System.Windows.Media;
 using Viewer.Common.Model;
 using Viewer.Common.UI.Timeline;
 using System.Collections.Specialized;
+using System.Windows.Threading;
 
 namespace Viewer.Common.UI {
     
@@ -78,7 +79,7 @@ namespace Viewer.Common.UI {
         /// </summary>
         public static readonly DependencyProperty RangeMarkerFillProperty = DependencyProperty.Register(
             "RangeMarkerFill", typeof(Brush), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(Brushes.Yellow, OnRangeMarkerFillChanged));
+            new FrameworkPropertyMetadata(Brushes.Black, OnRangeMarkerFillChanged));
         private static void OnRangeMarkerFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
             foreach (TimeRangeMarkerVisual marker in ((TimelineBar)d).m_markerLayer.Children) {
                 marker.Fill = (Brush)a.NewValue;
@@ -183,7 +184,7 @@ namespace Viewer.Common.UI {
 
         #region fields
 
-        private IList<TimelineElement> m_elements;
+        private VisualCollection m_elements;
         private TimelineElement m_rangeLayer;
         private TimelineElement m_markerLayer;
         private TimelineElement m_tickLayer;
@@ -196,7 +197,7 @@ namespace Viewer.Common.UI {
         #region constructors
 
         public TimelineBar() {
-            m_elements = new List<TimelineElement>();
+            m_elements = new VisualCollection(this);
 
             AddElement(m_fence = new FenceVisual(this) {
                 Fill = FenceFill
@@ -260,6 +261,14 @@ namespace Viewer.Common.UI {
         public Pen TrackerBorder {
             get { return (Pen)GetValue(TrackerBorderProperty); }
             set { SetValue(TrackerBorderProperty, value); }
+        }
+
+        /// <summary>
+        /// RangeMarker fill
+        /// </summary>
+        public Brush RangeMarkerFill {
+            get { return (Brush)GetValue(RangeMarkerFillProperty); }
+            set { SetValue(RangeMarkerFillProperty, value); }
         }
 
         /// <summary>
@@ -363,10 +372,22 @@ namespace Viewer.Common.UI {
 
         #region internal methods
 
+        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            RefrechElements();
+        }
+
         private void RegisterTracksEvents(object source) {
+            INotifyCollectionChanged coll = source as INotifyCollectionChanged;
+            if (coll != null) {
+                coll.CollectionChanged += new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
+            }
         }
 
         private void UnregisterTracksEvents(object source) {
+            INotifyCollectionChanged coll = source as INotifyCollectionChanged;
+            if (coll != null) {
+                coll.CollectionChanged -= new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
+            }
         }
 
         private void AddElement(TimelineElement element) {
@@ -386,11 +407,16 @@ namespace Viewer.Common.UI {
         /// </summary>
         private void RefrechElements() {
             m_markerLayer.Children.Clear();
-            for (int i = 0; i < 3; i++) {
-                TimeRangeMarkerVisual v = new TimeRangeMarkerVisual(this);
-                m_markerLayer.Children.Add(v);
+            if (Tracks != null) {
+                foreach (Track t in Tracks) {
+                    TimeRangeMarkerVisual marker = new TimeRangeMarkerVisual(this);
+                    m_markerLayer.Children.Add(marker);
+                    marker.Width = 11;
+                    marker.Height = 9;
+                    marker.Fill = RangeMarkerFill;
+                    marker.Draw();
+                }
             }
-
             InvalidateArrange();
         }
 
@@ -398,6 +424,8 @@ namespace Viewer.Common.UI {
         /// Element들을 배치한다.
         /// </summary>
         protected void LayoutChldren(double width, double height) {
+            if (width * height == 0) return;
+
             // fence
             m_fence.Offset = new Vector(0, 5);
             m_fence.Width = width;
@@ -405,15 +433,14 @@ namespace Viewer.Common.UI {
             m_fence.Draw();
 
             // tracker
-            m_tracker.Offset = new Vector(100, 0);
+            m_tracker.Offset = new Vector(10, 0);
             m_tracker.Width = 5;
             m_tracker.Height = height;
             m_tracker.Draw();
 
             // range markers
             foreach (TimeRangeMarkerVisual marker in m_markerLayer.Children) {
-                marker.Width = 10;
-                marker.Height = 7;
+                marker.Offset = new Vector(50, 10);
                 marker.Draw();
             }
         }

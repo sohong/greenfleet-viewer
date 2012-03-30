@@ -33,7 +33,7 @@ namespace Viewer.Common.UI.Timeline {
 
         public TimelineElement(FrameworkElement container) {
             m_container = container;
-            
+            Draw();
         }
 
         #endregion // constructor
@@ -68,7 +68,7 @@ namespace Viewer.Common.UI.Timeline {
                 }
             }
         }
-        private double m_width;
+        private double m_width = 0;
 
         /// <summary>
         /// Height
@@ -82,7 +82,7 @@ namespace Viewer.Common.UI.Timeline {
                 }
             }
         }
-        private double m_height;
+        private double m_height = 0;
 
         
         #endregion // properties
