@@ -267,8 +267,8 @@ namespace Viewer.Common.View {
         }
 
         private void AddPin(Track track) {
-            if (track.Points.Count > 0) {
-                TrackPoint p = track.Points[0];
+            if (track.PointCount > 0) {
+                TrackPoint p = track[0];
                 browser.InvokeScript("addMarker", track.Id, p.Lattitude, p.Longitude);
             }
         }

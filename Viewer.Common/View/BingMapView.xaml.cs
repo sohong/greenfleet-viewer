@@ -240,8 +240,8 @@ namespace Viewer.Common.View {
             }
              */
             foreach (Track track in m_tracks) {
-                if (track.Points.Count > 0) {
-                    TrackPoint p = track.Points[0];
+                if (track.PointCount > 0) {
+                    TrackPoint p = track[0];
                     Pushpin pin = new Pushpin();
                     pin.Location = new Location(p.Lattitude, p.Longitude);
                     pinLayer.Children.Add(pin);

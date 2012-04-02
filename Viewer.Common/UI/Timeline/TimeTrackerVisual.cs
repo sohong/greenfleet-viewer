@@ -61,6 +61,20 @@ namespace Viewer.Common.UI.Timeline {
         }
         private Pen m_border;
 
+        /// <summary>
+        /// Hover fill
+        /// </summary>
+        public Brush HoverFill {
+            get { return m_hoverFill; }
+            set {
+                if (value != m_hoverFill) {
+                    m_hoverFill = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Brush m_hoverFill;
+
         #endregion // properties
 
 
@@ -68,7 +82,7 @@ namespace Viewer.Common.UI.Timeline {
 
         protected override void DoDraw(DrawingContext dc) {
             Rect r = new Rect(0, 0, Width, Height);
-            dc.DrawRectangle(Fill, Border, r);
+            dc.DrawRectangle(IsHover && (HoverFill != null) ? HoverFill : Fill, Border, r);
         }
 
         #endregion // overriden methods

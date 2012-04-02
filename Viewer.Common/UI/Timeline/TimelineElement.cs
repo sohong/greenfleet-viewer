@@ -84,6 +84,24 @@ namespace Viewer.Common.UI.Timeline {
         }
         private double m_height = 0;
 
+        public bool IsHover {
+            get { return m_isHover; }
+            set {
+                if (value != m_isHover) {
+                    m_isHover = value;
+                    Invalidate();
+                }
+            }
+        }
+        private bool m_isHover;
+
+        /// <summary>
+        /// User data
+        /// </summary>
+        public object Data {
+            get;
+            set;
+        }
         
         #endregion // properties
 
@@ -92,6 +110,43 @@ namespace Viewer.Common.UI.Timeline {
 
         protected virtual void DoDraw(DrawingContext dc) {
             dc.DrawRectangle(Brushes.Yellow, new Pen(Brushes.Black, 1), new Rect(0, 0, Width, Height));
+        }
+
+        internal void MouseDown(Point p) {
+            DoMouseDown(p);
+        }
+
+        internal void MouseMove(Point p, bool pushed) {
+            DoMouseMove(p, pushed);
+        }
+
+        internal void MouseUp(Point p) {
+            DoMouseUp(p);
+        }
+
+        internal void MouseEnter() {
+            IsHover = true;
+            DoMouseEnter();
+        }
+
+        internal void MouseLeave() {
+            IsHover = false;
+            DoMouseLeave();
+        }
+
+        protected virtual void DoMouseDown(Point p) {
+        }
+
+        protected virtual void DoMouseMove(Point p, bool pushed) {
+        }
+
+        protected virtual void DoMouseUp(Point p) {
+        }
+
+        protected virtual void DoMouseEnter() {
+        }
+
+        protected virtual void DoMouseLeave() {
         }
 
         #endregion // internal methods

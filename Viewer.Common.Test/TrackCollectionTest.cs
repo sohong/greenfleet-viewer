@@ -1,23 +1,24 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackLoaderBaseTest.cs
-// 2012.03.14, created by sohong
+// TrackCollectionTest.cs
+// 2012.04.02, created by sohong
 //
 // =============================================================================
-// Copyright (C) 2012 PalmVision.
+// Copyright (C) 2012 PalmVision
 // All Rights Reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-using Viewer.Common.Loader;
+using Viewer.Common.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Viewer.Common.Model;
-using System.IO;
 
 namespace Viewer.Common.Test
 {
+    /// <summary>
+    ///This is a test class for TrackCollectionTest and is intended
+    ///to contain all TrackCollectionTest Unit Tests
+    ///</summary>
     [TestClass()]
-    public class TrackLoaderBaseTest {
-
+    public class TrackCollectionTest {
 
         private TestContext testContextInstance;
 
@@ -66,22 +67,22 @@ namespace Viewer.Common.Test
 
 
         /// <summary>
-        ///A test for LoadPoints
+        ///A test for Length
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("Viewer.Common.dll")]
-        public void LoadPointsTest() {
-            TrackLoaderBase_Accessor target = new TrackLoaderBase_Accessor();
-            Track track = new Track();
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            StreamReader reader = new StreamReader(Path.Combine(path, @"sample\track_log.inc"));
-            target.LoadPoints(track, reader);
-            Assert.AreEqual(track.PointCount, 26);
+        public void LengthTest() {
+            TrackCollection target = new TrackCollection();
+            Track track = new Track() { StartTime = new DateTime(2012, 3, 1, 0, 0, 0) };
+            target.Add(track);
+            
+            long actual = target.Length;
+            Assert.AreEqual(1, actual);
 
-            // 시간 순으로 정렬되어 있는가?
-            for (int i = 1; i < track.PointCount; i++) {
-                Assert.IsTrue(track[i].PointTime >= track[i - 1].PointTime);
-            }
+            track = new Track() { StartTime = new DateTime(2012, 3, 2, 3, 1, 0) };
+            target.Add(track);
+
+            actual = target.Length;
+            Assert.AreEqual(24 * 60 + 3 * 60 + 1 + 1, actual);
         }
     }
 }

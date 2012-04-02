@@ -58,7 +58,7 @@ namespace Viewer.Common.Loader {
                         p.AccelerationY = Convert.ToDouble(items[5]);
                         p.AccelerationZ = Convert.ToDouble(items[6]);
 
-                        track.Points.Add(p);
+                        track.AddPoint(p);
                     }
                 }
             }

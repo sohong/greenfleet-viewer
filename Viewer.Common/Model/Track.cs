@@ -31,7 +31,7 @@ namespace Viewer.Common.Model {
 
         #region fields
 
-        private ObservableCollection<TrackPoint> m_points;
+        private IList<TrackPoint> m_points;
         private string m_id;
         
         #endregion // fields
@@ -40,7 +40,7 @@ namespace Viewer.Common.Model {
         #region constructors
 
         public Track() {
-            m_points = new ObservableCollection<TrackPoint>();
+            m_points = new List<TrackPoint>();
             m_id = Guid.NewGuid().ToString();
         }
 
@@ -171,8 +171,16 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// Track points
         /// </summary>
-        public ObservableCollection<TrackPoint> Points {
+        public IEnumerable<TrackPoint> Points {
             get { return m_points; }
+        }
+
+        public int PointCount {
+            get { return m_points.Count; }
+        }
+
+        public TrackPoint this[int index] {
+            get { return m_points[index]; }
         }
 
         /// <summary>
@@ -191,6 +199,23 @@ namespace Viewer.Common.Model {
         private bool m_checked;
 
         #endregion // properties
+
+
+        #region methods
+
+        public void AddPoint(TrackPoint p) {
+            if (p != null && !m_points.Contains(p)) {
+                m_points.Add(p);
+
+                if (m_points.Count == 1) {
+                    StartTime = EndTime = m_points[0].PointTime;
+                } else {
+                    EndTime = m_points[PointCount - 1].PointTime;
+                }
+            }
+        }
+
+        #endregion // methods
 
 
         #region overriden methods

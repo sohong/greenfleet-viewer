@@ -75,6 +75,7 @@
     <Compile Include="LocalTrackLoaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryTest.cs" />
+    <Compile Include="TrackCollectionTest.cs" />
     <Compile Include="TrackGroupTest.cs" />
     <Compile Include="TrackLoaderBaseTest.cs" />
     <Compile Include="VideoUtilTest.cs" />

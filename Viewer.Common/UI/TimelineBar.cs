@@ -18,6 +18,7 @@ using Viewer.Common.Model;
 using Viewer.Common.UI.Timeline;
 using System.Collections.Specialized;
 using System.Windows.Threading;
+using System.Windows.Input;
 
 namespace Viewer.Common.UI {
     
@@ -26,7 +27,7 @@ namespace Viewer.Common.UI {
         #region dependency properties
 
         public static readonly DependencyProperty TracksProperty = DependencyProperty.Register(
-            "Tracks", typeof(IEnumerable<Track>), typeof(TimelineBar),
+            "Tracks", typeof(TrackCollection), typeof(TimelineBar),
             new FrameworkPropertyMetadata(null, OnTracksChanged));
         private static void OnTracksChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
             ((TimelineBar)d).UnregisterTracksEvents(a.OldValue);
@@ -190,6 +191,8 @@ namespace Viewer.Common.UI {
         private TimelineElement m_tickLayer;
         private FenceVisual m_fence;
         private TimeTrackerVisual m_tracker;
+
+        private TimelineElement m_hoverElement;
         
         #endregion // fields
 
@@ -226,8 +229,8 @@ namespace Viewer.Common.UI {
 
         #region properties
 
-        public IEnumerable<Track> Tracks {
-            get { return (IEnumerable<Track>)GetValue(TracksProperty); }
+        public TrackCollection Tracks {
+            get { return (TrackCollection)GetValue(TracksProperty); }
             set { SetValue(TracksProperty, value); }
         }
 
@@ -362,9 +365,33 @@ namespace Viewer.Common.UI {
 
         protected override Size ArrangeOverride(Size finalSize) {
             Size sz = base.ArrangeOverride(finalSize);
-            LayoutChldren(sz.Width, sz.Height);
+            LayoutElements(sz.Width, sz.Height);
 
             return sz;
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e) {
+            base.OnMouseDown(e);
+            TimelineElement element = GetHitTest(e.GetPosition(this));
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e) {
+            base.OnMouseMove(e);
+
+            Point p = e.GetPosition(this);
+            TimelineElement element = GetHitTest(p);
+            if (element != null) {
+                element.MouseMove(p, e.LeftButton == MouseButtonState.Pressed);
+            }
+            if (element != m_hoverElement) {
+                if (m_hoverElement != null) {
+                    m_hoverElement.MouseLeave();
+                }
+                m_hoverElement = element;
+                if (m_hoverElement != null) {
+                    m_hoverElement.MouseEnter();
+                }
+            }
         }
 
         #endregion // overriden methods
@@ -411,6 +438,7 @@ namespace Viewer.Common.UI {
                 foreach (Track t in Tracks) {
                     TimeRangeMarkerVisual marker = new TimeRangeMarkerVisual(this);
                     m_markerLayer.Children.Add(marker);
+                    marker.Data = t;
                     marker.Width = 11;
                     marker.Height = 9;
                     marker.Fill = RangeMarkerFill;
@@ -423,7 +451,7 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// Element들을 배치한다.
         /// </summary>
-        protected void LayoutChldren(double width, double height) {
+        protected void LayoutElements(double width, double height) {
             if (width * height == 0) return;
 
             // fence
@@ -440,9 +468,18 @@ namespace Viewer.Common.UI {
 
             // range markers
             foreach (TimeRangeMarkerVisual marker in m_markerLayer.Children) {
-                marker.Offset = new Vector(50, 10);
+                double x = width * Tracks.GetPosition((Track)marker.Data) / Tracks.Length;
+                marker.Offset = new Vector(x, 10);
                 marker.Draw();
             }
+        }
+
+        private TimelineElement GetHitTest(Point p) {
+            HitTestResult hr = VisualTreeHelper.HitTest(this, p);
+            if (hr != null) {
+                return hr.VisualHit as TimelineElement;
+            }
+            return null;
         }
 
         #endregion // internal methods

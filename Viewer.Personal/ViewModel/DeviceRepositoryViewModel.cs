@@ -39,7 +39,7 @@ namespace Viewer.Personal.ViewModel {
 
         private DeviceRepository m_repository;
         private ListCollectionView m_tracks;
-        private ObservableCollection<Track> m_selectedTracks;
+        private TrackCollection m_selectedTracks;
 
         #endregion // fields
 
@@ -49,7 +49,7 @@ namespace Viewer.Personal.ViewModel {
         public DeviceRepositoryViewModel() {
             this.DriveManager = new DriveManager();
             m_repository = new DeviceRepository();
-            m_selectedTracks = new ObservableCollection<Track>();
+            m_selectedTracks = new TrackCollection();
 
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
@@ -97,7 +97,7 @@ namespace Viewer.Personal.ViewModel {
             get { return m_tracks; }
         }
 
-        public ObservableCollection<Track> SelectedTracks {
+        public TrackCollection SelectedTracks {
             get { return m_selectedTracks; }
         }
 
