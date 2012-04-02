@@ -73,6 +73,7 @@
     <Compile Include="Event\TrackChangedEvent.cs" />
     <Compile Include="Model\TrackCollection.cs" />
     <Compile Include="Model\TrackGroup.cs" />
+    <Compile Include="Model\TrackRange.cs" />
     <Compile Include="NotificationObjectEx.cs" />
     <Compile Include="PropertyInfoExtension.cs" />
     <Compile Include="Service\DialogService.cs" />

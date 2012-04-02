@@ -84,6 +84,20 @@ namespace Viewer.Common.UI.Timeline {
         }
         private double m_height = 0;
 
+        /// <summary>
+        /// Background fill
+        /// </summary>
+        public Brush Fill {
+            get { return m_fill; }
+            set {
+                if (value != m_fill) {
+                    m_fill = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Brush m_fill;
+
         public bool IsHover {
             get { return m_isHover; }
             set {
@@ -94,6 +108,20 @@ namespace Viewer.Common.UI.Timeline {
             }
         }
         private bool m_isHover;
+
+        /// <summary>
+        /// Hover fill
+        /// </summary>
+        public Brush HoverFill {
+            get { return m_hoverFill; }
+            set {
+                if (value != m_hoverFill) {
+                    m_hoverFill = value;
+                    Invalidate();
+                }
+            }
+        }
+        private Brush m_hoverFill;
 
         /// <summary>
         /// User data
@@ -107,6 +135,10 @@ namespace Viewer.Common.UI.Timeline {
 
 
         #region internal methods
+
+        protected Brush GetFill() {
+            return IsHover && (HoverFill != null) ? HoverFill : Fill;
+        }
 
         protected virtual void DoDraw(DrawingContext dc) {
             dc.DrawRectangle(Brushes.Yellow, new Pen(Brushes.Black, 1), new Rect(0, 0, Width, Height));

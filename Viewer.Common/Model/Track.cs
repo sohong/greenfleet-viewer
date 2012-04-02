@@ -20,7 +20,8 @@ namespace Viewer.Common.Model {
 
     public enum TrackType {
         All,    // 상시
-        Event   // 이벤트
+        Event,  // 이벤트
+        Dummy   // 가짜
     };
 
     /// <summary>

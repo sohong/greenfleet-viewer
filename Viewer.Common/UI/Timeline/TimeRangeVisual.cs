@@ -34,20 +34,6 @@ namespace Viewer.Common.UI.Timeline {
         #region properties
 
         /// <summary>
-        /// Background fill
-        /// </summary>
-        public Brush Fill {
-            get { return m_fill; }
-            set {
-                if (value != m_fill) {
-                    m_fill = value;
-                    Invalidate();
-                }
-            }
-        }
-        private Brush m_fill;
-
-        /// <summary>
         /// Border
         /// </summary>
         public Pen Border {

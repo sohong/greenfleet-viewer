@@ -36,6 +36,15 @@ namespace Viewer.Common.UI {
         }
 
         /// <summary>
+        /// HoverFill
+        /// </summary>
+        public static readonly DependencyProperty HoverFillProperty = DependencyProperty.Register(
+            "HoverFill", typeof(Brush), typeof(TimelineBar),
+            new FrameworkPropertyMetadata(Brushes.White, OnHoverFillChanged));
+        private static void OnHoverFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        }
+
+        /// <summary>
         /// FenceHeight
         /// </summary>
         public static readonly DependencyProperty FenceHeightProperty = DependencyProperty.Register(
@@ -203,13 +212,14 @@ namespace Viewer.Common.UI {
             m_elements = new VisualCollection(this);
 
             AddElement(m_fence = new FenceVisual(this) {
-                Fill = FenceFill
+                Fill = FenceFill,
             });
             AddElement(m_rangeLayer = new TimelineElement(this));
             AddElement(m_markerLayer = new TimelineElement(this));
             AddElement(m_tracker = new TimeTrackerVisual(this) {
                 Fill = TrackerFill,
-                Border = TrackerBorder
+                Border = TrackerBorder,
+                HoverFill = HoverFill
             });
             AddElement(m_tickLayer = new TimelineElement(this));
         }
@@ -228,6 +238,15 @@ namespace Viewer.Common.UI {
 
 
         #region properties
+
+        /// <summary>
+        /// Element들이 hovered 상태일 때 fill.
+        /// </summary>
+        public Brush HoverFill {
+            get { return (Brush)GetValue(HoverFillProperty); }
+            set { SetValue(HoverFillProperty, value); }
+        }
+
 
         public TrackCollection Tracks {
             get { return (TrackCollection)GetValue(TracksProperty); }
@@ -470,6 +489,7 @@ namespace Viewer.Common.UI {
             foreach (TimeRangeMarkerVisual marker in m_markerLayer.Children) {
                 double x = width * Tracks.GetPosition((Track)marker.Data) / Tracks.Length;
                 marker.Offset = new Vector(x, 10);
+                marker.HoverFill = this.HoverFill;
                 marker.Draw();
             }
         }

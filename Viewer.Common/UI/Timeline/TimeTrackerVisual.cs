@@ -34,20 +34,6 @@ namespace Viewer.Common.UI.Timeline {
         #region properties
 
         /// <summary>
-        /// Background fill
-        /// </summary>
-        public Brush Fill {
-            get { return m_fill; }
-            set {
-                if (value != m_fill) {
-                    m_fill = value;
-                    Invalidate();
-                }
-            }
-        }
-        private Brush m_fill;
-
-        /// <summary>
         /// Border
         /// </summary>
         public Pen Border {
@@ -61,20 +47,6 @@ namespace Viewer.Common.UI.Timeline {
         }
         private Pen m_border;
 
-        /// <summary>
-        /// Hover fill
-        /// </summary>
-        public Brush HoverFill {
-            get { return m_hoverFill; }
-            set {
-                if (value != m_hoverFill) {
-                    m_hoverFill = value;
-                    Invalidate();
-                }
-            }
-        }
-        private Brush m_hoverFill;
-
         #endregion // properties
 
 
@@ -82,7 +54,7 @@ namespace Viewer.Common.UI.Timeline {
 
         protected override void DoDraw(DrawingContext dc) {
             Rect r = new Rect(0, 0, Width, Height);
-            dc.DrawRectangle(IsHover && (HoverFill != null) ? HoverFill : Fill, Border, r);
+            dc.DrawRectangle(GetFill(), Border, r);
         }
 
         #endregion // overriden methods
