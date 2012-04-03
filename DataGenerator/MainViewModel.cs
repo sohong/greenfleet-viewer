@@ -301,7 +301,7 @@ namespace DataGenerator {
                         CreateFile(t);
                         Current++;
                         t = t.AddMinutes(1);
-                        Thread.Sleep(20);
+                        Thread.Sleep(10);
                     }));
                     worker.ReportProgress(Current);
                 }
@@ -315,7 +315,7 @@ namespace DataGenerator {
         }
 
         private void CreateFile(DateTime t) {
-            string filename = t.ToString("yyyy_MM_dd_hh_mm_ss");
+            string filename = t.ToString("yyyy_MM_dd_HH_mm_ss");
             filename = "all_" + filename;
             CreateIncFile(t, Path.Combine(SelectedFolder, filename + ".inc"));
             CreateLogFile(t, Path.Combine(SelectedFolder, filename + ".log"));
@@ -324,7 +324,33 @@ namespace DataGenerator {
         }
 
         private void CreateIncFile(DateTime t, string filePath) {
-            
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("datetime,lattitude,longitude,velocity,accelate_x,accelate_y,accelate_z");
+
+            Random rand = new Random();
+
+            for (int i = 0; i < 60; i++) {
+                t = t.AddSeconds(1);
+                string s = t.ToString("yyyy-MM-dd hh:mm:ss,");
+                double v = StartLattitude + (EndLattitude - StartLattitude) * i / 60;
+                s += v.ToString("00.000000") + ",";
+                v = StartLongitude + (EndLongitude - StartLongitude) * i / 60;
+                s += v.ToString("000.000000") + ",";
+                int z = rand.Next(LowVelocity, HighVelocity);
+                s += z + ",";
+                z = rand.Next(LowAccelate, HighAccelate);
+                s += z + ",";
+                z = rand.Next(LowAccelate, HighAccelate);
+                s += z + ",";
+                z = rand.Next(LowAccelate, HighAccelate);
+                s += z + "";
+
+
+                sb.AppendLine(s);
+            }
+
+            File.WriteAllText(filePath, sb.ToString());
         }
 
         private void CreateLogFile(DateTime t, string filePath) {
