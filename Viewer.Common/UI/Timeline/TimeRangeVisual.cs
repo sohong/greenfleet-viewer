@@ -54,7 +54,7 @@ namespace Viewer.Common.UI.Timeline {
 
         protected override void DoDraw(DrawingContext dc) {
             Rect r = new Rect(0, 0, Width, Height);
-            dc.DrawRectangle(Fill, Border, r);
+            dc.DrawRectangle(GetFill(), Border, r);
         }
 
         #endregion // overriden methods

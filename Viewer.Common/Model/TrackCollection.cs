@@ -81,18 +81,18 @@ namespace Viewer.Common.Model {
             if (Count < 1) {
                 First = Last = null;
             } else if (Count == 1) {
+                First = Last = Items[0];
                 m_ranges.Add(new TrackRange(First.TrackType) {
                     StartTrack = First,
                     EndTrack = Last
                 });
-                First = Last = Items[0];
             } else {
                 Calculate();
             }
         }
 
         public long GetPosition(Track track) {
-            return (long)new TimeSpan(track.StartTime.StripSeconds().Ticks - First.StartTime.StripSeconds().Ticks).TotalMinutes;
+            return (long)new TimeSpan(track.StartTime.Ticks - First.StartTime.Ticks).TotalSeconds;
         }
 
         #endregion // methods
@@ -101,8 +101,8 @@ namespace Viewer.Common.Model {
         #region overriden methods
 
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e) {
-            base.OnCollectionChanged(e);
             Refresh();
+            base.OnCollectionChanged(e);
         }
         
         #endregion // overriden methods

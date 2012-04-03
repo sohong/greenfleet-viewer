@@ -452,8 +452,19 @@ namespace Viewer.Common.UI {
         /// track element를 제외한 모든 element들을 새로 생성한다.
         /// </summary>
         private void RefrechElements() {
+            m_rangeLayer.Children.Clear();
             m_markerLayer.Children.Clear();
+
             if (Tracks != null) {
+                // ranges
+                foreach (TrackRange r in Tracks.Ranges) {
+                    TimeRangeVisual range = new TimeRangeVisual(this);
+                    m_rangeLayer.Children.Add(range);
+                    range.Data = r;
+                    range.Fill = NormalFill;
+                }
+
+                // markers
                 foreach (Track t in Tracks) {
                     TimeRangeMarkerVisual marker = new TimeRangeMarkerVisual(this);
                     m_markerLayer.Children.Add(marker);
@@ -464,6 +475,7 @@ namespace Viewer.Common.UI {
                     marker.Draw();
                 }
             }
+
             InvalidateArrange();
         }
 
@@ -478,6 +490,16 @@ namespace Viewer.Common.UI {
             m_fence.Width = width;
             m_fence.Height = height - 5;
             m_fence.Draw();
+
+            // ranges
+            foreach (TimeRangeVisual range in m_rangeLayer.Children) {
+                TrackRange r = (TrackRange)(range.Data); 
+                double x = width * Tracks.GetPosition(r.StartTrack) / Tracks.Length;
+                range.Offset = new Vector(x, 0);
+                range.Height = 15;
+                range.Width = 100;
+                range.Draw();
+            }
 
             // tracker
             m_tracker.Offset = new Vector(10, 0);

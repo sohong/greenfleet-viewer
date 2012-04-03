@@ -1,0 +1,80 @@
+﻿<Window x:Class="DataGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+        Title="GreenFleets Sampler" Height="949" Width="748" WindowStartupLocation="CenterScreen">
+    <Grid Margin="6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!-- 시작 일시 -->
+            <Label Grid.Row="0">시작 일시:</Label>
+            <tk:DateTimeUpDown Grid.Row="0" Grid.Column="1" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Margin="3" Value="{Binding StartTime}" HorizontalAlignment="Left" MinWidth="140"/>
+            <!-- 종료 일시 -->
+            <Label Grid.Row="1">종료 일시:</Label>
+            <tk:DateTimeUpDown Grid.Row="1" Grid.Column="1" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Margin="3" Value="{Binding EndTime}" HorizontalAlignment="Left" MinWidth="140"/>
+            <!-- 시작 위치 -->
+            <Label Grid.Row="2">시작 위치:</Label>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="3">
+                <Label>위도:</Label>
+                <tk:MaskedTextBox Mask="00.000000" Margin="3" Text="{Binding StartLattitude}"></tk:MaskedTextBox>
+                <Label>경도:</Label>
+                <tk:MaskedTextBox Mask="000.000000" Margin="3" Text="{Binding StartLongitude}"></tk:MaskedTextBox>
+            </StackPanel>
+            <!-- 종료 위치 -->
+            <Label Grid.Row="3">종료 위치:</Label>
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="3">
+                <Label>위도:</Label>
+                <tk:MaskedTextBox Mask="00.000000" Margin="3" Text="{Binding EndLattitude}"></tk:MaskedTextBox>
+                <Label>경도:</Label>
+                <tk:MaskedTextBox Mask="000.000000" Margin="3" Text="{Binding EndLongitude}"></tk:MaskedTextBox>
+            </StackPanel>
+            <!-- 속도 -->
+            <Label Grid.Row="4">속도:</Label>
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="3">
+                <tk:IntegerUpDown Value="{Binding LowVelocity}" Increment="1" MinWidth="60"/>
+                <Label>~</Label>
+                <tk:IntegerUpDown Value="{Binding HighVelocity}" Increment="1" MinWidth="60"/>
+            </StackPanel>
+            <Label Grid.Row="5">가속도:</Label>
+            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="3">
+                <tk:IntegerUpDown Value="{Binding LowAccelate}" Increment="1" MinWidth="60"/>
+                <Label>~</Label>
+                <tk:IntegerUpDown Value="{Binding HighAccelate}" Increment="1" MinWidth="60"/>
+            </StackPanel>
+            <!-- 생성 폴더 -->
+            <Label Grid.Row="6">생성 폴더:</Label>
+            <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding SelectedFolder}"></TextBox>
+            <Button Grid.Row="6" Grid.Column="2" MinWidth="30" Margin="3" Command="{Binding SelectFolderCommand}">...</Button>
+            <!-- 기존 파일들 삭제 -->
+            <CheckBox Grid.Row="7" Grid.Column="1" IsChecked="{Binding DeleteFiles}" Margin="3">기존 파일들 삭제</CheckBox>
+        </Grid>
+        <ListBox Grid.Row="1" Margin="6" ItemsSource="{Binding Files}">
+        </ListBox>
+        <DockPanel Grid.Row="2" Margin="6,6,6,12" LastChildFill="True">
+            <Button MinWidth="80" Command="{Binding GenerateCommand}" Margin="0,0,10,0">생성</Button>
+            <Label Content="{Binding Current}"></Label>
+            <Label> / </Label>
+            <Label Content="{Binding TotalCount}" Margin="0,0,10,0"></Label>
+            <ProgressBar DockPanel.Dock="Left" Maximum="{Binding TotalCount}" Value="{Binding Current}"></ProgressBar>
+        </DockPanel>
+    </Grid>
+</Window>
