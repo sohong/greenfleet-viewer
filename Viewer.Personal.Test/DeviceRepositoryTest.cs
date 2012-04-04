@@ -75,11 +75,10 @@ namespace Viewer.Personal.Test
             DeviceRepository repo = new DeviceRepository();
             Vehicle vehicle = new Vehicle();
             string rootPath = PersonalTest.DeviceRoot;
-            repo.Open(vehicle, rootPath);
-
-            string[] files = Directory.GetFiles(rootPath, "*.inc");
-
-            Assert.AreEqual(files.Length, repo.TrackCount);
+            repo.Open(vehicle, rootPath, () => {
+                string[] files = Directory.GetFiles(rootPath, "*.inc");
+                Assert.AreEqual(files.Length, repo.TrackCount);
+            });
         }
 
         /// <summary>
@@ -90,10 +89,10 @@ namespace Viewer.Personal.Test
             DeviceRepository repo = new DeviceRepository();
             Vehicle vehicle = new Vehicle();
             string rootPath = PersonalTest.DeviceRoot;
-            repo.Open(vehicle, rootPath);
-
-            TrackGroup root = repo.CreateGroupsFromTracks(repo.GetTracks());
-            Assert.IsNotNull(root);
+            repo.Open(vehicle, rootPath, () => {
+                TrackGroup root = repo.CreateGroupsFromTracks(repo.GetTracks());
+                Assert.IsNotNull(root);
+            });
         }
     }
 }

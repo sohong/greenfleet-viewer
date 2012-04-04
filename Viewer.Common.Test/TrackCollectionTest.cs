@@ -82,7 +82,7 @@ namespace Viewer.Common.Test
             target.Add(track);
 
             actual = target.Length;
-            Assert.AreEqual(24 * 60 + 3 * 60 + 1 + 1, actual);
+            Assert.AreEqual((24 * 60 + 3 * 60 + 1) * 60 + 1, actual);
         }
     }
 }

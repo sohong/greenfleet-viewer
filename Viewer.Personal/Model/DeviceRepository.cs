@@ -18,13 +18,15 @@ using System.IO;
 using Viewer.Common.Model;
 using Viewer.Common.Loader;
 using System.ComponentModel;
+using System.Windows;
+using Viewer.Common;
 
 namespace Viewer.Personal.Model {
 
     /// <summary>
     /// SD Card 등 블랙박스 저장 미디어에 포함된 트랙 정보들.
     /// </summary>
-    public class DeviceRepository {
+    public class DeviceRepository : NotificationObjectEx {
 
         #region fields
 
@@ -90,6 +92,28 @@ namespace Viewer.Personal.Model {
             get { return m_endTime; }
         }
 
+        public int LoadingTotal {
+            get { return m_loadingTotal; }
+            set {
+                if (value != m_loadingTotal) {
+                    m_loadingTotal = value;
+                    RaisePropertyChanged(() => LoadingTotal);
+                }
+            }
+        }
+        private int m_loadingTotal;
+
+        public int LoadingCount {
+            get { return m_loadingCount; }
+            set {
+                if (value != m_loadingCount) {
+                    m_loadingCount = value;
+                    RaisePropertyChanged(() => LoadingCount);
+                }
+            }
+        }
+        private int m_loadingCount;
+
         #endregion // properties
 
 
@@ -100,7 +124,7 @@ namespace Viewer.Personal.Model {
         /// 시작/끝 일시를 계산한다.
         /// </summary>
         /// <param name="rootPath"></param>
-        public void Open(Vehicle vehicle, string rootPath) {
+        public void Open(Vehicle vehicle, string rootPath, Action callback) {
             m_vehicle = vehicle;
             m_rootPath = rootPath;
 
@@ -110,7 +134,8 @@ namespace Viewer.Personal.Model {
             }
             if (Directory.Exists(rootPath)) {
                 m_tracks = new ObservableCollection<Track>();
-                LoadTracks();
+
+                LoadTracks(callback);
             }
         }
 
@@ -168,23 +193,43 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
-        private void LoadTracks() {
+        private void LoadTracks(Action callback) {
             string[] files = Directory.GetFiles(m_rootPath, "*.inc");
             if (files.Length > 0) {
-                m_startTime = DateTime.MaxValue;
-                m_endTime = DateTime.MinValue;
-                
-                foreach (string file in files) {
-                    Track track = m_loader.Load(file, false);
-                    if (track != null) {
-                        m_tracks.Add(track);
+                LoadingTotal = files.Length;
+                LoadingCount = 0;
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += (sender, e) => {
+                    m_startTime = DateTime.MaxValue;
+                    m_endTime = DateTime.MinValue;
 
-                        if (track.CreateDate < m_startTime)
-                            m_startTime = track.CreateDate;
-                        if (track.CreateDate > m_startTime)
-                            m_endTime = track.CreateDate;
+                    foreach (string file in files) {
+                        Track track = m_loader.Load(file, false);
+                        if (track != null) {
+                            if (Application.Current != null) {
+                                Application.Current.Dispatcher.Invoke((Action)(() => {
+                                    m_tracks.Add(track);
+                                    LoadingCount++;
+                                }));
+                            } else {
+                                m_tracks.Add(track);
+                            }
+
+                            if (track.CreateDate < m_startTime)
+                                m_startTime = track.CreateDate;
+                            if (track.CreateDate > m_startTime)
+                                m_endTime = track.CreateDate;
+                        }
+                        //worker.ReportProgress(++cnt);
                     }
-                }
+                };
+                //worker.ProgressChanged += (sender, e) => { };
+                worker.RunWorkerCompleted += (sender, e) => {
+                    if (callback != null)
+                        callback();
+                };
+                //worker.WorkerReportsProgress = true;
+                worker.RunWorkerAsync();
             }
         }
 

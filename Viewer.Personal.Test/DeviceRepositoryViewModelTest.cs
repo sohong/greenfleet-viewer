@@ -7,6 +7,7 @@ using System.IO;
 using Viewer.Personal.Test.Mocks;
 using Viewer.Common.Model;
 using Viewer.Common;
+using System.Threading;
 
 namespace Viewer.Personal.Test
 {
@@ -72,11 +73,18 @@ namespace Viewer.Personal.Test
         [TestMethod()]
         [DeploymentItem("Viewer.Personal.dll")]
         public void LoadCommandTest() {
+            var completion = new ManualResetEvent(false);
+
             //DeviceRepositoryViewModel_Accessor target = new DeviceRepositoryViewModel_Accessor(); // TODO: Initialize to an appropriate value
             DeviceRepositoryViewModel target = new DeviceRepositoryViewModel();
             target.DriveManager = new MockDriveManager();
             target.SelectedVehicle = new Vehicle();
-            target.LoadCommand.Execute(null);
+            target.LoadCommand.Execute((Action)(() => {
+                completion.Set();
+            }));
+
+            completion.WaitOne();
+            Assert.IsNotNull(target.Tracks);
         }
 
         /// <summary>
@@ -85,11 +93,17 @@ namespace Viewer.Personal.Test
         [TestMethod()]
         [DeploymentItem("Viewer.Personal.dll")]
         public void SearchCommandTest() {
+            var completion = new ManualResetEvent(false);
+
             //DeviceRepositoryViewModel_Accessor target = new DeviceRepositoryViewModel_Accessor();
             DeviceRepositoryViewModel target = new DeviceRepositoryViewModel();
             target.DriveManager = new MockDriveManager();
             target.SelectedVehicle = new Vehicle();
-            target.LoadCommand.Execute(null);
+            target.LoadCommand.Execute((Action)(() => {
+                completion.Set();
+            }));
+
+            completion.WaitOne();
 
             DateTime d1 = new DateTime(2012, 3, 11, 20, 37, 11).StripSeconds();
             DateTime d2 = new DateTime(2012, 3, 11, 20, 38, 13).StripSeconds();
@@ -98,7 +112,7 @@ namespace Viewer.Personal.Test
             foreach (Track t in target.Tracks) {
                 if (t.CreateDate.StripSeconds() >= d1 &&
                     t.CreateDate.StripSeconds() <= d2) {
-                        count++;
+                    count++;
                 }
             }
 

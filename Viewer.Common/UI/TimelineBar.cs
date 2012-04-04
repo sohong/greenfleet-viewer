@@ -452,6 +452,7 @@ namespace Viewer.Common.UI {
         /// track element를 제외한 모든 element들을 새로 생성한다.
         /// </summary>
         private void RefrechElements() {
+            DateTime t1 = DateTime.Now;
             m_rangeLayer.Children.Clear();
             m_markerLayer.Children.Clear();
 
@@ -477,6 +478,9 @@ namespace Viewer.Common.UI {
             }
 
             InvalidateArrange();
+            DateTime t2 = DateTime.Now;
+            TimeSpan sp = t2 - t1;
+            Debug.WriteLine(">>>>>>>>> " + sp.TotalMilliseconds);
         }
 
         /// <summary>

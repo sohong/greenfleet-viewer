@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Viewer.Common.View.ProgressView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:local="clr-namespace:Viewer.Common.ViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="227" Width="482">
+    <UserControl.Resources>
+        <local:ProgressViewModel x:Key="DesignViewModel">
+            <local:ProgressViewModel.Caption>트랙파일들을 로드합니다.</local:ProgressViewModel.Caption>
+            <local:ProgressViewModel.CancelText>취소</local:ProgressViewModel.CancelText>
+            <local:ProgressViewModel.Message>All_2010-01-01-01-01-01.inc</local:ProgressViewModel.Message>
+            <local:ProgressViewModel.Minimum>0</local:ProgressViewModel.Minimum>
+            <local:ProgressViewModel.Maximum>100</local:ProgressViewModel.Maximum>
+            <local:ProgressViewModel.Value>70</local:ProgressViewModel.Value>
+        </local:ProgressViewModel>
+    </UserControl.Resources>
+    <Grid d:DataContext="{Binding Source={StaticResource DesignViewModel}}" Background="#eaeaea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>     
+        <StackPanel Margin="10">
+            <Label Content="{Binding Caption}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Background="#ffffff">
+            <Label Content="{Binding Message}" Margin="10" HorizontalAlignment="Center"/>
+            <ProgressBar Margin="30, 10, 20, 12" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" 
+                         Value="{Binding Value}" MinHeight="20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="{Binding Value}"/>
+                <Label Margin="2,0,2,0">/</Label>
+                <Label Content="{Binding Maximum}"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
+            <Button Content="{Binding CancelText}" Command="{Binding CancelCommand}" MinWidth="80" Padding="3"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

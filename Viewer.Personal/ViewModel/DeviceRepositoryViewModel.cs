@@ -154,12 +154,21 @@ namespace Viewer.Personal.ViewModel {
             if (folder != null) {
                 BeginLoading();
                 try {
-                    m_repository.Open(SelectedVehicle, folder);
-                    m_tracks = m_repository.GetTracks();
-                    this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
-                    this.TrackGroup.Observer = this;
-                    this.SearchFrom = m_repository.StartTime.StripSeconds();
-                    this.SearchTo = m_repository.EndTime.StripSeconds();
+                    m_repository.Open(SelectedVehicle, folder, () => {
+                        m_tracks = m_repository.GetTracks();
+                        this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
+                        if (this.TrackGroup != null) {
+                            this.TrackGroup.Observer = this;
+                            this.SearchFrom = m_repository.StartTime.StripSeconds();
+                            this.SearchTo = m_repository.EndTime.StripSeconds();
+                        }
+
+                        // for testing
+                        if (data is Action) {
+                            ((Action)data)();
+                        }
+                    });
+
                 } finally {
                     EndLoading();
                 }
