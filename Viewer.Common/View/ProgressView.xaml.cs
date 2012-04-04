@@ -9,14 +9,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Viewer.Common.View {
+
     /// <summary>
-    /// Interaction logic for ProgressView.xaml
     /// </summary>
-    public partial class ProgressView : UserControl {
+    public partial class ProgressView : Window {
+    
         public ProgressView() {
             InitializeComponent();
         }

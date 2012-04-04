@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="Viewer.Common.View.ProgressView"
+﻿<Window x:Class="Viewer.Common.View.ProgressView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:local="clr-namespace:Viewer.Common.ViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Height="227" Width="482">
-    <UserControl.Resources>
+             Height="261" Width="498">
+    <Window.Resources>
         <local:ProgressViewModel x:Key="DesignViewModel">
             <local:ProgressViewModel.Caption>트랙파일들을 로드합니다.</local:ProgressViewModel.Caption>
             <local:ProgressViewModel.CancelText>취소</local:ProgressViewModel.CancelText>
@@ -15,13 +15,13 @@
             <local:ProgressViewModel.Maximum>100</local:ProgressViewModel.Maximum>
             <local:ProgressViewModel.Value>70</local:ProgressViewModel.Value>
         </local:ProgressViewModel>
-    </UserControl.Resources>
+    </Window.Resources>
     <Grid d:DataContext="{Binding Source={StaticResource DesignViewModel}}" Background="#eaeaea">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>     
+        </Grid.RowDefinitions>
         <StackPanel Margin="10">
             <Label Content="{Binding Caption}"/>
         </StackPanel>
@@ -36,7 +36,7 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
-            <Button Content="{Binding CancelText}" Command="{Binding CancelCommand}" MinWidth="80" Padding="3"/>
+            <Button Content="{Binding CancelText}" Command="{Binding CancelCommand}" IsCancel="True" MinWidth="80" Padding="3"/>
         </StackPanel>
     </Grid>
-</UserControl>
+</Window>

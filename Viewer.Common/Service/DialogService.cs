@@ -55,6 +55,21 @@ namespace Viewer.Common.Service {
             }
         }
 
+        public static void RunProgress(string title, ProgressViewModel viewModel, bool modal = true) {
+            if (viewModel == null)
+                throw new ArgumentNullException("viewModel");
+
+            ProgressView dialog = new ProgressView();
+            dialog.Title = title;
+            dialog.DataContext = viewModel;
+
+            if (modal) {
+                dialog.ShowCallback(callback);
+            } else {
+                dialog.Show();
+            }
+        }
+
         #endregion // methods
     }
 }

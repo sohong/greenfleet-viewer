@@ -12,6 +12,8 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
 
 namespace Viewer.Common.ViewModel {
 
@@ -20,9 +22,17 @@ namespace Viewer.Common.ViewModel {
     /// </summary>
     public class ProgressViewModel : ViewModelBase {
 
+        #region fields
+
+        private bool m_canceled;
+
+        #endregion // fields
+
+
         #region constructors
 
         public ProgressViewModel() {
+            CancelCommand = new DelegateCommand(DoCancel, CanCancel);
         }
 
         #endregion // constructors
@@ -91,12 +101,12 @@ namespace Viewer.Common.ViewModel {
         }
         private double m_value;
 
-        public bool Cancelable {
+        public bool IsCancelable {
             get { return m_cancelable; }
             set {
                 if (value != m_cancelable) {
                     m_cancelable = value;
-                    RaisePropertyChanged(() => Cancelable);
+                    RaisePropertyChanged(() => IsCancelable);
                 }
             }
         }
@@ -113,6 +123,42 @@ namespace Viewer.Common.ViewModel {
         }
         private string m_cancelText;
 
+        /// <summary>
+        /// Cancel command
+        /// </summary>
+        public ICommand CancelCommand {
+            get;
+            private set;
+        }
+
+        public bool IsCanceled {
+            get { return m_canceled; }
+        }
+
         #endregion // properties
+
+
+        #region methods
+
+        public void Cancel() {
+            if (!m_canceled) {
+                m_canceled = true;
+            }
+        }
+
+        #endregion // methods
+
+
+        #region internal methods
+
+        private void DoCancel() {
+            Cancel();
+        }
+
+        private bool CanCancel() {
+            return IsCancelable;
+        }
+
+        #endregion // internal methods
     }
 }
