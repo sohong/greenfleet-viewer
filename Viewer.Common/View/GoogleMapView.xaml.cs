@@ -269,7 +269,7 @@ namespace Viewer.Common.View {
         private void AddPin(Track track) {
             if (track.PointCount > 0) {
                 TrackPoint p = track[0];
-                browser.InvokeScript("addMarker", track.Id, p.Lattitude, p.Longitude);
+                browser.InvokeScript("addMarker", track.Id, p.Latitude, p.Longitude);
             }
         }
 

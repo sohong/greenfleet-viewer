@@ -51,7 +51,7 @@ namespace Viewer.Common.Loader {
                     if (items.Length >= 7) {
                         TrackPoint p = new TrackPoint();
                         p.PointTime = DateTime.ParseExact(items[0], DATE_FORMAT, null);
-                        p.Lattitude = Convert.ToDouble(items[1]);
+                        p.Latitude = Convert.ToDouble(items[1]);
                         p.Longitude = Convert.ToDouble(items[2]);
                         p.Velocity = Convert.ToDouble(items[3]);
                         p.AccelerationX = Convert.ToDouble(items[4]);

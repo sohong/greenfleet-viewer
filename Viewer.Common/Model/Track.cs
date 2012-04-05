@@ -216,6 +216,15 @@ namespace Viewer.Common.Model {
             }
         }
 
+        public TrackPoint FindPoint(double miliseconds) {
+            foreach (TrackPoint p in m_points) {
+                double term = TimeSpan.FromTicks(p.PointTime.Ticks - StartTime.Ticks).TotalMilliseconds;
+                if (miliseconds < term)
+                    return p;
+            }
+            return null;
+        }
+
         #endregion // methods
 
 

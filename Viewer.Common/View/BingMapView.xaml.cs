@@ -218,7 +218,7 @@ namespace Viewer.Common.View {
 
             if (track != null) {
                 foreach (TrackPoint p in track.Points) {
-                    Location loc = new Location(p.Lattitude, p.Longitude);
+                    Location loc = new Location(p.Latitude, p.Longitude);
                     m_locations.Add(loc);
                 }
             }
@@ -243,7 +243,7 @@ namespace Viewer.Common.View {
                 if (track.PointCount > 0) {
                     TrackPoint p = track[0];
                     Pushpin pin = new Pushpin();
-                    pin.Location = new Location(p.Lattitude, p.Longitude);
+                    pin.Location = new Location(p.Latitude, p.Longitude);
                     pinLayer.Children.Add(pin);
                 }
             }

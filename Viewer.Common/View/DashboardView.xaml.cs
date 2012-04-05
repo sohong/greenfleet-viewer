@@ -59,7 +59,7 @@ namespace Viewer.Common.View {
         private static void VelocityPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
             DashboardView view = (DashboardView)obj;
             double v = (double)e.NewValue;
-            view.RefreshDateTime();
+            view.RefreshVelocity();
         }
 
         /// <summary>
@@ -176,6 +176,10 @@ namespace Viewer.Common.View {
 
         private void RefreshDirection() {
             txtDirection.Content = this.Direction.ToString("000.00");
+        }
+
+        private void RefreshVelocity() {
+            txtVelocity.Content = this.Velocity.ToString("000");
         }
 
         #endregion // internal methods

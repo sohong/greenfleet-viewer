@@ -21,6 +21,7 @@ using Viewer.Personal.View;
 using Microsoft.Practices.Prism.Commands;
 using Viewer.Common.Util;
 using Viewer.Personal.Command;
+using Viewer.Common.Event;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -50,14 +51,12 @@ namespace Viewer.Personal.ViewModel {
             SearchAll = true;
             AutoPlay = true;
 
-            /*
             if (PersonalDomain.Domain.EventAggregator != null) {
                 PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
                     track.IsChecked = true;
                     ActiveTrack = track;
                 });
             }
-             */
         }
 
         #endregion // constructors

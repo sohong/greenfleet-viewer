@@ -25,6 +25,8 @@ using Microsoft.Windows.Controls;
 using Viewer.Personal.Model;
 using Viewer.Common.Event;
 using Viewer.Common.Model;
+using Viewer.Personal.Event;
+using Viewer.Common.View;
 
 namespace Viewer.Personal.View {
 
@@ -49,12 +51,17 @@ namespace Viewer.Personal.View {
         }
 
         private void TrackTreeView_ActivateTrack(object sender, Track track) {
-            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
+            PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Publish(track);
         }
 
         // videoView
-        private void VideoView_PositionChanged(Common.View.VideoView arg1, double arg2, double arg3) {  
+        private void VideoView_PositionChanged(VideoView view, double length, double position) {  
             // video track 위치가 변경되면 해당하는 track point를 찾아 전역 이벤트를 발생시킨다.
+            Track track = view.Track;
+            TrackPoint point = track.FindPoint(position);
+            if (point != null) {
+                PersonalDomain.Domain.EventAggregator.GetEvent<TrackPointChangedEvent>().Publish(point);
+            }
         }
 
         // googleMapView

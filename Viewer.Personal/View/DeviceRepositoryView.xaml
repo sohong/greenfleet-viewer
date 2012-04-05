@@ -60,7 +60,7 @@
                         <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}" PositionChanged="VideoView_PositionChanged"/>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                         <Grid Grid.Row="2">
-                            <gf:AccelerationView Track="{Binding ActiveTrack}"/>
+                            <gf:AccelerationView Track="{Binding ActiveTrack}" Position="{Binding TrackPoint}"/>
                         </Grid>
                     </Grid>
                     <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
@@ -80,7 +80,8 @@
                         </TabControl>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                         <Grid Grid.Row="2">
-                            <gf:DashboardView/>
+                            <gf:DashboardView Velocity="{Binding Path=TrackPoint.Velocity}" DateTime="{Binding Path=TrackPoint.PointTime}"
+                                              Latitude="{Binding Path=TrackPoint.Latitude}" Longitude="{Binding Path=TrackPoint.Longitude}"/>
                         </Grid>
                     </Grid>
                 </Grid>

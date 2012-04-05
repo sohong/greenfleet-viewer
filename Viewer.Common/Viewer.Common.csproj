@@ -71,6 +71,7 @@
     <Compile Include="DateTimeExtension.cs" />
     <Compile Include="Event\TrackActivatedEvent.cs" />
     <Compile Include="Event\TrackChangedEvent.cs" />
+    <Compile Include="Event\TrackPointChangedEvent.cs" />
     <Compile Include="Model\TrackCollection.cs" />
     <Compile Include="Model\TrackGroup.cs" />
     <Compile Include="Model\TrackRange.cs" />

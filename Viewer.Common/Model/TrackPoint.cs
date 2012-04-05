@@ -21,6 +21,13 @@ namespace Viewer.Common.Model {
     /// </summary>
     public class TrackPoint : NotificationObject {
 
+        #region static members
+
+        public static readonly TrackPoint Zero = new TrackPoint();
+
+        #endregion // static members
+
+
         #region constructors
 
         public TrackPoint() {
@@ -48,12 +55,12 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// GPS 샘플링 위도.
         /// </summary>
-        public double Lattitude {
+        public double Latitude {
             get { return m_lattitude; }
             set {
                 if (value != m_lattitude) {
                     m_lattitude = value;
-                    RaisePropertyChanged(() => Lattitude);
+                    RaisePropertyChanged(() => Latitude);
                 }
             }
         }

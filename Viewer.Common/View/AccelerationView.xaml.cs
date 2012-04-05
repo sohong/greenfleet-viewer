@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Viewer.Common.Model;
+using System.Collections.ObjectModel;
 
 namespace Viewer.Common.View {
 
@@ -29,9 +30,6 @@ namespace Viewer.Common.View {
     public partial class AccelerationView : UserControl {
 
         #region static members
-
-        private static readonly List<TrackPoint> EMPTY_POINTS = new List<TrackPoint>();
-
         #endregion // static members
 
 
@@ -50,16 +48,41 @@ namespace Viewer.Common.View {
         private static void TrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
             AccelerationView view = (AccelerationView)obj;
             Track track = e.NewValue as Track;
-            view.chartMain.DataContext = (track != null) ? (IEnumerable<TrackPoint>)track.Points : EMPTY_POINTS;
+            view.m_points.Clear();
+        }
+
+        /// <summary>
+        /// Position
+        /// </summary>
+        public static readonly DependencyProperty PositionProperty =
+            DependencyProperty.Register(
+                "Position",
+                typeof(TrackPoint),
+                typeof(AccelerationView),
+                new PropertyMetadata(PositionPropertyChanged));
+
+        private static void PositionPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+            AccelerationView view = (AccelerationView)obj;
+            TrackPoint point = e.NewValue as TrackPoint;
+            view.RefreshPoints(point);
         }
 
         #endregion dependency properties
 
+
+        #region fields
+
+        private ObservableCollection<TrackPoint> m_points;
         
+        #endregion // fields
+
+
         #region constructor
 
         public AccelerationView() {
             InitializeComponent();
+            m_points = new ObservableCollection<TrackPoint>();
+            chartMain.DataContext = m_points;
         }
 
         #endregion // constructor
@@ -75,15 +98,42 @@ namespace Viewer.Common.View {
             set { SetValue(TrackProperty, value); }
         }
 
+        /// <summary>
+        /// 재생 포인트
+        /// </summary>
+        public TrackPoint Position {
+            get { return (TrackPoint)GetValue(PositionProperty); }
+            set { SetValue(PositionProperty, value); }
+        }
+
         #endregion // properties
+
+
+        #region internal methods
+
+        private void RefreshPoints(TrackPoint current) {
+            m_points.Clear();
+            if (Track != null) {
+                foreach (TrackPoint p in Track.Points) {
+                    m_points.Add(p);
+                    if (p == current)
+                        break;
+                }
+
+                for (int i = m_points.Count; i < Track.PointCount; i++) {
+                    TrackPoint p = new TrackPoint();
+                    p.PointTime = Track[i].PointTime;
+                    m_points.Add(p);
+                }
+            }
+        }
+
+        #endregion // internal methods
 
 
         #region event handlers
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
-            if (chartMain.DataContext == null) {
-                chartMain.DataContext = EMPTY_POINTS;
-            }
         }
 
         #endregion // event handlers
