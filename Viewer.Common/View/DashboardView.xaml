@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Viewer.Common.View.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="321" d:DesignWidth="529">
+    <Grid Background="#333333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>            
+        <DockPanel Margin="6">
+            <Label Name="txtDate" DockPanel.Dock="Left" Content="2012-03-31" FontSize="16" Foreground="White"/>
+            <Label Name="txtTime" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="10-03-31 AM" FontSize="16" Foreground="White"/>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Stroke="Yellow" StrokeThickness="5" Margin="20"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Rectangle Stroke="Yellow" StrokeThickness="5" Margin="10"/>
+                <Grid Grid.Row="1" Margin="10,6,10,6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Direction -->
+                    <Label Name="txtDirection" Grid.Row="0" Grid.Column="1" Content="222.22" Foreground="White"/>
+                    <!-- Latitude -->
+                    <Label Grid.Row="1" Content="Latitude:" Foreground="White"/>
+                    <Label Name="txtLatitude" Grid.Row="1" Grid.Column="1" Content="37.123456" Foreground="White"/>
+                    <!-- Longitude -->
+                    <Label Grid.Row="2" Content="Longitude:" Foreground="White"/>
+                    <Label Name="txtLongitude" Grid.Row="2" Grid.Column="1" Content="111.123456" Foreground="White"/>
+                </Grid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Name="txtVelocity" FontSize="32" FontWeight="Bold" Content="050" Foreground="Yellow"/>
+                    <Label FontSize="18" Content="km/h" Foreground="white" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

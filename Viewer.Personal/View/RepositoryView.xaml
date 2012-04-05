@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:tk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
              xmlns:gf="clr-namespace:Viewer.Common.View;assembly=Viewer.Common"
+             xmlns:ui="clr-namespace:Viewer.Common.UI;assembly=Viewer.Common"
              mc:Ignorable="d" 
              d:DesignHeight="344" d:DesignWidth="858">
     <Grid>
@@ -78,35 +79,45 @@
             </TreeView>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="4"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" MinHeight="60"/>
-                        <RowDefinition Height="4"/>
-                        <RowDefinition Height="240" MinHeight="20"/>
-                    </Grid.RowDefinitions>
-                    <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}"/>
-                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                    <Grid Grid.Row="2">
-                        <gf:AccelerationView/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="4"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="4"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" MinHeight="60"/>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="240" MinHeight="20"/>
+                        </Grid.RowDefinitions>
+                        <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}"/>
+                        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                        <Grid Grid.Row="2">
+                            <gf:AccelerationView/>
+                        </Grid>
+                    </Grid>
+                    <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="6*" MinHeight="40"/>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="4*" MinHeight="20"/>
+                        </Grid.RowDefinitions>
+                        <gf:GoogleMapView  ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}"/>
+                        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                        <Grid Grid.Row="2">
+                            <gf:DashboardView/>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="6*" MinHeight="40"/>
-                        <RowDefinition Height="4"/>
-                        <RowDefinition Height="4*" MinHeight="20"/>
-                    </Grid.RowDefinitions>
-                    <gf:BingMapView/>
-                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                    <Grid Grid.Row="2" Background="Gray">
-                    </Grid>
-                </Grid>
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                <ui:TimelineBar Grid.Row="2" Tracks="{Binding SelectedTracks}"/>
             </Grid>
         </Grid>
     </Grid>

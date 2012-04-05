@@ -57,7 +57,7 @@
                             <RowDefinition Height="4"/>
                             <RowDefinition Height="240" MinHeight="20"/>
                         </Grid.RowDefinitions>
-                        <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}"/>
+                        <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}" PositionChanged="VideoView_PositionChanged"/>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                         <Grid Grid.Row="2">
                             <gf:AccelerationView Track="{Binding ActiveTrack}"/>
@@ -79,7 +79,8 @@
                             </TabItem>
                         </TabControl>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                        <Grid Grid.Row="2" Background="Gray">
+                        <Grid Grid.Row="2">
+                            <gf:DashboardView/>
                         </Grid>
                     </Grid>
                 </Grid>

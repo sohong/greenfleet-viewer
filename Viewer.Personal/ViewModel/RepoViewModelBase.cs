@@ -41,13 +41,6 @@ namespace Viewer.Personal.ViewModel {
         public RepoViewModelBase() {
             m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
             m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
-
-            if (PersonalDomain.Domain.EventAggregator != null) {
-                PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
-                    track.IsChecked = true;
-                    ActiveTrack = track;
-                });
-            }
         }
 
         #endregion // constructors

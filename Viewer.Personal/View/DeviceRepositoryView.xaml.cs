@@ -52,6 +52,11 @@ namespace Viewer.Personal.View {
             PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
         }
 
+        // videoView
+        private void VideoView_PositionChanged(Common.View.VideoView arg1, double arg2, double arg3) {  
+            // video track 위치가 변경되면 해당하는 track point를 찾아 전역 이벤트를 발생시킨다.
+        }
+
         // googleMapView
         private void GoogleMapView_TrackDoubleClicked(object sender, Track track) {
             PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);

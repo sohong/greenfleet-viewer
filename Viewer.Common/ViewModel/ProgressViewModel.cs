@@ -110,7 +110,7 @@ namespace Viewer.Common.ViewModel {
                 }
             }
         }
-        private bool m_cancelable;
+        private bool m_cancelable = true;
 
         public string CancelText {
             get { return m_cancelText; }
@@ -121,7 +121,7 @@ namespace Viewer.Common.ViewModel {
                 }
             }
         }
-        private string m_cancelText;
+        private string m_cancelText = "취소";
 
         /// <summary>
         /// Cancel command
@@ -133,6 +133,12 @@ namespace Viewer.Common.ViewModel {
 
         public bool IsCanceled {
             get { return m_canceled; }
+            private set {
+                if (value != m_canceled) {
+                    m_canceled = value;
+                    RaisePropertyChanged(() => IsCanceled);
+                }
+            }
         }
 
         #endregion // properties
@@ -141,9 +147,7 @@ namespace Viewer.Common.ViewModel {
         #region methods
 
         public void Cancel() {
-            if (!m_canceled) {
-                m_canceled = true;
-            }
+            IsCanceled = true;
         }
 
         #endregion // methods

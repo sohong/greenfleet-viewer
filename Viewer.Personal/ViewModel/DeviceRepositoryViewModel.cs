@@ -59,6 +59,13 @@ namespace Viewer.Personal.ViewModel {
             LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
             SearchCommand = new DelegateCommand(DoSearch, CanSearch);
             ConfigDeviceCommand = new DelegateCommand<object>(DoConfigDevice, CanConfigDevice);
+
+            if (PersonalDomain.Domain.EventAggregator != null) {
+                PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
+                    track.IsChecked = true;
+                    ActiveTrack = track;
+                });
+            }
         }
 
         #endregion // constructors

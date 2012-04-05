@@ -49,6 +49,15 @@ namespace Viewer.Personal.ViewModel {
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
             SearchAll = true;
             AutoPlay = true;
+
+            /*
+            if (PersonalDomain.Domain.EventAggregator != null) {
+                PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
+                    track.IsChecked = true;
+                    ActiveTrack = track;
+                });
+            }
+             */
         }
 
         #endregion // constructors

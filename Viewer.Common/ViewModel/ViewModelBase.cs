@@ -20,5 +20,7 @@ namespace Viewer.Common.ViewModel {
     /// View model abstract.
     /// </summary>
     public abstract class ViewModelBase : NotificationObject {
+
+        public object Tag;
     }
 }

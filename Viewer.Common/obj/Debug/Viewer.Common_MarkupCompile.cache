@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-7-1729056394
+8372343962
 5-1526680961
-52-1546716568
+53-412864093
 21-1613677832
-View\BingMapView.xaml;View\DialogView.xaml;View\GoogleMapView.xaml;View\AccelerationView.xaml;View\ProgressView.xaml;View\TrackTreeView.xaml;View\VideoView.xaml;
+View\BingMapView.xaml;View\DashboardView.xaml;View\DialogView.xaml;View\GoogleMapView.xaml;View\AccelerationView.xaml;View\ProgressView.xaml;View\TrackTreeView.xaml;View\VideoView.xaml;
 
 False
 

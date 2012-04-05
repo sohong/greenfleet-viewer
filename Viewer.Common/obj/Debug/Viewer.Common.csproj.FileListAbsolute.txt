@@ -53,3 +53,7 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\o
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\ProgressView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\ProgressView.g.cs
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\Viewer.Common_MarkupCompile.lref
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\DashboardView.baml
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\View\DashboardView.g.cs

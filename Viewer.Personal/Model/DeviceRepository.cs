@@ -20,6 +20,8 @@ using Viewer.Common.Loader;
 using System.ComponentModel;
 using System.Windows;
 using Viewer.Common;
+using Viewer.Common.ViewModel;
+using Viewer.Common.Service;
 
 namespace Viewer.Personal.Model {
 
@@ -91,28 +93,6 @@ namespace Viewer.Personal.Model {
         public DateTime EndTime {
             get { return m_endTime; }
         }
-
-        public int LoadingTotal {
-            get { return m_loadingTotal; }
-            set {
-                if (value != m_loadingTotal) {
-                    m_loadingTotal = value;
-                    RaisePropertyChanged(() => LoadingTotal);
-                }
-            }
-        }
-        private int m_loadingTotal;
-
-        public int LoadingCount {
-            get { return m_loadingCount; }
-            set {
-                if (value != m_loadingCount) {
-                    m_loadingCount = value;
-                    RaisePropertyChanged(() => LoadingCount);
-                }
-            }
-        }
-        private int m_loadingCount;
 
         #endregion // properties
 
@@ -193,23 +173,39 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
+        private ProgressViewModel CreateProgressView(int total) {
+            ProgressViewModel progView = new ProgressViewModel();
+            progView.Maximum = total;
+            return progView;
+        }
+
         private void LoadTracks(Action callback) {
             string[] files = Directory.GetFiles(m_rootPath, "*.inc");
             if (files.Length > 0) {
-                LoadingTotal = files.Length;
-                LoadingCount = 0;
+                ProgressViewModel progView = CreateProgressView(files.Length);
+                progView.Caption = "트랙 파일들을 로드합니다.";
+                DialogService.RunProgress("SD 카드 로딩", progView);
+
+                int cnt = 0;
                 BackgroundWorker worker = new BackgroundWorker();
                 worker.DoWork += (sender, e) => {
                     m_startTime = DateTime.MaxValue;
                     m_endTime = DateTime.MinValue;
 
                     foreach (string file in files) {
+                        if (Application.Current != null && progView.IsCanceled) {
+                            Application.Current.Dispatcher.Invoke((Action)(() => {
+                                m_tracks.Clear();
+                            }));
+                            break;
+                        }
+
+                        cnt++;
                         Track track = m_loader.Load(file, false);
                         if (track != null) {
                             if (Application.Current != null) {
                                 Application.Current.Dispatcher.Invoke((Action)(() => {
                                     m_tracks.Add(track);
-                                    LoadingCount++;
                                 }));
                             } else {
                                 m_tracks.Add(track);
@@ -220,7 +216,15 @@ namespace Viewer.Personal.Model {
                             if (track.CreateDate > m_startTime)
                                 m_endTime = track.CreateDate;
                         }
+
                         //worker.ReportProgress(++cnt);
+
+                        if (Application.Current != null) {
+                            Application.Current.Dispatcher.Invoke((Action)(() => {
+                                progView.Value = cnt;
+                                progView.Message = file;
+                            }));
+                        }
                     }
                 };
                 //worker.ProgressChanged += (sender, e) => { };
