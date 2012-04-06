@@ -92,9 +92,14 @@ namespace Viewer.Common.View {
                 }
                 break;
             case NotifyCollectionChangedAction.Reset:
-                Clear();
-                foreach (Track track in e.NewItems) {
-                    AddTrack(track);
+                try {
+                    Clear(false);
+                    foreach (Track track in Tracks) {
+                        AddTrack(track, false);
+                    }
+                
+                } finally {
+                    RefreshPins();
                 }
                 break;
             }
@@ -164,31 +169,33 @@ namespace Viewer.Common.View {
 
         #region methods
 
-        public bool AddTrack(Track track) {
+        public bool AddTrack(Track track, bool refresh = true) {
             if (track != null && !m_tracks.Contains(track)) {
                 m_tracks.Add(track);
 
-                //RefreshLocations(track);
-                //RefreshRegion(track);
-                //RefreshRoutes(track);
-                RefreshPins();
+                if (refresh) {
+                    RefreshMap();
+                }
 
                 return true;
             }
             return false;
         }
 
-        public void RemoveTrack(Track track) {
+        public void RemoveTrack(Track track, bool refresh = true) {
             if (track != null && m_tracks.Contains(track)) {
                 m_tracks.Remove(track);
 
-                RefreshPins();
+                if (refresh) {
+                    RefreshMap();
+                }
             }
         }
 
-        public void Clear() {
-            foreach (Track track in m_tracks) {
-                RemoveTrack(track);
+        public void Clear(bool refresh = true) {
+            m_tracks.Clear();
+            if (refresh) {
+                RefreshMap();
             }
         }
 
@@ -196,6 +203,13 @@ namespace Viewer.Common.View {
 
 
         #region internal methods
+
+        private void RefreshMap() {
+            //RefreshLocations(track);
+            //RefreshRegion(track);
+            //RefreshRoutes(track);
+            RefreshPins();
+        }
 
         private void SetActive(Track track) {
             if (track != m_activeTrack) {

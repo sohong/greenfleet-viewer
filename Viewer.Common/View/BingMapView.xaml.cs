@@ -90,7 +90,7 @@ namespace Viewer.Common.View {
                 break;
             case NotifyCollectionChangedAction.Reset:
                 Clear();
-                foreach (Track track in e.NewItems) {
+                foreach (Track track in Tracks) {
                     AddTrack(track);
                 }
                 break;

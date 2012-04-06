@@ -27,12 +27,6 @@ namespace Viewer.Common.Model {
     };
 
     
-    public interface ITrackStateObserver {
-
-        void TrackChanged(Track track, string propName);
-    }
-
-
     /// <summary>
     /// 시간/일 단위로 묶여진 track group.
     /// 트랙 목록을 트리로 표현할 때 사용.
@@ -43,11 +37,21 @@ namespace Viewer.Common.Model {
 
         #region fields
 
+        private TrackGroup m_parent;
         private DateTime m_date;
         private TrackGroupLevel m_level;
         private List<NotificationObject> m_children;
-        
+        private int m_updateLock;
+
         #endregion // fields
+
+
+        #region events
+
+        public event Action<TrackGroup, Track, string/* propName */> TrackChanged;
+        public event Action<TrackGroup> TrackAllChanged;
+
+        #endregion // events
 
 
         #region constructor
@@ -79,37 +83,37 @@ namespace Viewer.Common.Model {
             get { return m_checked; }
             set {
                 if (value != m_checked) {
-                    m_checked = value;
-                    RaisePropertyChanged(() => IsChecked);
+                    BeginUpdate();
+                    try {
+                        m_checked = value;
+                        RaisePropertyChanged(() => IsChecked);
 
-                    foreach (NotificationObject obj in m_children) {
-                        if (obj is Track) {
-                            ((Track)obj).IsChecked = IsChecked;
-                        } else if (obj is TrackGroup) {
-                            ((TrackGroup)obj).IsChecked = IsChecked;
+                        foreach (NotificationObject obj in m_children) {
+                            if (obj is Track) {
+                                ((Track)obj).IsChecked = IsChecked;
+                            } else if (obj is TrackGroup) {
+                                ((TrackGroup)obj).IsChecked = IsChecked;
+                            }
                         }
+                    } finally {
+                        EndUpdate();
                     }
                 }
             }
         }
         private bool m_checked;
 
-        /// <summary>
-        /// 트랙 상태 관찰자 설정.
-        /// </summary>
-        public ITrackStateObserver Observer {
-            get { return m_observer; }
+        [Transient]
+        public bool IsExpanded {
+            get { return m_expanded; }
             set {
-                m_observer = value;
-                foreach (object obj in Children) {
-                    TrackGroup group = obj as TrackGroup;
-                    if (group != null) {
-                        group.Observer = value;
-                    }
+                if (value != m_expanded) {
+                    m_expanded = value;
+                    RaisePropertyChanged(() => IsExpanded);
                 }
             }
         }
-        private ITrackStateObserver m_observer;
+        private bool m_expanded = false;
         
         #endregion // properties
 
@@ -118,6 +122,7 @@ namespace Viewer.Common.Model {
 
         public void Add(TrackGroup subGroup) {
             m_children.Add(subGroup);
+            subGroup.m_parent = this;
         }
 
         public void Add(Track track) {
@@ -131,10 +136,25 @@ namespace Viewer.Common.Model {
                     UnregisterTrackEvents((Track)obj);
                 } else if (obj is TrackGroup) {
                     ((TrackGroup)obj).Clear();
+                    ((TrackGroup)obj).m_parent = null;
                 }
             }
 
             m_children.Clear();
+        }
+
+        public void BeginUpdate() {
+            m_updateLock++;
+        }
+
+        public void EndUpdate() {
+            m_updateLock = Math.Max(0, m_updateLock - 1);
+            if (!IsLocked()) {
+                Action<TrackGroup> eh = TrackAllChanged;
+                if (eh != null) {
+                    eh(this);
+                }
+            }
         }
 
         #endregion // methods
@@ -163,10 +183,8 @@ namespace Viewer.Common.Model {
 
         #region internal methods
 
-        private void track_PropertyChanged(object sender, PropertyChangedEventArgs e) {
-            if (m_observer != null) {
-                m_observer.TrackChanged((Track)sender, e.PropertyName);
-            }
+        private bool IsLocked() {
+            return m_updateLock > 0 || (m_parent != null && m_parent.IsLocked());
         }
 
         private void RegisterTrackEvents(Track track) {
@@ -175,6 +193,23 @@ namespace Viewer.Common.Model {
 
         private void UnregisterTrackEvents(Track track) {
             track.PropertyChanged -= new PropertyChangedEventHandler(track_PropertyChanged);
+        }
+
+        private void track_PropertyChanged(object sender, PropertyChangedEventArgs e) {
+            if (!IsLocked()) {
+                FireTrackChangeEvent(this, (Track)sender, e.PropertyName);
+            }
+        }
+
+        private void FireTrackChangeEvent(TrackGroup group, Track track, string propName) {
+            Action<TrackGroup, Track, string> eh = TrackChanged;
+            if (eh != null) {
+                eh(group, track, propName);
+            }
+
+            if (m_parent != null) {
+                m_parent.FireTrackChangeEvent(this, track, propName);
+            }
         }
 
         #endregion // internal methods

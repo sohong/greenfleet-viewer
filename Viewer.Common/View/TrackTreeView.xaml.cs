@@ -41,19 +41,27 @@ namespace Viewer.Common.View {
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(
                 "ItemsSource",
-                typeof(IEnumerable),
+                typeof(TrackGroup),
                 typeof(TrackTreeView),
                 new PropertyMetadata(ItemsSourcePropertyChanged));
 
         private static void ItemsSourcePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
             TrackTreeView view = (TrackTreeView)obj;
-            view.tvMain.ItemsSource = (IEnumerable)e.NewValue;
+            view.m_root = (TrackGroup)e.NewValue;
+            view.tvMain.ItemsSource = view.m_root != null ? view.m_root.Children : null;
         }
 
         #endregion dependency properties
 
 
-        #region events 
+        #region fields 
+        
+        private TrackGroup m_root;
+        
+        #endregion // fields
+
+
+        #region events
 
         public event Action<object, TrackGroup> ActivateGroup;
         public event Action<object, Track> ActivateTrack;
@@ -72,8 +80,8 @@ namespace Viewer.Common.View {
 
         #region properties
 
-        public IEnumerable ItemsSource {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+        public TrackGroup ItemsSource {
+            get { return (TrackGroup)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value);  }
         }
 
@@ -86,10 +94,13 @@ namespace Viewer.Common.View {
         /// 전체를 선택하거나 선택하지 않는다.
         /// </summary>
         public void SelectAll(bool select) {
-            if (ItemsSource != null) {
-                foreach (TrackGroup group in ItemsSource) {
-                    SelectAll(group, select);
+            m_root.BeginUpdate();
+            try {
+                if (m_root != null) {
+                    SelectAll(m_root, select);
                 }
+            } finally {
+                m_root.EndUpdate();
             }
         }
 
@@ -100,13 +111,6 @@ namespace Viewer.Common.View {
 
         private void SelectAll(TrackGroup group, bool select) {
             group.IsChecked = select;
-            foreach (object obj in group.Children) {
-                if (obj is Track) {
-                    ((Track)obj).IsChecked = select;
-                } else if (obj is TrackGroup) {
-                    SelectAll((TrackGroup)obj, select);
-                }
-            }
         }
 
         #endregion // internal methods

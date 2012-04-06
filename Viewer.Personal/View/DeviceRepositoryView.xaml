@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <gf:TrackTreeView Grid.Row="0" ItemsSource="{Binding Path=TrackGroup.Children}"
+            <gf:TrackTreeView Grid.Row="0" ItemsSource="{Binding Path=TrackGroup}"
                             ActivateGroup="TrackTreeView_ActivateGroup" ActivateTrack="TrackTreeView_ActivateTrack"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
@@ -75,7 +75,9 @@
                                 <gf:GoogleMapView  ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" TrackDoubleClicked="GoogleMapView_TrackDoubleClicked"/>
                             </TabItem>
                             <TabItem Header="Bing">
+                                <!--
                                 <gf:BingMapView ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" PreviewMouseDoubleClick="BingMapView_PreviewMouseDoubleClick" />
+                                -->
                             </TabItem>
                         </TabControl>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>

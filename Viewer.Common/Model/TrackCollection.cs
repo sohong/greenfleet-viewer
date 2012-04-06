@@ -25,6 +25,7 @@ namespace Viewer.Common.Model {
         #region fields
 
         private IList<TrackRange> m_ranges;
+        private bool m_locked;
 
         #endregion // fields
 
@@ -95,14 +96,29 @@ namespace Viewer.Common.Model {
             return (long)new TimeSpan(track.StartTime.Ticks - First.StartTime.Ticks).TotalSeconds;
         }
 
+        public void BeginUpdate() {
+            m_locked = true;
+        }
+
+        public void EndUpdate() {
+            if (m_locked) {
+                m_locked = false;
+                Refresh();
+                NotifyCollectionChangedEventArgs ea = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
+                base.OnCollectionChanged(ea);
+            }
+        }
+
         #endregion // methods
 
 
         #region overriden methods
 
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e) {
-            Refresh();
-            base.OnCollectionChanged(e);
+            if (!m_locked) {
+                Refresh();
+                base.OnCollectionChanged(e);
+            }
         }
         
         #endregion // overriden methods

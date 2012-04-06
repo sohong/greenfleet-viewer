@@ -33,7 +33,7 @@ namespace Viewer.Personal.ViewModel {
     /// <summary>
     /// View model for DeviceRepositoryView
     /// </summary>
-    public class DeviceRepositoryViewModel : RepoViewModelBase, ITrackStateObserver {
+    public class DeviceRepositoryViewModel : RepoViewModelBase {
 
         #region fields
 
@@ -73,24 +73,6 @@ namespace Viewer.Personal.ViewModel {
         }
 
         #endregion // constructors
-
-
-        #region ITrackStateObserver
-
-        public void TrackChanged(Track track, string propName) {
-            // 현재 재생 중인 것은 그냥 놔둔다.
-            if (track == ActiveTrack && !track.IsChecked) {
-                track.IsChecked = true;
-            }
-
-            if (track.IsChecked) {
-                m_selectedTracks.Add(track);
-            } else {
-                m_selectedTracks.Remove(track);
-            }
-        }
-
-        #endregion // ITrackStateObserver
 
 
         #region properties
@@ -183,7 +165,8 @@ namespace Viewer.Personal.ViewModel {
                         m_tracks = m_repository.GetTracks();
                         this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
                         if (this.TrackGroup != null) {
-                            this.TrackGroup.Observer = this;
+                            RegisterEvents(this.TrackGroup);
+
                             this.SearchFrom = m_repository.StartTime.StripSeconds();
                             this.SearchTo = m_repository.EndTime.StripSeconds();
                         }
@@ -202,6 +185,44 @@ namespace Viewer.Personal.ViewModel {
                 //PersonalDomain.Domain.EventAggregator.GetEvent<NoDriveEvent>().Publish(null);
                 // TODO 테스트 가능하도록 MessageUtil을 서비스 인터페이스로 구현해야 한다.
                 MessageUtil.Show("트랙 데이터 드라이브가 존재하지 않습니다.");
+            }
+        }
+
+        private void RegisterEvents(TrackGroup group) {
+            group.TrackChanged += new Action<TrackGroup, Track, string>(TrackGroup_TrackChanged);
+            group.TrackAllChanged += new Action<Common.Model.TrackGroup>(TrackGroup_TrackAllChanged);
+            foreach (object child in group.Children) {
+                if (child is TrackGroup) {
+                    RegisterEvents((TrackGroup)child);
+                }
+            }
+        }
+
+        private void TrackGroup_TrackChanged(TrackGroup group, Track track, string propName) {
+            // 현재 재생 중인 것은 그냥 놔둔다.
+            if (track == ActiveTrack && !track.IsChecked) {
+                track.IsChecked = true;
+            }
+
+            if (track.IsChecked) {
+                m_selectedTracks.Add(track);
+            } else {
+                m_selectedTracks.Remove(track);
+            }
+        }
+
+        private void TrackGroup_TrackAllChanged(TrackGroup group) {
+            m_selectedTracks.BeginUpdate();
+            try {
+                m_selectedTracks.Clear();
+                foreach (Track track in m_tracks) {
+                    if (track.IsChecked) {
+                        m_selectedTracks.Add(track);
+                    }
+                }
+
+            } finally {
+                m_selectedTracks.EndUpdate();
             }
         }
 
