@@ -31,6 +31,7 @@ namespace Viewer.Personal.Model {
 
         public SaveOption() {
 
+            Convert = true;
             Overwrite = false;
         }
 
@@ -95,6 +96,14 @@ namespace Viewer.Personal.Model {
             }
         }
         private DateTime m_endDate;
+
+        /// <summary>
+        /// 저장하면서 .264파일을 mp4로 변환할 것인가?
+        /// </summary>
+        public bool Convert {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 같은 파일이 존재하면 덮어 쓸 것인가?

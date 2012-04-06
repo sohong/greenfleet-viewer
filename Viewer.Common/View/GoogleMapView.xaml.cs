@@ -215,6 +215,7 @@ namespace Viewer.Common.View {
             if (track != m_activeTrack) {
                 ClearActive();
                 m_activeTrack = track;
+
                 if (AddTrack(m_activeTrack)) {
                 }
             }
@@ -222,6 +223,7 @@ namespace Viewer.Common.View {
 
         private void ClearActive() {
             if (m_activeTrack != null) {
+                m_activeTrack = null;
             }
         }
 
@@ -305,7 +307,6 @@ namespace Viewer.Common.View {
         private void MarkerDoubleClicked(string trackId) {
             Track track = FindTrack(trackId);
             if (track != null) {
-                //MessageBox.Show("marker double clicked at " + track.Id, "map");
                 Action<object, Track> eh = TrackDoubleClicked;
                 if (eh != null) {
                     eh(this, track);

@@ -66,7 +66,7 @@ namespace Viewer.Personal.View {
 
         // googleMapView
         private void GoogleMapView_TrackDoubleClicked(object sender, Track track) {
-            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
+            PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Publish(track);
         }
 
         // bingMapView

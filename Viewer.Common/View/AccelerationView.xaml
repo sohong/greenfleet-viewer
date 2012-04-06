@@ -8,9 +8,30 @@
              d:DesignHeight="418" d:DesignWidth="580" Loaded="UserControl_Loaded"> 
     <Grid>
         <charting:Chart Name="chartMain">
-            <charting:LineSeries Name="seriesX" DependentValuePath="AccelerationX" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel X" />
-            <charting:LineSeries Name="seriesY" DependentValuePath="AccelerationY" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel Y" />
-            <charting:LineSeries Name="seriesZ" DependentValuePath="AccelerationZ" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel Z" />
+            <charting:LineSeries Name="seriesX" DependentValuePath="AccelerationX" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel X">
+                <charting:LineSeries.DataPointStyle>
+                    <Style TargetType="{x:Type charting:LineDataPoint}">
+                        <Setter Property="Width" Value="0"/>
+                        <Setter Property="Height" Value="0"/>
+                    </Style>
+                </charting:LineSeries.DataPointStyle>
+            </charting:LineSeries>
+            <charting:LineSeries Name="seriesY" DependentValuePath="AccelerationY" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel Y">
+                <charting:LineSeries.DataPointStyle>
+                    <Style TargetType="{x:Type charting:LineDataPoint}">
+                        <Setter Property="Width" Value="0"/>
+                        <Setter Property="Height" Value="0"/>
+                    </Style>
+                </charting:LineSeries.DataPointStyle>
+            </charting:LineSeries>
+            <charting:LineSeries Name="seriesZ" DependentValuePath="AccelerationZ" IndependentValuePath="PointTime" ItemsSource="{Binding}" Title="accel Z">
+                <charting:LineSeries.DataPointStyle>
+                    <Style TargetType="{x:Type charting:LineDataPoint}">
+                        <Setter Property="Width" Value="0"/>
+                        <Setter Property="Height" Value="0"/>
+                    </Style>
+                </charting:LineSeries.DataPointStyle>
+            </charting:LineSeries>
             <charting:Chart.Axes>
                 <charting:DateTimeAxis Orientation="X" Location="Bottom" />
                 <charting:LinearAxis Orientation="Y" Location="Left" ShowGridLines="True"/>

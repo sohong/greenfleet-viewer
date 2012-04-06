@@ -11,8 +11,9 @@
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false">
 </script>
 <script type="text/javascript">
-    
+
     var map;
+    var markers = [];
 
     function initialize() {
         var latlng = new google.maps.LatLng(37.380039, 127.115263);
@@ -31,11 +32,23 @@
             position: loc,
             map: map
         });
+        markers.push(marker);
+
+        google.maps.event.addListener(marker, 'click', function () {
+            window.external.MarkerClicked(marker.track);
+        });
 
         google.maps.event.addListener(marker, 'dblclick', function () {
-            //alert("I'm a marker!");
-            window.external.MarkerDblClicked("I'm a xxx marker at " + marker.track);
+            alert('click!!!');
+            window.external.MarkerDblClicked(marker.track);
         });
+    }
+
+    function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+        markers = [];
     }
 
 </script>

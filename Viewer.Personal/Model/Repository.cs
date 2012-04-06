@@ -126,9 +126,9 @@ namespace Viewer.Personal.Model {
         /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
         /// files에는 확장자 없는 파일명들이 들어있다.
         /// </summary>
-        public void ImportTrackFiles(Vehicle vehicle, IEnumerable<string> files, bool overwrite) {
+        public void ImportTrackFiles(Vehicle vehicle, IEnumerable<string> files, bool convert, bool overwrite) {
             Logger.Debug("Import track files...");
-            m_importHelper.Import(vehicle, files, overwrite);
+            m_importHelper.Import(vehicle, files, convert, overwrite);
         }
 
         #endregion // methods

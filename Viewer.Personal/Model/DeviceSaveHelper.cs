@@ -56,7 +56,7 @@ namespace Viewer.Personal.Model {
                 foreach (Track track in m_tracks) {
                     files.Add(track.TrackFile);
                 }
-                new TrackImportHelper(target).Import(source.Vehicle, files, options.Overwrite);
+                new TrackImportHelper(target).Import(source.Vehicle, files, options.Convert, options.Overwrite);
             }
         }
         

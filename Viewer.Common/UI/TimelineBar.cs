@@ -503,14 +503,14 @@ namespace Viewer.Common.UI {
             foreach (TimeRangeVisual range in m_rangeLayer.Children) {
                 TrackRange r = (TrackRange)(range.Data); 
                 double x = width * Tracks.GetPosition(r.StartTrack) / Tracks.Length;
-                range.Offset = new Vector(x, 0);
-                range.Height = 15;
-                range.Width = 100;
+                range.Offset = new Vector(x, 10);
+                range.Height = height - 20;
+                range.Width = width * (Tracks.GetPosition(r.EndTrack) + 1) / Tracks.Length - x;
                 range.Draw();
             }
 
             // tracker
-            m_tracker.Offset = new Vector(10, 0);
+            m_tracker.Offset = new Vector(100, 0);
             m_tracker.Width = 5;
             m_tracker.Height = height;
             m_tracker.Draw();
@@ -518,7 +518,7 @@ namespace Viewer.Common.UI {
             // range markers
             foreach (TimeRangeMarkerVisual marker in m_markerLayer.Children) {
                 double x = width * Tracks.GetPosition((Track)marker.Data) / Tracks.Length;
-                marker.Offset = new Vector(x, 10);
+                marker.Offset = new Vector(x, height - marker.Height);
                 marker.HoverFill = this.HoverFill;
                 marker.Draw();
             }

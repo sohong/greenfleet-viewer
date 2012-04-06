@@ -59,6 +59,7 @@ namespace Viewer.Personal.ViewModel {
             LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
             SearchCommand = new DelegateCommand(DoSearch, CanSearch);
             ConfigDeviceCommand = new DelegateCommand<object>(DoConfigDevice, CanConfigDevice);
+            SaveCommand = new DelegateCommand(DoSave, CanSave);
 
             if (PersonalDomain.Domain.EventAggregator != null) {
                 PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Subscribe((track) => {
@@ -253,11 +254,14 @@ namespace Viewer.Personal.ViewModel {
         }
 
         // Save(sd card -> local storage) command
-        private bool CanSave(object data) {
+        private bool CanSave() {
             return true;
         }
 
-        private void DoSave(object data) {
+        private void DoSave() {
+            Repository repo = PersonalDomain.Domain.Repository;
+            //PersonalDomain.Domain.
+            MessageUtil.Show(Vehicles.CurrentItem.ToString());
         }
 
         #endregion // internal methods

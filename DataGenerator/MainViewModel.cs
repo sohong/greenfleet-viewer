@@ -113,7 +113,7 @@ namespace DataGenerator {
                 }
             }
         }
-        private double m_endLattitude = 37.390039;
+        private double m_endLattitude = 37.790039;
 
         /// <summary>
         /// 시작 경도
@@ -127,7 +127,7 @@ namespace DataGenerator {
                 }
             }
         }
-        private double m_endLongitude = 127.125263;
+        private double m_endLongitude = 127.525263;
 
         /// <summary>
         /// 최저 속도
@@ -287,10 +287,12 @@ namespace DataGenerator {
                 }
             }
 
+            m_files.Clear();
+
             TimeSpan duration = EndTime - StartTime;
             TotalCount = (int)duration.TotalMinutes + 1;
             Current = 0;
-            m_files.Clear();
+            int eventIndex = new Random().Next(TotalCount);
 
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += new DoWorkEventHandler((sender, e) => {
@@ -298,7 +300,7 @@ namespace DataGenerator {
                 DateTime t = StartTime;
                 while (t <= EndTime) {
                     App.Current.Dispatcher.Invoke((Action)(() => {
-                        CreateFile(t);
+                        CreateFile(t, Current == eventIndex);
                         Current++;
                         t = t.AddMinutes(1);
                         Thread.Sleep(10);
@@ -314,9 +316,9 @@ namespace DataGenerator {
             worker.RunWorkerAsync();
         }
 
-        private void CreateFile(DateTime t) {
+        private void CreateFile(DateTime t, bool isEvent) {
             string filename = t.ToString("yyyy_MM_dd_HH_mm_ss");
-            filename = "all_" + filename;
+            filename = (isEvent ? "event_" : "all_") + filename;
             CreateIncFile(t, Path.Combine(SelectedFolder, filename + ".inc"));
             CreateLogFile(t, Path.Combine(SelectedFolder, filename + ".log"));
             CreateMovieFile(Path.Combine(SelectedFolder, filename + ".264"));
@@ -330,12 +332,14 @@ namespace DataGenerator {
 
             Random rand = new Random();
 
+            double lattitude = StartLattitude + (EndLattitude - StartLattitude) * rand.Next(60) / 60;
+            double longitude = StartLongitude + (EndLongitude - StartLongitude) * rand.Next(60) / 60; 
             for (int i = 0; i < 60; i++) {
                 t = t.AddSeconds(1);
                 string s = t.ToString("yyyy-MM-dd hh:mm:ss,");
-                double v = StartLattitude + (EndLattitude - StartLattitude) * i / 60;
+                double v = lattitude + 0.3 * i / 60;
                 s += v.ToString("00.000000") + ",";
-                v = StartLongitude + (EndLongitude - StartLongitude) * i / 60;
+                v = longitude + 0.3 * i / 60;
                 s += v.ToString("000.000000") + ",";
                 int z = rand.Next(LowVelocity, HighVelocity);
                 s += z + ",";

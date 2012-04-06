@@ -14,6 +14,10 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Viewer.Common.Util;
+using Viewer.Common.ViewModel;
+using Viewer.Common.Service;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Viewer.Personal.Model {
 
@@ -44,10 +48,10 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
         /// </summary>
-        public int Import(Vehicle vehicle, IEnumerable<string> files, bool overwrite) {
+        public int Import(Vehicle vehicle, IEnumerable<string> files, bool convert, bool overwrite) {
             int count = 0;
             foreach (string file in files) {
-                if (ImportTrackFile(vehicle, file, overwrite)) {
+                if (ImportTrackFile(vehicle, file, convert, overwrite)) {
                     count++;
                 }
             }
@@ -59,14 +63,35 @@ namespace Viewer.Personal.Model {
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="overwrite"></param>
-        public int ImportAll(Vehicle vehicle, string folder, bool overwrite) {
+        public int ImportAll(Vehicle vehicle, string folder, bool convert, bool overwrite) {
             int count = 0;
             if (Directory.Exists(folder)) {
                 string[] files = Directory.GetFiles(folder, "*.inc");
-                foreach (string file in files) {
-                    if (ImportTrackFile(vehicle, file, overwrite)) {
-                        count++;
-                    }
+                if (files.Length > 0) {
+                    ProgressViewModel progView = CreateProgressView(files.Length);
+                    progView.Caption = "SD 트랙 파일들을 로컬 저장소로 저장합니다.";
+                    DialogService.RunProgress("저장", progView);
+
+                    BackgroundWorker worker = new BackgroundWorker();
+                    worker.DoWork += (sender, e) => {
+                        int cnt = 0;
+                        foreach (string file in files) {
+                            if (ImportTrackFile(vehicle, file, convert, overwrite)) {
+                                count++;
+
+                                if (Application.Current != null) {
+                                    Application.Current.Dispatcher.Invoke((Action)(() => {
+                                        progView.Value = ++cnt;
+                                        progView.Message = file;
+                                    }));
+                                }
+                            }
+                        }
+                    };
+
+                    worker.RunWorkerCompleted += (sender, e) => {
+                    };
+                    worker.RunWorkerAsync();
                 }
             }
             return count;
@@ -77,12 +102,18 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
+        private ProgressViewModel CreateProgressView(int total) {
+            ProgressViewModel progView = new ProgressViewModel();
+            progView.Maximum = total;
+            return progView;
+        }
+
         /// <summary>
         /// file명에 해당하는 inc, log, 264 파일들을 해당하는 스토리지에 복사한다.
         /// 264파일은 mp4파일로 변환하여 저장한다.
         /// 264파을을 삭제하지는 않는다.
         /// </summary>
-        private bool ImportTrackFile(Vehicle vehicle, string file, bool overwrite) {
+        private bool ImportTrackFile(Vehicle vehicle, string file, bool convert, bool overwrite) {
             // inc 파일은 반드시 존재해야 한다.
             string source = Path.ChangeExtension(file, ".inc");
             if (File.Exists(source)) {
@@ -118,7 +149,9 @@ namespace Viewer.Personal.Model {
                     }
 
                     // convert to mp4;
-                    VideoUtil.RawToMpeg(target, null);
+                    if (convert) {
+                        VideoUtil.RawToMpeg(target, null);
+                    }
                 }
 
                 return true;

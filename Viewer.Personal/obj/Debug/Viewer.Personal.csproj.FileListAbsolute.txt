@@ -15,9 +15,6 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\bin\Debug\Viewer.Common.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\bin\Debug\Viewer.Common.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\map.html
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Personal.dll
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Personal.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\AboutView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceConfigView.baml
@@ -39,5 +36,8 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\VehicleView.g.cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal_MarkupCompile.cache
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.g.resources
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\map.html
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Personal.dll
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Personal.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.pdb

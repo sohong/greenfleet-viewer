@@ -50,6 +50,11 @@
         markers = [];
     }
 
+    function activeMarker(track, lattitude, longitude) {
+        clearMarkers();
+        addMarker(track, lattitude, longitude);
+    }
+
 </script>
 </head>
 <body onload="initialize()">

@@ -22,11 +22,8 @@
             <TabItem Header="저장소">
                 <gf:RepositoryView Name="repoView"/>
             </TabItem>
-            <!--
-            <TabItem Header="Track">
-                <gf:TrackView Name="trackView"/>
+            <TabItem Header="소모품">
             </TabItem>
-            -->
         </TabControl>
     </Grid>
 </Window>
