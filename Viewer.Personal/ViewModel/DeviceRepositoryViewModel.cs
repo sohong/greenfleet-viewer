@@ -259,9 +259,8 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoSave() {
-            Repository repo = PersonalDomain.Domain.Repository;
-            //PersonalDomain.Domain.
-            MessageUtil.Show(Vehicles.CurrentItem.ToString());
+            SaveViewModel model = new SaveViewModel(Repository, SearchFrom, SearchTo);
+            DialogService.Run("저장", new SaveView(), model);
         }
 
         #endregion // internal methods

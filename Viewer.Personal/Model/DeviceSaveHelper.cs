@@ -39,13 +39,13 @@ namespace Viewer.Personal.Model {
 
             IEnumerable<Track> m_tracks = null;
             switch (options.Scope) {
-            case SaveOption.SaveScope.All:
+            case SaveScope.All:
                 m_tracks = source.Tracks;
                 break;
-            case SaveOption.SaveScope.Selection:
+            case SaveScope.Selection:
                 m_tracks = source.Selection;
                 break;
-            case SaveOption.SaveScope.Range:
+            case SaveScope.Range:
                 m_tracks = source.Tracks.Where((t) =>
                     (t.StartTime >= options.StartDate) && (t.StartTime <= options.EndDate));
                 break;

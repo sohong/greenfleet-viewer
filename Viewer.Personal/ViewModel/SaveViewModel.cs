@@ -24,10 +24,14 @@ namespace Viewer.Personal.ViewModel {
 
         #region constructors
 
-        public SaveViewModel(DeviceRepository repository) {
+        public SaveViewModel(DeviceRepository repository, DateTime dateFrom, DateTime dateTo) {
             Repository = repository;
             Options = new SaveOption();
+            Options.StartDate = dateFrom;
+            Options.EndDate = dateTo;
             IsCancelable = true;
+            CancelText = "취소";
+            SubmitText = "저장";
         }
 
         #endregion // constructors

@@ -16,21 +16,22 @@ using Viewer.Common;
 
 namespace Viewer.Personal.Model {
 
+    public enum SaveScope {
+        All,
+        Selection,
+        Range
+    }
+
     /// <summary>
     /// Sd 카드 파일들을 저장소로 저장할 때 사용자가 지정할 수 있는 옵션.
     /// </summary>
     public class SaveOption : NotificationObjectEx {
 
-        public enum SaveScope {
-            All,
-            Selection,
-            Range
-        }
-
         #region constructors
 
         public SaveOption() {
 
+            Scope = SaveScope.All;
             Convert = true;
             Overwrite = false;
         }
@@ -101,17 +102,29 @@ namespace Viewer.Personal.Model {
         /// 저장하면서 .264파일을 mp4로 변환할 것인가?
         /// </summary>
         public bool Convert {
-            get;
-            set;
+            get { return m_convert; }
+            set {
+                if (value != m_convert) {
+                    m_convert = value;
+                    RaisePropertyChanged(() => Convert);
+                }
+            }
         }
+        private bool m_convert;
 
         /// <summary>
         /// 같은 파일이 존재하면 덮어 쓸 것인가?
         /// </summary>
         public bool Overwrite {
-            get;
-            set;
+            get { return m_overwrite; }
+            set {
+                if (value != m_overwrite) {
+                    m_overwrite = value;
+                    RaisePropertyChanged(() => Overwrite);
+                }
+            }
         }
+        private bool m_overwrite;
 
         #endregion // properties
     }

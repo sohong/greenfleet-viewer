@@ -68,7 +68,7 @@ namespace Viewer.Personal.Model {
         public IEnumerable<Track> Selection {
             get {
                 if (m_tracks != null) {
-                    m_tracks.Where((t) => t.IsChecked == true);
+                    return m_tracks.Where((t) => t.IsChecked == true);
                 }
                 return null;
             }

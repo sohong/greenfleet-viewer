@@ -49,12 +49,33 @@ namespace Viewer.Personal.Model {
         /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
         /// </summary>
         public int Import(Vehicle vehicle, IEnumerable<string> files, bool convert, bool overwrite) {
-            int count = 0;
-            foreach (string file in files) {
-                if (ImportTrackFile(vehicle, file, convert, overwrite)) {
-                    count++;
+            int count = files.Count();
+            ProgressViewModel progView = CreateProgressView(count);
+            progView.Caption = "SD 트랙 파일들을 로컬 저장소로 저장합니다.";
+            DialogService.RunProgress("저장", progView);
+
+            count = 0;
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (sender, e) => {
+                int cnt = 0;
+                foreach (string file in files) {
+                    if (ImportTrackFile(vehicle, file, convert, overwrite)) {
+                        count++;
+
+                        if (Application.Current != null) {
+                            Application.Current.Dispatcher.Invoke((Action)(() => {
+                                progView.Value = ++cnt;
+                                progView.Message = file;
+                            }));
+                        }
+                    }
                 }
-            }
+            };
+
+            worker.RunWorkerCompleted += (sender, e) => {
+            };
+            worker.RunWorkerAsync();
+            
             return count;
         }
 
@@ -68,30 +89,7 @@ namespace Viewer.Personal.Model {
             if (Directory.Exists(folder)) {
                 string[] files = Directory.GetFiles(folder, "*.inc");
                 if (files.Length > 0) {
-                    ProgressViewModel progView = CreateProgressView(files.Length);
-                    progView.Caption = "SD 트랙 파일들을 로컬 저장소로 저장합니다.";
-                    DialogService.RunProgress("저장", progView);
-
-                    BackgroundWorker worker = new BackgroundWorker();
-                    worker.DoWork += (sender, e) => {
-                        int cnt = 0;
-                        foreach (string file in files) {
-                            if (ImportTrackFile(vehicle, file, convert, overwrite)) {
-                                count++;
-
-                                if (Application.Current != null) {
-                                    Application.Current.Dispatcher.Invoke((Action)(() => {
-                                        progView.Value = ++cnt;
-                                        progView.Message = file;
-                                    }));
-                                }
-                            }
-                        }
-                    };
-
-                    worker.RunWorkerCompleted += (sender, e) => {
-                    };
-                    worker.RunWorkerAsync();
+                    count = Import(vehicle, files, convert, overwrite);
                 }
             }
             return count;

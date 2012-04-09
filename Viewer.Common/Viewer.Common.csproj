@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtension.cs" />
+    <Compile Include="EnumToBooleanConverter.cs" />
     <Compile Include="Event\TrackActivatedEvent.cs" />
     <Compile Include="Event\TrackChangedEvent.cs" />
     <Compile Include="Event\TrackPointChangedEvent.cs" />
