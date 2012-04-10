@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// RepoViewModelBase.cs
+// RepositoryViewModel.cs
 // 2012.03.21, created by sohong
 //
 // =============================================================================
@@ -38,7 +38,7 @@ namespace Viewer.Personal.ViewModel {
     /// <summary>
     /// View model base for LocalRepositoryViewModel and DeviceRepositoryViewModel.
     /// </summary>
-    public abstract class RepoViewModelBase : ViewModelBase {
+    public abstract class RepositoryViewModel : ViewModelBase {
 
         #region fields
 
@@ -50,7 +50,7 @@ namespace Viewer.Personal.ViewModel {
 
         #region constructors
 
-        public RepoViewModelBase() {
+        public RepositoryViewModel() {
             m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
             m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
         }

@@ -33,7 +33,7 @@ namespace Viewer.Personal.ViewModel {
     /// <summary>
     /// View model for DeviceRepositoryView
     /// </summary>
-    public class DeviceRepositoryViewModel : RepoViewModelBase {
+    public class DeviceRepositoryViewModel : RepositoryViewModel {
 
         #region fields
 
