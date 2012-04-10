@@ -164,7 +164,7 @@ namespace Viewer.Personal.Model {
 
                             if (track.CreateDate < m_startTime)
                                 m_startTime = track.CreateDate;
-                            if (track.CreateDate > m_startTime)
+                            if (track.CreateDate > m_endTime)
                                 m_endTime = track.CreateDate;
                         }
 
