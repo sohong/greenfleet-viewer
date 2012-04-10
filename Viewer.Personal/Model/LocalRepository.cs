@@ -25,7 +25,7 @@ namespace Viewer.Personal.Model {
     /// Repository를 열면 catalog를 읽어 트랙 개체들을 생성한다.
     /// 각 트랙의 실제 데이터 파일과 영상 파일은 트랙을 재생할 때 연다. 
     /// </summary>
-    public class LocalRepository {
+    public class LocalRepository : Repository {
 
         #region static members
 
@@ -51,7 +51,6 @@ namespace Viewer.Personal.Model {
 
         private string m_rootPath;
         private Dictionary<Vehicle, TrackCatalogCollection> m_catalogs;
-        private ObservableCollection<Track> m_tracks;
         private TrackFolderManager m_folderManager;
         private TrackImportHelper m_importHelper;
         
@@ -60,9 +59,8 @@ namespace Viewer.Personal.Model {
 
         #region constructors
 
-        public LocalRepository() {
+        public LocalRepository() : base("Local") {
             m_catalogs = new Dictionary<Vehicle, TrackCatalogCollection>();
-            m_tracks = new ObservableCollection<Track>();
             m_folderManager = new TrackFolderManager(this);
             m_importHelper = new TrackImportHelper(this);
         }
@@ -106,13 +104,6 @@ namespace Viewer.Personal.Model {
                 cats.Open(vehicle, RootPath);
                 m_catalogs.Add(vehicle, cats);
             }
-        }
-
-        /// <summary>
-        /// Track 컬렉션 원본에 대한 뷰를 생성한다.
-        /// </summary>
-        public ListCollectionView GetTracks() {
-            return new ListCollectionView(m_tracks);
         }
 
         /// <summary>

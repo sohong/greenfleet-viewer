@@ -28,13 +28,12 @@ namespace Viewer.Personal.Model {
     /// <summary>
     /// SD Card 등 블랙박스 저장 미디어에 포함된 트랙 정보들.
     /// </summary>
-    public class DeviceRepository : NotificationObjectEx {
+    public class DeviceRepository : Repository {
 
         #region fields
 
         private Vehicle m_vehicle;
         private string m_rootPath;
-        private ObservableCollection<Track> m_tracks;
         private LocalTrackLoader m_loader;
         private DateTime m_startTime;
         private DateTime m_endTime;
@@ -44,7 +43,7 @@ namespace Viewer.Personal.Model {
 
         #region constructor
 
-        public DeviceRepository() {
+        public DeviceRepository() : base("Device") {
             m_loader = new LocalTrackLoader();
         }
 
@@ -61,21 +60,17 @@ namespace Viewer.Personal.Model {
             get { return m_rootPath; }
         }
 
-        public IEnumerable<Track> Tracks {
-            get { return m_tracks; }
-        }
-
         public IEnumerable<Track> Selection {
             get {
-                if (m_tracks != null) {
-                    return m_tracks.Where((t) => t.IsChecked == true);
+                if (TrackList != null) {
+                    return TrackList.Where((t) => t.IsChecked == true);
                 }
                 return null;
             }
         }
 
         public int TrackCount {
-            get { return m_tracks != null ? m_tracks.Count : 0; }
+            get { return TrackList != null ? TrackList.Count : 0; }
         }
 
         /// <summary>
@@ -108,62 +103,18 @@ namespace Viewer.Personal.Model {
             m_vehicle = vehicle;
             m_rootPath = rootPath;
 
-            if (m_tracks != null) {
-                m_tracks.Clear();
-                m_tracks = null;
-            }
+            TrackList.Clear();
             if (Directory.Exists(rootPath)) {
-                m_tracks = new ObservableCollection<Track>();
-
                 LoadTracks(callback);
             }
         }
 
-        /// <summary>
-        /// Track 컬렉션 원본에 대한 뷰를 생성한다.
-        /// </summary>
-        public ListCollectionView GetTracks() {
-            ListCollectionView view = new ListCollectionView(m_tracks);
-            view.SortDescriptions.Add(new SortDescription("CreateDate", ListSortDirection.Ascending));
-            return view;
-        }
-
-        /// <summary>
-        /// 트랙 목록으로부터 트랙 그룹 hierarchy를 생성한다.
-        /// </summary>
-        /// <param name="tracks"></param>
-        /// <returns></returns>
-        public TrackGroup CreateGroupsFromTracks(ListCollectionView tracks) {
-            if (tracks.Count > 0) {
-                Track track = (Track)tracks.GetItemAt(0);
-                TrackGroup root = new TrackGroup(track.CreateDate, TrackGroupLevel.Day);
-                DateTime curr = track.CreateDate.Date;
-
-                TrackGroup group = null;
-                foreach (Track tr in tracks) {
-                    DateTime d = tr.CreateDate;
-                    if (d.Date == root.Date.Date) {
-                        if (group == null || d.Hour != curr.Hour) {
-                            group = new TrackGroup(d, TrackGroupLevel.Hour);
-                            root.Add(group);
-                        }
-
-                        group.Add(tr);
-                        curr = d;
-                    }
-                }
-
-                return root;
-            }
-
-            return null;
-        }
 
         /// <summary>
         /// 모든 track을 check되지 않은 상태로 변경한다.
         /// </summary>
         public void ClearSelection() {
-            foreach (Track t in m_tracks) {
+            foreach (Track t in TrackList) {
                 t.IsChecked = false;
             }
         }
@@ -195,7 +146,7 @@ namespace Viewer.Personal.Model {
                     foreach (string file in files) {
                         if (Application.Current != null && progView.IsCanceled) {
                             Application.Current.Dispatcher.Invoke((Action)(() => {
-                                m_tracks.Clear();
+                                TrackList.Clear();
                             }));
                             break;
                         }
@@ -205,10 +156,10 @@ namespace Viewer.Personal.Model {
                         if (track != null) {
                             if (Application.Current != null) {
                                 Application.Current.Dispatcher.Invoke((Action)(() => {
-                                    m_tracks.Add(track);
+                                    TrackList.Add(track);
                                 }));
                             } else {
-                                m_tracks.Add(track);
+                                TrackList.Add(track);
                             }
 
                             if (track.CreateDate < m_startTime)

@@ -19,11 +19,11 @@ using System.ComponentModel;
 namespace Viewer.Common.Model {
 
     public enum TrackGroupLevel {
-        Year,
-        Month,
-        Week,
+        Hour,
         Day,
-        Hour
+        Month,
+        Year,
+        All
     };
 
     
@@ -66,6 +66,10 @@ namespace Viewer.Common.Model {
 
 
         #region properties
+
+        public TrackGroupLevel Level {
+            get { return m_level; }
+        }
 
         public DateTime Date {
             get { return m_date; }
@@ -164,11 +168,12 @@ namespace Viewer.Common.Model {
 
         public override string ToString() {
             switch (m_level) {
+            case TrackGroupLevel.All:
+                return m_date.ToString("All");
             case TrackGroupLevel.Year:
                 return m_date.ToString("yyyy");
             case TrackGroupLevel.Month:
                 return m_date.ToString("yyyy-MM");
-            case TrackGroupLevel.Week:
             case TrackGroupLevel.Day:
                 return m_date.ToString("yyyy-MM-dd");
             case TrackGroupLevel.Hour:

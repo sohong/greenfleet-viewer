@@ -72,6 +72,7 @@
     <Compile Include="Model\DeviceSaveHelper.cs" />
     <Compile Include="Model\DriveManager.cs" />
     <Compile Include="Model\IDriveManager.cs" />
+    <Compile Include="Model\Repository.cs" />
     <Compile Include="Model\RepositorySearchHelper.cs" />
     <Compile Include="Model\SaveOption.cs" />
     <Compile Include="Model\TrackCatalog.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="ViewModel\PersonalViewModel.cs" />
     <Compile Include="ViewModel\PreferencesViewModel.cs" />
     <Compile Include="ViewModel\LocalRepositoryViewModel.cs" />
-    <Compile Include="ViewModel\RepoViewModelBase.cs" />
+    <Compile Include="ViewModel\RepositoryViewModel.cs" />
     <Compile Include="ViewModel\SaveViewModel.cs" />
     <Compile Include="ViewModel\TrackViewModel.cs" />
     <Compile Include="ViewModel\VehicleListViewModel.cs" />
