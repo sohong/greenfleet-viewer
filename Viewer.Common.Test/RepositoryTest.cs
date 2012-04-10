@@ -66,19 +66,5 @@ namespace Viewer.Common.Test
         //}
         //
         #endregion
-
-
-        /// <summary>
-        ///A test for ImportTrackFiles
-        ///</summary>
-        [TestMethod()]
-        public void ImportTrackFilesTest() {
-            Repository repo = new Repository();
-            repo.Open(@"c:\GreenFleet\test\storage", null);
-            Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
-            List<string> files = new List<string>();
-            files.Add(@"C:\GreenFleet\test\samples\all_2012_03_11_20_37_31");
-            repo.ImportTrackFiles(vehicle, files, true, true);
-        }
     }
 }

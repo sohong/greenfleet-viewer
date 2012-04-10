@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Margin="6,3,6,5">
+        <StackPanel Orientation="Horizontal" Margin="0,0,6,4">
             <Label>차랑:</Label>
             <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding LoadCommand}">열기</Button>

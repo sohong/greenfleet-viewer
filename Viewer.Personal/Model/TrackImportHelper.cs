@@ -28,14 +28,14 @@ namespace Viewer.Personal.Model {
 
         #region fields
 
-        private Repository m_owner;
+        private LocalRepository m_owner;
 
         #endregion // fields
 
 
         #region constructors
 
-        public TrackImportHelper(Repository owner) {
+        public TrackImportHelper(LocalRepository owner) {
             Debug.Assert(owner != null, "owner is null");
             m_owner = owner;
         }

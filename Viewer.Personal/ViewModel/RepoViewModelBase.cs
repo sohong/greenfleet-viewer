@@ -24,7 +24,19 @@ using Viewer.Common.Event;
 namespace Viewer.Personal.ViewModel {
 
     /// <summary>
-    /// View model base for RepositoryViewModel and DeviceRepositoryViewModel.
+    /// 리파지토리 검색 방법
+    /// </summary>
+    public enum SearchMode {
+        Range,      // 구간 설정
+        Today,      // 오늘
+        TwoDays,    // 이틀
+        Recent,     // 최근
+        RecentTwo   // 최근 이틀
+    }
+
+    
+    /// <summary>
+    /// View model base for LocalRepositoryViewModel and DeviceRepositoryViewModel.
     /// </summary>
     public abstract class RepoViewModelBase : ViewModelBase {
 

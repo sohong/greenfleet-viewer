@@ -38,14 +38,14 @@ namespace Viewer.Personal.Model {
 
         #region fields
 
-        private Repository m_owner;
+        private LocalRepository m_owner;
 
         #endregion // fields
 
 
         #region constructor
 
-        public TrackFolderManager(Repository owner) {
+        public TrackFolderManager(LocalRepository owner) {
             Debug.Assert(owner != null, "owner is null");
             m_owner = owner;
         }
@@ -83,13 +83,23 @@ namespace Viewer.Personal.Model {
             return folder;
         }
 
+        /// <summary>
+        /// 가장 최근에 등록된 트랙파일 일자를 리턴한다. 
+        /// </summary>
+        /// <returns></returns>
+        public DateTime FindRecentDay() {
+            DateTime d = DateTime.Today;
+
+            return d;
+        }
+
         #endregion // methods
 
 
         #region internal methods
 
         private string ParseFolder(string trackFile) {
-            Match match = Repository.TRACK_DATE_PATTERN.Match(trackFile);
+            Match match = LocalRepository.TRACK_DATE_PATTERN.Match(trackFile);
             if (match.Success) {
                 string[] arr = match.Value.Split('_');
                 string folder = arr[0] + '\\' + arr[1] + '\\' + arr[2];

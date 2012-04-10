@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// Repository.cs
+// LocalRepository.cs
 // 2012.03.07, created by sohong
 //
 // =============================================================================
@@ -22,15 +22,17 @@ namespace Viewer.Personal.Model {
     
     /// <summary>
     /// Track 파일 저장소.
+    /// Repository를 열면 catalog를 읽어 트랙 개체들을 생성한다.
+    /// 각 트랙의 실제 데이터 파일과 영상 파일은 트랙을 재생할 때 연다. 
     /// </summary>
-    public class Repository {
+    public class LocalRepository {
 
         #region static members
 
         public static readonly Regex TRACK_DATE_PATTERN = new Regex(@"\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}");
 
         public static bool ParseTrackFile(string fileName, ref DateTime date) {
-            Match match = Repository.TRACK_DATE_PATTERN.Match(fileName);
+            Match match = LocalRepository.TRACK_DATE_PATTERN.Match(fileName);
             if (match.Success) {
                 string[] arr = match.Value.Split('_');
                 if (arr.Length >= 6) {
@@ -58,7 +60,7 @@ namespace Viewer.Personal.Model {
 
         #region constructors
 
-        public Repository() {
+        public LocalRepository() {
             m_catalogs = new Dictionary<Vehicle, TrackCatalogCollection>();
             m_tracks = new ObservableCollection<Track>();
             m_folderManager = new TrackFolderManager(this);
@@ -120,15 +122,6 @@ namespace Viewer.Personal.Model {
         /// </summary>
         public string GetFolder(Vehicle vehicle, string trackFile, bool relative) {
             return m_folderManager.GetFolder(vehicle, trackFile, relative);
-        }
-
-        /// <summary>
-        /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
-        /// files에는 확장자 없는 파일명들이 들어있다.
-        /// </summary>
-        public void ImportTrackFiles(Vehicle vehicle, IEnumerable<string> files, bool convert, bool overwrite) {
-            Logger.Debug("Import track files...");
-            m_importHelper.Import(vehicle, files, convert, overwrite);
         }
 
         #endregion // methods

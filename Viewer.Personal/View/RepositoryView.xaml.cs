@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// RepositoryView.cs
+// LocalRepositoryView.cs
 // 2012.03.09, created by sohong
 //
 // =============================================================================
@@ -30,11 +30,11 @@ namespace Viewer.Personal.View {
 
     /// <summary>
     /// </summary>
-    public partial class RepositoryView : UserControl {
+    public partial class LocalRepositoryView : UserControl {
 
         #region constructor
 
-        public RepositoryView() {
+        public LocalRepositoryView() {
             InitializeComponent();
         }
 

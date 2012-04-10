@@ -54,7 +54,7 @@ namespace Viewer.Personal.Model {
         private Preferences m_preferences;
         private VehicleManager m_vehicles;
         private DeviceConfig m_deviceConfig;
-        private Repository m_repository;
+        private LocalRepository m_repository;
 
         #endregion // fields
 
@@ -64,7 +64,7 @@ namespace Viewer.Personal.Model {
         private PersonalDomain() {
             m_preferences = new Preferences();
             m_vehicles = new VehicleManager();
-            m_repository = new Repository();
+            m_repository = new LocalRepository();
         }
 
         #endregion // constructors
@@ -96,7 +96,7 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 저장소
         /// </summary>
-        public Repository Repository {
+        public LocalRepository Repository {
             get { return m_repository; }
         }
 

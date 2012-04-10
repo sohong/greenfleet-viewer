@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// StorageViewModel.cs
+// LocalRepositoryViewModel.cs
 // 2012.03.08, created by sohong
 //
 // =============================================================================
@@ -26,9 +26,9 @@ using Viewer.Common.Event;
 namespace Viewer.Personal.ViewModel {
 
     /// <summary>
-    /// View model for RepositoryView
+    /// View model for LocalRepositoryView
     /// </summary>
-    public class RepositoryViewModel : RepoViewModelBase {
+    public class LocalRepositoryViewModel : RepoViewModelBase {
 
         #region fields
 
@@ -39,7 +39,7 @@ namespace Viewer.Personal.ViewModel {
 
         #region constructors
 
-        public RepositoryViewModel() {
+        public LocalRepositoryViewModel() {
             m_tracks = Repository.GetTracks();
 
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
@@ -48,7 +48,7 @@ namespace Viewer.Personal.ViewModel {
 
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
-            SearchAll = true;
+            SearchMode = SearchMode.Today;
             AutoPlay = true;
 
             if (PersonalDomain.Domain.EventAggregator != null) {
@@ -64,13 +64,27 @@ namespace Viewer.Personal.ViewModel {
 
         #region properties
 
-        public Repository Repository {
+        public LocalRepository Repository {
             get { return PersonalDomain.Domain.Repository; }
         }
 
         public ListCollectionView Tracks {
             get { return m_tracks; }
         }
+
+        /// <summary>
+        /// Search mode.
+        /// </summary>
+        public SearchMode SearchMode {
+            get { return m_searchMode; }
+            set {
+                if (value != m_searchMode) {
+                    m_searchMode = value;
+                    RaisePropertyChanged(() => SearchMode);
+                }
+            }
+        }
+        private SearchMode m_searchMode;
 
         /// <summary>
         /// Search command

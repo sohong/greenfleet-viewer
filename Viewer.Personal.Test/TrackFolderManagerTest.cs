@@ -67,7 +67,7 @@ namespace Viewer.Personal.Test
         ///</summary>
         [TestMethod()]
         public void GetFolderTest() {
-            Repository repo = new Repository();
+            LocalRepository repo = new LocalRepository();
             repo.Open(PersonalTest.StorageRoot, null);
             TrackFolderManager manager = new TrackFolderManager(repo);
             Vehicle vehicle = new Vehicle() {

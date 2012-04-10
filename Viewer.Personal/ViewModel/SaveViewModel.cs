@@ -29,6 +29,8 @@ namespace Viewer.Personal.ViewModel {
             Options = new SaveOption();
             Options.StartDate = dateFrom;
             Options.EndDate = dateTo;
+            Options.Convert = false;
+            Options.Overwrite = true;
             IsCancelable = true;
             CancelText = "취소";
             SubmitText = "저장";

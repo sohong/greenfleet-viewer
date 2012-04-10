@@ -65,7 +65,7 @@ namespace Viewer.Personal.Test
         ///</summary>
         [TestMethod()]
         public void ImportTest() {
-            Repository repo = new Repository();
+            LocalRepository repo = new LocalRepository();
             repo.Open(PersonalTest.StorageRoot, null);
             Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
             TrackImportHelper helper = new TrackImportHelper(repo);
@@ -86,7 +86,7 @@ namespace Viewer.Personal.Test
             string repoDir = PersonalTest.StorageRoot;
             string sourceDir = PersonalTest.DeviceRoot;
             //string sourceDir = @"x:\gfdata";
-            Repository repo = new Repository();
+            LocalRepository repo = new LocalRepository();
             repo.Open(repoDir, null);
             Vehicle vehicle = new Vehicle() { VehicleId = "v121212121212" };
             TrackImportHelper helper = new TrackImportHelper(repo);

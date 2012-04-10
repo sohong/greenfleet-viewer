@@ -23,7 +23,6 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceConfigView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\DeviceRepositoryView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\PreferencesView.baml
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\RepositoryView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\TrackView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\VehicleListView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\VehicleView.baml
@@ -38,6 +37,7 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\VehicleView.g.cs
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal_MarkupCompile.cache
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal_MarkupCompile.lref
+C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\RepositoryView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\View\SaveView.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.g.resources
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Personal\obj\Debug\Viewer.Personal.dll

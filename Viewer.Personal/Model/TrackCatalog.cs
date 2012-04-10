@@ -26,7 +26,7 @@ namespace Viewer.Personal.Model {
 
         #region consts
         
-        private const string ROOT_ELEMENT = "TrackCategory";
+        private const string ROOT_ELEMENT = "TrackCatalog";
         private const string TRACK_ELEMENT = "track";
         private const string CREATED_ATTR = "created";
         private const string DATE_FORMAT = "yyyyMMdd HHmmss";
@@ -131,7 +131,7 @@ namespace Viewer.Personal.Model {
         /// <param name="fileName">경로와 확장자가 제외된 파일명.</param>
         private Track Add(string fileName) {
             DateTime date = new DateTime();
-            if (Repository.ParseTrackFile(fileName, ref date)) {
+            if (LocalRepository.ParseTrackFile(fileName, ref date)) {
                 if (date.Year == m_year && date.Month == m_month) {
                     Track track = new Track();
                     track.VehicleId = m_vehicle.VehicleId;

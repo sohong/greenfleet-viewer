@@ -32,7 +32,7 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public void Save(DeviceRepository source, Repository target, SaveOption options) {
+        public void Save(DeviceRepository source, LocalRepository target, SaveOption options) {
             Debug.Assert(source != null);
             Debug.Assert(target != null);
             Debug.Assert(options != null);

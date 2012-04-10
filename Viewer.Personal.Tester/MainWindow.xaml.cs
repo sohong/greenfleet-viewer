@@ -47,7 +47,7 @@ namespace Viewer.Personal.Tester {
             this.DataContext = new PersonalViewModel();
 
             deviceView.DataContext = new DeviceRepositoryViewModel();
-            repoView.DataContext = new RepositoryViewModel();
+            repoView.DataContext = new LocalRepositoryViewModel();
         }
 
         #endregion // constructors
