@@ -15,6 +15,7 @@ using System.Text;
 using System.IO;
 using Viewer.Common.Model;
 using Viewer.Personal.ViewModel;
+using Viewer.Common.Loader;
 
 namespace Viewer.Personal.Model {
 
@@ -43,23 +44,19 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public IEnumerable<Track> Find(Vehicle vehicle, SearchMode mode, DateTime start, DateTime end) {
-            IList<Track> tracks = new List<Track>();
+        public IEnumerable<Track> Find(Vehicle vehicle, DateTime start, DateTime end) {
+            if (end >= start) {
+                IList<string> trackFiles = new List<string>();
+                string root = m_folderManager.GetRoot(vehicle);
+                Find(trackFiles, root, start, end);
 
-            switch (mode) {
-            case SearchMode.Recent:
-                start = m_folderManager.FindRecentDay();
-                break;
-            case SearchMode.RecentTwo:
-                break;
-            case SearchMode.Today:
-                break;
-            case SearchMode.TwoDays:
-                break;
+                if (trackFiles.Count > 0) {
+                    List<Track> tracks = new List<Track>();
+
+                    return tracks;
+                }
             }
-
-            Find(tracks, "", start, end);
-            return tracks;
+            return null;
         }
 
         #endregion // methods
@@ -67,12 +64,29 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
-        private string GetRootFolder(Vehicle vehicle) {
-            string folder = Path.Combine(m_repository.RootPath, vehicle.VehicleId);
-            return folder;
-        }
+        private void Find(IList<string> list, string root, DateTime start, DateTime end) {
+            while (start < end) {
+                // 분단위로 판단할 수 있도록...
+                start = start.AddSeconds(-start.Second);
+                end = end.AddSeconds(60 - end.Second - 1);
 
-        private void Find(IList<Track> list, string root, DateTime start, DateTime end) {
+                string folder = m_folderManager.DateTimeToFolder(root, start);
+                if (Directory.Exists(folder)) {
+                    string[] files = Directory.GetFiles(folder, "*.inc");
+                    TrackType tt;
+                    DateTime d;
+
+                    foreach (string file in files) {
+                        if (LocalTrackLoader.FileToDateTime(file, out d, out tt)) {
+                            if (d >= start && d <= end) {
+                                list.Add(file);
+                            }
+                        }
+                    }
+                }
+
+                start += TimeSpan.FromDays(1);
+            }
         }
 
         #endregion // internal methods

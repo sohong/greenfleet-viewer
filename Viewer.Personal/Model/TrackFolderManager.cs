@@ -62,6 +62,10 @@ namespace Viewer.Personal.Model {
             return false;
         }
 
+        public string GetRoot(Vehicle vehicle) {
+            return Path.Combine(m_owner.RootPath, vehicle.VehicleId);
+        }
+
         /// <summary>
         /// track file이 저장될 폴더명을 리턴한다.
         /// relative가 true이면 repository root 상대 경로로 리턴한다.
@@ -81,6 +85,15 @@ namespace Viewer.Personal.Model {
             }
 
             return folder;
+        }
+
+        /// <summary>
+        /// root로 지정된 vehicle 폴더 내에서 date에 해당하는 폴더를 절대경로로 리턴한다.
+        /// 폴더가 존재하지 않으면 null을 리턴한다.
+        /// </summary>
+        public string DateTimeToFolder(string root, DateTime date) {
+            string folder = string.Format(@"{0:0000}\{1:00}\{2:00}", date.Year, date.Month, date.Day);
+            return Path.Combine(root, folder);
         }
 
         /// <summary>

@@ -30,8 +30,31 @@ namespace Viewer.Common.Loader {
 
         #endregion // consts
 
-        
-        #region constructor 
+
+        #region static members
+
+        public static bool FileToDateTime(string fileName, out DateTime date, out TrackType trackType) {
+            string s = Path.GetFileNameWithoutExtension(fileName);
+            date = DateTime.MinValue;
+            trackType = TrackType.All;
+
+            if (s.StartsWith("all_")) {
+                s = s.Substring(4);
+            } else if (s.StartsWith("event_")) {
+                s = s.Substring(6);
+                trackType = TrackType.Event;
+            } else {
+                return false;
+            }
+
+            date = DateTime.ParseExact(s, DATE_FORMAT, null);
+            return true;
+        }
+
+        #endregion // static members
+
+
+        #region constructor
 
         public LocalTrackLoader() {
         }
@@ -70,17 +93,10 @@ namespace Viewer.Common.Loader {
             }
 
             // create date
-            TrackType tt = TrackType.All;
-            string s = Path.GetFileNameWithoutExtension(path);
-            if (s.StartsWith("all_")) {
-                s = s.Substring(4);
-            } else if (s.StartsWith("event_")) {
-                s = s.Substring(6);
-                tt = TrackType.Event;
-            } else {
+            TrackType tt;
+            DateTime d;
+            if (!FileToDateTime(path, out d, out tt))
                 return null;
-            }
-            DateTime d = DateTime.ParseExact(s, DATE_FORMAT, null);
 
             Track track = new Track();
 
@@ -91,7 +107,7 @@ namespace Viewer.Common.Loader {
             // track type
             track.TrackType = tt;
             // video file
-            s = Path.ChangeExtension(path, "264");
+            string s = Path.ChangeExtension(path, "264");
             if (File.Exists(s)) {
                 track.VideoFile = s;
                 if (convertVideo) {

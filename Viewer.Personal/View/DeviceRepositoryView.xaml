@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="0,0,6,4">
             <Label>차랑:</Label>
-            <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True"/>
+            <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True" VerticalContentAlignment="Center" Padding="5,0,0,0"/>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding LoadCommand}">열기</Button>
             <Label Margin="4,0,0,0">검색 시간:</Label>
             <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchFrom}"/>

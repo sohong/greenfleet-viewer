@@ -22,6 +22,7 @@ using Microsoft.Practices.Prism.Commands;
 using Viewer.Common.Util;
 using Viewer.Personal.Command;
 using Viewer.Common.Event;
+using Viewer.Common.Model;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -47,7 +48,7 @@ namespace Viewer.Personal.ViewModel {
             DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
 
             SearchFrom = DateTime.Today;
-            SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
+            SearchTo = DateTime.Today + TimeSpan.FromMinutes(23 * 60 + 59);
             SearchMode = SearchMode.Today;
             AutoPlay = true;
 
@@ -132,6 +133,7 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoSearch(object data) {
+            IEnumerable<Track> tracks = new RepositorySearchHelper(Repository).Find(SelectedVehicle, SearchFrom, SearchTo);
         }
 
         // Export command
