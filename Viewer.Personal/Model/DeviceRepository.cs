@@ -34,9 +34,6 @@ namespace Viewer.Personal.Model {
 
         private Vehicle m_vehicle;
         private string m_rootPath;
-        private LocalTrackLoader m_loader;
-        private DateTime m_startTime;
-        private DateTime m_endTime;
         
         #endregion // fields
 
@@ -44,7 +41,6 @@ namespace Viewer.Personal.Model {
         #region constructor
 
         public DeviceRepository() : base("Device") {
-            m_loader = new LocalTrackLoader();
         }
 
         #endregion // constructor
@@ -58,35 +54,6 @@ namespace Viewer.Personal.Model {
 
         public string RootPath {
             get { return m_rootPath; }
-        }
-
-        public IEnumerable<Track> Selection {
-            get {
-                if (TrackList != null) {
-                    return TrackList.Where((t) => t.IsChecked == true);
-                }
-                return null;
-            }
-        }
-
-        public int TrackCount {
-            get { return TrackList != null ? TrackList.Count : 0; }
-        }
-
-        /// <summary>
-        /// 포함된 트랙들 중 가장 먼저인 놈의 파일 표시 시간값.
-        /// 즉, Track.CreateDate.
-        /// event_2012_03_11_20_38_31.inc => 2012-03-11 20:38:31
-        /// </summary>
-        public DateTime StartTime {
-            get { return m_startTime; }
-        }
-
-        /// <summary>
-        /// 포함된 트랙들 중 가장 나중인 놈의 파일 표시 시간값.
-        /// </summary>
-        public DateTime EndTime {
-            get { return m_endTime; }
         }
 
         #endregion // properties
@@ -109,82 +76,15 @@ namespace Viewer.Personal.Model {
             }
         }
 
-
-        /// <summary>
-        /// 모든 track을 check되지 않은 상태로 변경한다.
-        /// </summary>
-        public void ClearSelection() {
-            foreach (Track t in TrackList) {
-                t.IsChecked = false;
-            }
-        }
-
         #endregion // methods
 
 
         #region internal methods
 
-        private ProgressViewModel CreateProgressView(int total) {
-            ProgressViewModel progView = new ProgressViewModel();
-            progView.Maximum = total;
-            return progView;
-        }
-
         private void LoadTracks(Action callback) {
             string[] files = Directory.GetFiles(m_rootPath, "*.inc");
             if (files.Length > 0) {
-                ProgressViewModel progView = CreateProgressView(files.Length);
-                progView.Caption = "트랙 파일들을 로드합니다.";
-                DialogService.RunProgress("SD 카드 로딩", progView);
-
-                int cnt = 0;
-                BackgroundWorker worker = new BackgroundWorker();
-                worker.DoWork += (sender, e) => {
-                    m_startTime = DateTime.MaxValue;
-                    m_endTime = DateTime.MinValue;
-
-                    foreach (string file in files) {
-                        if (Application.Current != null && progView.IsCanceled) {
-                            Application.Current.Dispatcher.Invoke((Action)(() => {
-                                TrackList.Clear();
-                            }));
-                            break;
-                        }
-
-                        cnt++;
-                        Track track = m_loader.Load(file, false);
-                        if (track != null) {
-                            if (Application.Current != null) {
-                                Application.Current.Dispatcher.Invoke((Action)(() => {
-                                    TrackList.Add(track);
-                                }));
-                            } else {
-                                TrackList.Add(track);
-                            }
-
-                            if (track.CreateDate < m_startTime)
-                                m_startTime = track.CreateDate;
-                            if (track.CreateDate > m_endTime)
-                                m_endTime = track.CreateDate;
-                        }
-
-                        //worker.ReportProgress(++cnt);
-
-                        if (Application.Current != null) {
-                            Application.Current.Dispatcher.Invoke((Action)(() => {
-                                progView.Value = cnt;
-                                progView.Message = file;
-                            }));
-                        }
-                    }
-                };
-                //worker.ProgressChanged += (sender, e) => { };
-                worker.RunWorkerCompleted += (sender, e) => {
-                    if (callback != null)
-                        callback();
-                };
-                //worker.WorkerReportsProgress = true;
-                worker.RunWorkerAsync();
+                TrackList.Load(files, files.Length, "SD 카드 로딩", callback);
             }
         }
 

@@ -16,6 +16,7 @@ using System.IO;
 using Viewer.Common.Model;
 using Viewer.Personal.ViewModel;
 using Viewer.Common.Loader;
+using System.Collections.ObjectModel;
 
 namespace Viewer.Personal.Model {
 
@@ -44,19 +45,16 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public IEnumerable<Track> Find(Vehicle vehicle, DateTime start, DateTime end) {
+        public void Find(Vehicle vehicle, DateTime start, DateTime end, ObservableCollection<Track> traks) {
             if (end >= start) {
                 IList<string> trackFiles = new List<string>();
                 string root = m_folderManager.GetRoot(vehicle);
                 Find(trackFiles, root, start, end);
 
                 if (trackFiles.Count > 0) {
-                    List<Track> tracks = new List<Track>();
-
-                    return tracks;
+                    //List<Track> tracks = LoadTracks(trackFiles, tracks);
                 }
             }
-            return null;
         }
 
         #endregion // methods

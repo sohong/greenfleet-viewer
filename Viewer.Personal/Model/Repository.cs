@@ -28,7 +28,7 @@ namespace Viewer.Personal.Model {
         #region fields
 
         private string m_name;
-        private ObservableCollection<Track> m_tracks;
+        private LocalTrackCollection m_tracks;
 
         #endregion // fields
 
@@ -37,7 +37,7 @@ namespace Viewer.Personal.Model {
 
         public Repository(string name) {
             m_name = name;
-            m_tracks = new ObservableCollection<Track>();
+            m_tracks = new LocalTrackCollection();
         }
 
         #endregion // constructor
@@ -46,7 +46,31 @@ namespace Viewer.Personal.Model {
         #region properties
 
         public IEnumerable<Track> Tracks {
-            get { return m_tracks; }
+            get { return m_tracks.Tracks; }
+        }
+
+        public int TrackCount {
+            get { return TrackList.Count; }
+        }
+
+        /// <summary>
+        /// 포함된 트랙들 중 가장 먼저인 놈의 파일 표시 시간값.
+        /// 즉, Track.CreateDate.
+        /// event_2012_03_11_20_38_31.inc => 2012-03-11 20:38:31
+        /// </summary>
+        public DateTime StartTime {
+            get { return TrackList.StartTime; }
+        }
+
+        /// <summary>
+        /// 포함된 트랙들 중 가장 나중인 놈의 파일 표시 시간값.
+        /// </summary>
+        public DateTime EndTime {
+            get { return TrackList.EndTime; }
+        }
+
+        public IEnumerable<Track> Selection {
+            get { return TrackList.GetSelection(); }
         }
 
         #endregion // properties
@@ -58,9 +82,7 @@ namespace Viewer.Personal.Model {
         /// Track 컬렉션 원본에 대한 뷰를 생성한다.
         /// </summary>
         public ListCollectionView GetTracks() {
-            ListCollectionView view = new ListCollectionView(m_tracks);
-            view.SortDescriptions.Add(new SortDescription("CreateDate", ListSortDirection.Ascending));
-            return view;
+            return m_tracks.GetTracks();
         }
 
         /// <summary>
@@ -91,6 +113,13 @@ namespace Viewer.Personal.Model {
             return root;
         }
 
+        /// <summary>
+        /// 모든 track을 check되지 않은 상태로 변경한다.
+        /// </summary>
+        public void ClearSelection() {
+            TrackList.ClearSelection();
+        }
+
         #endregion // methods
 
 
@@ -105,7 +134,7 @@ namespace Viewer.Personal.Model {
 
         #region internal properties
 
-        protected ObservableCollection<Track> TrackList {
+        protected LocalTrackCollection TrackList {
             get { return m_tracks; }
         }
 

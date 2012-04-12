@@ -133,7 +133,7 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoSearch(object data) {
-            IEnumerable<Track> tracks = new RepositorySearchHelper(Repository).Find(SelectedVehicle, SearchFrom, SearchTo);
+            //IEnumerable<Track> tracks = new RepositorySearchHelper(Repository).Find(SelectedVehicle, SearchFrom, SearchTo);
         }
 
         // Export command

@@ -72,6 +72,7 @@
     <Compile Include="Model\DeviceSaveHelper.cs" />
     <Compile Include="Model\DriveManager.cs" />
     <Compile Include="Model\IDriveManager.cs" />
+    <Compile Include="Model\LocalTrackCollection.cs" />
     <Compile Include="Model\Repository.cs" />
     <Compile Include="Model\RepositorySearchHelper.cs" />
     <Compile Include="Model\SaveOption.cs" />
