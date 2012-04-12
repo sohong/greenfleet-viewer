@@ -23,6 +23,7 @@ using Viewer.Common.Util;
 using Viewer.Personal.Command;
 using Viewer.Common.Event;
 using Viewer.Common.Model;
+using Viewer.Personal.Event;
 
 namespace Viewer.Personal.ViewModel {
 
@@ -38,19 +39,23 @@ namespace Viewer.Personal.ViewModel {
         #region constructors
 
         public LocalRepositoryViewModel() {
-            SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
+            SearchFrom = DateTime.Today;
+            SearchTo = DateTime.Today + TimeSpan.FromMinutes(23 * 60 + 59);
+            SearchMode = SearchMode.Recent;
+            AutoPlay = true;
+
+            OpenCommand = new DelegateCommand<object>(DoOpen, CanOpen);
             ExportCommand = new DelegateCommand<object>(DoExport, CanExport);
             DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
 
-            SearchFrom = DateTime.Today;
-            SearchTo = DateTime.Today + TimeSpan.FromMinutes(23 * 60 + 59);
-            SearchMode = SearchMode.Today;
-            AutoPlay = true;
-
             if (PersonalDomain.Domain.EventAggregator != null) {
-                PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
+                PersonalDomain.Domain.EventAggregator.GetEvent<LocalTrackActivatedEvent>().Subscribe((track) => {
                     track.IsChecked = true;
                     ActiveTrack = track;
+                });
+
+                PersonalDomain.Domain.EventAggregator.GetEvent<TrackPointChangedEvent>().Subscribe((point) => {
+                    this.TrackPoint = point;
                 });
             }
         }
@@ -79,9 +84,9 @@ namespace Viewer.Personal.ViewModel {
         private SearchMode m_searchMode;
 
         /// <summary>
-        /// Search command
+        /// 지정한 구간의 트랙파일들을 읽어들인다.
         /// </summary>
-        public ICommand SearchCommand {
+        public ICommand OpenCommand {
             get;
             private set;
         }
@@ -119,12 +124,45 @@ namespace Viewer.Personal.ViewModel {
         #region internal methods
 
         // Search Command
-        private bool CanSearch(object data) {
+        private bool CanOpen(object data) {
             return true;
         }
 
-        private void DoSearch(object data) {
-            Repository.Find(SelectedVehicle, SearchFrom, SearchTo, () => {
+        private void DoOpen(object data) {
+            DateTime dateFrom = SearchFrom;
+            DateTime dateTo = SearchTo;
+
+            switch (SearchMode) {
+            /*
+            case ViewModel.SearchMode.Today:
+                dateFrom = DateTime.Today;
+                dateTo = dateFrom + TimeSpan.FromMinutes(23 * 60 + 59);
+                break;
+
+            case ViewModel.SearchMode.TwoDays:
+                dateFrom = DateTime.Today - TimeSpan.FromDays(1);
+                dateTo = dateFrom + TimeSpan.FromMinutes(47 * 60 + 59);
+                break;
+            */
+            case ViewModel.SearchMode.Recent:
+                dateFrom = new TrackFolderManager(Repository).GetRecentDay(SelectedVehicle);
+                dateTo = dateFrom + TimeSpan.FromMinutes(23 * 60 + 59);
+                break;
+
+            case ViewModel.SearchMode.RecentTwo:
+                dateFrom = new TrackFolderManager(Repository).GetRecentDay(SelectedVehicle) - TimeSpan.FromDays(1);;
+                dateTo = dateFrom + TimeSpan.FromMinutes(47 * 60 + 59);
+                break;
+
+            case ViewModel.SearchMode.Range:
+            default:
+                break;
+            }
+
+            SearchFrom = dateFrom;
+            SearchTo = dateTo;
+
+            Repository.Find(SelectedVehicle, dateFrom, dateTo, () => {
                 ResetTrackGroup(Repository.GetTracks());
             });
         }

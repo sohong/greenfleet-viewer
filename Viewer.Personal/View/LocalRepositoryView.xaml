@@ -22,17 +22,21 @@
             <Label>차랑:</Label>
             <ComboBox MinWidth="100" ItemsSource="{Binding Vehicles}" IsSynchronizedWithCurrentItem="True" VerticalContentAlignment="Center" Padding="5,0,0,0"/>
             <Label Margin="4,0,0,0">검색:</Label>
-            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchFrom}"/>
+            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchFrom}" 
+                               MouseLeftButtonDown="DateTimeUpDown_MouseLeftButtonDown" ValueChanged="DateTimeUpDown_ValueChanged" KeyDown="DateTimeUpDown_KeyDown" />
             <Label>~</Label>
-            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchTo}"/>
+            <tk:DateTimeUpDown Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchTo}" 
+                               MouseLeftButtonDown="DateTimeUpDown_MouseLeftButtonDown" ValueChanged="DateTimeUpDown_ValueChanged" KeyDown="DateTimeUpDown_KeyDown" />
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="6,0,0,0" >
-                <RadioButton Margin="0,0,4,0" IsChecked="{Binding Path=SearchMode, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static local:SearchMode.Range}}">구간</RadioButton>
+                <RadioButton Name="rdRange" Margin="0,0,4,0" IsChecked="{Binding Path=SearchMode, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static local:SearchMode.Range}}">구간</RadioButton>
+                <!--
                 <RadioButton Margin="0,0,4,0" IsChecked="{Binding Path=SearchMode, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static local:SearchMode.Today}}">오늘</RadioButton>
                 <RadioButton Margin="0,0,4,0" IsChecked="{Binding Path=SearchMode, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static local:SearchMode.TwoDays}}">이틀</RadioButton>
+                -->
                 <RadioButton Margin="0,0,4,0" IsChecked="{Binding Path=SearchMode, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static local:SearchMode.Recent}}">최근</RadioButton>
                 <RadioButton Margin="0,0,4,0" IsChecked="{Binding Path=SearchMode, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static local:SearchMode.RecentTwo}}">최근 이틀</RadioButton>
             </StackPanel>
-            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding SearchCommand}">검색</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding OpenCommand}">열기</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding Path=Commands.Import}" CommandParameter="{Binding SelectedVehicle}">Import</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ExportCommand}">Export</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding DeleteCommand}">삭제</Button>
@@ -81,7 +85,7 @@
                             <RowDefinition Height="4"/>
                             <RowDefinition Height="240" MinHeight="20"/>
                         </Grid.RowDefinitions>
-                        <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}"/>
+                        <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}" PositionChanged="VideoView_PositionChanged"/>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                         <Grid Grid.Row="2">
                             <gf:AccelerationView/>
@@ -94,10 +98,11 @@
                             <RowDefinition Height="4"/>
                             <RowDefinition Height="4*" MinHeight="20"/>
                         </Grid.RowDefinitions>
-                        <gf:GoogleMapView  ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}"/>
+                        <gf:GoogleMapView  ActiveTrack="{Binding ActiveTrack}" Tracks="{Binding SelectedTracks}" TrackDoubleClicked="GoogleMapView_TrackDoubleClicked"/>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                         <Grid Grid.Row="2">
-                            <gf:DashboardView/>
+                            <gf:DashboardView Velocity="{Binding Path=TrackPoint.Velocity}" DateTime="{Binding Path=TrackPoint.PointTime}"
+                                              Latitude="{Binding Path=TrackPoint.Latitude}" Longitude="{Binding Path=TrackPoint.Longitude}"/>
                         </Grid>
                     </Grid>
                 </Grid>

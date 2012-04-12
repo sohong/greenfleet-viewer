@@ -28,8 +28,8 @@ namespace Viewer.Personal.ViewModel {
     /// </summary>
     public enum SearchMode {
         Range,      // 구간 설정
-        Today,      // 오늘
-        TwoDays,    // 이틀
+        //Today,      // 오늘
+        //TwoDays,    // 이틀
         Recent,     // 최근
         RecentTwo   // 최근 이틀
     }
@@ -214,6 +214,20 @@ namespace Viewer.Personal.ViewModel {
             }
         }
         private Track m_activeTrack;
+
+        /// <summary>
+        /// 재생 포인트.
+        /// </summary>
+        public TrackPoint TrackPoint {
+            get { return m_trackPoint; }
+            set {
+                if (value != m_trackPoint) {
+                    m_trackPoint = value;
+                    RaisePropertyChanged(() => TrackPoint);
+                }
+            }
+        }
+        private TrackPoint m_trackPoint;
 
         public Commands Commands {
             get { return Commands.Instance; }

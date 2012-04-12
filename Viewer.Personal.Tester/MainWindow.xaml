@@ -19,7 +19,7 @@
             <TabItem Header="SD Card">
                 <gf:DeviceRepositoryView Name="deviceView"/>  
             </TabItem>
-            <TabItem Header="저장소">
+            <TabItem Header="PC 저장소">
                 <gf:LocalRepositoryView Name="repoView"/>
             </TabItem>
             <TabItem Header="소모품">

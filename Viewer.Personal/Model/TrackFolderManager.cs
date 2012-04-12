@@ -100,8 +100,44 @@ namespace Viewer.Personal.Model {
         /// 가장 최근에 등록된 트랙파일 일자를 리턴한다. 
         /// </summary>
         /// <returns></returns>
-        public DateTime FindRecentDay() {
+        public DateTime GetRecentDay(Vehicle vehicle) {
             DateTime d = DateTime.Today;
+            string root = GetRoot(vehicle);
+            string[] dirs = Directory.GetDirectories(root);
+
+            // year
+            if (dirs != null && dirs.Length > 0) {
+                Array.Sort(dirs);
+                string dir = dirs[dirs.Length - 1];
+
+                // month
+                dirs = Directory.GetDirectories(dir);
+                if (dirs != null && dirs.Length > 0) {
+                    Array.Sort(dirs);
+                    dir = dirs[dirs.Length - 1];
+
+                    // day
+                    dirs = Directory.GetDirectories(dir);
+                    if (dirs != null && dirs.Length > 0) {
+                        Array.Sort(dirs);
+                        dir = dirs[dirs.Length - 1];
+
+                        // file
+                        dirs = Directory.GetFiles(dir, "*.inc");
+                        if (dirs != null && dirs.Length > 0) {
+                            d = DateTime.MinValue;
+                            foreach (string file in dirs) {
+                                DateTime d2 = DateTime.MinValue;
+                                Repository.ParseTrackFile(file, ref d2);
+                                if (d2 > d) {
+                                    d = d2;
+                                }
+                            }
+                            d = new DateTime(d.Year, d.Month, d.Day);
+                        }
+                    }
+                }
+            }
 
             return d;
         }

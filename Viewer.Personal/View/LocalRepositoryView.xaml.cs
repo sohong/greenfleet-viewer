@@ -29,6 +29,8 @@ using Viewer.Personal.Command;
 using Viewer.Common.Model;
 using Viewer.Common.View;
 using Viewer.Common.Event;
+using Viewer.Personal.Event;
+using Microsoft.Windows.Controls;
 
 namespace Viewer.Personal.View {
 
@@ -52,7 +54,7 @@ namespace Viewer.Personal.View {
         }
 
         private void TrackTreeView_ActivateTrack(object sender, Track track) {
-            //PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Publish(track);
+            PersonalDomain.Domain.EventAggregator.GetEvent<LocalTrackActivatedEvent>().Publish(track);
         }
 
         // videoView
@@ -67,12 +69,29 @@ namespace Viewer.Personal.View {
 
         // googleMapView
         private void GoogleMapView_TrackDoubleClicked(object sender, Track track) {
-            //PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Publish(track);
+            PersonalDomain.Domain.EventAggregator.GetEvent<LocalTrackActivatedEvent>().Publish(track);
         }
 
         // bingMapView
         private void BingMapView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e) {
             Debug.WriteLine("xxx");
+        }
+
+        // dateTimeUpDowns
+        private void DateTimeUpDown_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            ((DateTimeUpDown)sender).Focus();
+        }
+
+        private void DateTimeUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+            if (((DateTimeUpDown)sender).IsKeyboardFocusWithin || ((DateTimeUpDown)sender).IsMouseCaptureWithin) {
+                rdRange.IsChecked = true;
+            }
+        }
+
+        private void DateTimeUpDown_KeyDown(object sender, KeyEventArgs e) {
+            if (e.Key != Key.Escape && e.Key != Key.Tab) {
+                rdRange.IsChecked = true;
+            }
         }
 
         #endregion // event handlers

@@ -84,20 +84,6 @@ namespace Viewer.Personal.ViewModel {
             get { return m_repository; }
         }
 
-        /// <summary>
-        /// 재생 포인트.
-        /// </summary>
-        public TrackPoint TrackPoint {
-            get { return m_trackPoint; }
-            set {
-                if (value != m_trackPoint) {
-                    m_trackPoint = value;
-                    RaisePropertyChanged(() => TrackPoint);
-                }
-            }
-        }
-        private TrackPoint m_trackPoint;
-
         public ICommand LoadCommand {
             get;
             private set;

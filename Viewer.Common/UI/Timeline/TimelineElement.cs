@@ -62,6 +62,7 @@ namespace Viewer.Common.UI.Timeline {
         public double Width {
             get { return m_width; }
             set {
+                value = Math.Max(1, value);
                 if (value != m_width) {
                     m_width = value;
                     Invalidate();
@@ -76,6 +77,7 @@ namespace Viewer.Common.UI.Timeline {
         public double Height {
             get { return m_height; }
             set {
+                value = Math.Max(1, value);
                 if (value != m_height) {
                     m_height = value;
                     Invalidate();
