@@ -131,7 +131,7 @@ namespace Viewer.Personal.Model {
         /// <param name="fileName">경로와 확장자가 제외된 파일명.</param>
         private Track Add(string fileName) {
             DateTime date = new DateTime();
-            if (LocalRepository.ParseTrackFile(fileName, ref date)) {
+            if (Repository.ParseTrackFile(fileName, ref date)) {
                 if (date.Year == m_year && date.Month == m_month) {
                     Track track = new Track();
                     track.VehicleId = m_vehicle.VehicleId;

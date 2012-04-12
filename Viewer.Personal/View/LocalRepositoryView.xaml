@@ -60,34 +60,8 @@
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TreeView Name="tvMain" Grid.Row="1" ItemsSource="{Binding Path=TrackGroup.Children}">
-                <TreeView.ItemContainerStyle>
-                    <Style TargetType="TreeViewItem">
-                        <Setter Property="IsExpanded" Value="True" />
-                        <!--
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                    <Setter Property="FontWeight" Value="Normal" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=ModelType}" Value="CustomerCategory">
-                            <Setter Property="Foreground" Value="#000088"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=ModelType}" Value="GameCategory">
-                            <Setter Property="Foreground" Value="#000088"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                    -->
-                    </Style>
-                </TreeView.ItemContainerStyle>
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <StackPanel Orientation="Horizontal" Margin="2">
-                            <CheckBox IsChecked="{Binding IsChecked,Mode=TwoWay}" Margin="0, 0, 4, 0" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
+            <gf:TrackTreeView Grid.Row="0" ItemsSource="{Binding Path=TrackGroup}"
+                            ActivateGroup="TrackTreeView_ActivateGroup" ActivateTrack="TrackTreeView_ActivateTrack"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>

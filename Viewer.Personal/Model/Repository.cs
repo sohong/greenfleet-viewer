@@ -17,6 +17,7 @@ using System.Windows.Data;
 using System.ComponentModel;
 using Viewer.Common.Model;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace Viewer.Personal.Model {
 
@@ -24,6 +25,26 @@ namespace Viewer.Personal.Model {
     /// Repository base.
     /// </summary>
     public abstract class Repository : NotificationObjectEx {
+
+        #region static members
+
+        public static readonly Regex TRACK_DATE_PATTERN = new Regex(@"\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}");
+
+        public static bool ParseTrackFile(string fileName, ref DateTime date) {
+            Match match = LocalRepository.TRACK_DATE_PATTERN.Match(fileName);
+            if (match.Success) {
+                string[] arr = match.Value.Split('_');
+                if (arr.Length >= 6) {
+                    date = new DateTime(int.Parse(arr[0]), int.Parse(arr[1]), int.Parse(arr[2]),
+                        int.Parse(arr[3]), int.Parse(arr[4]), int.Parse(arr[5]));
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        #endregion // static members
+
 
         #region fields
 
@@ -86,34 +107,6 @@ namespace Viewer.Personal.Model {
         }
 
         /// <summary>
-        /// 트랙 목록으로부터 트랙 그룹 hierarchy를 생성한다.
-        /// 트랙들은 CreateDate 순서로 정렬되었다고 가정한다.
-        /// </summary>
-        /// <param name="tracks"></param>
-        /// <returns></returns>
-        public TrackGroup CreateGroupsFromTracks(ListCollectionView tracks) {
-            if (tracks.IsEmpty)
-                return null;
-
-            IList<TrackGroup> groups = new List<TrackGroup>();
-            TrackGroup group = null;
-
-            for (int i = 0, count = tracks.Count; i < count; i++) {
-                Track track = (Track)tracks.GetItemAt(i);
-
-                if (group == null || track.CreateDate.Hour != group.Date.Hour) {
-                    group = new TrackGroup(track.CreateDate, TrackGroupLevel.Hour);
-                    groups.Add(group);
-                }
-
-                group.Add(track);
-            }
-
-            TrackGroup root = CreateGroupHierarchy(groups);
-            return root;
-        }
-
-        /// <summary>
         /// 모든 track을 check되지 않은 상태로 변경한다.
         /// </summary>
         public void ClearSelection() {
@@ -139,65 +132,5 @@ namespace Viewer.Personal.Model {
         }
 
         #endregion // internal properties
-
-
-        #region internal methods
-
-        private TrackGroup CreateGroupHierarchy(IList<TrackGroup> groups) {
-            IList<TrackGroup> parents = new List<TrackGroup>();
-            TrackGroup parent = CreateParent(groups[0]);
-            parent.Add(groups[0]);
-            parents.Add(parent);
-
-            for (int i = 1, count = groups.Count; i < count; i++) {
-                if (!Containable(parent, groups[i])) {
-                    parent = CreateParent(groups[i]);
-                    parents.Add(parent);
-                }
-                parent.Add(groups[i]);
-            }
-
-            return parents.Count > 1 ? CreateGroupHierarchy(parents) : parent;
-        }
-
-        private TrackGroup CreateParent(TrackGroup group) {
-            TrackGroupLevel level = (TrackGroupLevel)(group.Level + 1);
-            TrackGroup parent = new TrackGroup(group.Date, level);
-            return parent;
-        }
-
-        private bool Containable(TrackGroup parent, TrackGroup group) {
-            switch (parent.Level) {
-            case TrackGroupLevel.Day:
-                return group.Date.Day == parent.Date.Day;
-            case TrackGroupLevel.Month:
-                return group.Date.Month == parent.Date.Month;
-            case TrackGroupLevel.Year:
-                return group.Date.Year == parent.Date.Year;
-            }
-
-            return true;
-        }
-
-        private TrackGroup CreateRoot(Track startTrack, Track endTrack) {
-            TrackGroupLevel level;
-            DateTime dStart = startTrack.CreateDate;
-            DateTime dEnd = endTrack.CreateDate;
-
-            if (dStart.Year != dEnd.Year) {
-                level = TrackGroupLevel.All;
-            } else if (dStart.Month != dEnd.Month) {
-                level = TrackGroupLevel.Year;
-            } else if (dStart.Day != dEnd.Day) {
-                level = TrackGroupLevel.Month;
-            } else {
-                level = TrackGroupLevel.Day;
-            }
-
-            TrackGroup root = new TrackGroup(startTrack.CreateDate, level);
-            return root;
-        }
-
-        #endregion // internal methods
     }
 }

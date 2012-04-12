@@ -80,19 +80,5 @@ namespace Viewer.Personal.Test
                 Assert.AreEqual(files.Length, repo.TrackCount);
             });
         }
-
-        /// <summary>
-        ///A test for LoadGroups
-        ///</summary>
-        [TestMethod()]
-        public void LoadGroupsTest() {
-            DeviceRepository repo = new DeviceRepository();
-            Vehicle vehicle = new Vehicle();
-            string rootPath = PersonalTest.DeviceRoot;
-            repo.Open(vehicle, rootPath, () => {
-                TrackGroup root = repo.CreateGroupsFromTracks(repo.GetTracks());
-                Assert.IsNotNull(root);
-            });
-        }
     }
 }

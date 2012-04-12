@@ -38,8 +38,6 @@ namespace Viewer.Personal.ViewModel {
         #region fields
 
         private DeviceRepository m_repository;
-        private ListCollectionView m_tracks;
-        private TrackCollection m_selectedTracks;
 
         #endregion // fields
 
@@ -49,7 +47,6 @@ namespace Viewer.Personal.ViewModel {
         public DeviceRepositoryViewModel() {
             this.DriveManager = new DriveManager();
             m_repository = new DeviceRepository();
-            m_selectedTracks = new TrackCollection();
 
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
@@ -85,14 +82,6 @@ namespace Viewer.Personal.ViewModel {
 
         public DeviceRepository Repository {
             get { return m_repository; }
-        }
-
-        public ListCollectionView Tracks {
-            get { return m_tracks; }
-        }
-
-        public TrackCollection SelectedTracks {
-            get { return m_selectedTracks; }
         }
 
         /// <summary>
@@ -162,12 +151,9 @@ namespace Viewer.Personal.ViewModel {
             if (folder != null) {
                 BeginLoading();
                 try {
-                    m_repository.Open(SelectedVehicle, folder, () => {
-                        m_tracks = m_repository.GetTracks();
-                        this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
+                    Repository.Open(SelectedVehicle, folder, () => {
+                        ResetTrackGroup(m_repository.GetTracks());
                         if (this.TrackGroup != null) {
-                            RegisterEvents(this.TrackGroup);
-
                             this.SearchFrom = m_repository.StartTime.StripSeconds();
                             this.SearchTo = m_repository.EndTime.StripSeconds();
                         }
@@ -189,58 +175,20 @@ namespace Viewer.Personal.ViewModel {
             }
         }
 
-        private void RegisterEvents(TrackGroup group) {
-            group.TrackChanged += new Action<TrackGroup, Track, string>(TrackGroup_TrackChanged);
-            group.TrackAllChanged += new Action<Common.Model.TrackGroup>(TrackGroup_TrackAllChanged);
-            foreach (object child in group.Children) {
-                if (child is TrackGroup) {
-                    RegisterEvents((TrackGroup)child);
-                }
-            }
-        }
-
-        private void TrackGroup_TrackChanged(TrackGroup group, Track track, string propName) {
-            // 현재 재생 중인 것은 그냥 놔둔다.
-            if (track == ActiveTrack && !track.IsChecked) {
-                track.IsChecked = true;
-            }
-
-            if (track.IsChecked) {
-                m_selectedTracks.Add(track);
-            } else {
-                m_selectedTracks.Remove(track);
-            }
-        }
-
-        private void TrackGroup_TrackAllChanged(TrackGroup group) {
-            m_selectedTracks.BeginUpdate();
-            try {
-                m_selectedTracks.Clear();
-                foreach (Track track in m_tracks) {
-                    if (track.IsChecked) {
-                        m_selectedTracks.Add(track);
-                    }
-                }
-
-            } finally {
-                m_selectedTracks.EndUpdate();
-            }
-        }
-
         // Search command
         private bool CanSearch() {
             return true;
         }
 
         private void DoSearch() {
-            if (m_tracks != null) {
+            if (Tracks != null) {
                 //Repository.ClearSelection(); // 기존 선택들을 굳이 해제시킬 필요는 없을것 같다.
 
-                m_tracks.Filter = (track) => {
+                Tracks.Filter = (track) => {
                     DateTime d = ((Track)track).CreateDate.StripSeconds();
                     return d >= SearchFrom && d <= SearchTo;
                 };
-                this.TrackGroup = m_repository.CreateGroupsFromTracks(m_tracks);
+                ResetTrackGroup(null);
             }
         }
 

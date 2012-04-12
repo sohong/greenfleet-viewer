@@ -32,17 +32,12 @@ namespace Viewer.Personal.ViewModel {
     public class LocalRepositoryViewModel : RepositoryViewModel {
 
         #region fields
-
-        private ListCollectionView m_tracks;
-
         #endregion // fields
 
 
         #region constructors
 
         public LocalRepositoryViewModel() {
-            m_tracks = Repository.GetTracks();
-
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
             ExportCommand = new DelegateCommand<object>(DoExport, CanExport);
             DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
@@ -67,10 +62,6 @@ namespace Viewer.Personal.ViewModel {
 
         public LocalRepository Repository {
             get { return PersonalDomain.Domain.Repository; }
-        }
-
-        public ListCollectionView Tracks {
-            get { return m_tracks; }
         }
 
         /// <summary>
@@ -133,7 +124,9 @@ namespace Viewer.Personal.ViewModel {
         }
 
         private void DoSearch(object data) {
-            //IEnumerable<Track> tracks = new RepositorySearchHelper(Repository).Find(SelectedVehicle, SearchFrom, SearchTo);
+            Repository.Find(SelectedVehicle, SearchFrom, SearchTo, () => {
+                ResetTrackGroup(Repository.GetTracks());
+            });
         }
 
         // Export command

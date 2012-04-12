@@ -74,7 +74,6 @@
     <Compile Include="Model\IDriveManager.cs" />
     <Compile Include="Model\LocalTrackCollection.cs" />
     <Compile Include="Model\Repository.cs" />
-    <Compile Include="Model\RepositorySearchHelper.cs" />
     <Compile Include="Model\SaveOption.cs" />
     <Compile Include="Model\TrackCatalog.cs" />
     <Compile Include="Model\TrackCatalogCollection.cs" />
@@ -110,8 +109,8 @@
     <Compile Include="View\PreferencesView.xaml.cs">
       <DependentUpon>PreferencesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RepositoryView.xaml.cs">
-      <DependentUpon>RepositoryView.xaml</DependentUpon>
+    <Compile Include="View\LocalRepositoryView.xaml.cs">
+      <DependentUpon>LocalRepositoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SaveView.xaml.cs">
       <DependentUpon>SaveView.xaml</DependentUpon>
@@ -153,7 +152,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RepositoryView.xaml">
+    <Page Include="View\LocalRepositoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

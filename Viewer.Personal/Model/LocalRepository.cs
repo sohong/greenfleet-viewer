@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Data;
 using System.IO;
 using System.Text.RegularExpressions;
+using Viewer.Common.Loader;
 
 namespace Viewer.Personal.Model {
     
@@ -26,26 +27,6 @@ namespace Viewer.Personal.Model {
     /// 각 트랙의 실제 데이터 파일과 영상 파일은 트랙을 재생할 때 연다. 
     /// </summary>
     public class LocalRepository : Repository {
-
-        #region static members
-
-        public static readonly Regex TRACK_DATE_PATTERN = new Regex(@"\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}");
-
-        public static bool ParseTrackFile(string fileName, ref DateTime date) {
-            Match match = LocalRepository.TRACK_DATE_PATTERN.Match(fileName);
-            if (match.Success) {
-                string[] arr = match.Value.Split('_');
-                if (arr.Length >= 6) {
-                    date = new DateTime(int.Parse(arr[0]), int.Parse(arr[1]), int.Parse(arr[2]),
-                        int.Parse(arr[3]), int.Parse(arr[4]), int.Parse(arr[5]));
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        #endregion // static members
-
 
         #region fields
 
@@ -115,6 +96,18 @@ namespace Viewer.Personal.Model {
             return m_folderManager.GetFolder(vehicle, trackFile, relative);
         }
 
+        public void Find(Vehicle vehicle, DateTime start, DateTime end, Action callback) {
+            if (end >= start) {
+                IList<string> trackFiles = new List<string>();
+                string root = m_folderManager.GetRoot(vehicle);
+                Find(trackFiles, root, start, end);
+
+                if (trackFiles.Count > 0) {
+                    TrackList.Load(trackFiles, trackFiles.Count, "트랙 검색", callback);
+                }
+            }
+        }
+
         #endregion // methods
 
 
@@ -128,22 +121,29 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        private Track Find(DateTime time) {
-            return null;
-        }
+        private void Find(IList<string> list, string root, DateTime start, DateTime end) {
+            while (start < end) {
+                // 분단위로 판단할 수 있도록...
+                start = start.AddSeconds(-start.Second);
+                end = end.AddSeconds(60 - end.Second - 1);
 
-        private IEnumerable<Track> LoadTracks(DateTime fromTime, DateTime toTime, bool inclusive) {
-            return null;
-        }
+                string folder = m_folderManager.DateTimeToFolder(root, start);
+                if (Directory.Exists(folder)) {
+                    string[] files = Directory.GetFiles(folder, "*.inc");
+                    TrackType tt;
+                    DateTime d;
 
-        private Track LoadTrack(DateTime time) {
-            return null;
-        }
+                    foreach (string file in files) {
+                        if (LocalTrackLoader.FileToDateTime(file, out d, out tt)) {
+                            if (d >= start && d <= end) {
+                                list.Add(file);
+                            }
+                        }
+                    }
+                }
 
-        private void SaveTracks(IEnumerable<Track> tracks) {
-        }
-
-        private void SaveTrack(Track track) {
+                start += TimeSpan.FromDays(1);
+            }
         }
 
         #endregion // internal methods
