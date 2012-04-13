@@ -5,21 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="451" d:DesignWidth="638">
-    <Grid Background="Black">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Viewer.Common;component/Resources/Shared.xaml"/>
+                <ResourceDictionary Source="/Viewer.Common;component/Resources/Slider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="#333333">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <MediaElement Name="mediaMain" LoadedBehavior="Manual" UnloadedBehavior="Stop" MediaOpened="mediaMain_MediaOpened" MediaEnded="mediaMain_MediaEnded" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3" Background="Gray">
-            <Button Name="btnPlay" Margin="2" Padding="2" Click="btnPlay_Click">Play</Button>
-            <Button Name="btnStop" Margin="2" Padding="2" Click="btnStop_Click">Stop</Button>
-            <Button Name="btnPause" Margin="2" Padding="2" Click="btnPause_Click">Pause</Button>
-            <Button Name="btnHome" Margin="2" Padding="2" Click="btnHome_Click">Home</Button>
-            <Button Name="btnPrevious" Margin="2" Padding="2" Click="btnPrevious_Click" Content=" &lt; "></Button>
-            <Button Name="btnNext" Margin="2" Padding="2" Click="btnNext_Click" Content=" &gt; "></Button>
-            <Button Name="btnEnd" Margin="2" Padding="2" Click="btnEnd_Click">End</Button>
-            <Slider Name="timelineSlider" Margin="2" Width="200" PreviewMouseUp="timelineSlider_PreviewMouseUp" IsMoveToPointEnabled="True"/>
-        </StackPanel>
+        <Grid Background="Black">
+            <MediaElement Name="mediaMain" LoadedBehavior="Manual"
+                      UnloadedBehavior="Stop" MediaOpened="mediaMain_MediaOpened" MediaEnded="mediaMain_MediaEnded" />
+        </Grid>
+        <Grid Grid.Row="1" Background="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Slider Name="timelineSlider" Margin="10,0,10,0" Template="{StaticResource HorizontalSlider}" PreviewMouseUp="timelineSlider_PreviewMouseUp" IsMoveToPointEnabled="True"/>
+            <DockPanel Grid.Row="1" Margin="10,0,10,0" LastChildFill="True">
+                <Button Name="btnPlay" Margin="2" Padding="2" Click="btnPlay_Click">Play</Button>
+                <Button Name="btnStop" Margin="2" Padding="2" Click="btnStop_Click">Stop</Button>
+                <Button Name="btnPause" Margin="2" Padding="2" Click="btnPause_Click">Pause</Button>
+                <Button Name="btnHome" Margin="2" Padding="2" Click="btnHome_Click">Home</Button>
+                <Button Name="btnPrevious" Margin="2" Padding="2" Click="btnPrevious_Click" Content=" &lt; "></Button>
+                <Button Name="btnNext" Margin="2" Padding="2" Click="btnNext_Click" Content=" &gt; "></Button>
+                <Button Name="btnEnd" Margin="2" Padding="2" Click="btnEnd_Click">End</Button>
+                <TextBlock Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center">File Name</TextBlock>
+            </DockPanel>
+        </Grid>
     </Grid>
 </UserControl>

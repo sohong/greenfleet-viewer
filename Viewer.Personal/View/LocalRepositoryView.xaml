@@ -41,8 +41,8 @@
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ExportCommand}">Export</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding DeleteCommand}">삭제</Button>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AutoPlay}" ToolTip="트리나 맵에서 더블클릭으로 트랙이 선택되면 재생 시작">자동</CheckBox>
-            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding LoopPlay}" ToolTip="재생 완료 후 처음부터 다시 재생">반복</CheckBox>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AllPlay}" ToolTip="선택된 트랙들을 순서대로 재생">연속</CheckBox>
+            <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding LoopPlay}" ToolTip="재생 완료 후 처음부터 다시 재생">반복</CheckBox>
         </StackPanel>
         <!--
         <ListView Name="lvMain" Grid.Row="1" ItemsSource="{Binding Tracks}" IsSynchronizedWithCurrentItem="True">
