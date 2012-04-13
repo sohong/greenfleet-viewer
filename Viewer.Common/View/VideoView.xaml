@@ -36,7 +36,7 @@
                 <Button Name="btnPrevious" Margin="2" Padding="2" Click="btnPrevious_Click" Content=" &lt; "></Button>
                 <Button Name="btnNext" Margin="2" Padding="2" Click="btnNext_Click" Content=" &gt; "></Button>
                 <Button Name="btnEnd" Margin="2" Padding="2" Click="btnEnd_Click">End</Button>
-                <TextBlock Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center">File Name</TextBlock>
+                <TextBlock Name="txtName" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center">[ No Track ]</TextBlock>
             </DockPanel>
         </Grid>
     </Grid>

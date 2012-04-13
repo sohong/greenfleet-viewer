@@ -58,9 +58,11 @@ namespace Viewer.Personal.View {
         private void VideoView_PositionChanged(VideoView view, double length, double position) {  
             // video track 위치가 변경되면 해당하는 track point를 찾아 전역 이벤트를 발생시킨다.
             Track track = view.Track;
-            TrackPoint point = track.FindPoint(position);
-            if (point != null) {
-                PersonalDomain.Domain.EventAggregator.GetEvent<TrackPointChangedEvent>().Publish(point);
+            if (track != null) {
+                TrackPoint point = track.FindPoint(position);
+                if (point != null) {
+                    PersonalDomain.Domain.EventAggregator.GetEvent<TrackPointChangedEvent>().Publish(point);
+                }
             }
         }
 

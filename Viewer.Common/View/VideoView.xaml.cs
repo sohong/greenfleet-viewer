@@ -24,6 +24,8 @@ using System.Windows.Shapes;
 using Viewer.Common.Util;
 using System.Windows.Threading;
 using Viewer.Common.Model;
+using System.IO;
+using System.Threading;
 
 namespace Viewer.Common.View {
 
@@ -53,8 +55,10 @@ namespace Viewer.Common.View {
                 if (view.AutoPlay) {
                     view.Play();
                 }
+                view.txtName.Text = System.IO.Path.GetFileNameWithoutExtension(track.MpegFile);
             } else {
                 view.mediaMain.Source = null;
+                view.txtName.Text = "[ No Track ]";
             }
         }
 
@@ -111,7 +115,7 @@ namespace Viewer.Common.View {
             Steps = 20;
 
             m_timer = new DispatcherTimer();
-            m_timer.Interval = TimeSpan.FromMilliseconds(50);
+            m_timer.Interval = TimeSpan.FromMilliseconds(10);
             m_timer.Tick += new EventHandler(timer_Tick);
 
             timelineSlider.AddHandler(Slider.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler((obj, args) => {
@@ -178,7 +182,7 @@ namespace Viewer.Common.View {
         }
 
         public void Home() {
-            mediaMain.Position = TimeSpan.FromSeconds(0);
+            mediaMain.Position = TimeSpan.FromMilliseconds(0);
         }
 
         public void Previous() {
