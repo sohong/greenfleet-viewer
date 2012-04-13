@@ -19,7 +19,7 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type RepeatButton}">
-          <Border Background="Transparent" />
+          <Border Background="{TemplateBinding Background}" Height="3"/>
         </ControlTemplate>
       </Setter.Value>
     </Setter>
@@ -33,7 +33,7 @@
     <Setter Property="OverridesDefaultStyle"
             Value="true" />
     <Setter Property="Height"
-            Value="14" />
+            Value="12" />
     <Setter Property="Width"
             Value="14" />
     <Setter Property="Template">
@@ -159,14 +159,14 @@
       <Track Grid.Row="1"
              x:Name="PART_Track">
         <Track.DecreaseRepeatButton>
-          <RepeatButton Style="{StaticResource SliderButtonStyle}"
+          <RepeatButton Style="{StaticResource SliderButtonStyle}" Background="Orange"
                         Command="Slider.DecreaseLarge" />
         </Track.DecreaseRepeatButton>
         <Track.Thumb>
           <Thumb Style="{StaticResource SliderThumbStyle}" />
         </Track.Thumb>
         <Track.IncreaseRepeatButton>
-          <RepeatButton Style="{StaticResource SliderButtonStyle}"
+          <RepeatButton Style="{StaticResource SliderButtonStyle}" Background="#aaaaaa"
                         Command="Slider.IncreaseLarge" />
         </Track.IncreaseRepeatButton>
       </Track>
@@ -256,14 +256,14 @@
       <Track Grid.Column="1"
              x:Name="PART_Track">
         <Track.DecreaseRepeatButton>
-          <RepeatButton Style="{StaticResource SliderButtonStyle}"
+          <RepeatButton Style="{StaticResource SliderButtonStyle}" Background="Yellow"
                         Command="Slider.DecreaseLarge" />
         </Track.DecreaseRepeatButton>
         <Track.Thumb>
           <Thumb Style="{StaticResource SliderThumbStyle}" />
         </Track.Thumb>
         <Track.IncreaseRepeatButton>
-          <RepeatButton Style="{StaticResource SliderButtonStyle}"
+          <RepeatButton Style="{StaticResource SliderButtonStyle}" Background="Red"
                         Command="Slider.IncreaseLarge" />
         </Track.IncreaseRepeatButton>
       </Track>
