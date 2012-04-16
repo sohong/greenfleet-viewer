@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.Windows;
+using System.Globalization;
 
 namespace Viewer.Common.UI.Acceleration {
 
@@ -29,17 +30,19 @@ namespace Viewer.Common.UI.Acceleration {
 
 
         #region properties
+
+
         #endregion // properties
 
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
-            dc.DrawRectangle(Brushes.Yellow, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
+        public override Size Measure(double hintWidth, double hintHeight) {
+            return new Size(40, 0);
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
-            return new Size(hintWidth, 100);
+        protected override void DoDraw(DrawingContext dc) {
+            dc.DrawRectangle(Brushes.Yellow, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
         }
 
         #endregion // overriden methods

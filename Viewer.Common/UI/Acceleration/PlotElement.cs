@@ -69,6 +69,7 @@ namespace Viewer.Common.UI.Acceleration {
         }
 
         protected override void DoDraw(DrawingContext dc) {
+            dc.DrawRectangle(Brushes.LightGray, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
         }
 
         public override Size Measure(double hintWidth, double hintHeight) {

@@ -13,10 +13,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Viewer.Common.View {
+
     /// <summary>
-    /// Interaction logic for AccelerationChartView.xaml
+    /// AccelerationChart testing view
     /// </summary>
     public partial class AccelerationChartView : UserControl {
+    
         public AccelerationChartView() {
             InitializeComponent();
         }

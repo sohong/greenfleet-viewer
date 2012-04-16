@@ -5,7 +5,7 @@
              xmlns:ui="clr-namespace:Viewer.Common.UI"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="294" d:DesignWidth="466">
+             d:DesignHeight="340" d:DesignWidth="658">
     <Grid>
         <ui:AccelerationChart x:Name="chart"></ui:AccelerationChart>   
     </Grid>

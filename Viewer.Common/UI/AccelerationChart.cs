@@ -46,8 +46,8 @@ namespace Viewer.Common.UI {
         /// MinValueCount
         /// </summary>
         public static readonly DependencyProperty MinValueCountProperty = DependencyProperty.Register(
-            "MinValueCount", typeof(uint), typeof(AccelerationChart),
-            new FrameworkPropertyMetadata(60, OnMinValueCountChanged));
+            "ValueCount", typeof(uint), typeof(AccelerationChart),
+            new FrameworkPropertyMetadata((uint)60, OnMinValueCountChanged));
         private static void OnMinValueCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
             ((AccelerationChart)d).RefreshChart();
         }
@@ -182,22 +182,22 @@ namespace Viewer.Common.UI {
 
             // x-axis
             sz = m_xaxisElement.Measure(width, height);
-            m_xaxisElement.Width = sz.Width;
-            m_xaxisElement.Move(x, y);
+            m_xaxisElement.Height = sz.Height;
+            m_xaxisElement.Y = y + height - sz.Height;
 
-            x += m_xaxisElement.Width;
-            width -= m_xaxisElement.Width;
+            height -= m_xaxisElement.Height;
 
             // y-axis
             sz = m_yaxisElement.Measure(width, height);
-            m_yaxisElement.Width = width;
-            m_yaxisElement.Height = sz.Height;
-            m_yaxisElement.X = x;
-            m_yaxisElement.Y = y + height - sz.Height;
+            m_yaxisElement.Width = sz.Width;
+            m_yaxisElement.Height = height;
+            m_yaxisElement.Move(x, y);
 
-            height -= m_yaxisElement.Height;
+            x += m_yaxisElement.Width;
 
-            m_xaxisElement.Height = height;
+            m_xaxisElement.Width = width;
+            m_yaxisElement.Height = height;
+            m_xaxisElement.X = x;
 
             // plot
             m_plotElement.Width = width;
