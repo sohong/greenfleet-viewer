@@ -101,16 +101,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="StringExtension.cs" />
-    <Compile Include="UI\AccelChart\DataPointElement.cs" />
-    <Compile Include="UI\AccelChart\GridElement.cs" />
-    <Compile Include="UI\AccelChart\LegendElement.cs" />
-    <Compile Include="UI\AccelChart\LegendItemElement.cs" />
-    <Compile Include="UI\AccelChart\PlotElement.cs" />
-    <Compile Include="UI\AccelChart\SeriesElement.cs" />
-    <Compile Include="UI\AccelChart\XAxisElement.cs" />
-    <Compile Include="UI\AccelChart\YAxisElement.cs" />
+    <Compile Include="UI\Acceleration\DataPointElement.cs" />
+    <Compile Include="UI\Acceleration\GridElement.cs" />
+    <Compile Include="UI\Acceleration\LegendElement.cs" />
+    <Compile Include="UI\Acceleration\LegendItemElement.cs" />
+    <Compile Include="UI\Acceleration\PlotElement.cs" />
+    <Compile Include="UI\Acceleration\SeriesElement.cs" />
+    <Compile Include="UI\Acceleration\XAxisElement.cs" />
+    <Compile Include="UI\Acceleration\YAxisElement.cs" />
     <Compile Include="UI\AccelerationChart.cs" />
-    <Compile Include="UI\AccelChart\ChartElement.cs" />
+    <Compile Include="UI\Acceleration\ChartElement.cs" />
     <Compile Include="UI\HelloBox.cs" />
     <Compile Include="UI\Timeline\FenceVisual.cs" />
     <Compile Include="UI\Timeline\TimeRangeMarkerVisual.cs" />
@@ -131,6 +131,9 @@
     <Compile Include="ViewModel\IDialogViewModel.cs" />
     <Compile Include="ViewModel\ProgressViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AccelerationChartView.xaml.cs">
+      <DependentUpon>AccelerationChartView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BingMapView.xaml.cs">
       <DependentUpon>BingMapView.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,10 @@
     <Page Include="Resources\Shared.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AccelerationChartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BingMapView.xaml">
       <SubType>Designer</SubType>

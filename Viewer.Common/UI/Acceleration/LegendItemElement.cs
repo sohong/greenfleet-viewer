@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// YAxisElement.cs
+// LegendItemElement.cs
 // 2012.04.16, created by sohong
 //
 // =============================================================================
@@ -15,19 +15,15 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Viewer.Common.UI.AccelChart {
+namespace Viewer.Common.UI.Acceleration {
 
-    public class YAxisElement : ChartElement {
+    public class LegendItemElement : DrawingVisual {
 
-        #region overriden methods
+        #region constructor
 
-        protected override void DoDraw(DrawingContext dc) {
+        public LegendItemElement() {
         }
 
-        protected override Size Measure(double hintWidth, double hintHeight) {
-            return new Size();
-        }
-
-        #endregion // overriden methods
+        #endregion // constructor
     }
 }

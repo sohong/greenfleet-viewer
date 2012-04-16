@@ -31,7 +31,7 @@ namespace Viewer.Common.UI {
             new FrameworkPropertyMetadata(null, OnTracksChanged));
         private static void OnTracksChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
             ((TimelineBar)d).UnregisterTracksEvents(a.OldValue);
-            ((TimelineBar)d).RefrechElements();
+            ((TimelineBar)d).RefreshElements();
             ((TimelineBar)d).RegisterTracksEvents(a.NewValue);
         }
 
@@ -222,6 +222,8 @@ namespace Viewer.Common.UI {
                 HoverFill = HoverFill
             });
             AddElement(m_tickLayer = new TimelineElement(this));
+
+            SnapsToDevicePixels = true;
         }
 
         #endregion // constructors
@@ -373,9 +375,7 @@ namespace Viewer.Common.UI {
         #region overriden methods
 
         protected override int VisualChildrenCount {
-            get {
-                return m_elements.Count;
-            }
+            get { return m_elements.Count; }
         }
 
         protected override Visual GetVisualChild(int index) {
@@ -419,7 +419,7 @@ namespace Viewer.Common.UI {
         #region internal methods
 
         private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-            RefrechElements();
+            RefreshElements();
         }
 
         private void RegisterTracksEvents(object source) {
@@ -453,7 +453,7 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// track element를 제외한 모든 element들을 새로 생성한다.
         /// </summary>
-        private void RefrechElements() {
+        private void RefreshElements() {
             DateTime t1 = DateTime.Now;
 
             m_rangeLayer.Children.Clear();

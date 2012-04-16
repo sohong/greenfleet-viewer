@@ -17,6 +17,9 @@
             <TabItem Header="Chart">
                 <gf:AccelerationView Name="accelView"/>
             </TabItem>
+            <TabItem Header="Chart2">
+                <gf:AccelerationChartView Name="accelerationView"/>
+            </TabItem>
         </TabControl>    
     </Grid>
 </Window>

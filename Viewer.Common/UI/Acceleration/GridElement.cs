@@ -15,16 +15,25 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Viewer.Common.UI.AccelChart {
+namespace Viewer.Common.UI.Acceleration {
 
     public class GridElement : ChartElement {
+
+        #region constructor
+
+        public GridElement(AccelerationChart chart)
+            : base(chart) {
+        }
+
+        #endregion // constructor
+
 
         #region overriden methods
 
         protected override void DoDraw(DrawingContext dc) {
         }
 
-        protected override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight) {
             return new Size();
         }
 

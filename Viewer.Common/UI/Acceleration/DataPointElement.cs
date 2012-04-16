@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// PlotElement.cs
+// DataPointElement.cs
 // 2012.04.16, created by sohong
 //
 // =============================================================================
@@ -12,22 +12,18 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Media;
 
-namespace Viewer.Common.UI.AccelChart {
+namespace Viewer.Common.UI.Acceleration {
 
-    public class PlotElement : ChartElement {
+    public class DataPointElement : DrawingVisual {
 
-        #region overriden methods
+        #region constructor
 
-        protected override void DoDraw(DrawingContext dc) {
+        public DataPointElement() {
         }
 
-        protected override Size Measure(double hintWidth, double hintHeight) {
-            return new Size();
-        }
-
-        #endregion // overriden methods
+        #endregion // constructor
     }
 }

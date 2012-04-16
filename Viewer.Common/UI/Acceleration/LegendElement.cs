@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// LegendItemElement.cs
+// LegendElement.cs
 // 2012.04.16, created by sohong
 //
 // =============================================================================
@@ -15,17 +15,27 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Viewer.Common.UI.AccelChart {
+namespace Viewer.Common.UI.Acceleration {
 
-    public class LegendItemElement : ChartElement {
+    public class LegendElement : ChartElement {
+
+        #region constructor
+
+        public LegendElement(AccelerationChart chart)
+            : base(chart) {
+        }
+
+        #endregion // constructor
+
 
         #region overriden methods
 
         protected override void DoDraw(DrawingContext dc) {
+            dc.DrawRectangle(Brushes.Green, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
         }
 
-        protected override Size Measure(double hintWidth, double hintHeight) {
-            return new Size();
+        public override Size Measure(double hintWidth, double hintHeight) {
+            return new Size(100, 0);
         }
 
         #endregion // overriden methods
