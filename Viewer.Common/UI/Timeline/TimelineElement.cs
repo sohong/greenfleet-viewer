@@ -39,21 +39,6 @@ namespace Viewer.Common.UI.Timeline {
         #endregion // constructor
 
 
-        #region methods
-
-        public void Invalidate() {
-            m_container.InvalidateArrange();
-        }
-
-        public void Draw() {
-            DrawingContext dc = RenderOpen();
-            DoDraw(dc);
-            dc.Close();
-        }
-
-        #endregion // methods
-
-
         #region properties
 
         /// <summary>
@@ -134,6 +119,21 @@ namespace Viewer.Common.UI.Timeline {
         }
         
         #endregion // properties
+
+
+        #region methods
+
+        public void Invalidate() {
+            m_container.InvalidateArrange();
+        }
+
+        public void Draw() {
+            DrawingContext dc = RenderOpen();
+            DoDraw(dc);
+            dc.Close();
+        }
+
+        #endregion // methods
 
 
         #region internal methods

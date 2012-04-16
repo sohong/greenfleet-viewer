@@ -101,6 +101,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="StringExtension.cs" />
+    <Compile Include="UI\AccelChart\DataPointElement.cs" />
+    <Compile Include="UI\AccelChart\GridElement.cs" />
+    <Compile Include="UI\AccelChart\LegendElement.cs" />
+    <Compile Include="UI\AccelChart\LegendItemElement.cs" />
+    <Compile Include="UI\AccelChart\PlotElement.cs" />
+    <Compile Include="UI\AccelChart\SeriesElement.cs" />
+    <Compile Include="UI\AccelChart\XAxisElement.cs" />
+    <Compile Include="UI\AccelChart\YAxisElement.cs" />
+    <Compile Include="UI\AccelerationChart.cs" />
+    <Compile Include="UI\AccelChart\ChartElement.cs" />
     <Compile Include="UI\HelloBox.cs" />
     <Compile Include="UI\Timeline\FenceVisual.cs" />
     <Compile Include="UI\Timeline\TimeRangeMarkerVisual.cs" />

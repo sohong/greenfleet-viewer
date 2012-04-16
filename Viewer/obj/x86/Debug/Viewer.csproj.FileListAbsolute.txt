@@ -28,11 +28,8 @@ C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debu
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\log4net.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\WPFToolkit.dll
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Viewer.Common.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.pdb
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\bin\Debug\WPFToolkit.pdb
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\Debug\View\Shell.baml
 C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\Debug\View\HomeView.baml
