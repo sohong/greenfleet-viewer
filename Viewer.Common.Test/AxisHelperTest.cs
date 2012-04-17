@@ -67,8 +67,8 @@ namespace Viewer.Common.Test
         [TestMethod()]
         public void GetValuesTest() {
             double minValue = 0;
-            double maxValue = 177;
-            int maxCount = 20;
+            double maxValue = 0;
+            int maxCount = 6;
             IEnumerable<double> actual = AxisHelper.GetValues(minValue, maxValue, maxCount);
             Assert.IsNotNull(actual);
         }

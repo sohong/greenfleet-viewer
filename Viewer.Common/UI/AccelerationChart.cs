@@ -64,8 +64,9 @@ namespace Viewer.Common.UI {
         private LegendElement m_legendElement;
 
         private IList<Value> m_values;
-        private double m_minimum = -5;
-        private double m_maximum = 5;
+        private double m_minimum = -1;
+        private double m_maximum = 1;
+        private IList<double> m_axisValues;
 
         #endregion // fields
 
@@ -80,6 +81,7 @@ namespace Viewer.Common.UI {
             m_elements.Add(m_legendElement = new LegendElement(this));
 
             m_values = new List<Value>();
+            m_axisValues = new List<double>();
 
             SnapsToDevicePixels = true;
         }
@@ -104,6 +106,8 @@ namespace Viewer.Common.UI {
         #region methods
 
         public void Clear() {
+            m_values.Clear();
+            RefreshChart();
         }
 
         public void AddValue(double x, double y, double z) {
@@ -158,6 +162,12 @@ namespace Viewer.Common.UI {
 
             m_minimum = min;
             m_maximum = max;
+
+            m_axisValues.Clear();
+            foreach (double v in AxisHelper.GetValues(m_minimum, m_maximum, 6)) {
+                m_axisValues.Add(v);
+            }
+            m_yaxisElement.Values = m_axisValues;
         }
 
         private void LayoutElements(double width, double height) {

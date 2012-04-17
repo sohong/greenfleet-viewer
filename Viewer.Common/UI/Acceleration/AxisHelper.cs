@@ -20,14 +20,6 @@ namespace Viewer.Common.UI.Acceleration {
     /// </summary>
     public class AxisHelper {
 
-        /*
-        public static IEnumerable<double> GetValues(double minValue, double maxValue, int maxCount) {
-            double interval = CalcInterval(minValue, maxValue, maxCount);
-            Debug.WriteLine(interval);
-            yield break;
-        }
-         */
-
         public static IEnumerable<double> GetValues(double minValue, double maxValue, int maxCount) {
             IList<double> values = new List<double>();
             double interval = CalcInterval(minValue, maxValue, maxCount);
@@ -49,7 +41,7 @@ namespace Viewer.Common.UI.Acceleration {
             double bestInterval = range / maxCount;
             double minInterval = Math.Pow(10, Math.Floor(Math.Log10(bestInterval)));
 
-            foreach (int m in new int[] { 10, 5, 2, 1 }) {
+            foreach (int m in new int[] { 10, 5, 4, 2, 1 }) {
                 double interval = minInterval * m;
                 if (maxCount < range / interval)
                     break;
