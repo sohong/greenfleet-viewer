@@ -34,7 +34,7 @@ namespace Viewer.Common.UI.Acceleration {
         public IEnumerable<double> Values {
             get { return m_values; }
             set {
-                if (value != m_values) {
+                //if (value != m_values) {
                     m_values = value;
 
                     double minVal = 0;
@@ -49,7 +49,7 @@ namespace Viewer.Common.UI.Acceleration {
                     MaxValue = maxVal;
 
                     Invalidate();
-                }
+                //}
             }
         }
         private IEnumerable<double> m_values;
@@ -70,7 +70,7 @@ namespace Viewer.Common.UI.Acceleration {
         #region overriden methods
 
         public override Size Measure(double hintWidth, double hintHeight) {
-            return new Size(40, 0);
+            return new Size(30, 0);
         }
 
         protected override void DoDraw(DrawingContext dc) {
@@ -85,15 +85,12 @@ namespace Viewer.Common.UI.Acceleration {
                 double y = h - (p - MinValue) * h / len;
                 dc.DrawLine(new Pen(Brushes.Black, 1), new Point(x, y), new Point(x - 5, y));
 
-                /*
-                if (i % 10 == 0) {
-                    string text = m_startTime.AddSeconds(i).ToString("mm:ss");
-                    Typeface face = new Typeface("Tahoma");
-                    FormattedText ft = new FormattedText(text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 12, Brushes.Black);
-                    double tw = ft.MinWidth;
-                    dc.DrawText(ft, new Point(x - tw / 2, 7));
-                }
-                 */
+                string text = p + "";
+                Typeface face = new Typeface("Tahoma");
+                FormattedText ft = new FormattedText(text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 12, Brushes.Black);
+                double tw = ft.Width;
+                double th = ft.Height;
+                dc.DrawText(ft, new Point(x - tw - 5 - 2, y - th / 2));
             }
         }
 

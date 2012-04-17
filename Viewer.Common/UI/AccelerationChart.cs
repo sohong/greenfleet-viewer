@@ -84,6 +84,11 @@ namespace Viewer.Common.UI {
             m_axisValues = new List<double>();
 
             SnapsToDevicePixels = true;
+            RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+
+            SizeChanged += new SizeChangedEventHandler((sender, e) => {
+                VisualClip = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
+            });
         }
 
         #endregion // constructor
@@ -130,6 +135,7 @@ namespace Viewer.Common.UI {
 
         protected override Size ArrangeOverride(Size finalSize) {
             Size sz = base.ArrangeOverride(finalSize);
+
             LayoutElements(sz.Width, sz.Height);
 
             return sz;
@@ -141,12 +147,10 @@ namespace Viewer.Common.UI {
         #region internal methods
 
         private void RefreshChart() {
-            Recalculate();
-
             InvalidateArrange();
         }
 
-        private void Recalculate() {
+        private void Recalculate(double width, double height) {
             double min = -1;
             double max = 1;
 
@@ -164,7 +168,8 @@ namespace Viewer.Common.UI {
             m_maximum = max;
 
             m_axisValues.Clear();
-            foreach (double v in AxisHelper.GetValues(m_minimum, m_maximum, 6)) {
+            int maxCount = this.ActualHeight >= 400 ? 10 : height >= 200 ?  6 : height >= 140 ? 4 : 2;
+            foreach (double v in AxisHelper.GetValues(m_minimum, m_maximum, maxCount)) {
                 m_axisValues.Add(v);
             }
             m_yaxisElement.Values = m_axisValues;
@@ -173,22 +178,23 @@ namespace Viewer.Common.UI {
         private void LayoutElements(double width, double height) {
             if (width * height == 0) return;
 
-            Recalculate();
+            Recalculate(width, height);
 
-            double padding = 10;
-            double x = padding;
-            double y = padding;
-            width -= padding * 2;
-            height -= padding * 2;
+            double paddingX = 15;
+            double paddingY = 10;
+            double x = paddingX;
+            double y = paddingY;
+            width -= paddingX * 2;
+            height -= paddingY * 2;
 
             // legend
             Size sz = m_legendElement.Measure(width, height);
-            m_legendElement.Width = sz.Width;
-            m_legendElement.Height = height;
-            m_legendElement.X = x + width - sz.Width;
-            m_legendElement.Y = y;
+            m_legendElement.Width = width;
+            m_legendElement.Height = sz.Height;
+            m_legendElement.X = x;
+            m_legendElement.Y = y + height - sz.Height;
 
-            width -= m_legendElement.Width;
+            height -= m_legendElement.Height;
 
             // x-axis
             sz = m_xaxisElement.Measure(width, height);
@@ -204,10 +210,14 @@ namespace Viewer.Common.UI {
             m_yaxisElement.Move(x, y);
 
             x += m_yaxisElement.Width;
+            width -= m_yaxisElement.Width;
 
             m_xaxisElement.Width = width;
             m_yaxisElement.Height = height;
             m_xaxisElement.X = x;
+
+            m_legendElement.X = x;
+            m_legendElement.Width = width;
 
             // plot
             m_plotElement.Width = width;

@@ -54,8 +54,8 @@ namespace Viewer.Common.UI.Acceleration {
             dc.DrawLine(new Pen(Brushes.Black, 1), new Point(0, 0), new Point(Width, 0));
 
             uint count = Chart.MinValueCount;
-            double w = Width / (count - 1);
-            for (int i = 0; i < count; i++) {
+            double w = Width / count;
+            for (int i = 0; i <= count; i++) {
                 double x = i * w;
                 dc.DrawLine(new Pen(Brushes.Black, 1), new Point(x, 0), new Point(x, 5));
 
@@ -63,14 +63,14 @@ namespace Viewer.Common.UI.Acceleration {
                     string text = m_startTime.AddSeconds(i).ToString("mm:ss");
                     Typeface face = new Typeface("Tahoma");
                     FormattedText ft = new FormattedText(text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 12, Brushes.Black);
-                    double tw = ft.MinWidth;
+                    double tw = ft.Width;
                     dc.DrawText(ft, new Point(x - tw / 2, 7));
                 }
             }
         }
 
         public override Size Measure(double hintWidth, double hintHeight) {
-            return new Size(0, 30);
+            return new Size(0, 25);
         }
 
         #endregion // overriden methods

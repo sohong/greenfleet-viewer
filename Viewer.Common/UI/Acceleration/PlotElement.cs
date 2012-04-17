@@ -53,10 +53,10 @@ namespace Viewer.Common.UI.Acceleration {
         protected override void CreateChildren() {
             base.CreateChildren();
 
-            AddVisualChild(m_gridElement = new GridElement(Chart));
-            AddVisualChild(m_seriesX = new SeriesElement(Chart));
-            AddVisualChild(m_seriesY = new SeriesElement(Chart));
-            AddVisualChild(m_seriesZ = new SeriesElement(Chart));
+            Children.Add(m_gridElement = new GridElement(Chart));
+            Children.Add(m_seriesX = new SeriesElement(Chart));
+            Children.Add(m_seriesY = new SeriesElement(Chart));
+            Children.Add(m_seriesZ = new SeriesElement(Chart));
         }
 
         public override void Draw() {
@@ -69,7 +69,8 @@ namespace Viewer.Common.UI.Acceleration {
         }
 
         protected override void DoDraw(DrawingContext dc) {
-            dc.DrawRectangle(Brushes.LightGray, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
+            LinearGradientBrush brush = new LinearGradientBrush(Colors.LightGray, Colors.White, 90);
+            dc.DrawRectangle(brush, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
         }
 
         public override Size Measure(double hintWidth, double hintHeight) {
