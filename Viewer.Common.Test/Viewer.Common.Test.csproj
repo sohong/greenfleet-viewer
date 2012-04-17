@@ -70,6 +70,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AxisHelperTest.cs" />
     <Compile Include="CollectionSerializerTest.cs" />
     <Compile Include="DateTimeExtensionTest.cs" />
     <Compile Include="LocalTrackLoaderTest.cs" />
