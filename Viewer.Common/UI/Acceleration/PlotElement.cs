@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.Windows;
+using System.Globalization;
 
 namespace Viewer.Common.UI.Acceleration {
 
@@ -25,6 +26,8 @@ namespace Viewer.Common.UI.Acceleration {
         private SeriesElement m_seriesX;
         private SeriesElement m_seriesY;
         private SeriesElement m_seriesZ;
+        private DrawingVisual m_indicator;
+        private DrawingVisual m_panel;
         
         #endregion // fields
 
@@ -82,6 +85,8 @@ namespace Viewer.Common.UI.Acceleration {
             Children.Add(m_seriesX = new SeriesElement(Chart));
             Children.Add(m_seriesY = new SeriesElement(Chart));
             Children.Add(m_seriesZ = new SeriesElement(Chart));
+            Children.Add(m_indicator = new DrawingVisual());
+            Children.Add(m_panel = new DrawingVisual());
         }
 
         public override void Draw() {
@@ -117,6 +122,11 @@ namespace Viewer.Common.UI.Acceleration {
                 m_seriesZ.AxisLabels = this.AxisLabels;
                 m_seriesZ.Values = GetSeriesValues(2);
                 m_seriesZ.Draw();
+
+                if (this.Values.Count > 0) {
+                    DrawIndicator();
+                    DrawPanel();
+                }
             }
         }
 
@@ -154,6 +164,34 @@ namespace Viewer.Common.UI.Acceleration {
             }
 
             return values;
+        }
+
+        private void DrawIndicator() {
+            DrawingContext dc = m_indicator.RenderOpen();
+
+            Pen pen = new Pen(new SolidColorBrush(ToColor(0x880000ff)), 1);
+            pen.DashStyle = DashStyles.Dash;
+            double x = this.AxisLabels.GetPosition(this.Values.Count - 1) * this.Width;
+            dc.DrawLine(pen, new Point(x, -2), new Point(x, this.Height + 2));
+
+            dc.Close();
+        }
+
+        private void DrawPanel() {
+            DrawingContext dc = m_panel.RenderOpen();
+
+            Brush fill = new SolidColorBrush(ToColor(0x110000ff));
+            double x = this.AxisLabels.GetPosition(this.Values.Count - 1) * this.Width;
+            dc.DrawRectangle(fill, null, new Rect(x, 0, this.Width - x, this.Height));
+
+            if (x < this.Width - 4) {
+                string s = this.AxisLabels.GetLabel(this.Values.Count - 1);
+                Typeface face = new Typeface("Tahoma");
+                FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 12, Brushes.Blue);
+                dc.DrawText(ft, new Point(x + 4, this.Height - ft.Height - 2));
+            }
+
+            dc.Close();
         }
 
         #endregion // internal methods

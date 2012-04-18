@@ -42,7 +42,7 @@ namespace Viewer.Common.UI.Acceleration {
         #region overriden methods
 
         public override Size Measure(double hintWidth, double hintHeight) {
-            return new Size(20, 0);
+            return new Size(16, 0);
         }
 
         protected override void DoDraw(DrawingContext dc) {

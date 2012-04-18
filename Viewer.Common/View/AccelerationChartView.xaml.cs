@@ -60,16 +60,11 @@ namespace Viewer.Common.View {
 
 
         #region fields
-
-        private ObservableCollection<TrackPoint> m_points;
-
         #endregion // fields
 
         
         public AccelerationChartView() {
             InitializeComponent();
-
-            m_points = new ObservableCollection<TrackPoint>();
         }
 
 
@@ -97,18 +92,18 @@ namespace Viewer.Common.View {
         #region internal methods
 
         private void RefreshPoints(TrackPoint current) {
-            m_points.Clear();
             chart.Clear();
+            chart.Title = "";
 
-            if (Track != null && Position != null) {
+            if (Track != null && Track.PointCount > 0 && Position != null) {
                 foreach (TrackPoint p in Track.Points) {
-                    m_points.Add(p);
-
-                    chart.AddValue(p.AccelerationX, p.AccelerationY, p.AccelerationZ);
-
+                    chart.AddValue(p.PointTime, p.AccelerationX, p.AccelerationY, p.AccelerationZ);
                     if (p == current)
                         break;
                 }
+
+                chart.Title = Track.First.PointTime.ToString("yyyy-MM-dd hh:mm:ss") + " ~ " +
+                    Track.Last.PointTime.ToString("yyyy-MM-dd hh:mm:ss");
             }
         }
 

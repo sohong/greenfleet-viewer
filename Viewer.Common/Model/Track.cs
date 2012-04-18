@@ -184,6 +184,14 @@ namespace Viewer.Common.Model {
             get { return m_points[index]; }
         }
 
+        public TrackPoint First {
+            get { return m_points.Count > 0 ? m_points[0] : null; }
+        }
+
+        public TrackPoint Last {
+            get { return m_points.Count > 0 ? m_points[m_points.Count - 1] : null; }
+        }
+
         /// <summary>
         /// 선택 상태. view에서 사용한다.
         /// </summary>

@@ -23,6 +23,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         public SeriesElement(AccelerationChart chart)
             : base(chart) {
+
+            RenderOptions.SetEdgeMode(this, EdgeMode.Unspecified);
         }
 
         #endregion // constructor

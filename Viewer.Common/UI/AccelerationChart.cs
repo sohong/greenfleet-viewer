@@ -26,11 +26,13 @@ namespace Viewer.Common.UI {
         #region struct Value
 
         public struct Value {
+            public DateTime T;
             public double X;
             public double Y;
             public double Z;
 
-            public Value(double x, double y, double z) {
+            public Value(DateTime t, double x, double y, double z) {
+                this.T = t;
                 this.X = x;
                 this.Y = y;
                 this.Z = z;
@@ -64,6 +66,16 @@ namespace Viewer.Common.UI {
             "ValueCount", typeof(uint), typeof(AccelerationChart),
             new FrameworkPropertyMetadata((uint)60, OnMinValueCountChanged));
         private static void OnMinValueCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+            ((AccelerationChart)d).RefreshChart();
+        }
+
+        /// <summary>
+        /// Title
+        /// </summary>
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+            "Title", typeof(string), typeof(AccelerationChart),
+            new FrameworkPropertyMetadata(null, OnTitleChanged));
+        private static void OnTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
             ((AccelerationChart)d).RefreshChart();
         }
 
@@ -129,6 +141,15 @@ namespace Viewer.Common.UI {
             set { SetValue(MinValueCountProperty, value); }
         }
 
+        /// <summary>
+        /// Chart title.
+        /// 왼쪽 아래에 표시한다.
+        /// </summary>
+        public string Title {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+
         #endregion // properties
 
 
@@ -139,8 +160,8 @@ namespace Viewer.Common.UI {
             RefreshChart();
         }
 
-        public void AddValue(double x, double y, double z) {
-            m_values.Add(new Value(x, y, z));
+        public void AddValue(DateTime t, double x, double y, double z) {
+            m_values.Add(new Value(t, x, y, z));
             RefreshChart();
         }
 
@@ -194,7 +215,7 @@ namespace Viewer.Common.UI {
             int maxCount = this.ActualHeight >= 400 ? 10 : height >= 200 ?  6 : height >= 140 ? 4 : 2;
             m_axisValues.ResetValues(AxisHelper.GetValues(m_minimum, m_maximum, maxCount));
 
-            m_axisLabels.StartTime = DateTime.Now;
+            m_axisLabels.StartTime = m_values.Count > 0 ? m_values[0].T : DateTime.MinValue;
             m_axisLabels.Count = 60;
 
             m_xaxisElement.AxisLabels = m_axisLabels;
@@ -251,6 +272,7 @@ namespace Viewer.Common.UI {
 
             m_legendElement.X = x;
             m_legendElement.Width = width;
+            m_legendElement.Title = Title;
 
             // plot
             m_plotElement.Width = width;

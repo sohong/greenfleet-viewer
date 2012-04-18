@@ -217,7 +217,7 @@ namespace Viewer.Common.View {
         }
 
         private void mediaMain_MediaEnded(object sender, RoutedEventArgs e) {
-            Stop();
+            //Stop();
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e) {
