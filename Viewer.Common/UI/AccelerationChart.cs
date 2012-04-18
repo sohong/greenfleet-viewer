@@ -40,6 +40,21 @@ namespace Viewer.Common.UI {
         #endregion // struct Value
 
 
+        #region struct Series
+
+        public struct Series {
+            public string Label;
+            public Color Color;
+
+            public Series(string label, Color color) {
+                this.Label = label;
+                this.Color = color;
+            }
+        }
+
+        #endregion // struct Series
+
+
         #region dependency properties
 
         /// <summary>
@@ -64,6 +79,7 @@ namespace Viewer.Common.UI {
         private LegendElement m_legendElement;
 
         private IList<Value> m_values;
+        private IList<Series> m_series;
         private double m_minimum = -1;
         private double m_maximum = 1;
         private AxisValueProvider m_axisValues;
@@ -82,6 +98,12 @@ namespace Viewer.Common.UI {
             m_elements.Add(m_legendElement = new LegendElement(this));
 
             m_values = new List<Value>();
+            
+            m_series = new List<Series>();
+            m_series.Add(new Series("accel X", Colors.CadetBlue));
+            m_series.Add(new Series("accel Y", Colors.Goldenrod));
+            m_series.Add(new Series("accel Z", Colors.PaleVioletRed));
+
             m_axisValues = new AxisValueProvider();
             m_axisLabels = new AxisLabelProvider();
 
@@ -177,9 +199,13 @@ namespace Viewer.Common.UI {
 
             m_xaxisElement.AxisLabels = m_axisLabels;
             m_yaxisElement.AxisValues = m_axisValues;
+
             m_plotElement.AxisLabels = m_axisLabels;
             m_plotElement.AxisValues = m_axisValues;
             m_plotElement.Values = m_values;
+            m_plotElement.Series = m_series;
+
+            m_legendElement.Series = m_series;
         }
 
         private void LayoutElements(double width, double height) {
@@ -188,7 +214,7 @@ namespace Viewer.Common.UI {
             Recalculate(width, height);
 
             double paddingX = 15;
-            double paddingY = 10;
+            double paddingY = 5;
             double x = paddingX;
             double y = paddingY;
             width -= paddingX * 2;

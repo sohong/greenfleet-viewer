@@ -55,6 +55,11 @@ namespace Viewer.Common.UI.Acceleration {
             set;
         }
 
+        public IList<AccelerationChart.Series> Series {
+            get;
+            set;
+        }
+
         #endregion // properties
 
 
@@ -88,26 +93,31 @@ namespace Viewer.Common.UI.Acceleration {
             m_gridElement.AxisLabels = this.AxisLabels;
             m_gridElement.Draw();
 
-            m_seriesX.Width = this.Width;
-            m_seriesX.Height = this.Height;
-            m_seriesX.AxisValues = this.AxisValues;
-            m_seriesX.AxisLabels = this.AxisLabels;
-            m_seriesX.Values = GetSeriesValues(0);
-            m_seriesX.Draw();
+            if (this.Series != null && this.Series.Count >= 3) {
+                m_seriesX.Width = this.Width;
+                m_seriesX.Height = this.Height;
+                m_seriesX.Color = this.Series[0].Color;
+                m_seriesX.AxisValues = this.AxisValues;
+                m_seriesX.AxisLabels = this.AxisLabels;
+                m_seriesX.Values = GetSeriesValues(0);
+                m_seriesX.Draw();
 
-            m_seriesY.Width = this.Width;
-            m_seriesY.Height = this.Height;
-            m_seriesY.AxisValues = this.AxisValues;
-            m_seriesY.AxisLabels = this.AxisLabels;
-            m_seriesY.Values = GetSeriesValues(1);
-            m_seriesY.Draw();
+                m_seriesY.Width = this.Width;
+                m_seriesY.Height = this.Height;
+                m_seriesY.Color = this.Series[1].Color;
+                m_seriesY.AxisValues = this.AxisValues;
+                m_seriesY.AxisLabels = this.AxisLabels;
+                m_seriesY.Values = GetSeriesValues(1);
+                m_seriesY.Draw();
 
-            m_seriesZ.Width = this.Width;
-            m_seriesZ.Height = this.Height;
-            m_seriesZ.AxisValues = this.AxisValues;
-            m_seriesZ.AxisLabels = this.AxisLabels;
-            m_seriesZ.Values = GetSeriesValues(2);
-            m_seriesZ.Draw();
+                m_seriesZ.Width = this.Width;
+                m_seriesZ.Height = this.Height;
+                m_seriesZ.Color = this.Series[2].Color;
+                m_seriesZ.AxisValues = this.AxisValues;
+                m_seriesZ.AxisLabels = this.AxisLabels;
+                m_seriesZ.Values = GetSeriesValues(2);
+                m_seriesZ.Draw();
+            }
         }
 
         protected override void DoDraw(DrawingContext dc) {

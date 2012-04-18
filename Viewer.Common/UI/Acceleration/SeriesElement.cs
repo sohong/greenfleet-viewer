@@ -72,12 +72,16 @@ namespace Viewer.Common.UI.Acceleration {
             }
 
             // lines
+            Brush fill = new SolidColorBrush(Color);
+            Pen pen = new Pen(fill, 2);
+            for (int i = 0; i < pts.Length - 1; i++) {
+                dc.DrawLine(pen, pts[i], pts[i + 1]);
+            }
 
             // data points
-            Brush fill = new SolidColorBrush(Color);
             for (int i = 0; i < pts.Length; i++) {
                 Point p = pts[i];
-                dc.DrawEllipse(fill, null, p, 10, 10);
+                dc.DrawEllipse(fill, null, p, 3, 3);
             }
         }
 

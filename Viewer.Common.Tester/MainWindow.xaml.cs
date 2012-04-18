@@ -66,6 +66,7 @@ namespace Viewer.Common.Tester {
 
             // chart
             accelView.Track = track;
+            accelerationView.Track = track;
         }
 
         #endregion // event handlers
