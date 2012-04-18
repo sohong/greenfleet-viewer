@@ -22,6 +22,18 @@ namespace Viewer.Common.UI.Acceleration {
     /// </summary>
     public abstract class ChartElement : DrawingVisual {
 
+        #region static members
+
+        public static Color ToColor(uint argb) {
+            Color color = Color.FromArgb((byte)((argb & 0xff000000) >> 24), 
+                (byte)((argb & 0xff0000) >> 16), (byte)((argb & 0xff00) >> 8), (byte)(argb & 0xff));
+            return color;
+
+        }
+
+        #endregion // static members
+
+
         #region fields
 
         private AccelerationChart m_chart;

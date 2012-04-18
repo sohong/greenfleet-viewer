@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Viewer.Common.UI;
 
 namespace Viewer.Common.View {
 
@@ -21,6 +22,10 @@ namespace Viewer.Common.View {
     
         public AccelerationChartView() {
             InitializeComponent();
+
+            chart.AddValue(3, 0, 0);
+            chart.AddValue(2, 1.2, -1);
+            chart.AddValue(2, 1.5, -2.1);
         }
     }
 }

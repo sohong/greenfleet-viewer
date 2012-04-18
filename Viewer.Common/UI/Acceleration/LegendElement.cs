@@ -79,8 +79,8 @@ namespace Viewer.Common.UI.Acceleration {
                 double w = this.Width;
                 double h = this.Height;
 
-                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#05000000"));
-                dc.DrawRectangle(brush, new Pen(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#110000ff")), 1), new Rect(0, 0, w, h));
+                SolidColorBrush brush = new SolidColorBrush(ToColor(0x05000000));
+                dc.DrawRectangle(brush, new Pen(new SolidColorBrush(ToColor(0x110000ff)), 1), new Rect(0, 0, w, h));
             }
         }
 

@@ -66,7 +66,8 @@ namespace Viewer.Common.UI {
         private IList<Value> m_values;
         private double m_minimum = -1;
         private double m_maximum = 1;
-        private IList<double> m_axisValues;
+        private AxisValueProvider m_axisValues;
+        private AxisLabelProvider m_axisLabels;
 
         #endregion // fields
 
@@ -81,7 +82,8 @@ namespace Viewer.Common.UI {
             m_elements.Add(m_legendElement = new LegendElement(this));
 
             m_values = new List<Value>();
-            m_axisValues = new List<double>();
+            m_axisValues = new AxisValueProvider();
+            m_axisLabels = new AxisLabelProvider();
 
             SnapsToDevicePixels = true;
             RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
@@ -167,12 +169,17 @@ namespace Viewer.Common.UI {
             m_minimum = min;
             m_maximum = max;
 
-            m_axisValues.Clear();
             int maxCount = this.ActualHeight >= 400 ? 10 : height >= 200 ?  6 : height >= 140 ? 4 : 2;
-            foreach (double v in AxisHelper.GetValues(m_minimum, m_maximum, maxCount)) {
-                m_axisValues.Add(v);
-            }
-            m_yaxisElement.Values = m_axisValues;
+            m_axisValues.ResetValues(AxisHelper.GetValues(m_minimum, m_maximum, maxCount));
+
+            m_axisLabels.StartTime = DateTime.Now;
+            m_axisLabels.Count = 60;
+
+            m_xaxisElement.AxisLabels = m_axisLabels;
+            m_yaxisElement.AxisValues = m_axisValues;
+            m_plotElement.AxisLabels = m_axisLabels;
+            m_plotElement.AxisValues = m_axisValues;
+            m_plotElement.Values = m_values;
         }
 
         private void LayoutElements(double width, double height) {

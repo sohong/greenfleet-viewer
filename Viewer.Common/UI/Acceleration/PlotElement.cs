@@ -38,6 +38,26 @@ namespace Viewer.Common.UI.Acceleration {
         #endregion // constructor
 
 
+        #region properties
+
+        public AxisValueProvider AxisValues {
+            get;
+            set;
+        }
+
+        public AxisLabelProvider AxisLabels {
+            get;
+            set;
+        }
+
+        public IList<AccelerationChart.Value> Values {
+            get;
+            set;
+        }
+
+        #endregion // properties
+
+
         #region methods
 
         public void LayoutChildren() {
@@ -62,9 +82,31 @@ namespace Viewer.Common.UI.Acceleration {
         public override void Draw() {
             base.Draw();
 
+            m_gridElement.Width = this.Width;
+            m_gridElement.Height = this.Height;
+            m_gridElement.AxisValues = this.AxisValues;
+            m_gridElement.AxisLabels = this.AxisLabels;
             m_gridElement.Draw();
+
+            m_seriesX.Width = this.Width;
+            m_seriesX.Height = this.Height;
+            m_seriesX.AxisValues = this.AxisValues;
+            m_seriesX.AxisLabels = this.AxisLabels;
+            m_seriesX.Values = GetSeriesValues(0);
             m_seriesX.Draw();
+
+            m_seriesY.Width = this.Width;
+            m_seriesY.Height = this.Height;
+            m_seriesY.AxisValues = this.AxisValues;
+            m_seriesY.AxisLabels = this.AxisLabels;
+            m_seriesY.Values = GetSeriesValues(1);
             m_seriesY.Draw();
+
+            m_seriesZ.Width = this.Width;
+            m_seriesZ.Height = this.Height;
+            m_seriesZ.AxisValues = this.AxisValues;
+            m_seriesZ.AxisLabels = this.AxisLabels;
+            m_seriesZ.Values = GetSeriesValues(2);
             m_seriesZ.Draw();
         }
 
@@ -78,5 +120,32 @@ namespace Viewer.Common.UI.Acceleration {
         }
 
         #endregion // overriden methods
+
+
+        #region internal methods
+
+        private IList<double> GetSeriesValues(int accel) {
+            IList<double> values = new List<double>();
+
+            if (Values != null) {
+                foreach (AccelerationChart.Value v in Values) {
+                    switch (accel) {
+                    case 0: // X
+                        values.Add(v.X);
+                        break;
+                    case 1: // Y
+                        values.Add(v.Y);
+                        break;
+                    default:
+                        values.Add(v.Z);
+                        break;
+                    }
+                }
+            }
+
+            return values;
+        }
+
+        #endregion // internal methods
     }
 }

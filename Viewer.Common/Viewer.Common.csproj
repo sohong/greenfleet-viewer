@@ -102,6 +102,8 @@
     </Compile>
     <Compile Include="StringExtension.cs" />
     <Compile Include="UI\Acceleration\AxisHelper.cs" />
+    <Compile Include="UI\Acceleration\AxisLabelProvider.cs" />
+    <Compile Include="UI\Acceleration\AxisValueProvider.cs" />
     <Compile Include="UI\Acceleration\DataPointElement.cs" />
     <Compile Include="UI\Acceleration\GridElement.cs" />
     <Compile Include="UI\Acceleration\LegendElement.cs" />
