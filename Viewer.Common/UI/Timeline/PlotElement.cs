@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
 // PlotElement.cs
-// 2012.04.16, created by sohong
+// 2012.04.19, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -14,31 +14,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.Windows;
-using System.Globalization;
 
-namespace Viewer.Common.UI.Acceleration {
+namespace Viewer.Common.UI.Timeline {
 
     /// <summary>
-    /// AccelerationChart plot area.
+    /// TimelineBar plot area.
     /// </summary>
-    public class PlotElement : ChartElement {
+    public class PlotElement : TimelineElement {
 
         #region fields
 
         private GridElement m_gridElement;
-        private SeriesElement m_seriesX;
-        private SeriesElement m_seriesY;
-        private SeriesElement m_seriesZ;
-        private DrawingVisual m_indicator;
-        private DrawingVisual m_panel;
-        
+        //private SeriesElement m_seriesZ;
+        //private DrawingVisual m_indicator;
+        //private DrawingVisual m_panel;
+
         #endregion // fields
 
 
         #region constructor
 
-        public PlotElement(AccelerationChart chart)
-            : base(chart) {
+        public PlotElement(TimelineBar bar)
+            : base(bar) {
         }
 
         #endregion // constructor
@@ -46,22 +43,12 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public AxisValueProvider AxisValues {
-            get;
-            set;
-        }
-
         public AxisLabelProvider AxisLabels {
             get;
             set;
         }
 
-        public IList<AccelerationChart.Value> Values {
-            get;
-            set;
-        }
-
-        public IList<AccelerationChart.Series> Series {
+        public TimelineValueCollection Values {
             get;
             set;
         }
@@ -72,9 +59,9 @@ namespace Viewer.Common.UI.Acceleration {
         #region methods
 
         public void LayoutChildren() {
-            m_gridElement.Height = m_seriesX.Height = m_seriesY.Height = m_seriesZ.Height = this.Height;
+            m_gridElement.Height = this.Height;
         }
-        
+
         #endregion // methods
 
 
@@ -83,12 +70,7 @@ namespace Viewer.Common.UI.Acceleration {
         protected override void CreateChildren() {
             base.CreateChildren();
 
-            Children.Add(m_gridElement = new GridElement(Chart));
-            Children.Add(m_seriesX = new SeriesElement(Chart));
-            Children.Add(m_seriesY = new SeriesElement(Chart));
-            Children.Add(m_seriesZ = new SeriesElement(Chart));
-            Children.Add(m_indicator = new DrawingVisual());
-            Children.Add(m_panel = new DrawingVisual());
+            Children.Add(m_gridElement = new GridElement(Bar));
         }
 
         public override void Draw() {
@@ -96,40 +78,8 @@ namespace Viewer.Common.UI.Acceleration {
 
             m_gridElement.Width = this.Width;
             m_gridElement.Height = this.Height;
-            m_gridElement.AxisValues = this.AxisValues;
             m_gridElement.AxisLabels = this.AxisLabels;
             m_gridElement.Draw();
-
-            if (this.Series != null && this.Series.Count >= 3) {
-                m_seriesX.Width = this.Width;
-                m_seriesX.Height = this.Height;
-                m_seriesX.Color = this.Series[0].Color;
-                m_seriesX.AxisValues = this.AxisValues;
-                m_seriesX.AxisLabels = this.AxisLabels;
-                m_seriesX.Values = GetSeriesValues(0);
-                m_seriesX.Draw();
-
-                m_seriesY.Width = this.Width;
-                m_seriesY.Height = this.Height;
-                m_seriesY.Color = this.Series[1].Color;
-                m_seriesY.AxisValues = this.AxisValues;
-                m_seriesY.AxisLabels = this.AxisLabels;
-                m_seriesY.Values = GetSeriesValues(1);
-                m_seriesY.Draw();
-
-                m_seriesZ.Width = this.Width;
-                m_seriesZ.Height = this.Height;
-                m_seriesZ.Color = this.Series[2].Color;
-                m_seriesZ.AxisValues = this.AxisValues;
-                m_seriesZ.AxisLabels = this.AxisLabels;
-                m_seriesZ.Values = GetSeriesValues(2);
-                m_seriesZ.Draw();
-
-                if (this.Values.Count > 0) {
-                    DrawIndicator();
-                    DrawPanel();
-                }
-            }
         }
 
         protected override void DoDraw(DrawingContext dc) {
@@ -146,6 +96,7 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region internal methods
 
+        /*
         private IList<double> GetSeriesValues(int accel) {
             IList<double> values = new List<double>();
 
@@ -195,6 +146,7 @@ namespace Viewer.Common.UI.Acceleration {
 
             dc.Close();
         }
+         */
 
         #endregion // internal methods
     }

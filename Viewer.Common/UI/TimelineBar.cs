@@ -195,6 +195,9 @@ namespace Viewer.Common.UI {
         #region fields
 
         private VisualCollection m_elements;
+
+
+
         private TimelineElement m_rangeLayer;
         private TimelineElement m_markerLayer;
         private TimelineElement m_tickLayer;
@@ -209,6 +212,7 @@ namespace Viewer.Common.UI {
         #region constructors
 
         public TimelineBar() {
+            /*
             m_elements = new VisualCollection(this);
 
             AddElement(m_fence = new FenceVisual(this) {
@@ -224,6 +228,7 @@ namespace Viewer.Common.UI {
             AddElement(m_tickLayer = new TimelineElement(this));
 
             SnapsToDevicePixels = true;
+             */
         }
 
         #endregion // constructors

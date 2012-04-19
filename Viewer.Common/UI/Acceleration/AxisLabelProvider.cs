@@ -16,7 +16,7 @@ using System.Text;
 namespace Viewer.Common.UI.Acceleration {
 
     /// <summary>
-    /// AccelerationChar X 축에 표시할 label들의 위치와 text를 리턴한다.
+    /// AccelerationChart X 축에 표시할 label들의 위치와 text를 리턴한다.
     /// </summary>
     public class AxisLabelProvider {
 

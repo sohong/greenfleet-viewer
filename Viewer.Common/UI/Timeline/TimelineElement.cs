@@ -20,91 +20,21 @@ namespace Viewer.Common.UI.Timeline {
     /// <summary>
     /// Visual element base for TimelineBar
     /// </summary>
-    public class TimelineElement : DrawingVisual {
-
-        #region static members
-
-        public static Color ToColor(uint argb) {
-            Color color = Color.FromArgb((byte)((argb & 0xff000000) >> 24),
-                (byte)((argb & 0xff0000) >> 16), (byte)((argb & 0xff00) >> 8), (byte)(argb & 0xff));
-            return color;
-
-        }
-
-        #endregion // static members
-
-        
-        #region fields
-
-        private TimelineBar m_bar;
-        
-        #endregion // fields
-
+    public abstract class TimelineElement : UIElement {
 
         #region constructor
 
-        public TimelineElement(TimelineBar bar) {
-            m_bar = bar;
-            CreateChildren();
-            Draw();
+        public TimelineElement(TimelineBar bar) : base(bar) {
         }
 
         #endregion // constructor
 
 
-        #region abstract members
-
-        protected abstract void DoDraw(DrawingContext dc);
-        public abstract Size Measure(double hintWidth, double hintHeight);
-
-        #endregion // abstract members
-
-        
         #region properties
 
         public TimelineBar Bar {
-            get { return m_bar; }
+            get { return Container as TimelineBar; }
         }
-
-        public double X {
-            get { return Offset.X; }
-            set { Move(value, Y); }
-        }
-
-        public double Y {
-            get { return Offset.Y; }
-            set { Move(X, value); }
-        }
-
-        /// <summary>
-        /// Width
-        /// </summary>
-        public double Width {
-            get { return m_width; }
-            set {
-                value = Math.Max(1, value);
-                if (value != m_width) {
-                    m_width = value;
-                    Invalidate();
-                }
-            }
-        }
-        private double m_width = 0;
-
-        /// <summary>
-        /// Height
-        /// </summary>
-        public double Height {
-            get { return m_height; }
-            set {
-                value = Math.Max(1, value);
-                if (value != m_height) {
-                    m_height = value;
-                    Invalidate();
-                }
-            }
-        }
-        private double m_height = 0;
 
         /// <summary>
         /// Background fill
@@ -157,17 +87,6 @@ namespace Viewer.Common.UI.Timeline {
 
 
         #region methods
-
-        public void Invalidate() {
-            m_bar.InvalidateArrange();
-        }
-
-        public void Draw() {
-            DrawingContext dc = RenderOpen();
-            DoDraw(dc);
-            dc.Close();
-        }
-
         #endregion // methods
 
 

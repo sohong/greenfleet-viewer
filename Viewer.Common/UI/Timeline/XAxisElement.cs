@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
 // XAxisElement.cs
-// 2012.04.16, created by sohong
+// 2012.04.19, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -8,7 +8,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,17 +15,16 @@ using System.Windows.Media;
 using System.Windows;
 using System.Globalization;
 
-namespace Viewer.Common.UI.Acceleration {
+namespace Viewer.Common.UI.Timeline {
 
     /// <summary>
-    /// AccelerationChart X Axis.
+    /// TimelineBar X Axis.
     /// </summary>
-    public class XAxisElement : ChartElement {
-
+    public class XAxisElement : TimelineElement {
         #region constructor
 
-        public XAxisElement(AccelerationChart chart)
-            : base(chart) {
+        public XAxisElement(TimelineBar bar)
+            : base(bar) {
         }
 
         #endregion // constructor

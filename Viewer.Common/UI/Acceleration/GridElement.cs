@@ -17,6 +17,9 @@ using System.Windows.Media;
 
 namespace Viewer.Common.UI.Acceleration {
 
+    /// <summary>
+    /// Acceleration chart grid.
+    /// </summary>
     public class GridElement : ChartElement {
 
         #region constructor

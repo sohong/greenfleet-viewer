@@ -115,7 +115,10 @@
     <Compile Include="UI\AccelerationChart.cs" />
     <Compile Include="UI\Acceleration\ChartElement.cs" />
     <Compile Include="UI\HelloBox.cs" />
+    <Compile Include="UI\Timeline\AxisLabelProvider.cs" />
     <Compile Include="UI\Timeline\FenceVisual.cs" />
+    <Compile Include="UI\Timeline\GridElement.cs" />
+    <Compile Include="UI\Timeline\PlotElement.cs" />
     <Compile Include="UI\Timeline\TimelineValue.cs" />
     <Compile Include="UI\Timeline\TimelineValueCollection.cs" />
     <Compile Include="UI\Timeline\TimeRangeMarkerVisual.cs" />
@@ -124,6 +127,8 @@
     <Compile Include="UI\Timeline\TimeRangeVisual.cs" />
     <Compile Include="UI\Timeline\TimeTickVisual.cs" />
     <Compile Include="UI\Timeline\TimeTrackerVisual.cs" />
+    <Compile Include="UI\Timeline\XAxisElement.cs" />
+    <Compile Include="UI\UIElement.cs" />
     <Compile Include="Util\DialogUtil.cs" />
     <Compile Include="Util\DriveUtil.cs" />
     <Compile Include="Util\FileUtil.cs" />

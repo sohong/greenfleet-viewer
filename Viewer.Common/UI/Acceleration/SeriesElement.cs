@@ -17,6 +17,9 @@ using System.Windows;
 
 namespace Viewer.Common.UI.Acceleration {
 
+    /// <summary>
+    /// AccelerationChart line series.
+    /// </summary>
     public class SeriesElement : ChartElement {
 
         #region constructor
