@@ -116,6 +116,8 @@
     <Compile Include="UI\Acceleration\ChartElement.cs" />
     <Compile Include="UI\HelloBox.cs" />
     <Compile Include="UI\Timeline\FenceVisual.cs" />
+    <Compile Include="UI\Timeline\TimelineValue.cs" />
+    <Compile Include="UI\Timeline\TimelineValueCollection.cs" />
     <Compile Include="UI\Timeline\TimeRangeMarkerVisual.cs" />
     <Compile Include="UI\TimelineBar.cs" />
     <Compile Include="UI\Timeline\TimelineElement.cs" />

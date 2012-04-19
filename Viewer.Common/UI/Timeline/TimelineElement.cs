@@ -22,24 +22,59 @@ namespace Viewer.Common.UI.Timeline {
     /// </summary>
     public class TimelineElement : DrawingVisual {
 
+        #region static members
+
+        public static Color ToColor(uint argb) {
+            Color color = Color.FromArgb((byte)((argb & 0xff000000) >> 24),
+                (byte)((argb & 0xff0000) >> 16), (byte)((argb & 0xff00) >> 8), (byte)(argb & 0xff));
+            return color;
+
+        }
+
+        #endregion // static members
+
+        
         #region fields
 
-        private FrameworkElement m_container;
+        private TimelineBar m_bar;
         
         #endregion // fields
 
 
         #region constructor
 
-        public TimelineElement(FrameworkElement container) {
-            m_container = container;
+        public TimelineElement(TimelineBar bar) {
+            m_bar = bar;
+            CreateChildren();
             Draw();
         }
 
         #endregion // constructor
 
 
+        #region abstract members
+
+        protected abstract void DoDraw(DrawingContext dc);
+        public abstract Size Measure(double hintWidth, double hintHeight);
+
+        #endregion // abstract members
+
+        
         #region properties
+
+        public TimelineBar Bar {
+            get { return m_bar; }
+        }
+
+        public double X {
+            get { return Offset.X; }
+            set { Move(value, Y); }
+        }
+
+        public double Y {
+            get { return Offset.Y; }
+            set { Move(X, value); }
+        }
 
         /// <summary>
         /// Width
@@ -124,7 +159,7 @@ namespace Viewer.Common.UI.Timeline {
         #region methods
 
         public void Invalidate() {
-            m_container.InvalidateArrange();
+            m_bar.InvalidateArrange();
         }
 
         public void Draw() {
@@ -138,12 +173,11 @@ namespace Viewer.Common.UI.Timeline {
 
         #region internal methods
 
-        protected Brush GetFill() {
-            return IsHover && (HoverFill != null) ? HoverFill : Fill;
+        protected virtual void CreateChildren() {
         }
 
-        protected virtual void DoDraw(DrawingContext dc) {
-            dc.DrawRectangle(Brushes.Yellow, new Pen(Brushes.Black, 1), new Rect(0, 0, Width, Height));
+        protected Brush GetFill() {
+            return IsHover && (HoverFill != null) ? HoverFill : Fill;
         }
 
         internal void MouseDown(Point p) {
