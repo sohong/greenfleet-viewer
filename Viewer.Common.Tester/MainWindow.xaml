@@ -21,6 +21,7 @@
                 <gf:AccelerationChartView Name="accelerationView"/>
             </TabItem>
             <TabItem Header="Timeline">
+                <gf:TimelineView Name="timelineView"/>
             </TabItem>
         </TabControl>    
     </Grid>

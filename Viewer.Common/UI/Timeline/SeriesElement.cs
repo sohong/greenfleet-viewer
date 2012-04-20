@@ -15,17 +15,18 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Viewer.Common.UI.Timeline {
-
+namespace Viewer.Common.UI.Timeline
+{
     /// <summary>
     /// TimelineBar series.
     /// </summary>
-    public class SeriesElement : TimelineElement {
-
+    public class SeriesElement : TimelineElement
+    {
         #region constructor
 
         public SeriesElement(TimelineBar bar)
-            : base(bar) {
+            : base(bar)
+        {
         }
 
         #endregion // constructor
@@ -33,7 +34,14 @@ namespace Viewer.Common.UI.Timeline {
 
         #region properties
 
-        public AxisLabelProvider AxisLabels {
+        public AxisLabelProvider AxisLabels
+        {
+            get;
+            set;
+        }
+
+        public TimelineValueCollection Values
+        {
             get;
             set;
         }

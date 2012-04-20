@@ -15,16 +15,18 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Viewer.Common.UI.Acceleration {
-    
+namespace Viewer.Common.UI.Acceleration
+{
     /// <summary>
     /// AccelerationChart 구성 요소.
     /// </summary>
-    public abstract class ChartElement : UIElement {
-
+    public abstract class ChartElement : UIElement
+    {
         #region constructor
 
-        public ChartElement(AccelerationChart chart) : base(chart) {
+        public ChartElement(AccelerationChart chart)
+            : base(chart)
+        {
         }
 
         #endregion // constructor
@@ -32,7 +34,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public AccelerationChart Chart {
+        public AccelerationChart Chart
+        {
             get { return Container as AccelerationChart; }
         }
 

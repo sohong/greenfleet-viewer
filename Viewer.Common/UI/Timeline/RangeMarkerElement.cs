@@ -18,7 +18,6 @@ using System.Windows.Shapes;
 
 namespace Viewer.Common.UI.Timeline
 {
-
     public class RangeMarkerElement : TimelineElement
     {
         #region constructor

@@ -16,14 +16,15 @@ using System.Windows.Media;
 using System.Windows;
 using System.Globalization;
 
-namespace Viewer.Common.UI.Acceleration {
-
-    public class YAxisElement : ChartElement {
-
+namespace Viewer.Common.UI.Acceleration
+{
+    public class YAxisElement : ChartElement
+    {
         #region constructor
 
         public YAxisElement(AccelerationChart chart)
-            : base(chart) {
+            : base(chart)
+        {
         }
 
         #endregion // constructor
@@ -31,7 +32,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public AxisValueProvider AxisValues {
+        public AxisValueProvider AxisValues
+        {
             get;
             set;
         }
@@ -41,11 +43,13 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region overriden methods
 
-        public override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
             return new Size(16, 0);
         }
 
-        protected override void DoDraw(DrawingContext dc) {
+        protected override void DoDraw(DrawingContext dc)
+        {
             if (AxisValues == null) return;
 
             double x = Width;

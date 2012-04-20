@@ -15,16 +15,18 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Viewer.Common.UI.Timeline {
-
+namespace Viewer.Common.UI.Timeline
+{
     /// <summary>
     /// TimelineBar plot area.
     /// </summary>
-    public class PlotElement : TimelineElement {
-
+    public class PlotElement : TimelineElement
+    {
         #region fields
 
         private GridElement m_gridElement;
+        private SeriesElement m_seriesElement;
+
         //private SeriesElement m_seriesZ;
         //private DrawingVisual m_indicator;
         //private DrawingVisual m_panel;
@@ -35,7 +37,8 @@ namespace Viewer.Common.UI.Timeline {
         #region constructor
 
         public PlotElement(TimelineBar bar)
-            : base(bar) {
+            : base(bar)
+        {
         }
 
         #endregion // constructor
@@ -43,12 +46,14 @@ namespace Viewer.Common.UI.Timeline {
 
         #region properties
 
-        public AxisLabelProvider AxisLabels {
+        public AxisLabelProvider AxisLabels
+        {
             get;
             set;
         }
 
-        public TimelineValueCollection Values {
+        public TimelineValueCollection Values
+        {
             get;
             set;
         }
@@ -58,7 +63,8 @@ namespace Viewer.Common.UI.Timeline {
 
         #region methods
 
-        public void LayoutChildren() {
+        public void LayoutChildren()
+        {
             m_gridElement.Height = this.Height;
         }
 
@@ -67,27 +73,38 @@ namespace Viewer.Common.UI.Timeline {
 
         #region overriden methods
 
-        protected override void CreateChildren() {
+        protected override void CreateChildren()
+        {
             base.CreateChildren();
 
             Children.Add(m_gridElement = new GridElement(Bar));
+            Children.Add(m_seriesElement = new SeriesElement(Bar));
         }
 
-        public override void Draw() {
+        public override void Draw()
+        {
             base.Draw();
 
             m_gridElement.Width = this.Width;
             m_gridElement.Height = this.Height;
             m_gridElement.AxisLabels = this.AxisLabels;
             m_gridElement.Draw();
+
+            m_seriesElement.Width = this.Width;
+            m_seriesElement.Height = this.Height;
+            m_seriesElement.AxisLabels = this.AxisLabels;
+            m_seriesElement.Values = this.Values;
+            m_seriesElement.Draw();
         }
 
-        protected override void DoDraw(DrawingContext dc) {
-            LinearGradientBrush brush = new LinearGradientBrush(Colors.LightGray, Colors.White, 90);
-            dc.DrawRectangle(brush, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
+        protected override void DoDraw(DrawingContext dc)
+        {
+            LinearGradientBrush brush = new LinearGradientBrush(Colors.Green, Colors.LightGreen, 90);
+            dc.DrawRectangle(brush, new Pen(Brushes.Green, 1), new Rect(0, 0, Width, Height));
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
             return new Size();
         }
 

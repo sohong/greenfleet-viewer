@@ -16,13 +16,14 @@ using System.Windows.Media;
 using System.Windows;
 using System.Globalization;
 
-namespace Viewer.Common.UI.Acceleration {
-
-    public class LegendItemElement : DrawingVisual {
-
+namespace Viewer.Common.UI.Acceleration
+{
+    public class LegendItemElement : DrawingVisual
+    {
         #region constructor
 
-        public LegendItemElement() {
+        public LegendItemElement()
+        {
             BoxSize = new Size(10, 10);
         }
 
@@ -31,27 +32,32 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public Size BoxSize {
+        public Size BoxSize
+        {
             get;
             set;
         }
 
-        public string Text {
+        public string Text
+        {
             get;
             set;
         }
 
-        public Pen Border {
+        public Pen Border
+        {
             get;
             set;
         }
 
-        public Brush Background {
+        public Brush Background
+        {
             get;
             set;
         }
 
-        public Brush Foreground {
+        public Brush Foreground
+        {
             get;
             set;
         }
@@ -61,7 +67,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region methods
 
-        public void Draw() {
+        public void Draw()
+        {
             DrawingContext dc = RenderOpen();
             DoDraw(dc);
             dc.Close();
@@ -72,7 +79,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region internal methods
 
-        protected void DoDraw(DrawingContext dc) {
+        protected void DoDraw(DrawingContext dc)
+        {
             if (Background != null) {
                 dc.DrawRectangle(Background, Border, new Rect(0, 0, BoxSize.Width, BoxSize.Height));
             }

@@ -15,16 +15,18 @@ using System.Windows.Media;
 using System.Windows;
 using System.Globalization;
 
-namespace Viewer.Common.UI.Timeline {
-
+namespace Viewer.Common.UI.Timeline
+{
     /// <summary>
     /// TimelineBar X Axis.
     /// </summary>
-    public class XAxisElement : TimelineElement {
+    public class XAxisElement : TimelineElement
+    {
         #region constructor
 
         public XAxisElement(TimelineBar bar)
-            : base(bar) {
+            : base(bar)
+        {
         }
 
         #endregion // constructor
@@ -32,7 +34,8 @@ namespace Viewer.Common.UI.Timeline {
 
         #region properties
 
-        public AxisLabelProvider AxisLabels {
+        public AxisLabelProvider AxisLabels
+        {
             get;
             set;
         }
@@ -42,28 +45,30 @@ namespace Viewer.Common.UI.Timeline {
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
+        protected override void DoDraw(DrawingContext dc)
+        {
             dc.DrawLine(new Pen(Brushes.Black, 1), new Point(0, 0), new Point(Width, 0));
 
             if (AxisLabels == null)
                 return;
 
-            for (int i = 0; i <= AxisLabels.Count; i++) {
+            for (int i = 0, cnt = AxisLabels.Count; i < cnt; i++) {
                 double x = AxisLabels.GetPosition(i) * Width;
                 dc.DrawLine(new Pen(Brushes.Black, 1), new Point(x, 0), new Point(x, 5));
 
-                if (i % 10 == 0) {
+                //if (i % 10 == 0 || i == cnt - 1) {
                     string text = AxisLabels.GetLabel(i);
                     Typeface face = new Typeface("Tahoma");
                     FormattedText ft = new FormattedText(text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 12, Brushes.Black);
                     double tw = ft.Width;
                     dc.DrawText(ft, new Point(x - tw / 2, 7));
-                }
+                //}
             }
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
-            return new Size(0, 25);
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
+            return new Size(0, 20);
         }
 
         #endregion // overriden methods

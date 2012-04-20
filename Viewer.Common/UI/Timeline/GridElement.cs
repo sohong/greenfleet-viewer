@@ -15,25 +15,27 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Viewer.Common.UI.Timeline {
-
+namespace Viewer.Common.UI.Timeline
+{
     /// <summary>
     /// Timeline bar grid.
     /// </summary>
-    public class GridElement : TimelineElement {
-
+    public class GridElement : TimelineElement
+    {
         #region constructor
 
         public GridElement(TimelineBar bar)
-            : base(bar) {
+            : base(bar)
+        {
         }
 
         #endregion // constructor
 
 
         #region properties
-    
-        public AxisLabelProvider AxisLabels {
+
+        public AxisLabelProvider AxisLabels
+        {
             get;
             set;
         }
@@ -43,20 +45,23 @@ namespace Viewer.Common.UI.Timeline {
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
+        protected override void DoDraw(DrawingContext dc)
+        {
             if (AxisLabels == null) return;
 
             Rect r = new Rect(0, 0, Width, Height);
-            Pen pen = new Pen(new SolidColorBrush(ToColor(0xff000000)), 1);
+            Pen pen = new Pen(new SolidColorBrush(ToColor(0xaaffffff)), 1);
+            pen.DashStyle = DashStyles.Dash;
 
             // vertical lines
-            for (int i = 1; i < AxisLabels.Count; i++) {
+            for (int i = 1; i < AxisLabels.Count - 1; i++) {
                 double x = AxisLabels.GetPosition(i) * Width;
                 dc.DrawLine(pen, new Point(x, 0), new Point(x, Height));
             }
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
             return new Size();
         }
 

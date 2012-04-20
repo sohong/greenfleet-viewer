@@ -15,13 +15,14 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Viewer.Common.UI.Acceleration {
-
-    public class DataPointElement : DrawingVisual {
-
+namespace Viewer.Common.UI.Acceleration
+{
+    public class DataPointElement : DrawingVisual
+    {
         #region constructor
 
-        public DataPointElement() {
+        public DataPointElement()
+        {
         }
 
         #endregion // constructor

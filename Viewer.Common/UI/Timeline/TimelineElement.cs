@@ -15,16 +15,18 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Viewer.Common.UI.Timeline {
-    
+namespace Viewer.Common.UI.Timeline
+{
     /// <summary>
     /// Visual element base for TimelineBar
     /// </summary>
-    public abstract class TimelineElement : UIElement {
-
+    public abstract class TimelineElement : UIElement
+    {
         #region constructor
 
-        public TimelineElement(TimelineBar bar) : base(bar) {
+        public TimelineElement(TimelineBar bar)
+            : base(bar)
+        {
         }
 
         #endregion // constructor
@@ -32,16 +34,19 @@ namespace Viewer.Common.UI.Timeline {
 
         #region properties
 
-        public TimelineBar Bar {
+        public TimelineBar Bar
+        {
             get { return Container as TimelineBar; }
         }
 
         /// <summary>
         /// Background fill
         /// </summary>
-        public Brush Fill {
+        public Brush Fill
+        {
             get { return m_fill; }
-            set {
+            set
+            {
                 if (value != m_fill) {
                     m_fill = value;
                     Invalidate();
@@ -50,9 +55,11 @@ namespace Viewer.Common.UI.Timeline {
         }
         private Brush m_fill;
 
-        public bool IsHover {
+        public bool IsHover
+        {
             get { return m_isHover; }
-            set {
+            set
+            {
                 if (value != m_isHover) {
                     m_isHover = value;
                     Invalidate();
@@ -64,9 +71,11 @@ namespace Viewer.Common.UI.Timeline {
         /// <summary>
         /// Hover fill
         /// </summary>
-        public Brush HoverFill {
+        public Brush HoverFill
+        {
             get { return m_hoverFill; }
-            set {
+            set
+            {
                 if (value != m_hoverFill) {
                     m_hoverFill = value;
                     Invalidate();
@@ -75,14 +84,6 @@ namespace Viewer.Common.UI.Timeline {
         }
         private Brush m_hoverFill;
 
-        /// <summary>
-        /// User data
-        /// </summary>
-        public object Data {
-            get;
-            set;
-        }
-        
         #endregion // properties
 
 
@@ -92,48 +93,56 @@ namespace Viewer.Common.UI.Timeline {
 
         #region internal methods
 
-        protected virtual void CreateChildren() {
-        }
-
-        protected Brush GetFill() {
+        protected Brush GetFill()
+        {
             return IsHover && (HoverFill != null) ? HoverFill : Fill;
         }
 
-        internal void MouseDown(Point p) {
+        internal void MouseDown(Point p)
+        {
             DoMouseDown(p);
         }
 
-        internal void MouseMove(Point p, bool pushed) {
+        internal void MouseMove(Point p, bool pushed)
+        {
             DoMouseMove(p, pushed);
         }
 
-        internal void MouseUp(Point p) {
+        internal void MouseUp(Point p)
+        {
             DoMouseUp(p);
         }
 
-        internal void MouseEnter() {
+        internal void MouseEnter()
+        {
             IsHover = true;
             DoMouseEnter();
         }
 
-        internal void MouseLeave() {
+        internal void MouseLeave()
+        {
             IsHover = false;
             DoMouseLeave();
         }
 
-        protected virtual void DoMouseDown(Point p) {
+        protected virtual void DoMouseDown(Point p)
+        {
         }
 
-        protected virtual void DoMouseMove(Point p, bool pushed) {
+        protected virtual void DoMouseMove(Point p, bool pushed)
+        {
         }
 
-        protected virtual void DoMouseUp(Point p) {
+        protected virtual void DoMouseUp(Point p)
+        {
         }
 
-        protected virtual void DoMouseEnter() {
+        protected virtual void DoMouseEnter()
+        {
         }
 
-        protected virtual void DoMouseLeave() {
+        protected virtual void DoMouseLeave()
+        {
         }
 
         #endregion // internal methods

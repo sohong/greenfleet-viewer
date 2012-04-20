@@ -14,27 +14,27 @@ using System.Linq;
 using System.Text;
 using Viewer.Common.Model;
 
-namespace Viewer.Common.UI.Timeline {
-
+namespace Viewer.Common.UI.Timeline
+{
     /// <summary>
     /// Collection of TimelineValue.
     /// 각 TimelineValue들이 다른 분(minutes)에서 시작한다고 가정한다.
     /// 분이 연속되지 않는 시점 혹은, value type이 달라질 때 
     /// 새로운 TimelineValue가 생성된다. 
     /// </summary>
-    public class TimelineValueCollection {
-
+    public class TimelineValueCollection
+    {
         #region fields
 
         private IList<TimelineValue> m_values;
-        private TimelineValue m_current;
-        
+
         #endregion // fields
 
 
         #region constructor
 
-        public TimelineValueCollection(DateTime start, DateTime end) {
+        public TimelineValueCollection(DateTime start, DateTime end)
+        {
             StartTime = start.StripSeconds();
             EndTime = end.StripSeconds();
 
@@ -46,14 +46,21 @@ namespace Viewer.Common.UI.Timeline {
 
         #region properties
 
-        public DateTime StartTime {
+        public DateTime StartTime
+        {
             get;
-            private set;
+            set;
         }
 
-        public DateTime EndTime {
+        public DateTime EndTime
+        {
             get;
-            private set;
+            set;
+        }
+
+        public int Count
+        {
+            get { return m_values.Count; }
         }
 
         #endregion // properties;
@@ -61,7 +68,8 @@ namespace Viewer.Common.UI.Timeline {
 
         #region methods
 
-        public void Build(TrackCollection tracks) {
+        public void Build(TrackCollection tracks)
+        {
             m_values.Clear();
             if (tracks.Count < 1) return;
 
@@ -75,7 +83,7 @@ namespace Viewer.Common.UI.Timeline {
 
                 if (track.StartTime.Minute > value.Finish.Minute + 1 || // 분이 연속되지 않거나
                     vtype != value.Type) {                              // value type이 달라지면
-                    
+
                     value = new TimelineValue(vtype, track.StartTime);
                     m_values.Add(value);
                 } else {
@@ -89,7 +97,8 @@ namespace Viewer.Common.UI.Timeline {
 
         #region internal methods
 
-        private TimelineValue.TimelineValueType GetValueType(Track track) {
+        private TimelineValue.TimelineValueType GetValueType(Track track)
+        {
             return track.TrackType == TrackType.Event ? TimelineValue.TimelineValueType.Event : TimelineValue.TimelineValueType.All;
         }
 

@@ -13,24 +13,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Viewer.Common.UI.Timeline {
-
+namespace Viewer.Common.UI.Timeline
+{
     /// <summary>
     /// TimelineBar X축에 표시할 label들의 위치와 text를 리턴한다.
     /// </summary>
-    public class AxisLabelProvider {
-
+    public class AxisLabelProvider
+    {
         #region fields
 
         private IList<double> m_hours;
         private IList<DateTime> m_times;
-        
+
         #endregion // fields
 
 
         #region constructor
 
-        public AxisLabelProvider() {
+        public AxisLabelProvider()
+        {
             m_hours = new List<double>();
             m_times = new List<DateTime>();
 
@@ -43,20 +44,23 @@ namespace Viewer.Common.UI.Timeline {
 
         #endregion // constructor
 
-        
+
         #region properties
 
-        public DateTime StartTime {
+        public DateTime StartTime
+        {
             get;
-            set;
+            private set;
         }
 
-        public DateTime EndTime {
+        public DateTime EndTime
+        {
             get;
-            set;
+            private set;
         }
 
-        public int Count {
+        public int Count
+        {
             get { return m_hours.Count; }
         }
 
@@ -65,18 +69,19 @@ namespace Viewer.Common.UI.Timeline {
 
         #region methods
 
-        public void RefreshLabels() {
+        public void BuildLabels(DateTime startTime, DateTime endTime)
+        {
             m_hours.Clear();
             m_times.Clear();
 
-            DateTime t = StartTime;
+            DateTime t = startTime;
             t = new DateTime(t.Year, t.Month, t.Day, t.Hour, 0, 0);
             double x = 0;
             m_hours.Add(x);
-            m_times.Add(t);
+            m_times.Add(this.StartTime = t);
 
             t = t.AddHours(1);
-            while (t < EndTime) {
+            while (t < endTime) {
                 x = GetPosition(t);
                 m_hours.Add(x);
                 m_times.Add(t);
@@ -85,26 +90,34 @@ namespace Viewer.Common.UI.Timeline {
             }
 
             x = 1;
-            t = EndTime;
             m_hours.Add(x);
-            m_times.Add(t);
+            m_times.Add(this.EndTime = t);
         }
 
-        public double GetPosition(int index) {
+        public double GetHour(int index)
+        {
             return m_hours[index];
         }
 
-        public DateTime GetTime(int index) {
+        public DateTime GetTime(int index)
+        {
             return m_times[index];
         }
 
-        public string GetLabel(int index) {
-            return m_times[index].ToShortTimeString();
+        public string GetLabel(int index)
+        {
+            return m_times[index].ToString("HH:mm");
         }
 
-        public double GetPosition(DateTime t) {
+        public double GetPosition(DateTime t)
+        {
             double p = (double)(t.Ticks - StartTime.Ticks + 1) / (EndTime.Ticks - StartTime.Ticks + 1);
             return p;
+        }
+
+        public double GetPosition(int index)
+        {
+            return GetPosition(GetTime(index));
         }
 
         #endregion // methods

@@ -15,15 +15,16 @@ using System.Text;
 using System.Reflection;
 using Viewer.Common.Xml;
 
-namespace Viewer.Common.Util {
-
-    public class ObjectUtil {
-
+namespace Viewer.Common.Util
+{
+    public class ObjectUtil
+    {
         public static readonly Type[] EMPTY_TYPES = new Type[0];
         public static readonly object[] EMPTY_OBJECTS = new object[0];
 
 
-        public static string ToString(Object obj) {
+        public static string ToString(Object obj)
+        {
             if (obj == null) {
                 return "null";
             }
@@ -51,7 +52,8 @@ namespace Viewer.Common.Util {
             return sb.ToString();
         }
 
-        public static void Assign(object source, object target) {
+        public static void Assign(object source, object target)
+        {
             if (source == target)
                 return;
             if (source == null)
@@ -71,7 +73,8 @@ namespace Viewer.Common.Util {
             }
         }
 
-        public static void Write(object source, object target) {
+        public static void Write(object source, object target)
+        {
             Type t = source.GetType();
             PropertyInfo[] props = t.GetProperties();
 
@@ -93,7 +96,8 @@ namespace Viewer.Common.Util {
             }
         }
 
-        public static bool HasAttr(object[] attrs, Type attr) {
+        public static bool HasAttr(object[] attrs, Type attr)
+        {
             foreach (object a in attrs) {
                 if (a.GetType() == attr) {
                     return true;

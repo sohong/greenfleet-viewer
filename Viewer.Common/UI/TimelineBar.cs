@@ -26,16 +26,6 @@ namespace Viewer.Common.UI
     {
         #region dependency properties
 
-        public static readonly DependencyProperty TracksProperty = DependencyProperty.Register(
-            "Tracks", typeof(TrackCollection), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(null, OnTracksChanged));
-        private static void OnTracksChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).UnregisterTracksEvents(a.OldValue);
-            ((TimelineBar)d).RefreshElements();
-            ((TimelineBar)d).RegisterTracksEvents(a.NewValue);
-        }
-
         /// <summary>
         /// HoverFill
         /// </summary>
@@ -44,17 +34,6 @@ namespace Viewer.Common.UI
             new FrameworkPropertyMetadata(Brushes.White, OnHoverFillChanged));
         private static void OnHoverFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
         {
-        }
-
-        /// <summary>
-        /// FenceHeight
-        /// </summary>
-        public static readonly DependencyProperty FenceHeightProperty = DependencyProperty.Register(
-            "FenceHeight", typeof(double), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(0.8, OnFenceHeightChanged));
-        private static void OnFenceHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).InvalidateArrange();
         }
 
         /// <summary>
@@ -215,8 +194,6 @@ namespace Viewer.Common.UI
         private PlotElement m_plotElement;
         private XAxisElement m_xaxisElement;
 
-        private TimelineValueCollection m_values;
-
         #endregion // fields
 
 
@@ -227,8 +204,6 @@ namespace Viewer.Common.UI
             m_elements = new VisualCollection(this);
             m_elements.Add(m_plotElement = new PlotElement(this));
             m_elements.Add(m_xaxisElement = new XAxisElement(this));
-
-            m_values = new TimelineValueCollection(DateTime.Today, DateTime.Today.AddDays(1));
 
             SnapsToDevicePixels = true;
             RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
@@ -253,11 +228,6 @@ namespace Viewer.Common.UI
 
 
         #region properties
-
-        public TimelineValueCollection Values
-        {
-            get { return m_values; }
-        }
        
         /// <summary>
         /// Element들이 hovered 상태일 때 fill.
@@ -266,21 +236,6 @@ namespace Viewer.Common.UI
         {
             get { return (Brush)GetValue(HoverFillProperty); }
             set { SetValue(HoverFillProperty, value); }
-        }
-
-        public TrackCollection Tracks
-        {
-            get { return (TrackCollection)GetValue(TracksProperty); }
-            set { SetValue(TracksProperty, value); }
-        }
-
-        /// <summary>
-        /// Fence height
-        /// </summary>
-        public double FenceHeight
-        {
-            get { return (double)GetValue(FenceHeightProperty); }
-            set { SetValue(FenceHeightProperty, value); }
         }
 
         /// <summary>
@@ -406,6 +361,16 @@ namespace Viewer.Common.UI
 
 
         #region methods
+
+        public void RefreshData(TimelineValueCollection values, AxisLabelProvider labels)
+        {
+            m_plotElement.AxisLabels = labels;
+            m_plotElement.Values = values;
+            m_xaxisElement.AxisLabels = labels;
+
+            InvalidateArrange();
+        }
+
         #endregion // methods
 
 
@@ -469,39 +434,34 @@ namespace Viewer.Common.UI
 
         #region internal methods
 
-        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RefreshElements();
-        }
-
-        private void RegisterTracksEvents(object source)
-        {
-            INotifyCollectionChanged coll = source as INotifyCollectionChanged;
-            if (coll != null) {
-                coll.CollectionChanged += new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
-            }
-        }
-
-        private void UnregisterTracksEvents(object source)
-        {
-            INotifyCollectionChanged coll = source as INotifyCollectionChanged;
-            if (coll != null) {
-                coll.CollectionChanged -= new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
-            }
-        }
-
-        /// <summary>
-        /// TimelineValue들을 새로 계산/생성해서 element들에 반영시킨다.
-        /// </summary>
-        private void RefreshElements()
-        {
-        }
-
         /// <summary>
         /// Element들을 배치한다.
         /// </summary>
         protected void LayoutElements(double width, double height)
         {
+            if (width * height == 0) return;
+
+            double paddingX = 15;
+            double paddingY = 5;
+            double x = paddingX;
+            double y = paddingY;
+            width -= paddingX * 2;
+            height -= paddingY * 2;
+
+            // x-axis
+            Size sz = m_xaxisElement.Measure(width, height);
+            m_xaxisElement.Height = sz.Height;
+            m_xaxisElement.Width = width;
+            m_xaxisElement.Move(x, y + height - sz.Height);
+
+            // plot
+            m_plotElement.Width = width;
+            m_plotElement.Height = height - m_xaxisElement.Height;
+            m_plotElement.Move(x, y);
+
+            m_plotElement.Draw();
+            m_xaxisElement.Draw();
+            
             /*
             if (width * height == 0) return;
 

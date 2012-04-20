@@ -27,6 +27,7 @@ using Viewer.Common.Loader;
 namespace Viewer.Common.Tester
 {
     /// <summary>
+    /// MainWindow for Viewer.Common.Tester Application.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -49,6 +50,29 @@ namespace Viewer.Common.Tester
             return track;
         }
 
+        private TrackCollection LoadTracks()
+        {
+            TrackCollection tracks = new TrackCollection();
+
+            Track track;
+            for (int i = 0; i < 30; i++) {
+                track = new Track() { StartTime = new DateTime(2012, 3, 1, 11, i, 0), EndTime = new DateTime(2012, 3, 1, 11, i, 59) };
+                tracks.Add(track);
+            }
+
+            for (int i = 0; i < 20; i++) {
+                track = new Track() { StartTime = new DateTime(2012, 3, 1, 12, 10 + i, 0), EndTime = new DateTime(2012, 3, 1, 12, 10 + i, 59) };
+                tracks.Add(track);
+            }
+
+            for (int i = 0; i < 40; i++) {
+                track = new Track() { StartTime = new DateTime(2012, 3, 1, 13, 11 + i, 0), EndTime = new DateTime(2012, 3, 1, 13, 11 + i, 59) };
+                tracks.Add(track);
+            }
+
+            return tracks;
+        }
+
         #endregion // internal methods
 
 
@@ -58,6 +82,7 @@ namespace Viewer.Common.Tester
         {
             Logger.InitLog4Net("Viewer.Common.Tester");
             Track track = LoadTrack();
+            TrackCollection tracks = LoadTracks();
 
             // video
             videoView.Track = track;
@@ -70,6 +95,9 @@ namespace Viewer.Common.Tester
             // chart
             accelView.Track = track;
             accelerationView.Track = track;
+
+            // timeline
+            timelineView.Tracks = tracks;
         }
 
         #endregion // event handlers

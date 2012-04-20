@@ -14,13 +14,13 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Viewer.Common.Util {
-
+namespace Viewer.Common.Util
+{
     /// <summary>
     /// Video 관련 유틸리티들.
     /// </summary>
-    public class VideoUtil {
-
+    public class VideoUtil
+    {
         #region consts
 
         const string FFMPEG = "ffmpeg.exe";
@@ -31,7 +31,8 @@ namespace Viewer.Common.Util {
         /// <summary>
         /// h264 raw 영상을 mpeg4 컨테이너로 변환한다.
         /// </summary>
-        public static string RawToMpeg(string sourcePath, string targetFolder, string extension = "mp4") {
+        public static string RawToMpeg(string sourcePath, string targetFolder, string extension = "mp4")
+        {
             string exeName = Path.Combine(FileUtil.GetAppFolder(), FFMPEG);
             if (!File.Exists(exeName)) {
                 exeName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FFMPEG);

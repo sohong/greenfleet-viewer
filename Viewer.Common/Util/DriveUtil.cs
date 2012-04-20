@@ -14,14 +14,15 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Viewer.Common.Util {
-
+namespace Viewer.Common.Util
+{
     /// <summary>
     /// 드라이브 관련 유틸리티들.
     /// </summary>
-    public class DriveUtil {
-
-        public static DriveInfo[] GetDrives() {
+    public class DriveUtil
+    {
+        public static DriveInfo[] GetDrives()
+        {
             DriveInfo[] list = DriveInfo.GetDrives();
             return list;
         }

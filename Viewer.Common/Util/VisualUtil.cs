@@ -17,14 +17,15 @@ using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Controls;
 
-namespace Viewer.Common.Util {
-
+namespace Viewer.Common.Util
+{
     /// <summary>
     /// WPF Visual element 관련 유틸리티들.
     /// </summary>
-    public class VisualUtil {
-
-        public static T FindTypedAncestor<T>(DependencyObject source) where T : DependencyObject {
+    public class VisualUtil
+    {
+        public static T FindTypedAncestor<T>(DependencyObject source) where T : DependencyObject
+        {
             while (source != null && source.GetType() != typeof(T)) {
                 if (source is Visual) {
                     source = VisualTreeHelper.GetParent(source);
@@ -35,7 +36,8 @@ namespace Viewer.Common.Util {
             return (T)source;
         }
 
-        public static T FindAncestor<T>(DependencyObject source) where T : DependencyObject {
+        public static T FindAncestor<T>(DependencyObject source) where T : DependencyObject
+        {
             while (source != null && !(source is T)) {
                 if (source is Visual) {
                     source = VisualTreeHelper.GetParent(source);
@@ -46,13 +48,15 @@ namespace Viewer.Common.Util {
             return (T)source;
         }
 
-        public static bool IsListViewColumnHeader(MouseButtonEventArgs e) {
+        public static bool IsListViewColumnHeader(MouseButtonEventArgs e)
+        {
             GridViewColumnHeader header = FindTypedAncestor<GridViewColumnHeader>(e.OriginalSource as DependencyObject);
             return header != null;
         }
 
         public static T FindVisualChild<T>(DependencyObject obj)
-            where T : DependencyObject {
+            where T : DependencyObject
+        {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++) {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
                 if (child != null && child is T)
@@ -67,7 +71,8 @@ namespace Viewer.Common.Util {
         }
 
         public static T FindVisualChild<T>(FrameworkElement obj, string name)
-            where T : FrameworkElement {
+            where T : FrameworkElement
+        {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++) {
                 FrameworkElement child = VisualTreeHelper.GetChild(obj, i) as FrameworkElement;
                 if (child != null && child is T && child.Name.Equals(name))

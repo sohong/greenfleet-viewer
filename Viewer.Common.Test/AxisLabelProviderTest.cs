@@ -1,24 +1,25 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackCollectionTest.cs
-// 2012.04.02, created by sohong
+// AxisLabelProviderTest.cs
+// 2012.04.20, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision
 // All Rights Reserved.
 ////////////////////////////////////////////////////////////////////////////////
 
-using Viewer.Common.Model;
+using Viewer.Common.UI.Timeline;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Viewer.Common.Model;
 
 namespace Viewer.Common.Test
 {
     /// <summary>
-    ///This is a test class for TrackCollectionTest and is intended
-    ///to contain all TrackCollectionTest Unit Tests
+    ///This is a test class for AxisLabelProviderTest and is intended
+    ///to contain all AxisLabelProviderTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class TrackCollectionTest
+    public class AxisLabelProviderTest
     {
         private TestContext testContextInstance;
 
@@ -70,23 +71,32 @@ namespace Viewer.Common.Test
 
 
         /// <summary>
-        ///A test for Length
+        ///A test for BuildLabels
         ///</summary>
         [TestMethod()]
-        public void LengthTest()
+        public void BuildLabelsTest()
         {
-            TrackCollection target = new TrackCollection();
-            Track track = new Track() { StartTime = new DateTime(2012, 3, 1, 0, 0, 0) };
-            target.Add(track);
+            TrackCollection tracks = LoadTracks();
+            AxisLabelProvider target = new AxisLabelProvider();
+            DateTime startTime = tracks.First.StartTime;
+            DateTime endTime = tracks.Last.EndTime;
+            target.BuildLabels(startTime, endTime);
 
-            long actual = target.Length;
-            Assert.AreEqual(1, actual);
+            Assert.AreEqual(target.Count, 2);
+            Assert.AreEqual(target.GetTime(0), new DateTime(2012, 3, 1, 11, 0, 0));
+            Assert.AreEqual(target.GetTime(1), new DateTime(2012, 3, 1, 12, 0, 0));
+        }
 
-            track = new Track() { StartTime = new DateTime(2012, 3, 2, 3, 1, 0) };
-            target.Add(track);
+        private TrackCollection LoadTracks()
+        {
+            TrackCollection tracks = new TrackCollection();
+            Track track = new Track() { StartTime = new DateTime(2012, 3, 1, 11, 11, 12), EndTime = new DateTime(2012, 3, 1, 11, 11, 59) };
+            tracks.Add(track);
 
-            actual = target.Length;
-            Assert.AreEqual((24 * 60 + 3 * 60 + 1) * 60 + 1, actual);
+            track = new Track() { StartTime = new DateTime(2012, 3, 1, 11, 1, 0), EndTime = new DateTime(2012, 3, 1, 11, 1, 59) };
+            tracks.Add(track);
+
+            return tracks;
         }
     }
 }

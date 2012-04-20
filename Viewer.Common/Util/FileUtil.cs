@@ -14,17 +14,18 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Viewer.Common.Util {
-
+namespace Viewer.Common.Util
+{
     /// <summary>
     /// File 관련 유틸리티들.
     /// </summary>
-    public class FileUtil {
-
+    public class FileUtil
+    {
         /// <summary>
         /// 실행 파일 경로.
         /// </summary>
-        public static string GetAppFilePath() {
+        public static string GetAppFilePath()
+        {
             string path = Process.GetCurrentProcess().MainModule.FileName;
             return path;
         }
@@ -32,7 +33,8 @@ namespace Viewer.Common.Util {
         /// <summary>
         /// 실행 파일이 위치한 폴더.
         /// </summary>
-        public static string GetAppFolder() {
+        public static string GetAppFolder()
+        {
             string path = GetAppFilePath();
             return Path.GetDirectoryName(path);
         }
@@ -40,7 +42,8 @@ namespace Viewer.Common.Util {
         /// <summary>
         /// 실행 파일 버전
         /// </summary>
-        public static string GetVersion(string filePath) {
+        public static string GetVersion(string filePath)
+        {
             if (File.Exists(filePath)) {
                 FileVersionInfo vi = FileVersionInfo.GetVersionInfo(filePath);
                 return vi.ProductVersion;
@@ -52,7 +55,8 @@ namespace Viewer.Common.Util {
         /// <summary>
         /// 버전 문자열로 새 버전인 지 검사.
         /// </summary>
-        public static bool IsNewVersion(string oldVer, string newVer) {
+        public static bool IsNewVersion(string oldVer, string newVer)
+        {
             if (string.IsNullOrEmpty(newVer))
                 return false;
             if (string.IsNullOrEmpty(oldVer))

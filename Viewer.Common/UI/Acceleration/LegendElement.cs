@@ -16,10 +16,10 @@ using System.Windows.Media;
 using System.Windows;
 using System.Globalization;
 
-namespace Viewer.Common.UI.Acceleration {
-
-    public class LegendElement : ChartElement {
-
+namespace Viewer.Common.UI.Acceleration
+{
+    public class LegendElement : ChartElement
+    {
         #region fields
 
         private LegendItemElement m_elementX;
@@ -32,7 +32,8 @@ namespace Viewer.Common.UI.Acceleration {
         #region constructor
 
         public LegendElement(AccelerationChart chart)
-            : base(chart) {
+            : base(chart)
+        {
 
             Children.Add(m_elementX = new LegendItemElement());
             Children.Add(m_elementY = new LegendItemElement());
@@ -44,23 +45,25 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public IList<AccelerationChart.Series> Series {
+        public IList<AccelerationChart.Series> Series
+        {
             get;
             set;
         }
 
-        public string Title {
+        public string Title
+        {
             get;
             set;
         }
-        private string m_title;
 
         #endregion // properties
 
 
         #region overriden methods
 
-        public override void Draw() {
+        public override void Draw()
+        {
             base.Draw();
 
             if (Series != null && Series.Count >= 3) {
@@ -91,7 +94,8 @@ namespace Viewer.Common.UI.Acceleration {
             }
         }
 
-        protected override void DoDraw(DrawingContext dc) {
+        protected override void DoDraw(DrawingContext dc)
+        {
             if (Width > 0 && Height > 0) {
                 double w = this.Width;
                 double h = this.Height;
@@ -109,7 +113,8 @@ namespace Viewer.Common.UI.Acceleration {
             }
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
             return new Size(0, 17);
         }
 
