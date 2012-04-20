@@ -17,23 +17,30 @@ using System.Text.RegularExpressions;
 using Viewer.Common.Model;
 using Viewer.Common.Util;
 
-namespace Viewer.Common.Loader {
-
+namespace Viewer.Common.Loader
+{
     /// <summary>
     /// local pc에 저장되어 있는 track 파일을 읽어 track 개체를 생성한다.
     /// </summary>
-    public class LocalTrackLoader : TrackLoaderBase, ITrackLoader {
-
+    public class LocalTrackLoader : TrackLoaderBase, ITrackLoader
+    {
         #region consts
 
         private const string DATE_FORMAT = "yyyy_MM_dd_HH_mm_ss";
+
+        public static DateTime ParseDate(string s)
+        {
+            DateTime date = DateTime.ParseExact(s, DATE_FORMAT, null);
+            return date;
+        }
 
         #endregion // consts
 
 
         #region static members
 
-        public static bool FileToDateTime(string fileName, out DateTime date, out TrackType trackType) {
+        public static bool FileToDateTime(string fileName, out DateTime date, out TrackType trackType)
+        {
             string s = Path.GetFileNameWithoutExtension(fileName);
             date = DateTime.MinValue;
             trackType = TrackType.All;
@@ -47,7 +54,7 @@ namespace Viewer.Common.Loader {
                 return false;
             }
 
-            date = DateTime.ParseExact(s, DATE_FORMAT, null);
+            date = ParseDate(s);
             return true;
         }
 
@@ -56,7 +63,8 @@ namespace Viewer.Common.Loader {
 
         #region constructor
 
-        public LocalTrackLoader() {
+        public LocalTrackLoader()
+        {
         }
 
         #endregion // constructor
@@ -64,7 +72,8 @@ namespace Viewer.Common.Loader {
 
         #region ITrackLoader
 
-        public Track Load(object source, bool convertVideo) {
+        public Track Load(object source, bool convertVideo)
+        {
             string path = source.ToString();
             Track track = LoadTrack(path, convertVideo);
             return track;
@@ -75,7 +84,12 @@ namespace Viewer.Common.Loader {
 
         #region internal methods
 
-        private Track LoadTrack(string path, bool convertVideo) {
+        private Track LoadTrack(string path, bool convertVideo)
+        {
+            if (path.Contains("13_13_")) {
+                Debug.WriteLine(path);
+            }
+
             // track 정보
             Track track = CreateTrack(path, convertVideo);
 
@@ -87,7 +101,8 @@ namespace Viewer.Common.Loader {
             return track;
         }
 
-        protected Track CreateTrack(string path, bool convertVideo) {
+        protected Track CreateTrack(string path, bool convertVideo)
+        {
             if (!File.Exists(path)) {
                 return null;
             }

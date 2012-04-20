@@ -44,45 +44,24 @@ namespace Viewer.Common.UI.Timeline
         /// </summary>
         public Brush Fill
         {
-            get { return m_fill; }
-            set
-            {
-                if (value != m_fill) {
-                    m_fill = value;
-                    Invalidate();
-                }
-            }
+            get;
+            set;
         }
-        private Brush m_fill;
 
         public bool IsHover
         {
-            get { return m_isHover; }
-            set
-            {
-                if (value != m_isHover) {
-                    m_isHover = value;
-                    Invalidate();
-                }
-            }
+            get;
+            set;
         }
-        private bool m_isHover;
 
         /// <summary>
         /// Hover fill
         /// </summary>
         public Brush HoverFill
         {
-            get { return m_hoverFill; }
-            set
-            {
-                if (value != m_hoverFill) {
-                    m_hoverFill = value;
-                    Invalidate();
-                }
-            }
+            get;
+            set;
         }
-        private Brush m_hoverFill;
 
         #endregion // properties
 

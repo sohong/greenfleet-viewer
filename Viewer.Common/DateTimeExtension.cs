@@ -24,7 +24,8 @@ namespace Viewer.Common {
         /// 초 값을 제거한다.
         /// </summary>
         public static DateTime StripSeconds(this DateTime d) {
-            return d - TimeSpan.FromSeconds(d.Second);
+            //return d - TimeSpan.FromSeconds(d.Second);
+            return new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, 0);
         }
     }
 }

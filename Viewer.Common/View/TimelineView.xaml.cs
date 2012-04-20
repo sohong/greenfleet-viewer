@@ -34,6 +34,22 @@ namespace Viewer.Common.View
             ((TimelineView)d).RegisterTracksEvents(a.NewValue);
         }
 
+        public static readonly DependencyProperty AllBackgroundProperty = DependencyProperty.Register(
+            "AllBackground", typeof(Brush), typeof(TimelineView),
+            new FrameworkPropertyMetadata(Brushes.Blue, OnAllBackgroundChanged));
+        private static void OnAllBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
+            ((TimelineView)d).RefreshView();
+        }
+
+        public static readonly DependencyProperty EventBackgroundProperty = DependencyProperty.Register(
+            "EventBackground", typeof(Brush), typeof(TimelineView),
+            new FrameworkPropertyMetadata(Brushes.Red, OnEventBackgroundChanged));
+        private static void OnEventBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
+            ((TimelineView)d).RefreshView();
+        }
+
         #endregion // dependency properties
 
 
@@ -53,6 +69,18 @@ namespace Viewer.Common.View
         {
             get { return (TrackCollection)GetValue(TracksProperty); }
             set { SetValue(TracksProperty, value); }
+        }
+
+        public Brush AllBackground
+        {
+            get { return (Brush)GetValue(AllBackgroundProperty); }
+            set { SetValue(AllBackgroundProperty, value); }
+        }
+
+        public Brush EventBackground
+        {
+            get { return (Brush)GetValue(EventBackgroundProperty); }
+            set { SetValue(EventBackgroundProperty, value); }
         }
 
         #endregion // properties
@@ -100,7 +128,9 @@ namespace Viewer.Common.View
             TimelineValueCollection values = new TimelineValueCollection(start, end);
             values.Build(Tracks);
 
-            bar.RefreshData(values, labels); 
+            bar.AllBackground = this.AllBackground;
+            bar.EventBackground = this.EventBackground;
+            bar.RefreshBar(values, labels);
         }
 
         #endregion // internal methods

@@ -22,11 +22,21 @@ namespace Viewer.Common.UI.Timeline
     /// </summary>
     public class SeriesElement : TimelineElement
     {
+        #region fields
+
+        private IList<TimeRangeElement> m_ranges;
+        
+        #endregion // fields
+
+
         #region constructor
 
         public SeriesElement(TimelineBar bar)
             : base(bar)
         {
+            m_ranges = new List<TimeRangeElement>();
+
+            RangeHeight = 16;
         }
 
         #endregion // constructor
@@ -46,6 +56,12 @@ namespace Viewer.Common.UI.Timeline
             set;
         }
 
+        public double RangeHeight
+        {
+            get;
+            set;
+        }
+
         #endregion // properties
 
 
@@ -58,8 +74,38 @@ namespace Viewer.Common.UI.Timeline
 
         protected override void DoDraw(DrawingContext dc)
         {
+            LayoutRangeElements();
         }
 
         #endregion // overriden methods
+
+
+        #region internal methods
+
+        private void LayoutRangeElements()
+        {
+            Children.Clear();
+            if (Values == null || Values.Count < 1)
+                return;
+
+            while (m_ranges.Count < Values.Count) {
+                m_ranges.Add(new TimeRangeElement(Bar));
+            }
+
+            for (int i = 0; i < Values.Count; i++) {
+                TimelineValue value = Values[i];
+                TimeRangeElement range = m_ranges[i];
+                Children.Add(range);
+
+                range.Y = (this.Height - RangeHeight) / 2;
+                range.X = AxisLabels.GetPosition(value.Start) * this.Width;
+                range.Height = RangeHeight;
+                range.Width = (AxisLabels.GetPosition(value.Finish.AddMinutes(1)) - AxisLabels.GetPosition(value.Start)) * this.Width;
+                range.Fill = value.Type == TimelineValue.TimelineValueType.Event ? Bar.EventBackground : Bar.AllBackground;
+                range.Draw();
+            }
+        }
+
+        #endregion // internal methods
     }
 }

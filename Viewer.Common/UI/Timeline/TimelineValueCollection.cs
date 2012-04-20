@@ -63,11 +63,19 @@ namespace Viewer.Common.UI.Timeline
             get { return m_values.Count; }
         }
 
+        public TimelineValue this[int index]
+        {
+            get { return m_values[index]; }
+        }
+
         #endregion // properties;
 
 
         #region methods
 
+        /// <summary>
+        /// 전달되는 트랙들이 시간 순으로 정렬되어 있다고 가정한다!!
+        /// </summary>
         public void Build(TrackCollection tracks)
         {
             m_values.Clear();
@@ -81,9 +89,10 @@ namespace Viewer.Common.UI.Timeline
                 track = tracks[i];
                 TimelineValue.TimelineValueType vtype = GetValueType(track);
 
-                if (track.StartTime.Minute > value.Finish.Minute + 1 || // 분이 연속되지 않거나
-                    vtype != value.Type) {                              // value type이 달라지면
-
+                // 분이 연속되지 않거나, value type이 달라지면
+                double m1 = TimeSpan.FromTicks(track.StartTime.StripSeconds().Ticks).TotalMinutes;
+                double m2 = TimeSpan.FromTicks(value.Finish.StripSeconds().Ticks).TotalMinutes + 1;
+                if (vtype != value.Type || m1 > m2) {                              
                     value = new TimelineValue(vtype, track.StartTime);
                     m_values.Add(value);
                 } else {

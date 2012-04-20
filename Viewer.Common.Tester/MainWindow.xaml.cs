@@ -65,8 +65,14 @@ namespace Viewer.Common.Tester
                 tracks.Add(track);
             }
 
-            for (int i = 0; i < 40; i++) {
+            for (int i = 0; i < 20; i++) {
                 track = new Track() { StartTime = new DateTime(2012, 3, 1, 13, 11 + i, 0), EndTime = new DateTime(2012, 3, 1, 13, 11 + i, 59) };
+                track.TrackType = TrackType.Event;
+                tracks.Add(track);
+            }
+
+            for (int i = 0; i < 20; i++) {
+                track = new Track() { StartTime = new DateTime(2012, 3, 1, 13, 31 + i, 0), EndTime = new DateTime(2012, 3, 1, 13, 31 + i, 59) };
                 tracks.Add(track);
             }
 

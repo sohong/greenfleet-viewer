@@ -38,6 +38,9 @@ namespace DataGenerator {
             m_files = new ObservableCollection<string>();
             SelectFolderCommand = new DelegateCommand(DoSelectFolder);
             GenerateCommand = new DelegateCommand(DoGenerate);
+
+            StartTime = DateTime.Today.AddHours(10);
+            EndTime = DateTime.Today.AddMinutes(20 * 60 + 59);
         }
 
         #endregion // constructors
@@ -57,7 +60,7 @@ namespace DataGenerator {
                 }
             }
         }
-        private DateTime m_startTime = new DateTime(2012, 4, 1, 10, 0, 0);
+        private DateTime m_startTime;
 
         /// <summary>
         /// 종료 일시
@@ -71,7 +74,7 @@ namespace DataGenerator {
                 }
             }
         }
-        private DateTime m_endTime = new DateTime(2012, 4, 1, 20, 59, 0);
+        private DateTime m_endTime;
 
         /// <summary>
         /// 시작 위도
@@ -336,7 +339,7 @@ namespace DataGenerator {
             double longitude = StartLongitude + (EndLongitude - StartLongitude) * rand.Next(60) / 60; 
             for (int i = 0; i < 60; i++) {
                 t = t.AddSeconds(1);
-                string s = t.ToString("yyyy-MM-dd hh:mm:ss,");
+                string s = t.ToString("yyyy-MM-dd HH:mm:ss,");
                 double v = lattitude + 0.3 * i / 60;
                 s += v.ToString("00.000000") + ",";
                 v = longitude + 0.3 * i / 60;

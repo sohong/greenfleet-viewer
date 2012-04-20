@@ -24,150 +24,6 @@ namespace Viewer.Common.UI
 {
     public class TimelineBar : FrameworkElement
     {
-        #region dependency properties
-
-        /// <summary>
-        /// HoverFill
-        /// </summary>
-        public static readonly DependencyProperty HoverFillProperty = DependencyProperty.Register(
-            "HoverFill", typeof(Brush), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(Brushes.White, OnHoverFillChanged));
-        private static void OnHoverFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-        }
-
-        /// <summary>
-        /// PlotFill
-        /// </summary>
-        public static readonly DependencyProperty PlotFillProperty = DependencyProperty.Register(
-            "PlotFill", typeof(Brush), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(Brushes.Green, OnPlotFillChanged));
-        private static void OnPlotFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            //((TimelineBar)d).m_fence.Fill = (Brush)a.NewValue;
-        }
-
-        /// <summary>
-        /// Tracker Fill
-        /// </summary>
-        public static readonly DependencyProperty TrackerFillProperty = DependencyProperty.Register(
-            "TrackerFill", typeof(Brush), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(Brushes.Yellow, OnTrackerFillChanged));
-        private static void OnTrackerFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            //((TimelineBar)d).m_tracker.Fill = (Brush)a.NewValue;
-        }
-
-        /// <summary>
-        /// Tracker Border
-        /// </summary>
-        public static readonly DependencyProperty TrackerBorderProperty = DependencyProperty.Register(
-            "TrackerBorder", typeof(Pen), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(new Pen(Brushes.Black, 1), OnTrackerBorderChanged));
-        private static void OnTrackerBorderChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            //((TimelineBar)d).m_tracker.Border = (Pen)a.NewValue;
-        }
-
-        /// <summary>
-        /// RangeMarker Fill
-        /// </summary>
-        public static readonly DependencyProperty RangeMarkerFillProperty = DependencyProperty.Register(
-            "RangeMarkerFill", typeof(Brush), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(Brushes.Black, OnRangeMarkerFillChanged));
-        private static void OnRangeMarkerFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            /*
-            foreach (RangeMarkerElement marker in ((TimelineBar)d).m_markerLayer.Children) {
-                marker.Fill = (Brush)a.NewValue;
-            }
-             */
-        }
-
-        /// <summary>
-        /// TimeBarHeight
-        /// </summary>
-        public static readonly DependencyProperty TimeBarHeightProperty = DependencyProperty.Register(
-            "TimeBarHeight", typeof(double), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(0.8, OnTimeBarHeightChanged));
-        private static void OnTimeBarHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).InvalidateArrange();
-            ((TimelineBar)d).InvalidateVisual();
-        }
-
-        /// <summary>
-        /// NormalFill
-        /// </summary>
-        public static readonly DependencyProperty NormalFillProperty = DependencyProperty.Register(
-            "NormalFill", typeof(Brush), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(Brushes.Blue, OnNormalFillChanged));
-        private static void OnNormalFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).InvalidateVisual();
-        }
-
-        /// <summary>
-        /// EventFill
-        /// </summary>
-        public static readonly DependencyProperty EventFillProperty = DependencyProperty.Register(
-            "EventFill", typeof(Brush), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(Brushes.Red, OnEventFillChanged));
-        private static void OnEventFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).InvalidateVisual();
-        }
-
-        /// <summary>
-        /// Font family
-        /// </summary>
-        public static readonly DependencyProperty FontFamilyProperty = DependencyProperty.Register(
-            "FontFamily", typeof(string), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(null, OnFontFamilyChanged));
-        private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).InvalidateVisual();
-        }
-
-        /// <summary>
-        /// FontSize
-        /// </summary>
-        public static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
-            "FontSize", typeof(double), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(0.8, OnFontSizeChanged));
-        private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).InvalidateArrange();
-            ((TimelineBar)d).InvalidateVisual();
-        }
-
-        /// <summary>
-        /// FontStyle
-        /// </summary>
-        public static readonly DependencyProperty FontStyleProperty = DependencyProperty.Register(
-            "FontStyle", typeof(FontStyle), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(FontStyles.Normal, OnFontStyleChanged));
-        private static void OnFontStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).InvalidateArrange();
-            ((TimelineBar)d).InvalidateVisual();
-        }
-
-        /// <summary>
-        /// FontWeight
-        /// </summary>
-        public static readonly DependencyProperty FontWeightProperty = DependencyProperty.Register(
-            "FontWeight", typeof(FontWeight), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(FontWeights.Normal, OnFontWeightChanged));
-        private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
-        {
-            ((TimelineBar)d).InvalidateArrange();
-            ((TimelineBar)d).InvalidateVisual();
-        }
-
-        #endregion // dependency properties
-
-
         #region routed events
 
         public static readonly RoutedEvent TrackPointChangedEvent;
@@ -228,113 +84,23 @@ namespace Viewer.Common.UI
 
 
         #region properties
-       
+
         /// <summary>
-        /// Element들이 hovered 상태일 때 fill.
+        /// 상시 영역 fill
         /// </summary>
-        public Brush HoverFill
+        public Brush AllBackground
         {
-            get { return (Brush)GetValue(HoverFillProperty); }
-            set { SetValue(HoverFillProperty, value); }
+            get;
+            set;
         }
 
         /// <summary>
-        /// Fence fill
+        /// 이벤트 영역 fill
         /// </summary>
-        public Brush PlotFill
+        public Brush EventBackground
         {
-            get { return (Brush)GetValue(PlotFillProperty); }
-            set { SetValue(PlotFillProperty, value); }
-        }
-
-        /// <summary>
-        /// Tracker fill
-        /// </summary>
-        public Brush TrackerFill
-        {
-            get { return (Brush)GetValue(TrackerFillProperty); }
-            set { SetValue(TrackerFillProperty, value); }
-        }
-
-        /// <summary>
-        /// Tracker Border
-        /// </summary>
-        public Pen TrackerBorder
-        {
-            get { return (Pen)GetValue(TrackerBorderProperty); }
-            set { SetValue(TrackerBorderProperty, value); }
-        }
-
-        /// <summary>
-        /// RangeMarker fill
-        /// </summary>
-        public Brush RangeMarkerFill
-        {
-            get { return (Brush)GetValue(RangeMarkerFillProperty); }
-            set { SetValue(RangeMarkerFillProperty, value); }
-        }
-
-        /// <summary>
-        /// TimeBar height
-        /// </summary>
-        public double TimeBarHeight
-        {
-            get { return (double)GetValue(TimeBarHeightProperty); }
-            set { SetValue(TimeBarHeightProperty, value); }
-        }
-
-        /// <summary>
-        /// TimeBar normal fill
-        /// </summary>
-        public Brush NormalFill
-        {
-            get { return (Brush)GetValue(NormalFillProperty); }
-            set { SetValue(NormalFillProperty, value); }
-        }
-
-        /// <summary>
-        /// TimeBar event fill
-        /// </summary>
-        public Brush EventFill
-        {
-            get { return (Brush)GetValue(EventFillProperty); }
-            set { SetValue(EventFillProperty, value); }
-        }
-
-        /// <summary>
-        /// Font family
-        /// </summary>
-        public string FontFamily
-        {
-            get { return (string)GetValue(FontFamilyProperty); }
-            set { SetValue(FontFamilyProperty, value); }
-        }
-
-        /// <summary>
-        /// Font size
-        /// </summary>
-        public double FontSize
-        {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
-        }
-
-        /// <summary>
-        /// Font style
-        /// </summary>
-        public FontStyle FontStyle
-        {
-            get { return (FontStyle)GetValue(FontStyleProperty); }
-            set { SetValue(FontStyleProperty, value); }
-        }
-
-        /// <summary>
-        /// Font weight
-        /// </summary>
-        public FontWeight FontWeight
-        {
-            get { return (FontWeight)GetValue(FontWeightProperty); }
-            set { SetValue(FontWeightProperty, value); }
+            get;
+            set;
         }
 
         /// <summary>
@@ -362,7 +128,7 @@ namespace Viewer.Common.UI
 
         #region methods
 
-        public void RefreshData(TimelineValueCollection values, AxisLabelProvider labels)
+        public void RefreshBar(TimelineValueCollection values, AxisLabelProvider labels)
         {
             m_plotElement.AxisLabels = labels;
             m_plotElement.Values = values;
@@ -461,40 +227,6 @@ namespace Viewer.Common.UI
 
             m_plotElement.Draw();
             m_xaxisElement.Draw();
-            
-            /*
-            if (width * height == 0) return;
-
-            // fence
-            m_fence.Offset = new Vector(0, 5);
-            m_fence.Width = width;
-            m_fence.Height = height - 5;
-            m_fence.Draw();
-
-            // ranges
-            foreach (TimeRangeElement range in m_rangeLayer.Children) {
-                TrackRange r = (TrackRange)(range.Data);
-                double x = width * Tracks.GetPosition(r.StartTrack) / Tracks.Length;
-                range.Offset = new Vector(x, 10);
-                range.Height = height - 20;
-                range.Width = width * (Tracks.GetPosition(r.EndTrack) + 1) / Tracks.Length - x;
-                range.Draw();
-            }
-
-            // tracker
-            m_tracker.Offset = new Vector(100, 0);
-            m_tracker.Width = 5;
-            m_tracker.Height = height;
-            m_tracker.Draw();
-
-            // range markers
-            foreach (RangeMarkerElement marker in m_markerLayer.Children) {
-                double x = width * Tracks.GetPosition((Track)marker.Data) / Tracks.Length;
-                marker.Offset = new Vector(x, height - marker.Height);
-                marker.HoverFill = this.HoverFill;
-                marker.Draw();
-            }
-             */
         }
 
         private TimelineElement GetHitTest(Point p)
