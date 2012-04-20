@@ -16,17 +16,18 @@ using System.Windows.Media;
 using System.Windows;
 using System.Globalization;
 
-namespace Viewer.Common.UI.Acceleration {
-
+namespace Viewer.Common.UI.Acceleration
+{
     /// <summary>
     /// AccelerationChart X Axis.
     /// </summary>
-    public class XAxisElement : ChartElement {
-
+    public class XAxisElement : ChartElement
+    {
         #region constructor
 
         public XAxisElement(AccelerationChart chart)
-            : base(chart) {
+            : base(chart)
+        {
         }
 
         #endregion // constructor
@@ -34,7 +35,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public AxisLabelProvider AxisLabels {
+        public AxisLabelProvider AxisLabels
+        {
             get;
             set;
         }
@@ -44,7 +46,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
+        protected override void DoDraw(DrawingContext dc)
+        {
             dc.DrawLine(new Pen(Brushes.Black, 1), new Point(0, 0), new Point(Width, 0));
 
             if (AxisLabels == null)
@@ -64,7 +67,8 @@ namespace Viewer.Common.UI.Acceleration {
             }
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
             return new Size(0, 25);
         }
 

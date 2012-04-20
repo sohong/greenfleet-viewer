@@ -20,16 +20,17 @@ using System.Collections.Specialized;
 using System.Windows.Threading;
 using System.Windows.Input;
 
-namespace Viewer.Common.UI {
-    
-    public class TimelineBar : FrameworkElement {
-
+namespace Viewer.Common.UI
+{
+    public class TimelineBar : FrameworkElement
+    {
         #region dependency properties
 
         public static readonly DependencyProperty TracksProperty = DependencyProperty.Register(
             "Tracks", typeof(TrackCollection), typeof(TimelineBar),
             new FrameworkPropertyMetadata(null, OnTracksChanged));
-        private static void OnTracksChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnTracksChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).UnregisterTracksEvents(a.OldValue);
             ((TimelineBar)d).RefreshElements();
             ((TimelineBar)d).RegisterTracksEvents(a.NewValue);
@@ -41,7 +42,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty HoverFillProperty = DependencyProperty.Register(
             "HoverFill", typeof(Brush), typeof(TimelineBar),
             new FrameworkPropertyMetadata(Brushes.White, OnHoverFillChanged));
-        private static void OnHoverFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnHoverFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
         }
 
         /// <summary>
@@ -50,18 +52,20 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty FenceHeightProperty = DependencyProperty.Register(
             "FenceHeight", typeof(double), typeof(TimelineBar),
             new FrameworkPropertyMetadata(0.8, OnFenceHeightChanged));
-        private static void OnFenceHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnFenceHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).InvalidateArrange();
         }
 
         /// <summary>
-        /// FenceFill
+        /// PlotFill
         /// </summary>
-        public static readonly DependencyProperty FenceFillProperty = DependencyProperty.Register(
-            "FenceFill", typeof(Brush), typeof(TimelineBar),
-            new FrameworkPropertyMetadata(Brushes.Green, OnFenceFillChanged));
-        private static void OnFenceFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
-            ((TimelineBar)d).m_fence.Fill = (Brush)a.NewValue;
+        public static readonly DependencyProperty PlotFillProperty = DependencyProperty.Register(
+            "PlotFill", typeof(Brush), typeof(TimelineBar),
+            new FrameworkPropertyMetadata(Brushes.Green, OnPlotFillChanged));
+        private static void OnPlotFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
+            //((TimelineBar)d).m_fence.Fill = (Brush)a.NewValue;
         }
 
         /// <summary>
@@ -70,8 +74,9 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty TrackerFillProperty = DependencyProperty.Register(
             "TrackerFill", typeof(Brush), typeof(TimelineBar),
             new FrameworkPropertyMetadata(Brushes.Yellow, OnTrackerFillChanged));
-        private static void OnTrackerFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
-            ((TimelineBar)d).m_tracker.Fill = (Brush)a.NewValue;
+        private static void OnTrackerFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
+            //((TimelineBar)d).m_tracker.Fill = (Brush)a.NewValue;
         }
 
         /// <summary>
@@ -80,8 +85,9 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty TrackerBorderProperty = DependencyProperty.Register(
             "TrackerBorder", typeof(Pen), typeof(TimelineBar),
             new FrameworkPropertyMetadata(new Pen(Brushes.Black, 1), OnTrackerBorderChanged));
-        private static void OnTrackerBorderChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
-            ((TimelineBar)d).m_tracker.Border = (Pen)a.NewValue;
+        private static void OnTrackerBorderChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
+            //((TimelineBar)d).m_tracker.Border = (Pen)a.NewValue;
         }
 
         /// <summary>
@@ -90,10 +96,13 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty RangeMarkerFillProperty = DependencyProperty.Register(
             "RangeMarkerFill", typeof(Brush), typeof(TimelineBar),
             new FrameworkPropertyMetadata(Brushes.Black, OnRangeMarkerFillChanged));
-        private static void OnRangeMarkerFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
-            foreach (TimeRangeMarkerVisual marker in ((TimelineBar)d).m_markerLayer.Children) {
+        private static void OnRangeMarkerFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
+            /*
+            foreach (RangeMarkerElement marker in ((TimelineBar)d).m_markerLayer.Children) {
                 marker.Fill = (Brush)a.NewValue;
             }
+             */
         }
 
         /// <summary>
@@ -102,7 +111,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty TimeBarHeightProperty = DependencyProperty.Register(
             "TimeBarHeight", typeof(double), typeof(TimelineBar),
             new FrameworkPropertyMetadata(0.8, OnTimeBarHeightChanged));
-        private static void OnTimeBarHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnTimeBarHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).InvalidateArrange();
             ((TimelineBar)d).InvalidateVisual();
         }
@@ -113,7 +123,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty NormalFillProperty = DependencyProperty.Register(
             "NormalFill", typeof(Brush), typeof(TimelineBar),
             new FrameworkPropertyMetadata(Brushes.Blue, OnNormalFillChanged));
-        private static void OnNormalFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnNormalFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).InvalidateVisual();
         }
 
@@ -123,7 +134,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty EventFillProperty = DependencyProperty.Register(
             "EventFill", typeof(Brush), typeof(TimelineBar),
             new FrameworkPropertyMetadata(Brushes.Red, OnEventFillChanged));
-        private static void OnEventFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnEventFillChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).InvalidateVisual();
         }
 
@@ -133,7 +145,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty FontFamilyProperty = DependencyProperty.Register(
             "FontFamily", typeof(string), typeof(TimelineBar),
             new FrameworkPropertyMetadata(null, OnFontFamilyChanged));
-        private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).InvalidateVisual();
         }
 
@@ -143,7 +156,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
             "FontSize", typeof(double), typeof(TimelineBar),
             new FrameworkPropertyMetadata(0.8, OnFontSizeChanged));
-        private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).InvalidateArrange();
             ((TimelineBar)d).InvalidateVisual();
         }
@@ -154,7 +168,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty FontStyleProperty = DependencyProperty.Register(
             "FontStyle", typeof(FontStyle), typeof(TimelineBar),
             new FrameworkPropertyMetadata(FontStyles.Normal, OnFontStyleChanged));
-        private static void OnFontStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnFontStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).InvalidateArrange();
             ((TimelineBar)d).InvalidateVisual();
         }
@@ -165,7 +180,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty FontWeightProperty = DependencyProperty.Register(
             "FontWeight", typeof(FontWeight), typeof(TimelineBar),
             new FrameworkPropertyMetadata(FontWeights.Normal, OnFontWeightChanged));
-        private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((TimelineBar)d).InvalidateArrange();
             ((TimelineBar)d).InvalidateVisual();
         }
@@ -181,54 +197,45 @@ namespace Viewer.Common.UI {
 
 
         #region static constructor
-        
-        static TimelineBar() {
+
+        static TimelineBar()
+        {
             // events
             TrackPointChangedEvent = EventManager.RegisterRoutedEvent(
                 "TrackPointChanged", RoutingStrategy.Bubble,
                 typeof(RoutedPropertyChangedEventHandler<TrackPoint>), typeof(TimelineBar));
         }
-        
+
         #endregion // static constructor
 
 
         #region fields
 
         private VisualCollection m_elements;
+        private PlotElement m_plotElement;
+        private XAxisElement m_xaxisElement;
 
+        private TimelineValueCollection m_values;
 
-
-        private TimelineElement m_rangeLayer;
-        private TimelineElement m_markerLayer;
-        private TimelineElement m_tickLayer;
-        private FenceVisual m_fence;
-        private TimeTrackerVisual m_tracker;
-
-        private TimelineElement m_hoverElement;
-        
         #endregion // fields
 
 
         #region constructors
 
-        public TimelineBar() {
-            /*
+        public TimelineBar()
+        {
             m_elements = new VisualCollection(this);
+            m_elements.Add(m_plotElement = new PlotElement(this));
+            m_elements.Add(m_xaxisElement = new XAxisElement(this));
 
-            AddElement(m_fence = new FenceVisual(this) {
-                Fill = FenceFill,
-            });
-            AddElement(m_rangeLayer = new TimelineElement(this));
-            AddElement(m_markerLayer = new TimelineElement(this));
-            AddElement(m_tracker = new TimeTrackerVisual(this) {
-                Fill = TrackerFill,
-                Border = TrackerBorder,
-                HoverFill = HoverFill
-            });
-            AddElement(m_tickLayer = new TimelineElement(this));
+            m_values = new TimelineValueCollection(DateTime.Today, DateTime.Today.AddDays(1));
 
             SnapsToDevicePixels = true;
-             */
+            RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+
+            SizeChanged += new SizeChangedEventHandler((sender, e) => {
+                VisualClip = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
+            });
         }
 
         #endregion // constructors
@@ -236,26 +243,33 @@ namespace Viewer.Common.UI {
 
         #region events
 
-        public event RoutedPropertyChangedEventHandler<TrackPoint> TrackPointChanged {
+        public event RoutedPropertyChangedEventHandler<TrackPoint> TrackPointChanged
+        {
             add { AddHandler(TrackPointChangedEvent, value); }
             remove { RemoveHandler(TrackPointChangedEvent, value); }
         }
-        
+
         #endregion // events
 
 
         #region properties
 
+        public TimelineValueCollection Values
+        {
+            get { return m_values; }
+        }
+       
         /// <summary>
         /// Element들이 hovered 상태일 때 fill.
         /// </summary>
-        public Brush HoverFill {
+        public Brush HoverFill
+        {
             get { return (Brush)GetValue(HoverFillProperty); }
             set { SetValue(HoverFillProperty, value); }
         }
 
-
-        public TrackCollection Tracks {
+        public TrackCollection Tracks
+        {
             get { return (TrackCollection)GetValue(TracksProperty); }
             set { SetValue(TracksProperty, value); }
         }
@@ -263,7 +277,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// Fence height
         /// </summary>
-        public double FenceHeight {
+        public double FenceHeight
+        {
             get { return (double)GetValue(FenceHeightProperty); }
             set { SetValue(FenceHeightProperty, value); }
         }
@@ -271,15 +286,17 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// Fence fill
         /// </summary>
-        public Brush FenceFill {
-            get { return (Brush)GetValue(FenceFillProperty); }
-            set { SetValue(FenceFillProperty, value); }
+        public Brush PlotFill
+        {
+            get { return (Brush)GetValue(PlotFillProperty); }
+            set { SetValue(PlotFillProperty, value); }
         }
 
         /// <summary>
         /// Tracker fill
         /// </summary>
-        public Brush TrackerFill {
+        public Brush TrackerFill
+        {
             get { return (Brush)GetValue(TrackerFillProperty); }
             set { SetValue(TrackerFillProperty, value); }
         }
@@ -287,7 +304,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// Tracker Border
         /// </summary>
-        public Pen TrackerBorder {
+        public Pen TrackerBorder
+        {
             get { return (Pen)GetValue(TrackerBorderProperty); }
             set { SetValue(TrackerBorderProperty, value); }
         }
@@ -295,7 +313,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// RangeMarker fill
         /// </summary>
-        public Brush RangeMarkerFill {
+        public Brush RangeMarkerFill
+        {
             get { return (Brush)GetValue(RangeMarkerFillProperty); }
             set { SetValue(RangeMarkerFillProperty, value); }
         }
@@ -303,7 +322,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// TimeBar height
         /// </summary>
-        public double TimeBarHeight {
+        public double TimeBarHeight
+        {
             get { return (double)GetValue(TimeBarHeightProperty); }
             set { SetValue(TimeBarHeightProperty, value); }
         }
@@ -311,7 +331,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// TimeBar normal fill
         /// </summary>
-        public Brush NormalFill {
+        public Brush NormalFill
+        {
             get { return (Brush)GetValue(NormalFillProperty); }
             set { SetValue(NormalFillProperty, value); }
         }
@@ -319,7 +340,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// TimeBar event fill
         /// </summary>
-        public Brush EventFill {
+        public Brush EventFill
+        {
             get { return (Brush)GetValue(EventFillProperty); }
             set { SetValue(EventFillProperty, value); }
         }
@@ -327,7 +349,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// Font family
         /// </summary>
-        public string FontFamily {
+        public string FontFamily
+        {
             get { return (string)GetValue(FontFamilyProperty); }
             set { SetValue(FontFamilyProperty, value); }
         }
@@ -335,7 +358,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// Font size
         /// </summary>
-        public double FontSize {
+        public double FontSize
+        {
             get { return (double)GetValue(FontSizeProperty); }
             set { SetValue(FontSizeProperty, value); }
         }
@@ -343,7 +367,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// Font style
         /// </summary>
-        public FontStyle FontStyle {
+        public FontStyle FontStyle
+        {
             get { return (FontStyle)GetValue(FontStyleProperty); }
             set { SetValue(FontStyleProperty, value); }
         }
@@ -351,7 +376,8 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// Font weight
         /// </summary>
-        public FontWeight FontWeight {
+        public FontWeight FontWeight
+        {
             get { return (FontWeight)GetValue(FontWeightProperty); }
             set { SetValue(FontWeightProperty, value); }
         }
@@ -359,9 +385,11 @@ namespace Viewer.Common.UI {
         /// <summary>
         /// 현재 TrackPoint
         /// </summary>
-        public TrackPoint TrackPoint {
+        public TrackPoint TrackPoint
+        {
             get { return m_trackPoint; }
-            set {
+            set
+            {
                 if (value != m_trackPoint) {
                     TrackPoint oldValue = m_trackPoint;
                     m_trackPoint = value;
@@ -377,31 +405,48 @@ namespace Viewer.Common.UI {
         #endregion // properties
 
 
-        #region overriden methods
+        #region methods
+        #endregion // methods
 
-        protected override int VisualChildrenCount {
+
+        #region overriden properties
+
+        protected override int VisualChildrenCount
+        {
             get { return m_elements.Count; }
         }
 
-        protected override Visual GetVisualChild(int index) {
+        #endregion // overriden properties
+
+
+        #region overriden methods
+
+        protected override Visual GetVisualChild(int index)
+        {
             return m_elements[index];
         }
 
-        protected override Size ArrangeOverride(Size finalSize) {
+        protected override Size ArrangeOverride(Size finalSize)
+        {
             Size sz = base.ArrangeOverride(finalSize);
             LayoutElements(sz.Width, sz.Height);
-
             return sz;
         }
 
-        protected override void OnMouseDown(MouseButtonEventArgs e) {
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
             base.OnMouseDown(e);
+
+            /*
             TimelineElement element = GetHitTest(e.GetPosition(this));
+             */
         }
 
-        protected override void OnMouseMove(MouseEventArgs e) {
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
             base.OnMouseMove(e);
 
+            /*
             Point p = e.GetPosition(this);
             TimelineElement element = GetHitTest(p);
             if (element != null) {
@@ -416,6 +461,7 @@ namespace Viewer.Common.UI {
                     m_hoverElement.MouseEnter();
                 }
             }
+             */
         }
 
         #endregion // overriden methods
@@ -423,79 +469,40 @@ namespace Viewer.Common.UI {
 
         #region internal methods
 
-        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
             RefreshElements();
         }
 
-        private void RegisterTracksEvents(object source) {
+        private void RegisterTracksEvents(object source)
+        {
             INotifyCollectionChanged coll = source as INotifyCollectionChanged;
             if (coll != null) {
                 coll.CollectionChanged += new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
             }
         }
 
-        private void UnregisterTracksEvents(object source) {
+        private void UnregisterTracksEvents(object source)
+        {
             INotifyCollectionChanged coll = source as INotifyCollectionChanged;
             if (coll != null) {
                 coll.CollectionChanged -= new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
             }
         }
 
-        private void AddElement(TimelineElement element) {
-            if (!m_elements.Contains(element)) {
-                m_elements.Add(element);
-            }
-        }
-
-        private void RemoveElement(TimelineElement element) {
-            if (m_elements.Contains(element)) {
-                m_elements.Remove(element);
-            }
-        }
-
-        private int m_refreshCount = 0;
-
         /// <summary>
-        /// track element를 제외한 모든 element들을 새로 생성한다.
+        /// TimelineValue들을 새로 계산/생성해서 element들에 반영시킨다.
         /// </summary>
-        private void RefreshElements() {
-            DateTime t1 = DateTime.Now;
-
-            m_rangeLayer.Children.Clear();
-            m_markerLayer.Children.Clear();
-
-            if (Tracks != null) {
-                // ranges
-                foreach (TrackRange r in Tracks.Ranges) {
-                    TimeRangeVisual range = new TimeRangeVisual(this);
-                    m_rangeLayer.Children.Add(range);
-                    range.Data = r;
-                    range.Fill = NormalFill;
-                }
-
-                // markers
-                foreach (Track t in Tracks) {
-                    TimeRangeMarkerVisual marker = new TimeRangeMarkerVisual(this);
-                    m_markerLayer.Children.Add(marker);
-                    marker.Data = t;
-                    marker.Width = 11;
-                    marker.Height = 9;
-                    marker.Fill = RangeMarkerFill;
-                    marker.Draw();
-                }
-            }
-
-            InvalidateArrange();
-            
-            DateTime t2 = DateTime.Now;
-            TimeSpan sp = t2 - t1;
-            Debug.WriteLine(">>>>>>>>>[" + (++m_refreshCount) + "] " + sp.TotalMilliseconds);
+        private void RefreshElements()
+        {
         }
 
         /// <summary>
         /// Element들을 배치한다.
         /// </summary>
-        protected void LayoutElements(double width, double height) {
+        protected void LayoutElements(double width, double height)
+        {
+            /*
             if (width * height == 0) return;
 
             // fence
@@ -505,8 +512,8 @@ namespace Viewer.Common.UI {
             m_fence.Draw();
 
             // ranges
-            foreach (TimeRangeVisual range in m_rangeLayer.Children) {
-                TrackRange r = (TrackRange)(range.Data); 
+            foreach (TimeRangeElement range in m_rangeLayer.Children) {
+                TrackRange r = (TrackRange)(range.Data);
                 double x = width * Tracks.GetPosition(r.StartTrack) / Tracks.Length;
                 range.Offset = new Vector(x, 10);
                 range.Height = height - 20;
@@ -521,15 +528,17 @@ namespace Viewer.Common.UI {
             m_tracker.Draw();
 
             // range markers
-            foreach (TimeRangeMarkerVisual marker in m_markerLayer.Children) {
+            foreach (RangeMarkerElement marker in m_markerLayer.Children) {
                 double x = width * Tracks.GetPosition((Track)marker.Data) / Tracks.Length;
                 marker.Offset = new Vector(x, height - marker.Height);
                 marker.HoverFill = this.HoverFill;
                 marker.Draw();
             }
+             */
         }
 
-        private TimelineElement GetHitTest(Point p) {
+        private TimelineElement GetHitTest(Point p)
+        {
             HitTestResult hr = VisualTreeHelper.HitTest(this, p);
             if (hr != null) {
                 return hr.VisualHit as TimelineElement;

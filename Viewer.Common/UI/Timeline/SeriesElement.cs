@@ -12,6 +12,8 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Viewer.Common.UI.Timeline {
 
@@ -27,5 +29,29 @@ namespace Viewer.Common.UI.Timeline {
         }
 
         #endregion // constructor
+
+
+        #region properties
+
+        public AxisLabelProvider AxisLabels {
+            get;
+            set;
+        }
+
+        #endregion // properties
+
+
+        #region overriden methods
+
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
+            return new Size();
+        }
+
+        protected override void DoDraw(DrawingContext dc)
+        {
+        }
+
+        #endregion // overriden methods
     }
 }

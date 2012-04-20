@@ -24,15 +24,16 @@ using Viewer.Common.Util;
 using Viewer.Common.Model;
 using Viewer.Common.Loader;
 
-namespace Viewer.Common.Tester {
-
+namespace Viewer.Common.Tester
+{
     /// <summary>
     /// </summary>
-    public partial class MainWindow : Window {
+    public partial class MainWindow : Window
+    {
+        #region constructors
 
-        #region constructors 
-
-        public MainWindow() {
+        public MainWindow()
+        {
             InitializeComponent();
         }
 
@@ -41,18 +42,20 @@ namespace Viewer.Common.Tester {
 
         #region internal methods
 
-        private Track LoadTrack() {
+        private Track LoadTrack()
+        {
             string source = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"sample\all_2012_03_11_20_37_31.inc");
             Track track = new LocalTrackLoader().Load(source, true);
             return track;
         }
-        
+
         #endregion // internal methods
 
 
         #region event handlers
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             Logger.InitLog4Net("Viewer.Common.Tester");
             Track track = LoadTrack();
 

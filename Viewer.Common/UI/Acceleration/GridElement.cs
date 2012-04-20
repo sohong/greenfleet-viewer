@@ -15,17 +15,18 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Viewer.Common.UI.Acceleration {
-
+namespace Viewer.Common.UI.Acceleration
+{
     /// <summary>
     /// Acceleration chart grid.
     /// </summary>
-    public class GridElement : ChartElement {
-
+    public class GridElement : ChartElement
+    {
         #region constructor
 
         public GridElement(AccelerationChart chart)
-            : base(chart) {
+            : base(chart)
+        {
         }
 
         #endregion // constructor
@@ -33,12 +34,14 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public AxisValueProvider AxisValues {
+        public AxisValueProvider AxisValues
+        {
             get;
             set;
         }
 
-        public AxisLabelProvider AxisLabels {
+        public AxisLabelProvider AxisLabels
+        {
             get;
             set;
         }
@@ -48,9 +51,10 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
+        protected override void DoDraw(DrawingContext dc)
+        {
             if (AxisValues == null) return;
-            
+
             Rect r = new Rect(0, 0, Width, Height);
             Pen pen = new Pen(new SolidColorBrush(ToColor(0x33000000)), 1);
             pen.DashStyle = DashStyles.Dot;
@@ -64,7 +68,8 @@ namespace Viewer.Common.UI.Acceleration {
             }
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
             return new Size();
         }
 

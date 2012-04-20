@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackerVisual.cs
+// RangeMarkerVisual.cs
 // 2012.03.29, created by sohong
 //
 // =============================================================================
@@ -14,18 +14,18 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
-namespace Viewer.Common.UI.Timeline {
+namespace Viewer.Common.UI.Timeline
+{
 
-    /// <summary>
-    /// Timeline tracker.
-    /// </summary>
-    public class TimeTrackerVisual : TimelineElement {
-
+    public class RangeMarkerElement : TimelineElement
+    {
         #region constructor
 
-        public TimeTrackerVisual(FrameworkElement container)
-            : base(container) {
+        public RangeMarkerElement(TimelineBar bar)
+            : base(bar)
+        {
         }
 
         #endregion // constructor
@@ -36,9 +36,11 @@ namespace Viewer.Common.UI.Timeline {
         /// <summary>
         /// Border
         /// </summary>
-        public Pen Border {
+        public Pen Border
+        {
             get { return m_border; }
-            set {
+            set
+            {
                 if (value != m_border) {
                     m_border = value;
                     Invalidate();
@@ -52,9 +54,26 @@ namespace Viewer.Common.UI.Timeline {
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
-            Rect r = new Rect(0, 0, Width, Height);
-            dc.DrawRectangle(GetFill(), Border, r);
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
+            return new Size();
+        }
+
+        protected override void DoDraw(DrawingContext dc)
+        {
+            PathGeometry geom = new PathGeometry();
+            PathFigure figure = new PathFigure();
+            geom.Figures.Add(figure);
+
+            figure.StartPoint = new Point(0, 0);
+            figure.Segments.Add(new LineSegment() {
+                Point = new Point(Width, Height / 2)
+            });
+            figure.Segments.Add(new LineSegment() {
+                Point = new Point(0, Height)
+            });
+
+            dc.DrawGeometry(GetFill(), Border, geom);
         }
 
         #endregion // overriden methods

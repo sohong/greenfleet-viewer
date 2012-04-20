@@ -16,22 +16,24 @@ using System.Windows;
 using Viewer.Common.UI.Acceleration;
 using System.Windows.Media;
 
-namespace Viewer.Common.UI {
-
+namespace Viewer.Common.UI
+{
     /// <summary>
     /// x/y/x 가속도 챠트.
     /// </summary>
-    public class AccelerationChart : FrameworkElement {
-
+    public class AccelerationChart : FrameworkElement
+    {
         #region struct Value
 
-        public struct Value {
+        public struct Value
+        {
             public DateTime T;
             public double X;
             public double Y;
             public double Z;
 
-            public Value(DateTime t, double x, double y, double z) {
+            public Value(DateTime t, double x, double y, double z)
+            {
                 this.T = t;
                 this.X = x;
                 this.Y = y;
@@ -44,11 +46,13 @@ namespace Viewer.Common.UI {
 
         #region struct Series
 
-        public struct Series {
+        public struct Series
+        {
             public string Label;
             public Color Color;
 
-            public Series(string label, Color color) {
+            public Series(string label, Color color)
+            {
                 this.Label = label;
                 this.Color = color;
             }
@@ -65,7 +69,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty MinValueCountProperty = DependencyProperty.Register(
             "ValueCount", typeof(uint), typeof(AccelerationChart),
             new FrameworkPropertyMetadata((uint)60, OnMinValueCountChanged));
-        private static void OnMinValueCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnMinValueCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((AccelerationChart)d).RefreshChart();
         }
 
@@ -75,7 +80,8 @@ namespace Viewer.Common.UI {
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
             "Title", typeof(string), typeof(AccelerationChart),
             new FrameworkPropertyMetadata(null, OnTitleChanged));
-        private static void OnTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs a) {
+        private static void OnTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
             ((AccelerationChart)d).RefreshChart();
         }
 
@@ -102,7 +108,8 @@ namespace Viewer.Common.UI {
 
         #region constructor
 
-        public AccelerationChart() {
+        public AccelerationChart()
+        {
             m_elements = new VisualCollection(this);
             m_elements.Add(m_plotElement = new PlotElement(this));
             m_elements.Add(m_xaxisElement = new XAxisElement(this));
@@ -110,7 +117,7 @@ namespace Viewer.Common.UI {
             m_elements.Add(m_legendElement = new LegendElement(this));
 
             m_values = new List<Value>();
-            
+
             m_series = new List<Series>();
             m_series.Add(new Series("accel X", Colors.CadetBlue));
             m_series.Add(new Series("accel Y", Colors.Goldenrod));
@@ -136,7 +143,8 @@ namespace Viewer.Common.UI {
         /// X 축에 표시할 최소 value count.
         /// 실제 value 갯수가 적어도 자리를 차지한다.
         /// </summary>
-        public uint MinValueCount {
+        public uint MinValueCount
+        {
             get { return (uint)GetValue(MinValueCountProperty); }
             set { SetValue(MinValueCountProperty, value); }
         }
@@ -145,7 +153,8 @@ namespace Viewer.Common.UI {
         /// Chart title.
         /// 왼쪽 아래에 표시한다.
         /// </summary>
-        public string Title {
+        public string Title
+        {
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
         }
@@ -155,12 +164,14 @@ namespace Viewer.Common.UI {
 
         #region methods
 
-        public void Clear() {
+        public void Clear()
+        {
             m_values.Clear();
             RefreshChart();
         }
 
-        public void AddValue(DateTime t, double x, double y, double z) {
+        public void AddValue(DateTime t, double x, double y, double z)
+        {
             m_values.Add(new Value(t, x, y, z));
             RefreshChart();
         }
@@ -168,21 +179,27 @@ namespace Viewer.Common.UI {
         #endregion // methods
 
 
-        #region overriden methods
+        #region overriden properties
 
-        protected override int VisualChildrenCount {
+        protected override int VisualChildrenCount
+        {
             get { return m_elements.Count; }
         }
 
-        protected override Visual GetVisualChild(int index) {
+        #endregion // overriden properties
+
+
+        #region overriden methods
+
+        protected override Visual GetVisualChild(int index)
+        {
             return m_elements[index];
         }
 
-        protected override Size ArrangeOverride(Size finalSize) {
+        protected override Size ArrangeOverride(Size finalSize)
+        {
             Size sz = base.ArrangeOverride(finalSize);
-
             LayoutElements(sz.Width, sz.Height);
-
             return sz;
         }
 
@@ -191,11 +208,13 @@ namespace Viewer.Common.UI {
 
         #region internal methods
 
-        private void RefreshChart() {
+        private void RefreshChart()
+        {
             InvalidateArrange();
         }
 
-        private void Recalculate(double width, double height) {
+        private void Recalculate(double width, double height)
+        {
             double min = -1;
             double max = 1;
 
@@ -212,7 +231,7 @@ namespace Viewer.Common.UI {
             m_minimum = min;
             m_maximum = max;
 
-            int maxCount = this.ActualHeight >= 400 ? 10 : height >= 200 ?  6 : height >= 140 ? 4 : 2;
+            int maxCount = this.ActualHeight >= 400 ? 10 : height >= 200 ? 6 : height >= 140 ? 4 : 2;
             m_axisValues.ResetValues(AxisHelper.GetValues(m_minimum, m_maximum, maxCount));
 
             m_axisLabels.StartTime = m_values.Count > 0 ? m_values[0].T : DateTime.MinValue;
@@ -229,7 +248,8 @@ namespace Viewer.Common.UI {
             m_legendElement.Series = m_series;
         }
 
-        private void LayoutElements(double width, double height) {
+        private void LayoutElements(double width, double height)
+        {
             if (width * height == 0) return;
 
             Recalculate(width, height);

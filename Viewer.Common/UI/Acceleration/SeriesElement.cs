@@ -15,17 +15,18 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Viewer.Common.UI.Acceleration {
-
+namespace Viewer.Common.UI.Acceleration
+{
     /// <summary>
     /// AccelerationChart line series.
     /// </summary>
-    public class SeriesElement : ChartElement {
-
+    public class SeriesElement : ChartElement
+    {
         #region constructor
 
         public SeriesElement(AccelerationChart chart)
-            : base(chart) {
+            : base(chart)
+        {
 
             RenderOptions.SetEdgeMode(this, EdgeMode.Unspecified);
         }
@@ -35,22 +36,26 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public AxisValueProvider AxisValues {
+        public AxisValueProvider AxisValues
+        {
             get;
             set;
         }
 
-        public AxisLabelProvider AxisLabels {
+        public AxisLabelProvider AxisLabels
+        {
             get;
             set;
         }
 
-        public IList<double> Values {
+        public IList<double> Values
+        {
             get;
             set;
         }
 
-        public Color Color {
+        public Color Color
+        {
             get;
             set;
         }
@@ -60,8 +65,9 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
-            if (AxisValues == null || AxisLabels == null || Values == null) 
+        protected override void DoDraw(DrawingContext dc)
+        {
+            if (AxisValues == null || AxisLabels == null || Values == null)
                 return;
 
             // create points
@@ -90,7 +96,8 @@ namespace Viewer.Common.UI.Acceleration {
             }
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
             return new Size();
         }
 

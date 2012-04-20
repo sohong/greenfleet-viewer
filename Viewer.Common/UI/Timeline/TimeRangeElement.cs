@@ -15,30 +15,33 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Viewer.Common.UI.Timeline {
-
+namespace Viewer.Common.UI.Timeline
+{
     /// <summary>
     /// TimelineBar의 한 구간을 표시하는 element.
     /// </summary>
-    public class TimeRangeVisual : TimelineElement {
-
+    public class TimeRangeElement : TimelineElement
+    {
         #region constructor
 
-        public TimeRangeVisual(FrameworkElement container) 
-            : base(container) {
+        public TimeRangeElement(TimelineBar bar)
+            : base(bar)
+        {
         }
 
         #endregion // constructor
 
-        
+
         #region properties
 
         /// <summary>
         /// Border
         /// </summary>
-        public Pen Border {
+        public Pen Border
+        {
             get { return m_border; }
-            set {
+            set
+            {
                 if (value != m_border) {
                     m_border = value;
                     Invalidate();
@@ -52,7 +55,13 @@ namespace Viewer.Common.UI.Timeline {
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
+            return new Size();
+        }
+
+        protected override void DoDraw(DrawingContext dc)
+        {
             Rect r = new Rect(0, 0, Width, Height);
             dc.DrawRectangle(GetFill(), Border, r);
         }

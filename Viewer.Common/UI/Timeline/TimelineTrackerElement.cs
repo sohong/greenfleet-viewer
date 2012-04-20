@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// RangeMarkerVisual.cs
+// TrackerVisual.cs
 // 2012.03.29, created by sohong
 //
 // =============================================================================
@@ -14,29 +14,34 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
-namespace Viewer.Common.UI.Timeline {
-    
-    public class TimeRangeMarkerVisual : TimelineElement {
-
+namespace Viewer.Common.UI.Timeline
+{
+    /// <summary>
+    /// Timeline tracker.
+    /// </summary>
+    public class TimelineTrackerElement : TimelineElement
+    {
         #region constructor
 
-        public TimeRangeMarkerVisual(FrameworkElement container) 
-            : base(container) {
+        public TimelineTrackerElement(TimelineBar bar)
+            : base(bar)
+        {
         }
 
         #endregion // constructor
 
-        
+
         #region properties
 
         /// <summary>
         /// Border
         /// </summary>
-        public Pen Border {
+        public Pen Border
+        {
             get { return m_border; }
-            set {
+            set
+            {
                 if (value != m_border) {
                     m_border = value;
                     Invalidate();
@@ -50,20 +55,15 @@ namespace Viewer.Common.UI.Timeline {
 
         #region overriden methods
 
-        protected override void DoDraw(DrawingContext dc) {
-            PathGeometry geom = new PathGeometry();
-            PathFigure figure = new PathFigure();
-            geom.Figures.Add(figure);
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
+            return new Size();
+        }
 
-            figure.StartPoint = new Point(0, 0);
-            figure.Segments.Add(new LineSegment() {
-                Point = new Point(Width, Height / 2)
-            });
-            figure.Segments.Add(new LineSegment() {
-                Point = new Point(0, Height)
-            });
-
-            dc.DrawGeometry(GetFill(), Border, geom);
+        protected override void DoDraw(DrawingContext dc)
+        {
+            Rect r = new Rect(0, 0, Width, Height);
+            dc.DrawRectangle(GetFill(), Border, r);
         }
 
         #endregion // overriden methods

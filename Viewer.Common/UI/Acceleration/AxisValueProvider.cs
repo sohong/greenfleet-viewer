@@ -14,13 +14,13 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 
-namespace Viewer.Common.UI.Acceleration {
-
+namespace Viewer.Common.UI.Acceleration
+{
     /// <summary>
     /// AccelerationChart Y 축에 표시할 값들을 제공한다.
     /// </summary>
-    public class AxisValueProvider : IEnumerable<double> {
-
+    public class AxisValueProvider : IEnumerable<double>
+    {
         #region fields
 
         private IList<double> m_values;
@@ -32,7 +32,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region constructor
 
-        public AxisValueProvider() {
+        public AxisValueProvider()
+        {
             m_values = new List<double>();
         }
 
@@ -41,11 +42,13 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region IEnumerable<double>
 
-        public IEnumerator<double> GetEnumerator() {
+        public IEnumerator<double> GetEnumerator()
+        {
             return m_values.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return m_values.GetEnumerator();
         }
 
@@ -54,7 +57,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region methods
 
-        public void ResetValues(IEnumerable<double> values) {
+        public void ResetValues(IEnumerable<double> values)
+        {
             double minVal = 0;
             double maxVal = 0;
             m_values.Clear();
@@ -74,11 +78,13 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public double MinValue {
+        public double MinValue
+        {
             get { return m_minValue; }
         }
 
-        public double MaxValue {
+        public double MaxValue
+        {
             get { return m_maxValue; }
         }
 

@@ -15,13 +15,13 @@ using Viewer.Common.UI;
 using Viewer.Common.Model;
 using System.Collections.ObjectModel;
 
-namespace Viewer.Common.View {
-
+namespace Viewer.Common.View
+{
     /// <summary>
     /// AccelerationChart testing view
     /// </summary>
-    public partial class AccelerationChartView : UserControl {
-
+    public partial class AccelerationChartView : UserControl
+    {
         #region dependency properties
 
         /// <summary>
@@ -34,7 +34,8 @@ namespace Viewer.Common.View {
                 typeof(AccelerationChartView),
                 new PropertyMetadata(TrackPropertyChanged));
 
-        private static void TrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void TrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             AccelerationChartView view = (AccelerationChartView)obj;
             Track track = e.NewValue as Track;
             view.RefreshPoints(null);
@@ -50,7 +51,8 @@ namespace Viewer.Common.View {
                 typeof(AccelerationChartView),
                 new PropertyMetadata(PositionPropertyChanged));
 
-        private static void PositionPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void PositionPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             AccelerationChartView view = (AccelerationChartView)obj;
             TrackPoint point = e.NewValue as TrackPoint;
             view.RefreshPoints(point);
@@ -62,8 +64,9 @@ namespace Viewer.Common.View {
         #region fields
         #endregion // fields
 
-        
-        public AccelerationChartView() {
+
+        public AccelerationChartView()
+        {
             InitializeComponent();
         }
 
@@ -73,7 +76,8 @@ namespace Viewer.Common.View {
         /// <summary>
         /// chart에 표시할 Track 정보.
         /// </summary>
-        public Track Track {
+        public Track Track
+        {
             get { return (Track)GetValue(TrackProperty); }
             set { SetValue(TrackProperty, value); }
         }
@@ -81,7 +85,8 @@ namespace Viewer.Common.View {
         /// <summary>
         /// 재생 포인트
         /// </summary>
-        public TrackPoint Position {
+        public TrackPoint Position
+        {
             get { return (TrackPoint)GetValue(PositionProperty); }
             set { SetValue(PositionProperty, value); }
         }
@@ -91,7 +96,8 @@ namespace Viewer.Common.View {
 
         #region internal methods
 
-        private void RefreshPoints(TrackPoint current) {
+        private void RefreshPoints(TrackPoint current)
+        {
             chart.Clear();
             chart.Title = "";
 

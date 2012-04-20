@@ -16,13 +16,13 @@ using System.Windows.Media;
 using System.Windows;
 using System.Globalization;
 
-namespace Viewer.Common.UI.Acceleration {
-
+namespace Viewer.Common.UI.Acceleration
+{
     /// <summary>
     /// AccelerationChart plot area.
     /// </summary>
-    public class PlotElement : ChartElement {
-
+    public class PlotElement : ChartElement
+    {
         #region fields
 
         private GridElement m_gridElement;
@@ -31,14 +31,15 @@ namespace Viewer.Common.UI.Acceleration {
         private SeriesElement m_seriesZ;
         private DrawingVisual m_indicator;
         private DrawingVisual m_panel;
-        
+
         #endregion // fields
 
 
         #region constructor
 
         public PlotElement(AccelerationChart chart)
-            : base(chart) {
+            : base(chart)
+        {
         }
 
         #endregion // constructor
@@ -46,22 +47,26 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region properties
 
-        public AxisValueProvider AxisValues {
+        public AxisValueProvider AxisValues
+        {
             get;
             set;
         }
 
-        public AxisLabelProvider AxisLabels {
+        public AxisLabelProvider AxisLabels
+        {
             get;
             set;
         }
 
-        public IList<AccelerationChart.Value> Values {
+        public IList<AccelerationChart.Value> Values
+        {
             get;
             set;
         }
 
-        public IList<AccelerationChart.Series> Series {
+        public IList<AccelerationChart.Series> Series
+        {
             get;
             set;
         }
@@ -71,16 +76,18 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region methods
 
-        public void LayoutChildren() {
+        public void LayoutChildren()
+        {
             m_gridElement.Height = m_seriesX.Height = m_seriesY.Height = m_seriesZ.Height = this.Height;
         }
-        
+
         #endregion // methods
 
 
         #region overriden methods
 
-        protected override void CreateChildren() {
+        protected override void CreateChildren()
+        {
             base.CreateChildren();
 
             Children.Add(m_gridElement = new GridElement(Chart));
@@ -91,7 +98,8 @@ namespace Viewer.Common.UI.Acceleration {
             Children.Add(m_panel = new DrawingVisual());
         }
 
-        public override void Draw() {
+        public override void Draw()
+        {
             base.Draw();
 
             m_gridElement.Width = this.Width;
@@ -132,12 +140,14 @@ namespace Viewer.Common.UI.Acceleration {
             }
         }
 
-        protected override void DoDraw(DrawingContext dc) {
+        protected override void DoDraw(DrawingContext dc)
+        {
             LinearGradientBrush brush = new LinearGradientBrush(Colors.LightGray, Colors.White, 90);
             dc.DrawRectangle(brush, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
         }
 
-        public override Size Measure(double hintWidth, double hintHeight) {
+        public override Size Measure(double hintWidth, double hintHeight)
+        {
             return new Size();
         }
 
@@ -146,7 +156,8 @@ namespace Viewer.Common.UI.Acceleration {
 
         #region internal methods
 
-        private IList<double> GetSeriesValues(int accel) {
+        private IList<double> GetSeriesValues(int accel)
+        {
             IList<double> values = new List<double>();
 
             if (Values != null) {
@@ -168,7 +179,8 @@ namespace Viewer.Common.UI.Acceleration {
             return values;
         }
 
-        private void DrawIndicator() {
+        private void DrawIndicator()
+        {
             DrawingContext dc = m_indicator.RenderOpen();
 
             Pen pen = new Pen(new SolidColorBrush(ToColor(0x880000ff)), 1);
@@ -179,7 +191,8 @@ namespace Viewer.Common.UI.Acceleration {
             dc.Close();
         }
 
-        private void DrawPanel() {
+        private void DrawPanel()
+        {
             DrawingContext dc = m_panel.RenderOpen();
 
             Brush fill = new SolidColorBrush(ToColor(0x110000ff));
