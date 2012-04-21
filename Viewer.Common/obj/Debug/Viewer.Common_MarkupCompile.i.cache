@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer.Common\obj\Debug\
+C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Common\obj\Debug\
 Viewer.Common
 none
 false
@@ -12,8 +12,8 @@ DEBUG;TRACE
 
 12-25121358
 6-211092918
-77-1680589389
-20205665469
+771179061309
+20-2007026948
 Resources\Slider.xaml;Resources\Shared.xaml;View\AccelerationChartView.xaml;View\BingMapView.xaml;View\DashboardView.xaml;View\DialogView.xaml;View\GoogleMapView.xaml;View\AccelerationView.xaml;View\ProgressView.xaml;View\TimelineView.xaml;View\TrackTreeView.xaml;View\VideoView.xaml;
 
 True

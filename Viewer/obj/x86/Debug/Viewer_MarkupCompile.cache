@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\obj\x86\Debug\
+C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer\obj\x86\Debug\
 GreenFleet.Viewer
 none
 false
 DEBUG;TRACE
-C:\Users\Sohong\Documents\Visual Studio 2010\Projects\GreenFleet\Viewer\App.xaml
+C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer\App.xaml
 3787495359
 2-1522058752
 13-1542994340
-171488045772
+17-1915409371
 View\Shell.xaml;View\HomeView.xaml;View\TrackView.xaml;
 
 False
