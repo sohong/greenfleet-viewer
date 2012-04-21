@@ -67,7 +67,7 @@ namespace Viewer.Common.UI.Timeline
             dc.DrawLine(pen, new Point(0, 0), new Point(0, Height));
 
             pen = new Pen(this.Fill, 1);
-            dc.DrawLine(pen, new Point(-5, 0), new Point(5, 0));
+            dc.DrawLine(pen, new Point(-5, 1), new Point(5, 1));
             dc.DrawLine(pen, new Point(-5, Height), new Point(5, Height));
         }
 

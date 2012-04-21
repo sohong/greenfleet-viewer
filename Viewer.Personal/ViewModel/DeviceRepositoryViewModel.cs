@@ -28,13 +28,13 @@ using Viewer.Common.Service;
 using Viewer.Personal.View;
 using Viewer.Common;
 
-namespace Viewer.Personal.ViewModel {
-
+namespace Viewer.Personal.ViewModel
+{
     /// <summary>
     /// View model for DeviceRepositoryView
     /// </summary>
-    public class DeviceRepositoryViewModel : RepositoryViewModel {
-
+    public class DeviceRepositoryViewModel : RepositoryViewModel
+    {
         #region fields
 
         private DeviceRepository m_repository;
@@ -44,7 +44,8 @@ namespace Viewer.Personal.ViewModel {
 
         #region constructors
 
-        public DeviceRepositoryViewModel() {
+        public DeviceRepositoryViewModel()
+        {
             this.DriveManager = new DriveManager();
             m_repository = new DeviceRepository();
 
@@ -75,31 +76,37 @@ namespace Viewer.Personal.ViewModel {
 
         #region properties
 
-        public IDriveManager DriveManager {
+        public IDriveManager DriveManager
+        {
             get;
             set;
         }
 
-        public DeviceRepository Repository {
+        public DeviceRepository Repository
+        {
             get { return m_repository; }
         }
 
-        public ICommand LoadCommand {
+        public ICommand LoadCommand
+        {
             get;
             private set;
         }
 
-        public ICommand SearchCommand {
+        public ICommand SearchCommand
+        {
             get;
             private set;
         }
 
-        public ICommand ConfigDeviceCommand {
+        public ICommand ConfigDeviceCommand
+        {
             get;
             private set;
         }
 
-        public ICommand SaveCommand {
+        public ICommand SaveCommand
+        {
             get;
             private set;
         }
@@ -109,7 +116,8 @@ namespace Viewer.Personal.ViewModel {
 
         #region overriden methods
 
-        protected override void CheckCommands() {
+        protected override void CheckCommands()
+        {
             base.CheckCommands();
         }
 
@@ -119,11 +127,13 @@ namespace Viewer.Personal.ViewModel {
         #region internal methods
 
         // Load command
-        private bool CanLoad(object data) {
+        private bool CanLoad(object data)
+        {
             return true;
         }
 
-        private void DoLoad(object data) {
+        private void DoLoad(object data)
+        {
             /*
             string folder = DialogUtil.SelectFolder("트랙 파일들이 저장된 위치를 선택하세요.", null);
             if (folder != null) {
@@ -153,7 +163,7 @@ namespace Viewer.Personal.ViewModel {
                 } finally {
                     EndLoading();
                 }
-            
+
             } else {
                 //PersonalDomain.Domain.EventAggregator.GetEvent<NoDriveEvent>().Publish(null);
                 // TODO 테스트 가능하도록 MessageUtil을 서비스 인터페이스로 구현해야 한다.
@@ -162,11 +172,13 @@ namespace Viewer.Personal.ViewModel {
         }
 
         // Search command
-        private bool CanSearch() {
+        private bool CanSearch()
+        {
             return true;
         }
 
-        private void DoSearch() {
+        private void DoSearch()
+        {
             if (Tracks != null) {
                 //Repository.ClearSelection(); // 기존 선택들을 굳이 해제시킬 필요는 없을것 같다.
 
@@ -179,20 +191,24 @@ namespace Viewer.Personal.ViewModel {
         }
 
         // Config device command
-        private bool CanConfigDevice(object data) {
+        private bool CanConfigDevice(object data)
+        {
             return true;
         }
 
-        private void DoConfigDevice(object data) {
+        private void DoConfigDevice(object data)
+        {
             DialogService.Run("기기 설정", new DeviceConfigView(), new DeviceConfigViewModel());
         }
 
         // Save(sd card -> local storage) command
-        private bool CanSave() {
+        private bool CanSave()
+        {
             return true;
         }
 
-        private void DoSave() {
+        private void DoSave()
+        {
             SaveViewModel model = new SaveViewModel(Repository, SearchFrom, SearchTo);
             DialogService.Run("저장", new SaveView(), model);
         }

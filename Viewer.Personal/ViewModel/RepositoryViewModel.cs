@@ -21,12 +21,13 @@ using System.IO;
 using Viewer.Personal.Command;
 using Viewer.Common.Event;
 
-namespace Viewer.Personal.ViewModel {
-
+namespace Viewer.Personal.ViewModel
+{
     /// <summary>
     /// 리파지토리 검색 방법
     /// </summary>
-    public enum SearchMode {
+    public enum SearchMode
+    {
         Range,      // 구간 설정
         //Today,      // 오늘
         //TwoDays,    // 이틀
@@ -34,12 +35,12 @@ namespace Viewer.Personal.ViewModel {
         RecentTwo   // 최근 이틀
     }
 
-    
+
     /// <summary>
     /// View model base for LocalRepositoryViewModel and DeviceRepositoryViewModel.
     /// </summary>
-    public abstract class RepositoryViewModel : ViewModelBase {
-
+    public abstract class RepositoryViewModel : ViewModelBase
+    {
         #region fields
 
         private ListCollectionView m_vehicles;
@@ -52,7 +53,8 @@ namespace Viewer.Personal.ViewModel {
 
         #region constructors
 
-        public RepositoryViewModel() {
+        public RepositoryViewModel()
+        {
             m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
             m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
@@ -64,17 +66,21 @@ namespace Viewer.Personal.ViewModel {
 
         #region properties
 
-        public ListCollectionView Vehicles {
+        public ListCollectionView Vehicles
+        {
             get { return m_vehicles; }
         }
 
-        public ListCollectionView Tracks {
+        public ListCollectionView Tracks
+        {
             get { return m_tracks; }
         }
 
-        public TrackGroup TrackGroup {
+        public TrackGroup TrackGroup
+        {
             get { return m_trackGroup; }
-            set {
+            set
+            {
                 if (value != m_trackGroup) {
                     m_trackGroup = value;
                     RaisePropertyChanged(() => TrackGroup);
@@ -83,7 +89,8 @@ namespace Viewer.Personal.ViewModel {
         }
         private TrackGroup m_trackGroup;
 
-        public TrackCollection SelectedTracks {
+        public TrackCollection SelectedTracks
+        {
             get { return m_selectedTracks; }
         }
 
@@ -91,9 +98,11 @@ namespace Viewer.Personal.ViewModel {
         /// 현재 선택되어 있는 vehicle.
         /// 선택 변경이 command들의 parameter에 반영될 수 있도록 setter를 작성한다.
         /// </summary>
-        public Vehicle SelectedVehicle {
+        public Vehicle SelectedVehicle
+        {
             get { return m_selectedVehicle; }
-            set {
+            set
+            {
                 if (value != m_selectedVehicle) {
                     m_selectedVehicle = value;
                     RaisePropertyChanged(() => SelectedVehicle);
@@ -105,9 +114,11 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// 검색 조건 - 시작 시각(시/분), 혹은 시작 일시(일/시).
         /// </summary>
-        public DateTime SearchFrom {
+        public DateTime SearchFrom
+        {
             get { return m_searchFrom; }
-            set {
+            set
+            {
                 if (value != m_searchFrom) {
                     m_searchFrom = value;
                     RaisePropertyChanged(() => SearchFrom);
@@ -122,9 +133,11 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// 검색 조건 - 끝 시각(시/분), 혹은 끝 일시(일/시).
         /// </summary>
-        public DateTime SearchTo {
+        public DateTime SearchTo
+        {
             get { return m_searchTo; }
-            set {
+            set
+            {
                 if (value != m_searchTo) {
                     m_searchTo = value;
                     RaisePropertyChanged(() => SearchTo);
@@ -139,9 +152,11 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// 모두 가져오기
         /// </summary>
-        public bool SearchAll {
+        public bool SearchAll
+        {
             get { return m_searchAll; }
-            set {
+            set
+            {
                 if (value != m_searchAll) {
                     m_searchAll = value;
                     RaisePropertyChanged(() => SearchAll);
@@ -153,9 +168,11 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// ActiveTrack이 설정되면 자동으로 재생할 것인 지 설정.
         /// </summary>
-        public bool AutoPlay {
+        public bool AutoPlay
+        {
             get { return m_autoPlay; }
-            set {
+            set
+            {
                 if (value != m_autoPlay) {
                     m_autoPlay = value;
                     RaisePropertyChanged(() => AutoPlay);
@@ -168,9 +185,11 @@ namespace Viewer.Personal.ViewModel {
         /// ActiveTrack을 반복 재생
         /// PlayAll이 true면 선택된 전체를 반복 재생.
         /// </summary>
-        public bool LoopPlay {
+        public bool LoopPlay
+        {
             get { return m_loopPlay; }
-            set {
+            set
+            {
                 if (value != m_loopPlay) {
                     m_loopPlay = value;
                     RaisePropertyChanged(() => LoopPlay);
@@ -183,9 +202,11 @@ namespace Viewer.Personal.ViewModel {
         /// ActiveTrack부터 선택된 모든 track을 차례대로 재생.
         /// LoopPlay가 true이면 전체 반복.
         /// </summary>
-        public bool AllPlay {
+        public bool AllPlay
+        {
             get { return m_allPlay; }
-            set {
+            set
+            {
                 if (value != m_allPlay) {
                     m_allPlay = value;
                     RaisePropertyChanged(() => AllPlay);
@@ -197,9 +218,11 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// 현재 재생 중인 track.
         /// </summary>
-        public Track ActiveTrack {
+        public Track ActiveTrack
+        {
             get { return m_activeTrack; }
-            set {
+            set
+            {
                 if (value != m_activeTrack) {
                     m_activeTrack = value;
 
@@ -218,9 +241,11 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// 재생 포인트.
         /// </summary>
-        public TrackPoint TrackPoint {
+        public TrackPoint TrackPoint
+        {
             get { return m_trackPoint; }
-            set {
+            set
+            {
                 if (value != m_trackPoint) {
                     m_trackPoint = value;
                     RaisePropertyChanged(() => TrackPoint);
@@ -229,7 +254,8 @@ namespace Viewer.Personal.ViewModel {
         }
         private TrackPoint m_trackPoint;
 
-        public Commands Commands {
+        public Commands Commands
+        {
             get { return Commands.Instance; }
         }
 
@@ -238,7 +264,8 @@ namespace Viewer.Personal.ViewModel {
 
         #region methods
 
-        protected void ResetTrackGroup(ListCollectionView tracks) {
+        protected void ResetTrackGroup(ListCollectionView tracks)
+        {
             if (tracks != null)
                 m_tracks = tracks;
 
@@ -253,7 +280,8 @@ namespace Viewer.Personal.ViewModel {
 
         #region internal properties
 
-        protected bool IsLoading {
+        protected bool IsLoading
+        {
             get { return m_loading; }
         }
 
@@ -262,11 +290,13 @@ namespace Viewer.Personal.ViewModel {
 
         #region internal methods
 
-        protected void BeginLoading() {
+        protected void BeginLoading()
+        {
             m_loading = true;
         }
 
-        protected void EndLoading() {
+        protected void EndLoading()
+        {
             m_loading = false;
         }
 
@@ -276,7 +306,8 @@ namespace Viewer.Personal.ViewModel {
         /// </summary>
         /// <param name="tracks"></param>
         /// <returns></returns>
-        private TrackGroup CreateGroupsFromTracks(ListCollectionView tracks) {
+        private TrackGroup CreateGroupsFromTracks(ListCollectionView tracks)
+        {
             if (tracks.IsEmpty)
                 return null;
 
@@ -298,7 +329,8 @@ namespace Viewer.Personal.ViewModel {
             return root;
         }
 
-        private TrackGroup CreateGroupHierarchy(IList<TrackGroup> groups) {
+        private TrackGroup CreateGroupHierarchy(IList<TrackGroup> groups)
+        {
             IList<TrackGroup> parents = new List<TrackGroup>();
             TrackGroup parent = CreateParent(groups[0]);
             parent.Add(groups[0]);
@@ -315,26 +347,29 @@ namespace Viewer.Personal.ViewModel {
             return parents.Count > 1 ? CreateGroupHierarchy(parents) : parent;
         }
 
-        private TrackGroup CreateParent(TrackGroup group) {
+        private TrackGroup CreateParent(TrackGroup group)
+        {
             TrackGroupLevel level = (TrackGroupLevel)(group.Level + 1);
             TrackGroup parent = new TrackGroup(group.Date, level);
             return parent;
         }
 
-        private bool Containable(TrackGroup parent, TrackGroup group) {
+        private bool Containable(TrackGroup parent, TrackGroup group)
+        {
             switch (parent.Level) {
-            case TrackGroupLevel.Day:
-                return group.Date.Day == parent.Date.Day;
-            case TrackGroupLevel.Month:
-                return group.Date.Month == parent.Date.Month;
-            case TrackGroupLevel.Year:
-                return group.Date.Year == parent.Date.Year;
+                case TrackGroupLevel.Day:
+                    return group.Date.Day == parent.Date.Day;
+                case TrackGroupLevel.Month:
+                    return group.Date.Month == parent.Date.Month;
+                case TrackGroupLevel.Year:
+                    return group.Date.Year == parent.Date.Year;
             }
 
             return true;
         }
 
-        private TrackGroup CreateRoot(Track startTrack, Track endTrack) {
+        private TrackGroup CreateRoot(Track startTrack, Track endTrack)
+        {
             TrackGroupLevel level;
             DateTime dStart = startTrack.CreateDate;
             DateTime dEnd = endTrack.CreateDate;
@@ -353,7 +388,8 @@ namespace Viewer.Personal.ViewModel {
             return root;
         }
 
-        private void RegisterEvents(TrackGroup group) {
+        private void RegisterEvents(TrackGroup group)
+        {
             group.TrackChanged += new Action<TrackGroup, Track, string>(TrackGroup_TrackChanged);
             group.TrackAllChanged += new Action<Common.Model.TrackGroup>(TrackGroup_TrackAllChanged);
             foreach (object child in group.Children) {
@@ -363,7 +399,8 @@ namespace Viewer.Personal.ViewModel {
             }
         }
 
-        private void TrackGroup_TrackChanged(TrackGroup group, Track track, string propName) {
+        private void TrackGroup_TrackChanged(TrackGroup group, Track track, string propName)
+        {
             // 현재 재생 중인 것은 그냥 놔둔다.
             if (track == ActiveTrack && !track.IsChecked) {
                 track.IsChecked = true;
@@ -376,7 +413,8 @@ namespace Viewer.Personal.ViewModel {
             }
         }
 
-        private void TrackGroup_TrackAllChanged(TrackGroup group) {
+        private void TrackGroup_TrackAllChanged(TrackGroup group)
+        {
             m_selectedTracks.BeginUpdate();
             try {
                 m_selectedTracks.Clear();
@@ -391,12 +429,14 @@ namespace Viewer.Personal.ViewModel {
             }
         }
 
-        private void Vehicles_CurrentChanged(object sender, EventArgs e) {
+        private void Vehicles_CurrentChanged(object sender, EventArgs e)
+        {
             SelectedVehicle = Vehicles.CurrentItem as Vehicle;
             CheckCommands();
         }
 
-        protected virtual void CheckCommands() {
+        protected virtual void CheckCommands()
+        {
             //((DelegateCommand<object>)DeleteCommand).RaiseCanExecuteChanged();
             //CommandManager.InvalidateRequerySuggested();
         }

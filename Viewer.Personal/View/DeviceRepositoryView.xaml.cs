@@ -28,16 +28,17 @@ using Viewer.Common.Model;
 using Viewer.Personal.Event;
 using Viewer.Common.View;
 
-namespace Viewer.Personal.View {
-
+namespace Viewer.Personal.View
+{
     /// <summary>
     /// 입력 장치(SD 카드 등)에 저장된 트랙 정보를 표시하고 관리한다.
     /// </summary>
-    public partial class DeviceRepositoryView : UserControl {
-
+    public partial class DeviceRepositoryView : UserControl
+    {
         #region constructors
 
-        public DeviceRepositoryView() {
+        public DeviceRepositoryView()
+        {
             InitializeComponent();
         }
 
@@ -47,15 +48,18 @@ namespace Viewer.Personal.View {
         #region event handlers
 
         // trackTreeView
-        private void TrackTreeView_ActivateGroup(object sender, TrackGroup group) {
+        private void TrackTreeView_ActivateGroup(object sender, TrackGroup group)
+        {
         }
 
-        private void TrackTreeView_ActivateTrack(object sender, Track track) {
+        private void TrackTreeView_ActivateTrack(object sender, Track track)
+        {
             PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Publish(track);
         }
 
         // videoView
-        private void VideoView_PositionChanged(VideoView view, double length, double position) {  
+        private void VideoView_PositionChanged(VideoView view, double length, double position)
+        {
             // video track 위치가 변경되면 해당하는 track point를 찾아 전역 이벤트를 발생시킨다.
             Track track = view.Track;
             if (track != null) {
@@ -67,12 +71,14 @@ namespace Viewer.Personal.View {
         }
 
         // googleMapView
-        private void GoogleMapView_TrackDoubleClicked(object sender, Track track) {
+        private void GoogleMapView_TrackDoubleClicked(object sender, Track track)
+        {
             PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Publish(track);
         }
 
         // bingMapView
-        private void BingMapView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e) {
+        private void BingMapView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
             Debug.WriteLine("xxx");
         }
 

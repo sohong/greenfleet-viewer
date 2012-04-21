@@ -24,6 +24,9 @@ namespace Viewer.Common.View
     {
         #region dependency properties
 
+        /// <summary>
+        /// Tracks
+        /// </summary>
         public static readonly DependencyProperty TracksProperty = DependencyProperty.Register(
             "Tracks", typeof(TrackCollection), typeof(TimelineView),
             new FrameworkPropertyMetadata(null, OnTracksChanged));
@@ -34,6 +37,9 @@ namespace Viewer.Common.View
             ((TimelineView)d).RegisterTracksEvents(a.NewValue);
         }
 
+        /// <summary>
+        /// All range background
+        /// </summary>
         public static readonly DependencyProperty AllBackgroundProperty = DependencyProperty.Register(
             "AllBackground", typeof(Brush), typeof(TimelineView),
             new FrameworkPropertyMetadata(Brushes.Blue, OnAllBackgroundChanged));
@@ -42,12 +48,37 @@ namespace Viewer.Common.View
             ((TimelineView)d).RefreshView();
         }
 
+        /// <summary>
+        /// Event range background
+        /// </summary>
         public static readonly DependencyProperty EventBackgroundProperty = DependencyProperty.Register(
             "EventBackground", typeof(Brush), typeof(TimelineView),
             new FrameworkPropertyMetadata(Brushes.Red, OnEventBackgroundChanged));
         private static void OnEventBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
         {
             ((TimelineView)d).RefreshView();
+        }
+
+        /// <summary>
+        /// Current track
+        /// </summary>
+        public static readonly DependencyProperty CurrentTrackProperty = DependencyProperty.Register(
+            "CurrentTrack", typeof(Track), typeof(TimelineView),
+            new FrameworkPropertyMetadata(null, OnCurrentTrackChanged));
+        private static void OnCurrentTrackChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
+            ((TimelineView)d).ResetTracker();
+        }
+
+        /// <summary>
+        /// Current track point
+        /// </summary>
+        public static readonly DependencyProperty CurrentPointProperty = DependencyProperty.Register(
+            "CurrentPoint", typeof(TrackPoint), typeof(TimelineView),
+            new FrameworkPropertyMetadata(null, OnCurrentPointChanged));
+        private static void OnCurrentPointChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
+        {
+            ((TimelineView)d).ResetTracker();
         }
 
         #endregion // dependency properties
@@ -81,6 +112,18 @@ namespace Viewer.Common.View
         {
             get { return (Brush)GetValue(EventBackgroundProperty); }
             set { SetValue(EventBackgroundProperty, value); }
+        }
+
+        public Track CurrentTrack
+        {
+            get { return (Track)GetValue(CurrentTrackProperty); }
+            set { SetValue(CurrentTrackProperty, value); }
+        }
+
+        public TrackPoint CurrentPoint
+        {
+            get { return (TrackPoint)GetValue(CurrentPointProperty); }
+            set { SetValue(CurrentPointProperty, value); }
         }
 
         #endregion // properties
@@ -141,6 +184,11 @@ namespace Viewer.Common.View
             bar.AllBackground = this.AllBackground;
             bar.EventBackground = this.EventBackground;
             bar.RefreshBar(values, labels);
+        }
+
+        private void ResetTracker()
+        {
+            bar.SetPosition(CurrentTrack, CurrentPoint);
         }
 
         #endregion // internal methods

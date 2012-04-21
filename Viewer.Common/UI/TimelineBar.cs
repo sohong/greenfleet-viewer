@@ -141,6 +141,7 @@ namespace Viewer.Common.UI
 
         public void SetPosition(Track track, TrackPoint point)
         {
+            m_trackerElement.X = 100;
         }
 
         #endregion // methods
