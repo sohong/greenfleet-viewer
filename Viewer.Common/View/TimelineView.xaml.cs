@@ -131,9 +131,9 @@ namespace Viewer.Common.View
 
         #region methods
 
-        public void SetPosition(Track track, TrackPoint point)
+        public void ResetPosition(TrackPoint point)
         {
-            bar.SetPosition(track, point);
+            bar.Position = point;
         }
 
         #endregion // methods
@@ -188,7 +188,7 @@ namespace Viewer.Common.View
 
         private void ResetTracker()
         {
-            bar.SetPosition(CurrentTrack, CurrentPoint);
+            bar.Position = CurrentPoint;
         }
 
         #endregion // internal methods

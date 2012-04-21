@@ -21,7 +21,18 @@
                 <gf:AccelerationChartView Name="accelerationView"/>
             </TabItem>
             <TabItem Header="Timeline">
-                <gf:TimelineView Name="timelineView"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <gf:TimelineView Name="timelineView"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button Name="btnPoint1" Margin="4" Click="btnPoint1_Click">Point 1</Button>
+                        <Button Name="btnPoint2" Margin="4" Click="btnPoint2_Click">Point 2</Button>
+                        <Button Name="btnPoint3" Margin="4" Click="btnPoint3_Click">Point 3</Button>
+                    </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>    
     </Grid>

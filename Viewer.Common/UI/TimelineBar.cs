@@ -108,14 +108,15 @@ namespace Viewer.Common.UI
         /// <summary>
         /// 현재 TrackPoint
         /// </summary>
-        public TrackPoint TrackPoint
+        public TrackPoint Position
         {
-            get { return m_trackPoint; }
+            get { return m_position; }
             set
             {
-                if (value != m_trackPoint) {
-                    TrackPoint oldValue = m_trackPoint;
-                    m_trackPoint = value;
+                if (value != m_position) {
+                    TrackPoint oldValue = m_position;
+                    m_position = value;
+                    ResetPosition();
 
                     RoutedPropertyChangedEventArgs<TrackPoint> args = new RoutedPropertyChangedEventArgs<TrackPoint>(oldValue, value);
                     args.RoutedEvent = TrackPointChangedEvent;
@@ -123,7 +124,7 @@ namespace Viewer.Common.UI
                 }
             }
         }
-        private TrackPoint m_trackPoint;
+        private TrackPoint m_position;
 
         #endregion // properties
 
@@ -137,11 +138,6 @@ namespace Viewer.Common.UI
             m_xaxisElement.AxisLabels = labels;
 
             InvalidateArrange();
-        }
-
-        public void SetPosition(Track track, TrackPoint point)
-        {
-            m_trackerElement.X = 100;
         }
 
         #endregion // methods
@@ -207,6 +203,15 @@ namespace Viewer.Common.UI
 
         #region internal methods
 
+        private void ResetPosition()
+        {
+            AxisLabelProvider labels = m_xaxisElement.AxisLabels;
+            if (labels != null && m_position != null) {
+                double x = labels.GetPosition(m_position.PointTime);
+                m_trackerElement.X = 15 + x * m_xaxisElement.Width;
+            }
+        }
+
         /// <summary>
         /// Element들을 배치한다.
         /// </summary>
@@ -239,6 +244,8 @@ namespace Viewer.Common.UI
             m_plotElement.Draw();
             m_xaxisElement.Draw();
             m_trackerElement.Draw();
+
+            ResetPosition();
         }
 
         private TimelineElement GetHitTest(Point p)

@@ -79,6 +79,15 @@ namespace Viewer.Common.Tester
             return tracks;
         }
 
+        private void ResetPosition(int i)
+        {
+            TrackCollection tracks = timelineView.Tracks;
+            Track track = tracks[i];
+            TrackPoint point = new TrackPoint();
+            point.PointTime = track.StartTime;
+            timelineView.ResetPosition(point);
+        }
+
         #endregion // internal methods
 
 
@@ -104,6 +113,21 @@ namespace Viewer.Common.Tester
 
             // timeline
             timelineView.Tracks = tracks;
+        }
+
+        private void btnPoint1_Click(object sender, RoutedEventArgs e)
+        {
+            ResetPosition(11);
+        }
+
+        private void btnPoint2_Click(object sender, RoutedEventArgs e)
+        {
+            ResetPosition(22);
+        }
+
+        private void btnPoint3_Click(object sender, RoutedEventArgs e)
+        {
+            ResetPosition(33);
         }
 
         #endregion // event handlers

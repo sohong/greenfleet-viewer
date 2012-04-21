@@ -63,7 +63,7 @@ namespace Viewer.Common.UI.Timeline
 
         protected override void DoDraw(DrawingContext dc)
         {
-            Pen pen = new Pen(this.Fill, 3);
+            Pen pen = new Pen(this.Fill, 2);
             dc.DrawLine(pen, new Point(0, 0), new Point(0, Height));
 
             pen = new Pen(this.Fill, 1);
