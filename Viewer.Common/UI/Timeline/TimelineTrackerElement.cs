@@ -1,5 +1,5 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackerVisual.cs
+// TimelineTrackerElement.cs
 // 2012.03.29, created by sohong
 //
 // =============================================================================
@@ -27,6 +27,7 @@ namespace Viewer.Common.UI.Timeline
         public TimelineTrackerElement(TimelineBar bar)
             : base(bar)
         {
+            this.Fill = new SolidColorBrush(ToColor(0xffff0000));
         }
 
         #endregion // constructor
@@ -62,8 +63,12 @@ namespace Viewer.Common.UI.Timeline
 
         protected override void DoDraw(DrawingContext dc)
         {
-            Rect r = new Rect(0, 0, Width, Height);
-            dc.DrawRectangle(GetFill(), Border, r);
+            Pen pen = new Pen(this.Fill, 3);
+            dc.DrawLine(pen, new Point(0, 0), new Point(0, Height));
+
+            pen = new Pen(this.Fill, 1);
+            dc.DrawLine(pen, new Point(-5, 0), new Point(5, 0));
+            dc.DrawLine(pen, new Point(-5, Height), new Point(5, Height));
         }
 
         #endregion // overriden methods

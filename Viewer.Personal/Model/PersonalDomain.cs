@@ -18,19 +18,22 @@ using System.Collections.ObjectModel;
 using Viewer.Common.Xml;
 using System.Collections.Specialized;
 using Microsoft.Practices.Prism.Events;
+using Viewer.Common.Service;
+using Viewer.Personal.View;
+using Viewer.Personal.ViewModel;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// Personal viewer application domain.
     /// </summary>
-    public class PersonalDomain {
-
+    public class PersonalDomain
+    {
         #region consts
 
         private const string PREFERS_PATH = "preferences.xml";
         private const string WORKING_FOLDER = "workspace";
-        
+
         #endregion // consts
 
 
@@ -38,11 +41,13 @@ namespace Viewer.Personal.Model {
 
         private static readonly PersonalDomain m_instance;
 
-        static PersonalDomain() {
+        static PersonalDomain()
+        {
             m_instance = new PersonalDomain();
         }
 
-        public static PersonalDomain Domain {
+        public static PersonalDomain Domain
+        {
             get { return m_instance; }
         }
 
@@ -61,7 +66,8 @@ namespace Viewer.Personal.Model {
 
         #region constructors
 
-        private PersonalDomain() {
+        private PersonalDomain()
+        {
             m_preferences = new Preferences();
             m_vehicles = new VehicleManager();
             m_repository = new LocalRepository();
@@ -75,28 +81,32 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 프로그램 환경 설정
         /// </summary>
-        public Preferences Preferences {
+        public Preferences Preferences
+        {
             get { return m_preferences; }
         }
 
         /// <summary>
         /// 차량 목록
         /// </summary>
-        public ObservableCollection<Vehicle> Vehicles {
+        public ObservableCollection<Vehicle> Vehicles
+        {
             get { return m_vehicles.Vehicles; }
         }
 
         /// <summary>
         /// 기기 설정 정보
         /// </summary>
-        public DeviceConfig DeviceConfig {
+        public DeviceConfig DeviceConfig
+        {
             get { return m_deviceConfig; }
         }
 
         /// <summary>
         /// 저장소
         /// </summary>
-        public LocalRepository Repository {
+        public LocalRepository Repository
+        {
             get { return m_repository; }
         }
 
@@ -105,7 +115,8 @@ namespace Viewer.Personal.Model {
         /// * 실행 환경에서는 bootstrapper가 설정해줘야 한다.
         /// null인 상태로 domain을 시작하면 예외를 발생시키도록 했다.
         /// </summary>
-        public EventAggregator EventAggregator {
+        public EventAggregator EventAggregator
+        {
             get;
             set;
         }
@@ -114,7 +125,8 @@ namespace Viewer.Personal.Model {
         /// 디바이스 트랙영상 변환 파일 저장 등, 실행 시간에 필요한 처리를 위한 작업 폴더.
         /// 프로그램 종료 시나 시작 시 비운다.
         /// </summary>
-        public string WorkingFolder {
+        public string WorkingFolder
+        {
             get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, WORKING_FOLDER); }
         }
 
@@ -123,7 +135,8 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public void Start() {
+        public void Start()
+        {
             Logger.Info("Personal Domain start...");
 
             if (EventAggregator == null) {
@@ -142,18 +155,25 @@ namespace Viewer.Personal.Model {
             });
 
             Logger.Info("Personal Domain started.");
+
+            if (m_vehicles.Vehicles.Count < 1) {
+                DialogService.Run("차량 정보 관리", new VehicleListView(), new VehicleListViewModel());
+            }
         }
 
-        public void SavePreferences() {
+        public void SavePreferences()
+        {
             m_preferences.Save(PrefersPath);
         }
 
-        public void SaveDeviceConfig(DeviceConfig config) {
+        public void SaveDeviceConfig(DeviceConfig config)
+        {
             new DeviceConfigManager().Save(config);
             config.AssignTo(m_deviceConfig);
         }
 
-        public void SaveDevice(DeviceRepository source, SaveOption options) {
+        public void SaveDevice(DeviceRepository source, SaveOption options)
+        {
             new DeviceSaveHelper().Save(source, Repository, options);
         }
 
@@ -162,10 +182,11 @@ namespace Viewer.Personal.Model {
 
         #region internal properties
 
-        private string PrefersPath {
+        private string PrefersPath
+        {
             get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERS_PATH); }
         }
-        
+
         #endregion // internal properties
 
 
@@ -174,7 +195,8 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 작업 폴더를 비운다.
         /// </summary>
-        private void EmptyWorkingFolder() {
+        private void EmptyWorkingFolder()
+        {
             string dir = WorkingFolder;
             try {
                 if (Directory.Exists(dir)) {
@@ -187,7 +209,8 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        private void Vehicles_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+        private void Vehicles_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
             m_vehicles.Save();
         }
 

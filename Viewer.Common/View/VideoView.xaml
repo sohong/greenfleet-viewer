@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Background="Black">
-            <MediaElement Name="mediaMain" LoadedBehavior="Manual"
+            <MediaElement Name="mediaMain" LoadedBehavior="Manual" ScrubbingEnabled="True"
                       UnloadedBehavior="Stop" MediaOpened="mediaMain_MediaOpened" MediaEnded="mediaMain_MediaEnded" />
         </Grid>
         <Grid Grid.Row="1" Background="Black">

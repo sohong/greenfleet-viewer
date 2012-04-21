@@ -49,6 +49,7 @@ namespace Viewer.Common.UI
         private VisualCollection m_elements;
         private PlotElement m_plotElement;
         private XAxisElement m_xaxisElement;
+        private TimelineTrackerElement m_trackerElement;
 
         #endregion // fields
 
@@ -60,6 +61,7 @@ namespace Viewer.Common.UI
             m_elements = new VisualCollection(this);
             m_elements.Add(m_plotElement = new PlotElement(this));
             m_elements.Add(m_xaxisElement = new XAxisElement(this));
+            m_elements.Add(m_trackerElement = new TimelineTrackerElement(this));
 
             SnapsToDevicePixels = true;
             RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
@@ -135,6 +137,10 @@ namespace Viewer.Common.UI
             m_xaxisElement.AxisLabels = labels;
 
             InvalidateArrange();
+        }
+
+        public void SetPosition(Track track, TrackPoint point)
+        {
         }
 
         #endregion // methods
@@ -225,8 +231,13 @@ namespace Viewer.Common.UI
             m_plotElement.Height = height - m_xaxisElement.Height;
             m_plotElement.Move(x, y);
 
+            // tracker
+            m_trackerElement.Height = height - m_xaxisElement.Height / 2;
+            m_trackerElement.Move(x, y - paddingY);
+
             m_plotElement.Draw();
             m_xaxisElement.Draw();
+            m_trackerElement.Draw();
         }
 
         private TimelineElement GetHitTest(Point p)

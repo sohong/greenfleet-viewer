@@ -99,7 +99,7 @@ namespace Viewer.Common.UI.Timeline
 
         protected override void DoDraw(DrawingContext dc)
         {
-            LinearGradientBrush brush = new LinearGradientBrush(Colors.Green, Colors.LightGreen, 90);
+            LinearGradientBrush brush = new LinearGradientBrush(Colors.LightGray, Colors.White, 90);
             dc.DrawRectangle(brush, new Pen(Brushes.Green, 1), new Rect(0, 0, Width, Height));
         }
 

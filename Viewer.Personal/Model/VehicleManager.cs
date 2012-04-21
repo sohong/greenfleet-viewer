@@ -17,14 +17,14 @@ using System.IO;
 using Viewer.Common.Xml;
 using Viewer.Common.Util;
 
-namespace Viewer.Personal.Model {
-    
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// Vehicle을 읽고/쓰고/추가하고/수정하고/삭제한다.
     /// 즉, 관리한다.
     /// </summary>
-    public class VehicleManager {
-
+    public class VehicleManager
+    {
         #region consts
 
         private const string VEHICLES_PATH = "vehicles.xml";
@@ -42,7 +42,8 @@ namespace Viewer.Personal.Model {
 
         #region constructor
 
-        public VehicleManager() {
+        public VehicleManager()
+        {
             m_vehicles = new ObservableCollection<Vehicle>();
         }
 
@@ -51,7 +52,8 @@ namespace Viewer.Personal.Model {
 
         #region properties
 
-        public ObservableCollection<Vehicle> Vehicles {
+        public ObservableCollection<Vehicle> Vehicles
+        {
             get { return m_vehicles; }
         }
 
@@ -60,7 +62,8 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public void Load() {
+        public void Load()
+        {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, VEHICLES_PATH);
             if (!File.Exists(path)) {
                 Save();
@@ -70,26 +73,31 @@ namespace Viewer.Personal.Model {
             new CollectionSerializer().Deserialize(path, VEHICLE_ELEMENT, typeof(Vehicle), m_vehicles);
         }
 
-        public void Save() {
+        public void Save()
+        {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, VEHICLES_PATH);
             new CollectionSerializer().Serialize(m_vehicles, VEHICLE_ROOT, VEHICLE_ELEMENT, path);
         }
 
-        public Vehicle Find(string vehicleName) {
+        public Vehicle Find(string vehicleName)
+        {
             Vehicle vehicle = m_vehicles.FirstOrDefault((v) => {
                 return string.Equals(v.Name, vehicleName, StringComparison.InvariantCultureIgnoreCase);
             });
             return vehicle;
         }
 
-        public int IndexOf(Vehicle vehicle) {
+        public int IndexOf(Vehicle vehicle)
+        {
             return m_vehicles.IndexOf(vehicle);
         }
 
-        public void AddNew() {
+        public void AddNew()
+        {
         }
 
-        public void Add(Vehicle vehicle) {
+        public void Add(Vehicle vehicle)
+        {
             if (vehicle == null)
                 throw new ArgumentNullException("vehicle");
 
@@ -98,14 +106,16 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        public void Remove(Vehicle vehicle) {
+        public void Remove(Vehicle vehicle)
+        {
             int index = IndexOf(vehicle);
             if (index >= 0) {
                 RemoveAt(index);
             }
         }
 
-        public void RemoveAt(int index) {
+        public void RemoveAt(int index)
+        {
             if (index >= 0 && index < m_vehicles.Count) {
                 if (MessageUtil.Conform("차량 삭제", "선택하신 차량 정보를 삭제하시겠습니까?")) {
                     m_vehicles.RemoveAt(index);

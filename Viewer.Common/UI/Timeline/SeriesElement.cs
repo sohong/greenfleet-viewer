@@ -36,7 +36,7 @@ namespace Viewer.Common.UI.Timeline
         {
             m_ranges = new List<TimeRangeElement>();
 
-            RangeHeight = 16;
+            RangeHeight = 7;
         }
 
         #endregion // constructor

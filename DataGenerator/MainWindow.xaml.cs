@@ -21,17 +21,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DataGenerator {
-
+namespace DataGenerator
+{
     /// <summary>
     /// Track file generator
     /// </summary>
-    public partial class MainWindow : Window {
-
-        public MainWindow() {
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
             InitializeComponent();
 
             DataContext = new MainViewModel();
+
+            this.Height = Math.Min(this.Height, SystemParameters.PrimaryScreenHeight - 40);
         }
     }
 }

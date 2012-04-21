@@ -86,6 +86,16 @@ namespace Viewer.Common.View
         #endregion // properties
 
 
+        #region methods
+
+        public void SetPosition(Track track, TrackPoint point)
+        {
+            bar.SetPosition(track, point);
+        }
+
+        #endregion // methods
+
+
         #region internal methods
 
         private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
