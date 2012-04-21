@@ -23,3 +23,10 @@ C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\bin\D
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\obj\Debug\GFLib.dll
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\obj\Debug\GFLib.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\bin\Debug\GFLib.dll
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\bin\Debug\GFLib.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\bin\Debug\Apache.NMS.ActiveMQ.dll
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\bin\Debug\Apache.NMS.dll
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\obj\Debug\GFLib.dll
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\GFLib\obj\Debug\GFLib.pdb

@@ -16,3 +16,12 @@ C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Upda
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\Viewer.Updater.exe
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\Viewer.Updater.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\bin\Debug\Viewer.Updater.exe
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\bin\Debug\Viewer.Updater.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\Viewer.Updater.MainForm.resources
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\Viewer.Updater.Properties.Resources.resources
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\Viewer.Updater.exe
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Updater\obj\x86\Debug\Viewer.Updater.pdb

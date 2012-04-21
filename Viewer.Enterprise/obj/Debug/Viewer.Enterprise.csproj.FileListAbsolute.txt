@@ -13,3 +13,8 @@ C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Ente
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Enterprise\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Enterprise\obj\Debug\Viewer.Enterprise.dll
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Enterprise\obj\Debug\Viewer.Enterprise.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Enterprise\bin\Debug\Viewer.Enterprise.dll
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Enterprise\bin\Debug\Viewer.Enterprise.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Enterprise\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Enterprise\obj\Debug\Viewer.Enterprise.dll
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\Viewer.Enterprise\obj\Debug\Viewer.Enterprise.pdb

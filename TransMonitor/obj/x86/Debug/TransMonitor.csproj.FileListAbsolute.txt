@@ -22,3 +22,11 @@ C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonito
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\TransMonitor.exe
 C:\Users\Gco\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\TransMonitor.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\bin\Debug\TransMonitor.exe
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\bin\Debug\TransMonitor.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\TransMonitor.Properties.Resources.resources
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\TransMonitor.exe
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\greenfleet-viewer\TransMonitor\obj\x86\Debug\TransMonitor.pdb
