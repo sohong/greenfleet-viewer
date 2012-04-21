@@ -24,6 +24,8 @@ namespace Viewer.Common.Util
         #region consts
 
         const string FFMPEG = "ffmpeg.exe";
+        const string EXTENSION = "mp4";
+        //const string EXTENSION = "wmv";
 
         #endregion // consts;
 
@@ -31,7 +33,7 @@ namespace Viewer.Common.Util
         /// <summary>
         /// h264 raw 영상을 mpeg4 컨테이너로 변환한다.
         /// </summary>
-        public static string RawToMpeg(string sourcePath, string targetFolder, string extension = "mp4")
+        public static string RawToMpeg(string sourcePath, string targetFolder, string extension = EXTENSION)
         {
             string exeName = Path.Combine(FileUtil.GetAppFolder(), FFMPEG);
             if (!File.Exists(exeName)) {
@@ -51,9 +53,10 @@ namespace Viewer.Common.Util
 
             if (File.Exists(exeName)) {
                 Process proc = new Process();
-                //proc.StartInfo.FileName = Path.Combine(FileUtil.GetAppFolder(), "ffmpeg.exe");
                 proc.StartInfo.FileName = exeName;
                 proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -vcodec copy \"" + path + "\"";
+                //proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -vcodec wmv2 \"" + path + "\"";
+                //proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -sameq -vcodec wmv2 -acodec wmav2 \"" + path + "\"";
                 proc.StartInfo.CreateNoWindow = true;
                 proc.StartInfo.UseShellExecute = false;
                 proc.Start();
