@@ -53,12 +53,14 @@ namespace Viewer.Common.Util
 
             if (File.Exists(exeName)) {
                 Process proc = new Process();
+                
                 proc.StartInfo.FileName = exeName;
                 proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -vcodec copy \"" + path + "\"";
                 //proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -vcodec wmv2 \"" + path + "\"";
                 //proc.StartInfo.Arguments = "-y -i \"" + sourcePath + "\" -sameq -vcodec wmv2 -acodec wmav2 \"" + path + "\"";
                 proc.StartInfo.CreateNoWindow = true;
                 proc.StartInfo.UseShellExecute = false;
+
                 proc.Start();
                 proc.WaitForExit();
             }
