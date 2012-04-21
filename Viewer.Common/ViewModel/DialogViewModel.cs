@@ -22,21 +22,13 @@ namespace Viewer.Common.ViewModel {
     /// </summary>
     public class DialogViewModel : ViewModelBase, IDialogViewModel {
 
-        #region fields
-
-        private bool m_submitable;
-
-        #endregion // fields
-
-
         #region constructor
 
         public DialogViewModel() {
             SubmitText = "OK";
             CancelText = "Cancel";
 
-            SubmitCommand = new DelegateCommand<object>(OnSubmit, IsSubmitable);
-            m_submitable = CanSubmit(SubmitData);
+            SubmitCommand = new DelegateCommand(OnSubmit, IsSubmitable);
         }
 
         #endregion // constructor
@@ -77,23 +69,23 @@ namespace Viewer.Common.ViewModel {
 
         #region internal methods
 
-        private void OnSubmit(object data) {
-            DoSubmit(data);
+        private void OnSubmit() {
+            DoSubmit();
         }
 
-        private bool IsSubmitable(object data) {
-            return m_submitable;
+        private bool IsSubmitable() {
+            return CanSubmit();
         }
 
         protected virtual object GetSubmitData() {
             return null;
         }
 
-        protected virtual bool CanSubmit(object data) {
+        protected virtual bool CanSubmit() {
             return false;
         }
 
-        protected virtual void DoSubmit(object data) {
+        protected virtual void DoSubmit() {
         }
 
         protected virtual bool DoCancel() {
@@ -104,11 +96,7 @@ namespace Viewer.Common.ViewModel {
         /// Submit 가능 상태가 변경될 수 있을 때 호출한다.
         /// </summary>
         public void CheckSubmit() {
-            bool v = CanSubmit(GetSubmitData());
-            if (v != m_submitable) {
-                m_submitable = v;
-                ((DelegateCommand)SubmitCommand).RaiseCanExecuteChanged();
-            }
+            ((DelegateCommand)SubmitCommand).RaiseCanExecuteChanged();
         }
 
         #endregion // internal methods

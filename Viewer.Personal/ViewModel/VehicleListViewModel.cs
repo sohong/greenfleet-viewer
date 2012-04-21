@@ -124,7 +124,7 @@ namespace Viewer.Personal.ViewModel {
 
         #region overriden methods
 
-        protected override bool CanSubmit(object data) {
+        protected override bool CanSubmit() {
             return true;
         }
 

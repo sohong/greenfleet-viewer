@@ -15,6 +15,7 @@ using System.Text;
 using Viewer.Common.ViewModel;
 using Viewer.Personal.Model;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace Viewer.Personal.ViewModel {
     
@@ -41,6 +42,11 @@ namespace Viewer.Personal.ViewModel {
                 string id = Guid.NewGuid().ToString();
                 Vehicle.VehicleId = "v" + id.Substring(id.Length - 12, 12);
             }
+
+            Vehicle.PropertyChanged += new PropertyChangedEventHandler((sender, e) => {
+                CheckSubmit();
+            });
+            CheckSubmit();
         }
 
         #endregion // constructor
@@ -59,14 +65,14 @@ namespace Viewer.Personal.ViewModel {
         #region overriden methods
 
         protected override object GetSubmitData() {
-            return (m_source != null) ? m_source : Vehicle;
+            return Vehicle;
         }
 
-        protected override bool CanSubmit(object data) {
-            return true;
+        protected override bool CanSubmit() {
+            return (Vehicle != null) && !string.IsNullOrWhiteSpace(Vehicle.Name);
         }
 
-        protected override void DoSubmit(object data) {
+        protected override void DoSubmit() {
             if (m_source == null) {
                 // 추가
                 PersonalDomain.Domain.Vehicles.Add(Vehicle);

@@ -21,14 +21,31 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Viewer.Personal.View {
-
+namespace Viewer.Personal.View
+{
     /// <summary>
+    /// 차량 정보 등록/수정
     /// </summary>
-    public partial class VehicleView : UserControl {
-    
-        public VehicleView() {
+    public partial class VehicleView : UserControl
+    {
+        #region constructor
+
+        public VehicleView()
+        {
             InitializeComponent();
         }
+
+        #endregion // constructor
+
+
+        #region event handlers
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtName.SelectAll();
+            txtName.Focus();
+        }
+
+        #endregion // event handlers
     }
 }

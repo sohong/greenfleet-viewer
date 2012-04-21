@@ -60,11 +60,11 @@ namespace Viewer.Personal.ViewModel {
             return Options;
         }
 
-        protected override bool CanSubmit(object data) {
+        protected override bool CanSubmit() {
             return true;
         }
 
-        protected override void DoSubmit(object data) {
+        protected override void DoSubmit() {
             PersonalDomain.Domain.SaveDevice(Repository, Options);
         }
 

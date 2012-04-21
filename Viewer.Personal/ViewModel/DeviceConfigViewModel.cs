@@ -48,11 +48,11 @@ namespace Viewer.Personal.ViewModel {
             return Config;
         }
 
-        protected override bool CanSubmit(object data) {
+        protected override bool CanSubmit() {
             return true;
         }
 
-        protected override void DoSubmit(object data) {
+        protected override void DoSubmit() {
             PersonalDomain.Domain.SaveDeviceConfig(Config);
         }
 

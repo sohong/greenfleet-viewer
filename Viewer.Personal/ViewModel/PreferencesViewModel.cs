@@ -61,11 +61,11 @@ namespace Viewer.Personal.ViewModel {
 
         #region overriden methods
 
-        protected override bool CanSubmit(object data) {
+        protected override bool CanSubmit() {
             return true;
         }
 
-        protected override void DoSubmit(object data) {
+        protected override void DoSubmit() {
             m_prefers.Assign(PersonalDomain.Domain.Preferences);
             PersonalDomain.Domain.SavePreferences();
         }

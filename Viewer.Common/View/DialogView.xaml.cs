@@ -30,6 +30,7 @@ namespace Viewer.Common.View {
 
         #region fields
 
+        private EventHandler m_canExecuteChangedHandler;
         private Action<object> m_callback;
         
         #endregion // fields
@@ -39,6 +40,7 @@ namespace Viewer.Common.View {
 
         public DialogView() {
             InitializeComponent();
+            m_canExecuteChangedHandler = new EventHandler(Submit_CanExecuteChanged);
         }
 
         #endregion // constructor
@@ -54,18 +56,18 @@ namespace Viewer.Common.View {
             set {
                 if (value != DataContext) {
                     if (DataContext is IDialogViewModel) {
-                        DelegateCommand<object> cmd = ((IDialogViewModel)DataContext).SubmitCommand as DelegateCommand<object>;
+                        DelegateCommand cmd = ((IDialogViewModel)DataContext).SubmitCommand as DelegateCommand;
                         if (cmd != null) {
-                            cmd.CanExecuteChanged -= new EventHandler(Submit_CanExecuteChanged);
+                            cmd.CanExecuteChanged -= m_canExecuteChangedHandler;
                         }
                     }
 
                     DataContext = value;
 
                     if (DataContext is IDialogViewModel) {
-                        DelegateCommand<object> cmd = ((IDialogViewModel)DataContext).SubmitCommand as DelegateCommand<object>;
+                        DelegateCommand cmd = ((IDialogViewModel)DataContext).SubmitCommand as DelegateCommand;
                         if (cmd != null) {
-                            cmd.CanExecuteChanged += new EventHandler(Submit_CanExecuteChanged);
+                            cmd.CanExecuteChanged += m_canExecuteChangedHandler;
                         }
                     }
                     RefreshDialog();
@@ -164,7 +166,7 @@ namespace Viewer.Common.View {
 
         #region internal methods
 
-        void Submit_CanExecuteChanged(object sender, EventArgs e) {
+        private void Submit_CanExecuteChanged(object sender, EventArgs e) {
             RefreshDialog();
         }
 
