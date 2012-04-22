@@ -51,6 +51,9 @@ namespace Viewer.Common.UI
         private XAxisElement m_xaxisElement;
         private TimelineTrackerElement m_trackerElement;
 
+        private TimelineElement m_clickedElement;
+        private TimelineElement m_hoveredElement;
+
         #endregion // fields
 
 
@@ -204,6 +207,11 @@ namespace Viewer.Common.UI
             InvalidateArrange();
         }
 
+        public bool GetTimeAtPos(double x, ref DateTime t)
+        {
+            return false;
+        }
+
         #endregion // methods
 
 
@@ -235,31 +243,53 @@ namespace Viewer.Common.UI
         {
             base.OnMouseDown(e);
 
-            /*
-            TimelineElement element = GetHitTest(e.GetPosition(this));
-             */
+            Point p = e.GetPosition(this);
+            m_clickedElement = GetHitTest(p);
+            if (m_clickedElement != null) {
+                m_clickedElement.MouseDown(p);
+            }
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
 
-            /*
             Point p = e.GetPosition(this);
-            TimelineElement element = GetHitTest(p);
-            if (element != null) {
-                element.MouseMove(p, e.LeftButton == MouseButtonState.Pressed);
-            }
-            if (element != m_hoverElement) {
-                if (m_hoverElement != null) {
-                    m_hoverElement.MouseLeave();
+
+            if (m_clickedElement != null && e.LeftButton == MouseButtonState.Pressed) {
+                m_clickedElement.MouseMove(p, true);
+            } else {
+                TimelineElement element = GetHitTest(p);
+                if (element != null) {
+                    element.MouseMove(p, e.LeftButton == MouseButtonState.Pressed);
                 }
-                m_hoverElement = element;
-                if (m_hoverElement != null) {
-                    m_hoverElement.MouseEnter();
+                if (element != m_hoveredElement) {
+                    if (m_hoveredElement != null) {
+                        m_hoveredElement.MouseLeave();
+                    }
+                    m_hoveredElement = element;
+                    if (m_hoveredElement != null) {
+                        m_hoveredElement.MouseEnter();
+                    }
                 }
             }
-             */
+        }
+
+        protected override void OnMouseUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseUp(e);
+
+            Point p = e.GetPosition(this);
+
+            if (m_clickedElement != null) {
+                m_clickedElement.MouseUp(p);
+                m_clickedElement = null;
+            } else {
+                TimelineElement element = GetHitTest(p);
+                if (element != null) {
+                    element.MouseUp(p);
+                }
+            }
         }
 
         #endregion // overriden methods

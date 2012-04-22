@@ -26,6 +26,8 @@ namespace Viewer.Common.UI.Timeline
         #region fields
 
         private bool m_dragging;
+        private double m_startX;
+        private Point m_startPos;
 
         #endregion // fields
 
@@ -94,6 +96,36 @@ namespace Viewer.Common.UI.Timeline
 
             double x = LeftLabel ? -ft.Width - 4 : 4;
             dc.DrawText(ft, new Point(x, this.Height - ft.Height / 3));
+        }
+
+        protected override void DoMouseDown(Point p)
+        {
+            m_startPos = p;
+            m_startX = this.X;
+            m_dragging = true;
+        }
+
+        protected override void DoMouseMove(Point p, bool pushed)
+        {
+            if (m_dragging) {
+                if (pushed) {
+                    double diff = p.X - m_startPos.X;
+                    double x = m_startX + diff;
+                    DateTime t = new DateTime();
+                    if (Bar.GetTimeAtPos(x, ref t)) {
+                        this.Time = t;
+                        this.X = x;
+                    }
+
+                } else {
+                    m_dragging = false;
+                }
+            }
+        }
+
+        protected override void DoMouseUp(Point p)
+        {
+            m_dragging = false;
         }
 
         #endregion // overriden methods
