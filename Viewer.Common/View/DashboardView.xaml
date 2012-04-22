@@ -4,29 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="321" d:DesignWidth="529">
-    <Grid Background="#333333">
+             d:DesignHeight="321" d:DesignWidth="529" FontFamily="Microsoft Sans Serif">
+    <Grid Background="#111111">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>            
-        <DockPanel Margin="6">
-            <Label Name="txtDate" DockPanel.Dock="Left" Content="2012-03-31" FontSize="16" Foreground="White"/>
-            <Label Name="txtTime" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="10-03-31 AM" FontSize="16" Foreground="White"/>
+        <DockPanel Margin="0">
+            <Label Name="txtDate" DockPanel.Dock="Left" Content="2012-03-31" FontSize="12" Foreground="LightYellow"/>
+            <Label Name="txtTime" DockPanel.Dock="Right" HorizontalAlignment="Right" Content="10-03-31 AM" FontSize="12" Foreground="LightYellow"/>
         </DockPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Ellipse Stroke="Yellow" StrokeThickness="5" Margin="20"/>
+            <Ellipse Stroke="White" StrokeThickness="5" Margin="20" />
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Rectangle Stroke="Yellow" StrokeThickness="5" Margin="10"/>
+                <Rectangle Stroke="White" StrokeThickness="5" Margin="10"/>
                 <Grid Grid.Row="1" Margin="10,6,10,6">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
