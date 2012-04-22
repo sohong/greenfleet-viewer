@@ -23,7 +23,7 @@
             <Grid>
                 <ui:SimpleSpeedometer x:Name="speedometer" Margin="10"/>
                 <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
-                    <Label Name="txtVelocity" FontSize="32" FontWeight="Bold" VerticalAlignment="Bottom" Content="050" Foreground="White" Margin="0,0,0,-10"/>
+                    <Label Name="txtVelocity" FontSize="28" FontWeight="Bold" VerticalAlignment="Bottom" Content="050" Foreground="White" Margin="0,0,0,-10"/>
                     <Label FontSize="16" Content="km/h" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="Gray"/>
                 </StackPanel>
             </Grid>
@@ -33,7 +33,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Rectangle Stroke="White" StrokeThickness="5" Margin="10"/>
+                <ui:DirectionIndicator x:Name="compass" Margin="10"/>
                 <StackPanel Grid.Row="1" Margin="10">
                     <!-- Direction -->
                     <Label Name="txtDirection" Content="222.22" Foreground="White" Margin="-4"/>

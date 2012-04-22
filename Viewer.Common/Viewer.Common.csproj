@@ -114,6 +114,7 @@
     <Compile Include="UI\Acceleration\YAxisElement.cs" />
     <Compile Include="UI\AccelerationChart.cs" />
     <Compile Include="UI\Acceleration\ChartElement.cs" />
+    <Compile Include="UI\DirectionIndicator.cs" />
     <Compile Include="UI\HelloBox.cs" />
     <Compile Include="UI\SimpleSpeedometer.cs" />
     <Compile Include="UI\Timeline\AxisLabelProvider.cs" />
