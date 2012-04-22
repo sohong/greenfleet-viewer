@@ -208,6 +208,7 @@ namespace Viewer.Common.UI
             AxisLabelProvider labels = m_xaxisElement.AxisLabels;
             if (labels != null && m_position != null) {
                 double x = labels.GetPosition(m_position.PointTime);
+                m_trackerElement.Time = m_position.PointTime;
                 m_trackerElement.X = 15 + x * m_xaxisElement.Width;
             }
         }

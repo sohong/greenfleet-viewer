@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using System.Globalization;
 
 namespace Viewer.Common.UI.Timeline
 {
@@ -35,21 +36,18 @@ namespace Viewer.Common.UI.Timeline
 
         #region properties
 
-        /// <summary>
-        /// Border
-        /// </summary>
-        public Pen Border
+        public DateTime Time
         {
-            get { return m_border; }
+            get { return m_time; }
             set
             {
-                if (value != m_border) {
-                    m_border = value;
-                    Invalidate();
+                if (value != m_time) {
+                    m_time = value;
+                    Draw();
                 }
             }
         }
-        private Pen m_border;
+        private DateTime m_time;
 
         #endregion // properties
 
@@ -63,12 +61,21 @@ namespace Viewer.Common.UI.Timeline
 
         protected override void DoDraw(DrawingContext dc)
         {
+            // vertical line
             Pen pen = new Pen(this.Fill, 2);
             dc.DrawLine(pen, new Point(0, 0), new Point(0, Height));
 
+            // top / bottom
             pen = new Pen(this.Fill, 1);
             dc.DrawLine(pen, new Point(-5, 1), new Point(5, 1));
             dc.DrawLine(pen, new Point(-5, Height), new Point(5, Height));
+
+            // label
+            string s = Time.ToString("MM-dd HH:mm:ss");
+            Typeface face = new Typeface("Tahoma");
+            Brush fill = new SolidColorBrush(ToColor(0xccff0000));
+            FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, fill);
+            dc.DrawText(ft, new Point(4, this.Height - ft.Height / 3));
         }
 
         #endregion // overriden methods
