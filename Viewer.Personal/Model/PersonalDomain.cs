@@ -21,6 +21,7 @@ using Microsoft.Practices.Prism.Events;
 using Viewer.Common.Service;
 using Viewer.Personal.View;
 using Viewer.Personal.ViewModel;
+using System.ComponentModel.Composition;
 
 namespace Viewer.Personal.Model
 {
@@ -115,7 +116,7 @@ namespace Viewer.Personal.Model
         /// * 실행 환경에서는 bootstrapper가 설정해줘야 한다.
         /// null인 상태로 domain을 시작하면 예외를 발생시키도록 했다.
         /// </summary>
-        public EventAggregator EventAggregator
+        public IEventAggregator EventAggregator
         {
             get;
             set;

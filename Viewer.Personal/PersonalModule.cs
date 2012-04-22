@@ -17,6 +17,10 @@ using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Viewer.Personal.Model;
 using Viewer.Common.Util;
 using Microsoft.Practices.Prism.Events;
+using System.ComponentModel.Composition;
+using Microsoft.Practices.Prism.Regions;
+using Viewer.Personal.View;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Viewer.Personal {
 
@@ -25,12 +29,17 @@ namespace Viewer.Personal {
     /// </summary>
     [ModuleExport(typeof(PersonalModule))]
     public class PersonalModule : IModule {
-    
+
+        [Import]
+        private IRegionManager m_regionManager;
+
         public void Initialize() {
             Debug.WriteLine("Personal Module initialize...");
             Logger.Debug("Personal Module initialize...");
 
-            PersonalDomain.Domain.EventAggregator = new EventAggregator();
+            m_regionManager.RegisterViewWithRegion("main", typeof(RepositoryView));
+
+            PersonalDomain.Domain.EventAggregator = (IEventAggregator)ServiceLocator.Current.GetService(typeof(IEventAggregator));
             PersonalDomain.Domain.Start();
         }
     }

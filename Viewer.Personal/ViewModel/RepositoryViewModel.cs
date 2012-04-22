@@ -20,6 +20,7 @@ using Viewer.Common.Util;
 using System.IO;
 using Viewer.Personal.Command;
 using Viewer.Common.Event;
+using System.ComponentModel.Composition;
 
 namespace Viewer.Personal.ViewModel
 {
@@ -39,7 +40,8 @@ namespace Viewer.Personal.ViewModel
     /// <summary>
     /// View model base for LocalRepositoryViewModel and DeviceRepositoryViewModel.
     /// </summary>
-    public abstract class RepositoryViewModel : ViewModelBase
+    [Export]
+    public class RepositoryViewModel : ViewModelBase
     {
         #region fields
 

@@ -113,6 +113,9 @@
     <Compile Include="View\LocalRepositoryView.xaml.cs">
       <DependentUpon>LocalRepositoryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\RepositoryView.xaml.cs">
+      <DependentUpon>RepositoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SaveView.xaml.cs">
       <DependentUpon>SaveView.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LocalRepositoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RepositoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
