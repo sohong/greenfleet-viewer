@@ -21,13 +21,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Viewer.Common.View {
-
+namespace Viewer.Common.View
+{
     /// <summary>
     /// 날짜, 시간, 위치, 속도 등을 표시한다.
     /// </summary>
-    public partial class DashboardView : UserControl {
-
+    public partial class DashboardView : UserControl
+    {
         #region dependency properties
 
         /// <summary>
@@ -40,7 +40,8 @@ namespace Viewer.Common.View {
                 typeof(DashboardView),
                 new PropertyMetadata(DateTimePropertyChanged));
 
-        private static void DateTimePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void DateTimePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             DashboardView view = (DashboardView)obj;
             DateTime d = (DateTime)e.NewValue;
             view.RefreshDateTime();
@@ -56,7 +57,8 @@ namespace Viewer.Common.View {
                 typeof(DashboardView),
                 new PropertyMetadata(VelocityPropertyChanged));
 
-        private static void VelocityPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void VelocityPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             DashboardView view = (DashboardView)obj;
             double v = (double)e.NewValue;
             view.RefreshVelocity();
@@ -72,7 +74,8 @@ namespace Viewer.Common.View {
                 typeof(DashboardView),
                 new PropertyMetadata(LatitudePropertyChanged));
 
-        private static void LatitudePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void LatitudePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             DashboardView view = (DashboardView)obj;
             double v = (double)e.NewValue;
             view.RefreshLocation();
@@ -88,7 +91,8 @@ namespace Viewer.Common.View {
                 typeof(DashboardView),
                 new PropertyMetadata(LongitudePropertyChanged));
 
-        private static void LongitudePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void LongitudePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             DashboardView view = (DashboardView)obj;
             double v = (double)e.NewValue;
             view.RefreshLocation();
@@ -104,7 +108,8 @@ namespace Viewer.Common.View {
                 typeof(DashboardView),
                 new PropertyMetadata(DirectionPropertyChanged));
 
-        private static void DirectionPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void DirectionPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             DashboardView view = (DashboardView)obj;
             double v = (double)e.NewValue;
             view.RefreshDirection();
@@ -119,7 +124,8 @@ namespace Viewer.Common.View {
 
         #region constructor
 
-        public DashboardView() {
+        public DashboardView()
+        {
             InitializeComponent();
 
             DateTime = DateTime.Today;
@@ -134,27 +140,32 @@ namespace Viewer.Common.View {
 
         #region properties
 
-        public DateTime DateTime {
+        public DateTime DateTime
+        {
             get { return (DateTime)GetValue(DateTimeProperty); }
             set { SetValue(DateTimeProperty, value); }
         }
 
-        public double Velocity {
+        public double Velocity
+        {
             get { return (double)GetValue(VelocityProperty); }
             set { SetValue(VelocityProperty, value); }
         }
 
-        public double Latitude {
+        public double Latitude
+        {
             get { return (double)GetValue(LatitudeProperty); }
             set { SetValue(LatitudeProperty, value); }
         }
 
-        public double Longitude {
+        public double Longitude
+        {
             get { return (double)GetValue(LongitudeProperty); }
             set { SetValue(LongitudeProperty, value); }
         }
 
-        public double Direction {
+        public double Direction
+        {
             get { return (double)GetValue(DirectionProperty); }
             set { SetValue(DirectionProperty, value); }
         }
@@ -164,22 +175,27 @@ namespace Viewer.Common.View {
 
         #region internal methods
 
-        private void RefreshDateTime() {
+        private void RefreshDateTime()
+        {
             txtDate.Content = DateTime.ToString("yyyy-MM-dd");
             txtTime.Content = DateTime.ToString("hh:mm:ss tt");
         }
 
-        private void RefreshLocation() {
+        private void RefreshLocation()
+        {
             txtLatitude.Content = this.Latitude.ToString("0000.0000 N");
             txtLongitude.Content = this.Longitude.ToString("0000.0000 E");
         }
 
-        private void RefreshDirection() {
+        private void RefreshDirection()
+        {
             txtDirection.Content = this.Direction.ToString("000.00");
         }
 
-        private void RefreshVelocity() {
+        private void RefreshVelocity()
+        {
             txtVelocity.Content = this.Velocity.ToString("000");
+            speedometer.Value = this.Velocity;
         }
 
         #endregion // internal methods

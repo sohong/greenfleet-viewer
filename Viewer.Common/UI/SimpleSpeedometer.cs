@@ -53,7 +53,7 @@ namespace Viewer.Common.UI
                 }
             }
         }
-        private double m_startAngle;
+        private double m_startAngle = 30;
 
         public double EndAngle
         {
@@ -66,7 +66,7 @@ namespace Viewer.Common.UI
                 }
             }
         }
-        private double m_endAngle;
+        private double m_endAngle = 260;
 
         public double Minimum
         {
@@ -79,7 +79,7 @@ namespace Viewer.Common.UI
                 }
             }
         }
-        private double m_minimum;
+        private double m_minimum = 0;
 
         public double Maximum
         {
@@ -92,7 +92,7 @@ namespace Viewer.Common.UI
                 }
             }
         }
-        private double m_maximum;
+        private double m_maximum = 240;
 
         public double Value
         {
@@ -105,7 +105,7 @@ namespace Viewer.Common.UI
                 }
             }
         }
-        private double m_value;
+        private double m_value = 0;
 
         #endregion // properties
 
@@ -122,7 +122,8 @@ namespace Viewer.Common.UI
         protected override void LayoutElements(double width, double height)
         {
             DrawFrame(width, height);
-            DrawHand(width, height);
+            m_hand.Offset = new Vector(10, 10);
+            DrawHand(width - 20, height - 20);
             DrawPin(width, height);
         }
 
@@ -131,29 +132,87 @@ namespace Viewer.Common.UI
 
         #region internal methods
 
+        private double ValueToAngle(double value)
+        {
+            double angle = EndAngle - (EndAngle - StartAngle) * ((value - Minimum) / (Maximum - Minimum));
+            return angle;
+        }
+
+        private Point GetAnglePos(double cx, double cy, double width, double height, double angle)
+        {
+            double radius = Math.Max(width, height) / 2;
+            double radian = angle * Math.PI / 180;
+
+            double x = Math.Cos(radian) * radius;
+            double y = Math.Sin(radian) * radius;
+
+            Point p = new Point(cx + x, cy - y);
+            return p;
+        }
+
         private void DrawFrame(double width, double height)
         {
+            DrawingContext dc = m_frame.RenderOpen();
+            double x = 3;
+            double y = 3;
+            width -= x * 2;
+            height -= x * 2;
+            double rd = Math.Max(width, height) / 2;
+            double cx = x + rd;
+            double cy = y + rd;
+
+            ScaleTransform tx = new ScaleTransform(width > height ? 1 : width / height, height > width ? 1 : height / width);
+            dc.PushTransform(tx);
+
+            Brush fill = new SolidColorBrush(UIElement.ToColor(0xffffffff));
+            Pen pen = new Pen(fill, 5);
+
+            PathGeometry path = new PathGeometry();
+            PathFigure figure = new PathFigure();
+            figure.StartPoint = GetAnglePos(cx, cy, width, height, StartAngle);
+
+            Size sz = new Size(rd, rd);
+            Point p = GetAnglePos(cx, cy, width, height, EndAngle);
+            ArcSegment arc = new ArcSegment(p, sz, 0, true, SweepDirection.Counterclockwise, true);
+            figure.Segments.Add(arc);
+            path.Figures.Add(figure);
+
+            dc.DrawGeometry(null, pen, path);
+
+            dc.Pop();
+            dc.Close();
         }
 
         private void DrawHand(double width, double height)
         {
             DrawingContext dc = m_hand.RenderOpen();
-            double x = width / 2;
-            double y = height / 2;
+            double rd = Math.Max(width, height) / 2;
             Brush fill = new SolidColorBrush(UIElement.ToColor(0xffffffff));
+            double angle = ValueToAngle(Value);
+
+            TransformGroup tx = new TransformGroup();
+            RotateTransform rotation = new RotateTransform(360 - angle, rd, rd);
+            ScaleTransform scale = new ScaleTransform(width > height ? 1 : width / height, height > width ? 1 : height / width);
+
+            tx.Children.Add(rotation);
+            tx.Children.Add(scale);
+            
+            dc.PushTransform(tx);
 
             Point[] pts = new Point[3];
-            pts[0] = new Point(x, y);
-            pts[1] = new Point(x - 20, y - 20);
-            pts[2] = new Point(x - 20, y + 20);
+            pts[0] = new Point(rd, rd - 5);
+            pts[1] = new Point(rd, rd + 5);
+            pts[2] = new Point(rd * 2, rd);// GetAnglePos(rd, rd, width, height, angle);
 
             PathGeometry path = new PathGeometry();
             PathFigure figure = new PathFigure();
+            figure.StartPoint = pts[0];
             figure.Segments.Add(new PolyLineSegment(pts, false));
             path.Figures.Add(figure);
             
             dc.DrawGeometry(fill, null, path);
-            
+
+            dc.Pop();
             dc.Close();
         }
 
