@@ -115,6 +115,7 @@
     <Compile Include="UI\AccelerationChart.cs" />
     <Compile Include="UI\Acceleration\ChartElement.cs" />
     <Compile Include="UI\HelloBox.cs" />
+    <Compile Include="UI\SimpleSpeedometer.cs" />
     <Compile Include="UI\Timeline\AxisLabelProvider.cs" />
     <Compile Include="UI\Timeline\GridElement.cs" />
     <Compile Include="UI\Timeline\PlotElement.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="UI\Timeline\TimeRangeElement.cs" />
     <Compile Include="UI\Timeline\TimelineTrackerElement.cs" />
     <Compile Include="UI\Timeline\XAxisElement.cs" />
+    <Compile Include="UI\UIContainer.cs" />
     <Compile Include="UI\UIElement.cs" />
     <Compile Include="Util\DialogUtil.cs" />
     <Compile Include="Util\DriveUtil.cs" />

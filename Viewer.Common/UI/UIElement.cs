@@ -36,14 +36,14 @@ namespace Viewer.Common.UI
 
         #region fields
 
-        private FrameworkElement m_container;
+        private UIContainer m_container;
 
         #endregion // fields
 
 
         #region constructor
 
-        public UIElement(FrameworkElement container)
+        public UIElement(UIContainer container)
         {
             m_container = container;
             CreateChildren();
@@ -63,7 +63,7 @@ namespace Viewer.Common.UI
 
         #region properties
 
-        public FrameworkElement Container
+        public UIContainer Container
         {
             get { return m_container; }
         }

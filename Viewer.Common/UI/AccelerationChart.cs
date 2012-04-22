@@ -21,7 +21,7 @@ namespace Viewer.Common.UI
     /// <summary>
     /// x/y/x 가속도 챠트.
     /// </summary>
-    public class AccelerationChart : FrameworkElement
+    public class AccelerationChart : UIContainer
     {
         #region struct Value
 
@@ -90,7 +90,6 @@ namespace Viewer.Common.UI
 
         #region fields
 
-        private VisualCollection m_elements;
         private PlotElement m_plotElement;
         private XAxisElement m_xaxisElement;
         private YAxisElement m_yaxisElement;
@@ -110,12 +109,6 @@ namespace Viewer.Common.UI
 
         public AccelerationChart()
         {
-            m_elements = new VisualCollection(this);
-            m_elements.Add(m_plotElement = new PlotElement(this));
-            m_elements.Add(m_xaxisElement = new XAxisElement(this));
-            m_elements.Add(m_yaxisElement = new YAxisElement(this));
-            m_elements.Add(m_legendElement = new LegendElement(this));
-
             m_values = new List<Value>();
 
             m_series = new List<Series>();
@@ -125,13 +118,6 @@ namespace Viewer.Common.UI
 
             m_axisValues = new AxisValueProvider();
             m_axisLabels = new AxisLabelProvider();
-
-            SnapsToDevicePixels = true;
-            RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
-
-            SizeChanged += new SizeChangedEventHandler((sender, e) => {
-                VisualClip = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
-            });
         }
 
         #endregion // constructor
@@ -179,76 +165,18 @@ namespace Viewer.Common.UI
         #endregion // methods
 
 
-        #region overriden properties
-
-        protected override int VisualChildrenCount
-        {
-            get { return m_elements.Count; }
-        }
-
-        #endregion // overriden properties
-
-
         #region overriden methods
 
-        protected override Visual GetVisualChild(int index)
+        protected override void CreateElements()
         {
-            return m_elements[index];
+            AddElement(m_plotElement = new PlotElement(this));
+            AddElement(m_xaxisElement = new XAxisElement(this));
+            AddElement(m_yaxisElement = new YAxisElement(this));
+            AddElement(m_legendElement = new LegendElement(this));
+
         }
 
-        protected override Size ArrangeOverride(Size finalSize)
-        {
-            Size sz = base.ArrangeOverride(finalSize);
-            LayoutElements(sz.Width, sz.Height);
-            return sz;
-        }
-
-        #endregion // overriden methods
-
-
-        #region internal methods
-
-        private void RefreshChart()
-        {
-            InvalidateArrange();
-        }
-
-        private void Recalculate(double width, double height)
-        {
-            double min = -1;
-            double max = 1;
-
-            foreach (Value v in m_values) {
-                min = Math.Min(min, v.X);
-                min = Math.Min(min, v.Y);
-                min = Math.Min(min, v.Z);
-
-                max = Math.Max(max, v.X);
-                max = Math.Max(max, v.Y);
-                max = Math.Max(max, v.Z);
-            }
-
-            m_minimum = min;
-            m_maximum = max;
-
-            int maxCount = this.ActualHeight >= 400 ? 10 : height >= 200 ? 6 : height >= 140 ? 4 : 2;
-            m_axisValues.ResetValues(AxisHelper.GetValues(m_minimum, m_maximum, maxCount));
-
-            m_axisLabels.StartTime = m_values.Count > 0 ? m_values[0].T : DateTime.MinValue;
-            m_axisLabels.Count = 60;
-
-            m_xaxisElement.AxisLabels = m_axisLabels;
-            m_yaxisElement.AxisValues = m_axisValues;
-
-            m_plotElement.AxisLabels = m_axisLabels;
-            m_plotElement.AxisValues = m_axisValues;
-            m_plotElement.Values = m_values;
-            m_plotElement.Series = m_series;
-
-            m_legendElement.Series = m_series;
-        }
-
-        private void LayoutElements(double width, double height)
+        protected override void LayoutElements(double width, double height)
         {
             if (width * height == 0) return;
 
@@ -305,6 +233,51 @@ namespace Viewer.Common.UI
 
             m_plotElement.LayoutChildren();
             m_plotElement.Draw();
+        }
+
+        #endregion // overriden methods
+
+
+        #region internal methods
+
+        private void RefreshChart()
+        {
+            InvalidateArrange();
+        }
+
+        private void Recalculate(double width, double height)
+        {
+            double min = -1;
+            double max = 1;
+
+            foreach (Value v in m_values) {
+                min = Math.Min(min, v.X);
+                min = Math.Min(min, v.Y);
+                min = Math.Min(min, v.Z);
+
+                max = Math.Max(max, v.X);
+                max = Math.Max(max, v.Y);
+                max = Math.Max(max, v.Z);
+            }
+
+            m_minimum = min;
+            m_maximum = max;
+
+            int maxCount = this.ActualHeight >= 400 ? 10 : height >= 200 ? 6 : height >= 140 ? 4 : 2;
+            m_axisValues.ResetValues(AxisHelper.GetValues(m_minimum, m_maximum, maxCount));
+
+            m_axisLabels.StartTime = m_values.Count > 0 ? m_values[0].T : DateTime.MinValue;
+            m_axisLabels.Count = 60;
+
+            m_xaxisElement.AxisLabels = m_axisLabels;
+            m_yaxisElement.AxisValues = m_axisValues;
+
+            m_plotElement.AxisLabels = m_axisLabels;
+            m_plotElement.AxisValues = m_axisValues;
+            m_plotElement.Values = m_values;
+            m_plotElement.Series = m_series;
+
+            m_legendElement.Series = m_series;
         }
 
         #endregion // internal methods

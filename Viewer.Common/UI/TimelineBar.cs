@@ -22,7 +22,11 @@ using System.Windows.Input;
 
 namespace Viewer.Common.UI
 {
-    public class TimelineBar : FrameworkElement
+    /// <summary>
+    /// 하나 이상의 트랙그룹이 재생되는 상태를 표시하거나,
+    /// 재생 지점을 지정할 수 있도록 한다.
+    /// </summary>
+    public class TimelineBar : UIContainer
     {
         #region routed events
 
@@ -46,7 +50,6 @@ namespace Viewer.Common.UI
 
         #region fields
 
-        private VisualCollection m_elements;
         private PlotElement m_plotElement;
         private XAxisElement m_xaxisElement;
         private TimelineTrackerElement m_trackerElement;
@@ -61,17 +64,6 @@ namespace Viewer.Common.UI
 
         public TimelineBar()
         {
-            m_elements = new VisualCollection(this);
-            m_elements.Add(m_plotElement = new PlotElement(this));
-            m_elements.Add(m_xaxisElement = new XAxisElement(this));
-            m_elements.Add(m_trackerElement = new TimelineTrackerElement(this));
-
-            SnapsToDevicePixels = true;
-            RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
-
-            SizeChanged += new SizeChangedEventHandler((sender, e) => {
-                VisualClip = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
-            });
         }
 
         #endregion // constructors
@@ -215,28 +207,47 @@ namespace Viewer.Common.UI
         #endregion // methods
 
 
-        #region overriden properties
-
-        protected override int VisualChildrenCount
-        {
-            get { return m_elements.Count; }
-        }
-
-        #endregion // overriden properties
-
-
         #region overriden methods
 
-        protected override Visual GetVisualChild(int index)
+        protected override void CreateElements()
         {
-            return m_elements[index];
+            AddElement(m_plotElement = new PlotElement(this));
+            AddElement(m_xaxisElement = new XAxisElement(this));
+            AddElement(m_trackerElement = new TimelineTrackerElement(this));
         }
 
-        protected override Size ArrangeOverride(Size finalSize)
+        /// <summary>
+        /// Element들을 배치한다.
+        /// </summary>
+        protected override void LayoutElements(double width, double height)
         {
-            Size sz = base.ArrangeOverride(finalSize);
-            LayoutElements(sz.Width, sz.Height);
-            return sz;
+            if (width * height == 0) return;
+
+            double x = PaddingLeft;
+            double y = PaddingTop;
+            width -= PaddingLeft + PaddingRight;
+            height -= PaddingTop + PaddingBottom;
+
+            // x-axis
+            Size sz = m_xaxisElement.Measure(width, height);
+            m_xaxisElement.Height = sz.Height;
+            m_xaxisElement.Width = width;
+            m_xaxisElement.Move(x, y + height - sz.Height);
+
+            // plot
+            m_plotElement.Width = width;
+            m_plotElement.Height = height - m_xaxisElement.Height;
+            m_plotElement.Move(x, y);
+
+            // tracker
+            m_trackerElement.Height = height - m_xaxisElement.Height / 2;
+            m_trackerElement.Move(x, y - PaddingTop / 2);
+
+            m_plotElement.Draw();
+            m_xaxisElement.Draw();
+            m_trackerElement.Draw();
+
+            ResetPosition();
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
@@ -308,40 +319,6 @@ namespace Viewer.Common.UI
                 m_trackerElement.LeftLabel = x > m_xaxisElement.Width - m_trackerElement.Measure(0, 0).Width;
                 m_trackerElement.X = x;
             }
-        }
-
-        /// <summary>
-        /// Element들을 배치한다.
-        /// </summary>
-        protected void LayoutElements(double width, double height)
-        {
-            if (width * height == 0) return;
-
-            double x = PaddingLeft;
-            double y = PaddingTop;
-            width -= PaddingLeft + PaddingRight;
-            height -= PaddingTop + PaddingBottom;
-
-            // x-axis
-            Size sz = m_xaxisElement.Measure(width, height);
-            m_xaxisElement.Height = sz.Height;
-            m_xaxisElement.Width = width;
-            m_xaxisElement.Move(x, y + height - sz.Height);
-
-            // plot
-            m_plotElement.Width = width;
-            m_plotElement.Height = height - m_xaxisElement.Height;
-            m_plotElement.Move(x, y);
-
-            // tracker
-            m_trackerElement.Height = height - m_xaxisElement.Height / 2;
-            m_trackerElement.Move(x, y - PaddingTop / 2);
-
-            m_plotElement.Draw();
-            m_xaxisElement.Draw();
-            m_trackerElement.Draw();
-
-            ResetPosition();
         }
 
         private TimelineElement GetHitTest(Point p)
