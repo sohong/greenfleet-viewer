@@ -23,6 +23,13 @@ namespace Viewer.Common.UI.Timeline
     /// </summary>
     public class TimelineTrackerElement : TimelineElement
     {
+        #region fields
+
+        private bool m_dragging;
+
+        #endregion // fields
+
+
         #region constructor
 
         public TimelineTrackerElement(TimelineBar bar)
@@ -49,6 +56,12 @@ namespace Viewer.Common.UI.Timeline
         }
         private DateTime m_time;
 
+        public bool LeftLabel
+        {
+            get;
+            set;
+        }
+
         #endregion // properties
 
 
@@ -56,7 +69,10 @@ namespace Viewer.Common.UI.Timeline
 
         public override Size Measure(double hintWidth, double hintHeight)
         {
-            return new Size();
+            string s = Time.ToString("MM-dd HH:mm:ss");
+            Typeface face = new Typeface("Tahoma");
+            FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, Brushes.Black);
+            return new Size(ft.Width + 4, ft.Height);
         }
 
         protected override void DoDraw(DrawingContext dc)
@@ -75,7 +91,9 @@ namespace Viewer.Common.UI.Timeline
             Typeface face = new Typeface("Tahoma");
             Brush fill = new SolidColorBrush(ToColor(0xccff0000));
             FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, fill);
-            dc.DrawText(ft, new Point(4, this.Height - ft.Height / 3));
+
+            double x = LeftLabel ? -ft.Width - 4 : 4;
+            dc.DrawText(ft, new Point(x, this.Height - ft.Height / 3));
         }
 
         #endregion // overriden methods

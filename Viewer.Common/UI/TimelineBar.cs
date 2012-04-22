@@ -106,6 +106,70 @@ namespace Viewer.Common.UI
         }
 
         /// <summary>
+        /// padding left
+        /// </summary>
+        public double PaddingLeft
+        {
+            get { return m_paddingLeft; }
+            set
+            {
+                if (value != m_paddingLeft) {
+                    m_paddingLeft = value;
+                    InvalidateArrange();
+                }
+            }
+        }
+        private double m_paddingLeft = 15;
+
+        /// <summary>
+        /// padding right
+        /// </summary>
+        public double PaddingRight
+        {
+            get { return m_paddingRight; }
+            set
+            {
+                if (value != m_paddingRight) {
+                    m_paddingRight = value;
+                    InvalidateArrange();
+                }
+            }
+        }
+        private double m_paddingRight = 15;
+
+        /// <summary>
+        /// padding Top
+        /// </summary>
+        public double PaddingTop
+        {
+            get { return m_paddingTop; }
+            set
+            {
+                if (value != m_paddingTop) {
+                    m_paddingTop = value;
+                    InvalidateArrange();
+                }
+            }
+        }
+        private double m_paddingTop = 10;
+
+        /// <summary>
+        /// padding Bottom
+        /// </summary>
+        public double PaddingBottom
+        {
+            get { return m_paddingBottom; }
+            set
+            {
+                if (value != m_paddingBottom) {
+                    m_paddingBottom = value;
+                    InvalidateArrange();
+                }
+            }
+        }
+        private double m_paddingBottom = 10;
+
+        /// <summary>
         /// 현재 TrackPoint
         /// </summary>
         public TrackPoint Position
@@ -209,7 +273,10 @@ namespace Viewer.Common.UI
             if (labels != null && m_position != null) {
                 double x = labels.GetPosition(m_position.PointTime);
                 m_trackerElement.Time = m_position.PointTime;
-                m_trackerElement.X = 15 + x * m_xaxisElement.Width;
+
+                x = PaddingLeft + x * m_xaxisElement.Width;
+                m_trackerElement.LeftLabel = x > m_xaxisElement.Width - m_trackerElement.Measure(0, 0).Width;
+                m_trackerElement.X = x;
             }
         }
 
@@ -220,12 +287,10 @@ namespace Viewer.Common.UI
         {
             if (width * height == 0) return;
 
-            double paddingX = 15;
-            double paddingY = 5;
-            double x = paddingX;
-            double y = paddingY;
-            width -= paddingX * 2;
-            height -= paddingY * 2;
+            double x = PaddingLeft;
+            double y = PaddingTop;
+            width -= PaddingLeft + PaddingRight;
+            height -= PaddingTop + PaddingBottom;
 
             // x-axis
             Size sz = m_xaxisElement.Measure(width, height);
@@ -240,7 +305,7 @@ namespace Viewer.Common.UI
 
             // tracker
             m_trackerElement.Height = height - m_xaxisElement.Height / 2;
-            m_trackerElement.Move(x, y - paddingY);
+            m_trackerElement.Move(x, y - PaddingTop / 2);
 
             m_plotElement.Draw();
             m_xaxisElement.Draw();

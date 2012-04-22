@@ -16,9 +16,10 @@ using Microsoft.Practices.Prism.ViewModel;
 using System.Collections.ObjectModel;
 using Viewer.Common.Xml;
 
-namespace Viewer.Common.Model {
-
-    public enum TrackType {
+namespace Viewer.Common.Model
+{
+    public enum TrackType
+    {
         All,    // 상시
         Event,  // 이벤트
         Dummy   // 가짜
@@ -28,19 +29,20 @@ namespace Viewer.Common.Model {
     /// SD 카드에 저장되는 한 단위의 트랙 정보.
     /// 주행 영상, TrackPoint들로 구성된다.
     /// </summary>
-    public class Track : NotificationObject {
-
+    public class Track : NotificationObject
+    {
         #region fields
 
         private IList<TrackPoint> m_points;
         private string m_id;
-        
+
         #endregion // fields
 
 
         #region constructors
 
-        public Track() {
+        public Track()
+        {
             m_points = new List<TrackPoint>();
             m_id = Guid.NewGuid().ToString();
         }
@@ -51,16 +53,19 @@ namespace Viewer.Common.Model {
         #region properties
 
         [Transient]
-        public string Id {
+        public string Id
+        {
             get { return m_id; }
         }
 
         /// <summary>
         /// 상시 or 이벤트.
         /// </summary>
-        public TrackType TrackType {
+        public TrackType TrackType
+        {
             get { return m_trackType; }
-            set {
+            set
+            {
                 if (value != m_trackType) {
                     m_trackType = value;
                     RaisePropertyChanged(() => TrackType);
@@ -72,9 +77,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 단말기 id
         /// </summary>
-        public string TerminalId {
+        public string TerminalId
+        {
             get { return m_terminalId; }
-            set {
+            set
+            {
                 if (value != m_terminalId) {
                     m_terminalId = value;
                     RaisePropertyChanged(() => TerminalId);
@@ -86,9 +93,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 차량 id
         /// </summary>
-        public string VehicleId {
+        public string VehicleId
+        {
             get { return m_vehicleId; }
-            set {
+            set
+            {
                 if (value != m_vehicleId) {
                     m_vehicleId = value;
                     RaisePropertyChanged(() => VehicleId);
@@ -100,9 +109,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 운전자 id
         /// </summary>
-        public string DriverId {
+        public string DriverId
+        {
             get { return m_driverId; }
-            set {
+            set
+            {
                 if (value != m_driverId) {
                     m_driverId = value;
                     RaisePropertyChanged(() => DriverId);
@@ -114,9 +125,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 파일 생성 일시.
         /// </summary>
-        public DateTime CreateDate {
+        public DateTime CreateDate
+        {
             get { return m_createDate; }
-            set {
+            set
+            {
                 if (value != m_createDate) {
                     m_createDate = value;
                     RaisePropertyChanged(() => CreateDate);
@@ -128,9 +141,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 시작 시각.
         /// </summary>
-        public DateTime StartTime {
+        public DateTime StartTime
+        {
             get { return m_startTime; }
-            set {
+            set
+            {
                 if (value != m_startTime) {
                     m_startTime = value;
                     RaisePropertyChanged(() => StartTime);
@@ -142,9 +157,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 종료 시각.
         /// </summary>
-        public DateTime EndTime {
+        public DateTime EndTime
+        {
             get { return m_endTime; }
-            set {
+            set
+            {
                 if (value != m_endTime) {
                     m_endTime = value;
                     RaisePropertyChanged(() => EndTime);
@@ -172,23 +189,28 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// Track points
         /// </summary>
-        public IEnumerable<TrackPoint> Points {
+        public IEnumerable<TrackPoint> Points
+        {
             get { return m_points; }
         }
 
-        public int PointCount {
+        public int PointCount
+        {
             get { return m_points.Count; }
         }
 
-        public TrackPoint this[int index] {
+        public TrackPoint this[int index]
+        {
             get { return m_points[index]; }
         }
 
-        public TrackPoint First {
+        public TrackPoint First
+        {
             get { return m_points.Count > 0 ? m_points[0] : null; }
         }
 
-        public TrackPoint Last {
+        public TrackPoint Last
+        {
             get { return m_points.Count > 0 ? m_points[m_points.Count - 1] : null; }
         }
 
@@ -196,9 +218,11 @@ namespace Viewer.Common.Model {
         /// 선택 상태. view에서 사용한다.
         /// </summary>
         [Transient]
-        public bool IsChecked {
+        public bool IsChecked
+        {
             get { return m_checked; }
-            set {
+            set
+            {
                 if (value != m_checked) {
                     m_checked = value;
                     RaisePropertyChanged(() => IsChecked);
@@ -212,7 +236,8 @@ namespace Viewer.Common.Model {
 
         #region methods
 
-        public void AddPoint(TrackPoint p) {
+        public void AddPoint(TrackPoint p)
+        {
             if (p != null && !m_points.Contains(p)) {
                 m_points.Add(p);
 
@@ -224,7 +249,8 @@ namespace Viewer.Common.Model {
             }
         }
 
-        public TrackPoint FindPoint(double miliseconds) {
+        public TrackPoint FindPoint(double miliseconds)
+        {
             foreach (TrackPoint p in m_points) {
                 double term = TimeSpan.FromTicks(p.PointTime.Ticks - StartTime.Ticks).TotalMilliseconds;
                 if (miliseconds < term)
@@ -238,7 +264,8 @@ namespace Viewer.Common.Model {
 
         #region overriden methods
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return "[" + TrackType + "] " + CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
         }
 

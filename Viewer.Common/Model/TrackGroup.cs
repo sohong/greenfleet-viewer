@@ -16,9 +16,10 @@ using Viewer.Common.Xml;
 using Microsoft.Practices.Prism.ViewModel;
 using System.ComponentModel;
 
-namespace Viewer.Common.Model {
-
-    public enum TrackGroupLevel {
+namespace Viewer.Common.Model
+{
+    public enum TrackGroupLevel
+    {
         Hour,
         Day,
         Month,
@@ -26,15 +27,15 @@ namespace Viewer.Common.Model {
         All
     };
 
-    
+
     /// <summary>
     /// 시간/일 단위로 묶여진 track group.
     /// 트랙 목록을 트리로 표현할 때 사용.
     /// 
     /// * 데이터 모델이 아니라 View를 위한 모델이다.
     /// </summary>
-    public class TrackGroup : NotificationObject {
-
+    public class TrackGroup : NotificationObject
+    {
         #region fields
 
         private TrackGroup m_parent;
@@ -56,7 +57,8 @@ namespace Viewer.Common.Model {
 
         #region constructor
 
-        public TrackGroup(DateTime date, TrackGroupLevel level) {
+        public TrackGroup(DateTime date, TrackGroupLevel level)
+        {
             m_date = date;
             m_level = level;
             m_children = new List<NotificationObject>();
@@ -67,15 +69,18 @@ namespace Viewer.Common.Model {
 
         #region properties
 
-        public TrackGroupLevel Level {
+        public TrackGroupLevel Level
+        {
             get { return m_level; }
         }
 
-        public DateTime Date {
+        public DateTime Date
+        {
             get { return m_date; }
         }
 
-        public List<NotificationObject> Children {
+        public List<NotificationObject> Children
+        {
             get { return m_children; }
         }
 
@@ -83,9 +88,11 @@ namespace Viewer.Common.Model {
         /// 선택 상태. view에서 사용한다.
         /// </summary>
         [Transient]
-        public bool IsChecked {
+        public bool IsChecked
+        {
             get { return m_checked; }
-            set {
+            set
+            {
                 if (value != m_checked) {
                     BeginUpdate();
                     try {
@@ -108,9 +115,11 @@ namespace Viewer.Common.Model {
         private bool m_checked;
 
         [Transient]
-        public bool IsExpanded {
+        public bool IsExpanded
+        {
             get { return m_expanded; }
-            set {
+            set
+            {
                 if (value != m_expanded) {
                     m_expanded = value;
                     RaisePropertyChanged(() => IsExpanded);
@@ -118,23 +127,26 @@ namespace Viewer.Common.Model {
             }
         }
         private bool m_expanded = false;
-        
+
         #endregion // properties
 
 
         #region methods
 
-        public void Add(TrackGroup subGroup) {
+        public void Add(TrackGroup subGroup)
+        {
             m_children.Add(subGroup);
             subGroup.m_parent = this;
         }
 
-        public void Add(Track track) {
+        public void Add(Track track)
+        {
             m_children.Add(track);
             RegisterTrackEvents(track);
         }
 
-        public void Clear() {
+        public void Clear()
+        {
             foreach (object obj in Children) {
                 if (obj is Track) {
                     UnregisterTrackEvents((Track)obj);
@@ -147,11 +159,13 @@ namespace Viewer.Common.Model {
             m_children.Clear();
         }
 
-        public void BeginUpdate() {
+        public void BeginUpdate()
+        {
             m_updateLock++;
         }
 
-        public void EndUpdate() {
+        public void EndUpdate()
+        {
             m_updateLock = Math.Max(0, m_updateLock - 1);
             if (!IsLocked()) {
                 Action<TrackGroup> eh = TrackAllChanged;
@@ -166,18 +180,19 @@ namespace Viewer.Common.Model {
 
         #region overriden methods
 
-        public override string ToString() {
+        public override string ToString()
+        {
             switch (m_level) {
-            case TrackGroupLevel.All:
-                return m_date.ToString("All");
-            case TrackGroupLevel.Year:
-                return m_date.ToString("yyyy");
-            case TrackGroupLevel.Month:
-                return m_date.ToString("yyyy-MM");
-            case TrackGroupLevel.Day:
-                return m_date.ToString("yyyy-MM-dd");
-            case TrackGroupLevel.Hour:
-                return m_date.ToString("yyyy-MM-dd HH시");
+                case TrackGroupLevel.All:
+                    return m_date.ToString("All");
+                case TrackGroupLevel.Year:
+                    return m_date.ToString("yyyy");
+                case TrackGroupLevel.Month:
+                    return m_date.ToString("yyyy-MM");
+                case TrackGroupLevel.Day:
+                    return m_date.ToString("yyyy-MM-dd");
+                case TrackGroupLevel.Hour:
+                    return m_date.ToString("yyyy-MM-dd HH시");
             }
 
             return m_date.ToString();
@@ -188,25 +203,30 @@ namespace Viewer.Common.Model {
 
         #region internal methods
 
-        private bool IsLocked() {
+        private bool IsLocked()
+        {
             return m_updateLock > 0 || (m_parent != null && m_parent.IsLocked());
         }
 
-        private void RegisterTrackEvents(Track track) {
+        private void RegisterTrackEvents(Track track)
+        {
             track.PropertyChanged += new PropertyChangedEventHandler(track_PropertyChanged);
         }
 
-        private void UnregisterTrackEvents(Track track) {
+        private void UnregisterTrackEvents(Track track)
+        {
             track.PropertyChanged -= new PropertyChangedEventHandler(track_PropertyChanged);
         }
 
-        private void track_PropertyChanged(object sender, PropertyChangedEventArgs e) {
+        private void track_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
             if (!IsLocked()) {
                 FireTrackChangeEvent(this, (Track)sender, e.PropertyName);
             }
         }
 
-        private void FireTrackChangeEvent(TrackGroup group, Track track, string propName) {
+        private void FireTrackChangeEvent(TrackGroup group, Track track, string propName)
+        {
             Action<TrackGroup, Track, string> eh = TrackChanged;
             if (eh != null) {
                 eh(group, track, propName);

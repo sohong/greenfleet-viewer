@@ -13,28 +13,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Viewer.Common.Model {
-
+namespace Viewer.Common.Model
+{
     /// <summary>
     /// TimelineBar에 표시되는 (같은 tracktype으로)연속되는 track 구간.
     /// </summary>
-    public class TrackRange : NotificationObjectEx {
-
+    public class TrackRange : NotificationObjectEx
+    {
         #region constructors
 
-        public TrackRange(TrackType type) {
+        public TrackRange(TrackType type)
+        {
             this.TrackType = type;
         }
 
         #endregion // constructors
 
-        
+
         #region properties
 
         /// <summary>
         /// All(상시) or Event
         /// </summary>
-        public TrackType TrackType {
+        public TrackType TrackType
+        {
             get;
             private set;
         }
@@ -42,9 +44,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 구간 시작 track
         /// </summary>
-        public Track StartTrack {
+        public Track StartTrack
+        {
             get { return m_startTrack; }
-            set {
+            set
+            {
                 if (value != m_startTrack) {
                     m_startTrack = value;
                     RaisePropertyChanged(() => StartTrack);
@@ -56,9 +60,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 구간 종료 track
         /// </summary>
-        public Track EndTrack {
+        public Track EndTrack
+        {
             get { return m_endTrack; }
-            set {
+            set
+            {
                 if (value != m_endTrack) {
                     m_endTrack = value;
                     RaisePropertyChanged(() => EndTrack);

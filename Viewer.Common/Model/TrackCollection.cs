@@ -15,13 +15,13 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace Viewer.Common.Model {
-
+namespace Viewer.Common.Model
+{
     /// <summary>
     /// Track collection
     /// </summary>
-    public class TrackCollection : ObservableCollection<Track> {
-
+    public class TrackCollection : ObservableCollection<Track>
+    {
         #region fields
 
         private IList<TrackRange> m_ranges;
@@ -32,7 +32,8 @@ namespace Viewer.Common.Model {
 
         #region constructors
 
-        public TrackCollection() {
+        public TrackCollection()
+        {
             m_ranges = new List<TrackRange>();
         }
 
@@ -41,12 +42,14 @@ namespace Viewer.Common.Model {
 
         #region properties
 
-        public Track First {
+        public Track First
+        {
             get;
             private set;
         }
 
-        public Track Last {
+        public Track Last
+        {
             get;
             private set;
         }
@@ -54,8 +57,10 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 전체 기간을 분단위 값으로 리턴
         /// </summary>
-        public long Length {
-            get {
+        public long Length
+        {
+            get
+            {
                 if (First != null) {
                     return GetPosition(Last) + 1;
                 } else {
@@ -64,10 +69,11 @@ namespace Viewer.Common.Model {
             }
         }
 
-        public IEnumerable<TrackRange> Ranges {
+        public IEnumerable<TrackRange> Ranges
+        {
             get { return m_ranges; }
         }
-        
+
         #endregion // properties
 
 
@@ -76,7 +82,8 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 시작/끝 등을 다시 계산한다.
         /// </summary>
-        public void Refresh() {
+        public void Refresh()
+        {
             m_ranges.Clear();
 
             if (Count < 1) {
@@ -92,15 +99,18 @@ namespace Viewer.Common.Model {
             }
         }
 
-        public long GetPosition(Track track) {
+        public long GetPosition(Track track)
+        {
             return (long)new TimeSpan(track.StartTime.Ticks - First.StartTime.Ticks).TotalSeconds;
         }
 
-        public void BeginUpdate() {
+        public void BeginUpdate()
+        {
             m_locked = true;
         }
 
-        public void EndUpdate() {
+        public void EndUpdate()
+        {
             if (m_locked) {
                 m_locked = false;
                 Refresh();
@@ -114,19 +124,21 @@ namespace Viewer.Common.Model {
 
         #region overriden methods
 
-        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e) {
+        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
             if (!m_locked) {
                 Refresh();
                 base.OnCollectionChanged(e);
             }
         }
-        
+
         #endregion // overriden methods
 
 
         #region overriden methods
 
-        private void Calculate() {
+        private void Calculate()
+        {
             Track first = Items[0];
             Track last = Items[0];
             TrackRange range = new TrackRange(first.TrackType) { StartTrack = first };

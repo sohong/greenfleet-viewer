@@ -14,13 +14,13 @@ using System.Linq;
 using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
 
-namespace Viewer.Common.Model {
-
+namespace Viewer.Common.Model
+{
     /// <summary>
     /// Track을 구성하는 한 시점 정보.
     /// </summary>
-    public class TrackPoint : NotificationObject {
-
+    public class TrackPoint : NotificationObject
+    {
         #region static members
 
         public static readonly TrackPoint Zero = new TrackPoint();
@@ -30,7 +30,8 @@ namespace Viewer.Common.Model {
 
         #region constructors
 
-        public TrackPoint() {
+        public TrackPoint()
+        {
         }
 
         #endregion // constructors
@@ -41,9 +42,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// Sampling 시각.
         /// </summary>
-        public DateTime PointTime {
+        public DateTime PointTime
+        {
             get { return m_pointTime; }
-            set {
+            set
+            {
                 if (value != m_pointTime) {
                     m_pointTime = value;
                     RaisePropertyChanged(() => PointTime);
@@ -55,9 +58,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// GPS 샘플링 위도.
         /// </summary>
-        public double Latitude {
+        public double Latitude
+        {
             get { return m_lattitude; }
-            set {
+            set
+            {
                 if (value != m_lattitude) {
                     m_lattitude = value;
                     RaisePropertyChanged(() => Latitude);
@@ -69,9 +74,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// GPS 샘플링 경도.
         /// </summary>
-        public double Longitude {
+        public double Longitude
+        {
             get { return m_longitude; }
-            set {
+            set
+            {
                 if (value != m_longitude) {
                     m_longitude = value;
                     RaisePropertyChanged(() => Longitude);
@@ -83,9 +90,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// GPS 샘플링 속도.
         /// </summary>
-        public double Velocity {
+        public double Velocity
+        {
             get { return m_velocity; }
-            set {
+            set
+            {
                 if (value != m_velocity) {
                     m_velocity = value;
                     RaisePropertyChanged(() => Velocity);
@@ -97,9 +106,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 감지 충격량 X축
         /// </summary>
-        public double AccelerationX {
+        public double AccelerationX
+        {
             get { return m_accelerationX; }
-            set {
+            set
+            {
                 if (value != m_accelerationX) {
                     m_accelerationX = value;
                     RaisePropertyChanged(() => AccelerationX);
@@ -111,9 +122,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 감지 충격량 Y축
         /// </summary>
-        public double AccelerationY {
+        public double AccelerationY
+        {
             get { return m_accelerationY; }
-            set {
+            set
+            {
                 if (value != m_accelerationY) {
                     m_accelerationY = value;
                     RaisePropertyChanged(() => AccelerationY);
@@ -125,9 +138,11 @@ namespace Viewer.Common.Model {
         /// <summary>
         /// 감지 충격량 Z축
         /// </summary>
-        public double AccelerationZ {
+        public double AccelerationZ
+        {
             get { return m_accelerationZ; }
-            set {
+            set
+            {
                 if (value != m_accelerationZ) {
                     m_accelerationZ = value;
                     RaisePropertyChanged(() => AccelerationZ);

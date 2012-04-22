@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="109" d:DesignWidth="705">
     <Grid>
-        <ui:TimelineBar x:Name="bar"></ui:TimelineBar>            
+        <ui:TimelineBar x:Name="bar" PaddingLeft="15" PaddingRight="15" PaddingTop="10" PaddingBottom="10"></ui:TimelineBar>            
     </Grid>
 </UserControl>
