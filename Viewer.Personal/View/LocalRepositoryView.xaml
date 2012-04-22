@@ -37,8 +37,6 @@
                 <RadioButton Margin="0,0,4,0" IsChecked="{Binding Path=SearchMode, Converter={StaticResource enumBoolConverter}, ConverterParameter={x:Static local:SearchMode.RecentTwo}}">최근 이틀</RadioButton>
             </StackPanel>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding OpenCommand}">열기</Button>
-            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding Path=Commands.Import}" CommandParameter="{Binding SelectedVehicle}">Import</Button>
-            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding ExportCommand}">Export</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding DeleteCommand}">삭제</Button>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AutoPlay}" ToolTip="트리나 맵에서 더블클릭으로 트랙이 선택되면 재생 시작">자동</CheckBox>
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding AllPlay}" ToolTip="선택된 트랙들을 순서대로 재생">연속</CheckBox>

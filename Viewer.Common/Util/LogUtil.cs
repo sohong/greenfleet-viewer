@@ -32,11 +32,12 @@ namespace Viewer.Common.Util
 
         #region static methods
 
-        public static void InitLog4Net(string logName)
+        public static ILoggerFacade InitLog4Net(string logName)
         {
             if (m_logger == null) {
                 m_logger = new Log4NetLogger(logName);
             }
+            return m_logger;
         }
 
         public static void Debug(string message)

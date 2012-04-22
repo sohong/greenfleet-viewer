@@ -25,15 +25,17 @@ using Viewer.Personal.Model;
 using Microsoft.Practices.Prism.Events;
 using Viewer.Common.Util;
 
-namespace Viewer.Personal.Tester {
-
+namespace Viewer.Personal.Tester
+{
     /// <summary>
+    /// Viewer.Personal.Tester main window
     /// </summary>
-    public partial class MainWindow : Window {
-
+    public partial class MainWindow : Window
+    {
         #region constructors
 
-        public MainWindow() {
+        public MainWindow()
+        {
             InitializeComponent();
 
             PersonalDomain.Domain.EventAggregator = new EventAggregator();
@@ -55,7 +57,8 @@ namespace Viewer.Personal.Tester {
 
         #region event handlers
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             Logger.InitLog4Net("Viewer.Personal.Tester");
             Logger.Debug("Starting tester...");
         }

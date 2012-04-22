@@ -16,6 +16,7 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Viewer.Personal.Model;
 using Viewer.Common.Util;
+using Microsoft.Practices.Prism.Events;
 
 namespace Viewer.Personal {
 
@@ -28,6 +29,8 @@ namespace Viewer.Personal {
         public void Initialize() {
             Debug.WriteLine("Personal Module initialize...");
             Logger.Debug("Personal Module initialize...");
+
+            PersonalDomain.Domain.EventAggregator = new EventAggregator();
             PersonalDomain.Domain.Start();
         }
     }

@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer.Data.Generator", "Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGenerator", "DataGenerator\DataGenerator.csproj", "{F3862D4C-FD05-4AF7-B30B-1D3CF94D4F73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBViewer", "GBViewer\GBViewer.csproj", "{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GreenFleet.vsmdi
@@ -247,6 +249,18 @@ Global
 		{F3862D4C-FD05-4AF7-B30B-1D3CF94D4F73}.Release|Win32.ActiveCfg = Release|x86
 		{F3862D4C-FD05-4AF7-B30B-1D3CF94D4F73}.Release|x86.ActiveCfg = Release|x86
 		{F3862D4C-FD05-4AF7-B30B-1D3CF94D4F73}.Release|x86.Build.0 = Release|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Debug|Win32.ActiveCfg = Debug|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Debug|x86.ActiveCfg = Debug|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Debug|x86.Build.0 = Debug|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Release|Any CPU.ActiveCfg = Release|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Release|Mixed Platforms.Build.0 = Release|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Release|Win32.ActiveCfg = Release|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Release|x86.ActiveCfg = Release|x86
+		{96A8E2EE-81DD-4BEA-A580-EFC35A92F465}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

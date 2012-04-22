@@ -19,17 +19,22 @@ using Viewer.Common.Service;
 using Viewer.Personal.View;
 using Viewer.Common.Util;
 using Viewer.Personal.Command;
+using System.ComponentModel.Composition;
 
-namespace Viewer.Personal.ViewModel {
-
+namespace Viewer.Personal.ViewModel
+{
     /// <summary>
     /// Main view model for Personal viewer.
     /// </summary>
-    public class PersonalViewModel : ViewModelBase {
+    [Export]
+    public class PersonalViewModel : ViewModelBase
+    {
 
         #region constructor
 
-        public PersonalViewModel() {
+        public PersonalViewModel()
+        {
+            ConfigDeviceCommand = new DelegateCommand<object>(DoConfigDevice, CanConfigDevice);
             VehicleCommand = new DelegateCommand<object>(DoVechicle, CanVehicle);
             PreferencesCommand = new DelegateCommand<object>(DoPreferences, CanPreferences);
             TestCommand = new DelegateCommand<object>(DoTest, CanTest);
@@ -40,14 +45,25 @@ namespace Viewer.Personal.ViewModel {
 
         #region properties
 
-        public Commands Commands {
+        public Commands Commands
+        {
             get { return Commands.Instance; }
+        }
+
+        /// <summary>
+        /// 기기 설정
+        /// </summary>
+        public ICommand ConfigDeviceCommand
+        {
+            get;
+            private set;
         }
 
         /// <summary>
         /// 차량 관리 command
         /// </summary>
-        public ICommand VehicleCommand {
+        public ICommand VehicleCommand
+        {
             get;
             private set;
         }
@@ -55,7 +71,8 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// 환경 설정 command
         /// </summary>
-        public ICommand PreferencesCommand {
+        public ICommand PreferencesCommand
+        {
             get;
             private set;
         }
@@ -63,7 +80,8 @@ namespace Viewer.Personal.ViewModel {
         /// <summary>
         /// Test command
         /// </summary>
-        public ICommand TestCommand {
+        public ICommand TestCommand
+        {
             get;
             private set;
         }
@@ -73,30 +91,47 @@ namespace Viewer.Personal.ViewModel {
 
         #region internal methods
 
-        // Vehicle Command
-        private bool CanVehicle(object data) {
+        // Config device command
+        private bool CanConfigDevice(object data)
+        {
             return true;
         }
 
-        private void DoVechicle(object data) {
+        private void DoConfigDevice(object data)
+        {
+            DialogService.Run("기기 설정", new DeviceConfigView(), new DeviceConfigViewModel());
+        }
+
+        // Vehicle Command
+        private bool CanVehicle(object data)
+        {
+            return true;
+        }
+
+        private void DoVechicle(object data)
+        {
             DialogService.Run("차량 정보 관리", new VehicleListView(), new VehicleListViewModel());
         }
 
         // Preferences command
-        private bool CanPreferences(object data) {
+        private bool CanPreferences(object data)
+        {
             return true;
         }
 
-        private void DoPreferences(object data) {
+        private void DoPreferences(object data)
+        {
             DialogService.Run("환경 설정", new PreferencesView(), new PreferencesViewModel());
         }
 
         // Test command
-        private bool CanTest(object data) {
+        private bool CanTest(object data)
+        {
             return true;
         }
 
-        private void DoTest(object data) {
+        private void DoTest(object data)
+        {
             MessageUtil.Show("Test what?");
         }
 

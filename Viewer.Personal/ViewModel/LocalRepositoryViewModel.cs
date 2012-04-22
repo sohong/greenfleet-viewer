@@ -45,7 +45,6 @@ namespace Viewer.Personal.ViewModel {
             AutoPlay = true;
 
             OpenCommand = new DelegateCommand<object>(DoOpen, CanOpen);
-            ExportCommand = new DelegateCommand<object>(DoExport, CanExport);
             DeleteCommand = new DelegateCommand<object>(DoDelete, CanDelete);
 
             if (PersonalDomain.Domain.EventAggregator != null) {
@@ -165,14 +164,6 @@ namespace Viewer.Personal.ViewModel {
             Repository.Find(SelectedVehicle, dateFrom, dateTo, () => {
                 ResetTrackGroup(Repository.GetTracks());
             });
-        }
-
-        // Export command
-        private bool CanExport(object data) {
-            return true;
-        }
-
-        private void DoExport(object data) {
         }
 
         // Delete command

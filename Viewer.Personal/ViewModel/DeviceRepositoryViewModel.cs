@@ -56,7 +56,6 @@ namespace Viewer.Personal.ViewModel
 
             LoadCommand = new DelegateCommand<object>(DoLoad, CanLoad);
             SearchCommand = new DelegateCommand(DoSearch, CanSearch);
-            ConfigDeviceCommand = new DelegateCommand<object>(DoConfigDevice, CanConfigDevice);
             SaveCommand = new DelegateCommand(DoSave, CanSave);
 
             if (PersonalDomain.Domain.EventAggregator != null) {
@@ -94,12 +93,6 @@ namespace Viewer.Personal.ViewModel
         }
 
         public ICommand SearchCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand ConfigDeviceCommand
         {
             get;
             private set;
@@ -188,17 +181,6 @@ namespace Viewer.Personal.ViewModel
                 };
                 ResetTrackGroup(null);
             }
-        }
-
-        // Config device command
-        private bool CanConfigDevice(object data)
-        {
-            return true;
-        }
-
-        private void DoConfigDevice(object data)
-        {
-            DialogService.Run("기기 설정", new DeviceConfigView(), new DeviceConfigViewModel());
         }
 
         // Save(sd card -> local storage) command
