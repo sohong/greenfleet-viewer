@@ -76,77 +76,6 @@ namespace Viewer.Common.View
             view.ResetTracks(e.OldValue as ObservableCollection<Track>, e.NewValue as ObservableCollection<Track>);
         }
 
-        private void ResetTracks(ObservableCollection<Track> oldTracks, ObservableCollection<Track> tracks)
-        {
-            if (oldTracks != null) {
-                oldTracks.CollectionChanged -= new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
-            }
-
-            if (tracks != null) {
-                tracks.CollectionChanged += new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
-            }
-        }
-
-        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            /*
-            switch (e.Action) {
-            case NotifyCollectionChangedAction.Add:
-                foreach (Track track in e.NewItems) {
-                    AddTrack(track);
-                }
-                break;
-            case NotifyCollectionChangedAction.Remove:
-                foreach (Track track in e.OldItems) {
-                    RemoveTrack(track);
-                }
-                break;
-            case NotifyCollectionChangedAction.Reset:
-                try {
-                    Clear(false);
-                    foreach (Track track in Tracks) {
-                        AddTrack(track, false);
-                    }
-                
-                } finally {
-                    RefreshPins();
-                }
-                break;
-            }
-             */
-            RefreshView();
-        }
-
-        private void RefreshView()
-        {
-            ClearPoints();
-            if (Tracks == null) return;
-
-            DateTime start = new DateTime();
-            DateTime end = new DateTime();
-            if (Tracks.First != null) {
-                start = Tracks.First.StartTime;
-            }
-            if (Tracks.Last != null) {
-                end = Tracks.Last.EndTime;
-            }
-
-            TimelineValueCollection values = new TimelineValueCollection(start, end);
-            values.Build(Tracks);
-
-            Clear(true);
-            foreach (TimelineValue v in values) {
-                AddTrack(v.Track);
-            }
-
-            IEventAggregator events = ServiceLocator.Current.GetService(typeof(IEventAggregator)) as IEventAggregator;
-            if (events != null) {
-                events.GetEvent<TrackPointChangedEvent>().Subscribe((point) => {
-                    AddPoint(point);
-                });
-            }
-        }
-
         #endregion dependency properties
 
 
@@ -183,6 +112,15 @@ namespace Viewer.Common.View
             if (!DesignerProperties.GetIsInDesignMode(this)) {
                 string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "map.html");
                 browser.Navigate(path);
+            }
+
+            if (!DesignerProperties.GetIsInDesignMode(this) && ServiceLocator.Current != null) {
+                IEventAggregator events = ServiceLocator.Current.GetService(typeof(IEventAggregator)) as IEventAggregator;
+                if (events != null) {
+                    events.GetEvent<TrackPointChangedEvent>().Subscribe((point) => {
+                        AddPoint(point);
+                    });
+                }
             }
         }
 
@@ -252,6 +190,46 @@ namespace Viewer.Common.View
 
         #region internal methods
 
+        private void ResetTracks(ObservableCollection<Track> oldTracks, ObservableCollection<Track> tracks)
+        {
+            if (oldTracks != null) {
+                oldTracks.CollectionChanged -= new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
+            }
+
+            if (tracks != null) {
+                tracks.CollectionChanged += new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
+            }
+        }
+
+        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RefreshView();
+        }
+
+        private void RefreshView()
+        {
+            ClearPoints();
+            if (Tracks == null) return;
+
+            DateTime start = new DateTime();
+            DateTime end = new DateTime();
+            if (Tracks.First != null) {
+                start = Tracks.First.StartTime;
+            }
+            if (Tracks.Last != null) {
+                end = Tracks.Last.EndTime;
+            }
+
+            TimelineValueCollection values = new TimelineValueCollection(start, end);
+            values.Build(Tracks);
+
+            Clear();
+            foreach (TimelineValue v in values) {
+                AddTrack(v.Track);
+                AddTrack(v.LastTrack);
+            }
+        }
+
         private void RefreshMap()
         {
             //RefreshLocations(track);
@@ -266,8 +244,8 @@ namespace Viewer.Common.View
                 ClearActive();
                 m_activeTrack = track;
 
-                if (AddTrack(m_activeTrack)) {
-                }
+                //if (AddTrack(m_activeTrack)) {
+                //}
             }
         }
 

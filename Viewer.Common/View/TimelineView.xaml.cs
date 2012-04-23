@@ -42,7 +42,7 @@ namespace Viewer.Common.View
         /// </summary>
         public static readonly DependencyProperty AllBackgroundProperty = DependencyProperty.Register(
             "AllBackground", typeof(Brush), typeof(TimelineView),
-            new FrameworkPropertyMetadata(Brushes.Blue, OnAllBackgroundChanged));
+            new FrameworkPropertyMetadata(Brushes.LightGreen, OnAllBackgroundChanged));
         private static void OnAllBackgroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs a)
         {
             ((TimelineView)d).RefreshView();

@@ -85,6 +85,7 @@ namespace Viewer.Personal.ViewModel
 
             OpenCommand = new DelegateCommand<object>(DoOpen, CanOpen);
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
+            PlaybackCommand = new DelegateCommand(DoPlayback, CanPlayback);
             SaveCommand = new DelegateCommand(DoSave, CanSave);
 
             RegisterGlobalEvents();
@@ -99,7 +100,8 @@ namespace Viewer.Personal.ViewModel
                     ActiveTrack = track;
                 });
                 events.GetEvent<TrackDeactivatedEvent>().Subscribe((track) => {
-                    ActiveTrack = m_playbackManager.GetNext(track, AllPlay, LoopPlay);
+                    track = m_playbackManager.GetNext(track, AllPlay, LoopPlay);
+                    ActiveTrack = track;
                 });
                 events.GetEvent<TrackPointChangedEvent>().Subscribe((point) => {
                     this.TrackPoint = point;
@@ -381,6 +383,12 @@ namespace Viewer.Personal.ViewModel
             private set;
         }
 
+        public ICommand PlaybackCommand
+        {
+            get;
+            set;
+        }
+
         public ICommand SaveCommand
         {
             get;
@@ -564,9 +572,9 @@ namespace Viewer.Personal.ViewModel
                 track.IsChecked = true;
             }
 
-            if (track.IsChecked) {
+            if (track.IsChecked && !m_selectedTracks.Contains(track)) {
                 m_selectedTracks.Add(track);
-            } else {
+            } else if (!track.IsChecked && m_selectedTracks.Contains(track)) {
                 m_selectedTracks.Remove(track);
             }
         }
@@ -692,6 +700,18 @@ namespace Viewer.Personal.ViewModel
             LocalRepository.Find(SelectedVehicle, dateFrom, dateTo, () => {
                 ResetLocalTrackGroup(LocalRepository.GetTracks());
             });
+        }
+
+        // Playback command
+        private bool CanPlayback()
+        {
+            return true;
+        }
+
+        private void DoPlayback()
+        {
+            Track track = m_playbackManager.GetFirst();
+            ActiveTrack = track;
         }
 
         // Save(sd card -> local storage) command
