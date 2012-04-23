@@ -38,6 +38,12 @@ namespace GBViewer.View {
 
         public Shell() {
             InitializeComponent();
+
+            if (SystemParameters.PrimaryScreenWidth > 1280) {
+                this.WindowState = WindowState.Normal;
+                this.Width = 1280;
+                this.Height = 900;
+            }
         }
 
         #endregion // constructors

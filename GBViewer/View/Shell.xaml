@@ -4,7 +4,7 @@
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:gf="clr-namespace:Viewer.Personal.View;assembly=Viewer.Personal"
         Title="GB5G viewer" Height="636" Width="783" WindowState="Maximized" WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded" Background="#333333">
+        Loaded="Window_Loaded" Background="#333333" SnapsToDevicePixels="True">
     <Grid Margin="6">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
