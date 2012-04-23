@@ -76,7 +76,8 @@
                             <RowDefinition Height="4"/>
                             <RowDefinition Height="130" MinHeight="20"/>
                         </Grid.RowDefinitions>
-                        <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}" PositionChanged="VideoView_PositionChanged"/>
+                        <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}" 
+                                      PositionChanged="VideoView_PositionChanged" PlayEnded="VideoView_PlayEnded"/>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
                         <Grid Grid.Row="2">
                             <gf:AccelerationChartView Track="{Binding ActiveTrack}" Position="{Binding TrackPoint}"/>

@@ -58,6 +58,7 @@ namespace Viewer.Personal.ViewModel
         private ListCollectionView m_deviceTracks;
         private ListCollectionView m_localTracks;
         private TrackCollection m_selectedTracks;
+        private PlaybackManager m_playbackManager;
 
         #endregion // fields
 
@@ -73,12 +74,14 @@ namespace Viewer.Personal.ViewModel
             m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
             m_selectedTracks = new TrackCollection();
+            m_playbackManager = new PlaybackManager(m_selectedTracks);
 
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromMinutes(23 * 60 + 59);
             SearchAll = true;
             SearchMode = SearchMode.Recent;
             AutoPlay = true;
+            AllPlay = true;
 
             OpenCommand = new DelegateCommand<object>(DoOpen, CanOpen);
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
@@ -95,7 +98,9 @@ namespace Viewer.Personal.ViewModel
                     track.IsChecked = true;
                     ActiveTrack = track;
                 });
-
+                events.GetEvent<TrackDeactivatedEvent>().Subscribe((track) => {
+                    ActiveTrack = m_playbackManager.GetNext(track, AllPlay, LoopPlay);
+                });
                 events.GetEvent<TrackPointChangedEvent>().Subscribe((point) => {
                     this.TrackPoint = point;
                 });

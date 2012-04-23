@@ -42,7 +42,24 @@ namespace Viewer.Common.Service
 
         #region methods
 
-        public Track Next(Track track, bool isLoop) {
+        public Track GetFirst()
+        {
+            return m_tracks.Count > 0 ? (Track)m_tracks.GetItemAt(0) : null;
+        }
+
+        public Track GetNext(Track track, bool isAll, bool isLoop) {
+            if (isAll) {
+                int index = m_tracks.IndexOf(track);
+                if (index < m_tracks.Count - 1) {
+                    track = (Track)m_tracks.GetItemAt(index + 1);
+                } else if (isLoop) {
+                    track = (Track)m_tracks.GetItemAt(0);
+                } else {
+                    track = null;
+                }
+            } else {
+                track = null;
+            }
             return track;
         }
 

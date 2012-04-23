@@ -74,6 +74,7 @@
     <Compile Include="EnumToBooleanConverter.cs" />
     <Compile Include="Event\TrackActivatedEvent.cs" />
     <Compile Include="Event\TrackChangedEvent.cs" />
+    <Compile Include="Event\TrackDeactivatedEvent.cs" />
     <Compile Include="Event\TrackPointChangedEvent.cs" />
     <Compile Include="Model\TrackCollection.cs" />
     <Compile Include="Model\TrackGroup.cs" />

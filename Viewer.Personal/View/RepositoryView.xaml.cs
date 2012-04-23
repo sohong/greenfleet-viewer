@@ -28,6 +28,8 @@ using Viewer.Personal.Model;
 using Viewer.Personal.Event;
 using Viewer.Common.View;
 using Viewer.Common.Event;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Viewer.Personal.View
 {
@@ -69,6 +71,11 @@ namespace Viewer.Personal.View
             get { return tabMain.SelectedIndex == 1; }
         }
 
+        private IEventAggregator Events
+        {
+            get { return ServiceLocator.Current.GetService(typeof(IEventAggregator)) as IEventAggregator; }
+        }
+
         #endregion // internal properties
 
 
@@ -107,7 +114,7 @@ namespace Viewer.Personal.View
 
         private void TrackTreeView_ActivateTrack(object sender, Track track)
         {
-            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
+            Events.GetEvent<TrackActivatedEvent>().Publish(track);
         }
 
         // videoView
@@ -118,15 +125,20 @@ namespace Viewer.Personal.View
             if (track != null) {
                 TrackPoint point = track.FindPoint(position);
                 if (point != null) {
-                    PersonalDomain.Domain.EventAggregator.GetEvent<TrackPointChangedEvent>().Publish(point);
+                    Events.GetEvent<TrackPointChangedEvent>().Publish(point);
                 }
             }
+        }
+
+        private void VideoView_PlayEnded(VideoView view)
+        {
+            Events.GetEvent<TrackDeactivatedEvent>().Publish(view.Track);
         }
 
         // googleMapView
         private void GoogleMapView_TrackDoubleClicked(object sender, Track track)
         {
-            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
+            Events.GetEvent<TrackActivatedEvent>().Publish(track);
         }
 
         // bingMapView

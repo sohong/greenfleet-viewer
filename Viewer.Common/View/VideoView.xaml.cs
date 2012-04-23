@@ -105,6 +105,7 @@ namespace Viewer.Common.View {
         #region events 
 
         public event Action<VideoView, double/* length */, double/* current */> PositionChanged;
+        public event Action<VideoView> PlayEnded;
 
         #endregion // events
 
@@ -214,12 +215,16 @@ namespace Viewer.Common.View {
         #region event handlers
 
         private void mediaMain_MediaOpened(object sender, RoutedEventArgs e) {
-            Logger.Debug("Media opened");
             timelineSlider.Maximum = m_videoLength = mediaMain.NaturalDuration.TimeSpan.TotalMilliseconds;
+            Logger.Debug("Media opened");
         }
 
         private void mediaMain_MediaEnded(object sender, RoutedEventArgs e) {
             //Stop();
+            if (PlayEnded != null) {
+                PlayEnded(this);
+            }
+            Logger.Debug("Media ended");
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e) {
