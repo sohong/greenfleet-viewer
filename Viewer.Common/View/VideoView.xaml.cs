@@ -56,7 +56,9 @@ namespace Viewer.Common.View {
                     view.Play();
                 }
                 view.txtName.Text = System.IO.Path.GetFileNameWithoutExtension(track.MpegFile);
+
             } else {
+                view.mediaMain.Stop();
                 view.mediaMain.Source = null;
                 view.txtName.Text = "[ No Track ]";
             }

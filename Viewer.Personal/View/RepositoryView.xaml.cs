@@ -74,6 +74,32 @@ namespace Viewer.Personal.View
 
         #region event handlers
 
+        // tabMain
+        private void tabMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLocal) {
+                //chkAll.Visibility = Visibility.Collapsed;
+                btnOpen.Visibility = Visibility.Collapsed;
+                dateFrom.Visibility = Visibility.Visible;
+                txtTilde.Visibility = Visibility.Visible;
+                dateTo.Visibility = Visibility.Visible;
+                btnSearch.Visibility = Visibility.Visible;
+                panMode.Visibility = Visibility.Visible;
+                btnDelete.Visibility = Visibility.Visible;
+                btnSave.Visibility = Visibility.Collapsed;
+            } else {
+                //chkAll.Visibility = Visibility.Visible;
+                btnOpen.Visibility = Visibility.Visible;
+                dateFrom.Visibility = Visibility.Collapsed;
+                txtTilde.Visibility = Visibility.Collapsed;
+                dateTo.Visibility = Visibility.Collapsed;
+                btnSearch.Visibility = Visibility.Collapsed;
+                panMode.Visibility = Visibility.Collapsed;
+                btnDelete.Visibility = Visibility.Collapsed;
+                btnSave.Visibility = Visibility.Visible;
+            }
+        }
+
         // trackTreeView
         private void TrackTreeView_ActivateGroup(object sender, TrackGroup group)
         {
@@ -81,7 +107,7 @@ namespace Viewer.Personal.View
 
         private void TrackTreeView_ActivateTrack(object sender, Track track)
         {
-            PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Publish(track);
+            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
         }
 
         // videoView
@@ -100,7 +126,7 @@ namespace Viewer.Personal.View
         // googleMapView
         private void GoogleMapView_TrackDoubleClicked(object sender, Track track)
         {
-            PersonalDomain.Domain.EventAggregator.GetEvent<DeviceTrackActivatedEvent>().Publish(track);
+            PersonalDomain.Domain.EventAggregator.GetEvent<TrackActivatedEvent>().Publish(track);
         }
 
         // bingMapView

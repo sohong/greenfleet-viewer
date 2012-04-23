@@ -30,7 +30,7 @@ namespace Viewer.Personal.ViewModel {
     /// <summary>
     /// View model for LocalRepositoryView
     /// </summary>
-    public class LocalRepositoryViewModel : RepositoryViewModel {
+    public class LocalRepositoryViewModel : RepositoryViewModelBase {
 
         #region fields
         #endregion // fields

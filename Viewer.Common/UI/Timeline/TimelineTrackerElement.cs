@@ -64,6 +64,12 @@ namespace Viewer.Common.UI.Timeline
             set;
         }
 
+        public bool ShowLabel
+        {
+            get;
+            set;
+        }
+
         #endregion // properties
 
 
@@ -88,14 +94,16 @@ namespace Viewer.Common.UI.Timeline
             dc.DrawLine(pen, new Point(-5, 1), new Point(5, 1));
             dc.DrawLine(pen, new Point(-5, Height), new Point(5, Height));
 
-            // label
-            string s = Time.ToString("MM-dd HH:mm:ss");
-            Typeface face = new Typeface("Tahoma");
-            Brush fill = new SolidColorBrush(ToColor(0xccff0000));
-            FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, fill);
+            if (ShowLabel) {
+                // label
+                string s = Time.ToString("MM-dd HH:mm:ss");
+                Typeface face = new Typeface("Tahoma");
+                Brush fill = new SolidColorBrush(ToColor(0xccff0000));
+                FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, fill);
 
-            double x = LeftLabel ? -ft.Width - 4 : 4;
-            dc.DrawText(ft, new Point(x, this.Height - ft.Height / 3));
+                double x = LeftLabel ? -ft.Width - 4 : 4;
+                dc.DrawText(ft, new Point(x, this.Height - ft.Height / 3));
+            }
         }
 
         protected override void DoMouseDown(Point p)

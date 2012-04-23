@@ -110,6 +110,9 @@ namespace Viewer.Common.View
 
                 chart.Title = Track.First.PointTime.ToString("yyyy-MM-dd hh:mm:ss") + " ~ " +
                     Track.Last.PointTime.ToString("yyyy-MM-dd hh:mm:ss");
+            } else {
+                chart.Title = "";
+                chart.Clear();
             }
         }
 

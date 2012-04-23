@@ -31,16 +31,15 @@ namespace Viewer.Personal {
     public class PersonalModule : IModule {
 
         [Import]
-        private IRegionManager m_regionManager;
+        IRegionManager m_regionManager;
 
         public void Initialize() {
-            Debug.WriteLine("Personal Module initialize...");
             Logger.Debug("Personal Module initialize...");
 
-            m_regionManager.RegisterViewWithRegion("main", typeof(RepositoryView));
-
-            PersonalDomain.Domain.EventAggregator = (IEventAggregator)ServiceLocator.Current.GetService(typeof(IEventAggregator));
+            PersonalDomain.Domain.EventAggregator = ServiceLocator.Current.GetService(typeof(IEventAggregator)) as IEventAggregator;
             PersonalDomain.Domain.Start();
+
+            m_regionManager.RegisterViewWithRegion("main", typeof(RepositoryView));
         }
     }
 }

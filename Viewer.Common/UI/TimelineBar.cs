@@ -316,8 +316,13 @@ namespace Viewer.Common.UI
                 m_trackerElement.Time = m_position.PointTime;
 
                 x = PaddingLeft + x * m_xaxisElement.Width;
+                m_trackerElement.ShowLabel = true;
                 m_trackerElement.LeftLabel = x > m_xaxisElement.Width - m_trackerElement.Measure(0, 0).Width;
                 m_trackerElement.X = x;
+            } else {
+                m_trackerElement.ShowLabel = false;
+                m_trackerElement.Time = new DateTime();
+                m_trackerElement.X = PaddingLeft;
             }
         }
 

@@ -100,6 +100,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Service\PlaybackManager.cs" />
     <Compile Include="StringExtension.cs" />
     <Compile Include="UI\Acceleration\AxisHelper.cs" />
     <Compile Include="UI\Acceleration\AxisLabelProvider.cs" />

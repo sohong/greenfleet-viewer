@@ -24,39 +24,20 @@ using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Viewer.Common;
-using Viewer.Common.Service;
-using Viewer.Personal.View;
-using Microsoft.Practices.Prism.Events;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Viewer.Personal.ViewModel
 {
     /// <summary>
-    /// 리파지토리 검색 방법
-    /// </summary>
-    public enum SearchMode
-    {
-        Range,      // 구간 설정
-        //Today,      // 오늘
-        //TwoDays,    // 이틀
-        Recent,     // 최근
-        RecentTwo   // 최근 이틀
-    }
-
-
-    /// <summary>
     /// View model base for LocalRepositoryViewModel and DeviceRepositoryViewModel.
     /// </summary>
     [Export]
-    public class RepositoryViewModel : ViewModelBase
+    public class RepositoryViewModelBase : ViewModelBase
     {
         #region fields
 
-        private DeviceRepository m_deviceRepository;
         private ListCollectionView m_vehicles;
         private bool m_loading;
-        private ListCollectionView m_deviceTracks;
-        private ListCollectionView m_localTracks;
+        private ListCollectionView m_tracks;
         private TrackCollection m_selectedTracks;
 
         #endregion // fields
@@ -64,11 +45,8 @@ namespace Viewer.Personal.ViewModel
 
         #region constructors
 
-        public RepositoryViewModel()
+        public RepositoryViewModelBase()
         {
-            this.DriveManager = new DriveManager();
-            m_deviceRepository = new DeviceRepository();
-
             m_vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
             m_vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
@@ -77,29 +55,7 @@ namespace Viewer.Personal.ViewModel
             SearchFrom = DateTime.Today;
             SearchTo = DateTime.Today + TimeSpan.FromMinutes(23 * 60 + 59);
             SearchAll = true;
-            SearchMode = SearchMode.Recent;
             AutoPlay = true;
-
-            OpenCommand = new DelegateCommand<object>(DoOpen, CanOpen);
-            SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
-            SaveCommand = new DelegateCommand(DoSave, CanSave);
-
-            RegisterGlobalEvents();
-        }
-
-        private void RegisterGlobalEvents()
-        {
-            IEventAggregator events = ServiceLocator.Current.GetService(typeof(IEventAggregator)) as IEventAggregator;
-            if (events != null) {
-                events.GetEvent<TrackActivatedEvent>().Subscribe((track) => {
-                    track.IsChecked = true;
-                    ActiveTrack = track;
-                });
-
-                events.GetEvent<TrackPointChangedEvent>().Subscribe((point) => {
-                    this.TrackPoint = point;
-                });
-            }
         }
 
         #endregion // constructors
@@ -107,76 +63,28 @@ namespace Viewer.Personal.ViewModel
 
         #region properties
 
-        public int ViewIndex
-        {
-            get { return m_viewIndex; }
-            set
-            {
-                if (value != m_viewIndex) {
-                    m_viewIndex = value;
-                    RaisePropertyChanged(() => ViewIndex);
-                    IsLocalChanged();
-                }
-            }
-        }
-        private int m_viewIndex;
-
-        public bool IsLocal
-        {
-            get { return ViewIndex == 1; }
-        }
-
         public ListCollectionView Vehicles
         {
             get { return m_vehicles; }
         }
 
-        public IDriveManager DriveManager
-        {
-            get;
-            set;
-        }
-
-        public DeviceRepository DeviceRepository
-        {
-            get { return m_deviceRepository; }
-        }
-
-        public LocalRepository LocalRepository
-        {
-            get { return PersonalDomain.Domain.Repository; }
-        }
-
         public ListCollectionView Tracks
         {
-            get { return m_deviceTracks; }
+            get { return m_tracks; }
         }
 
-        public TrackGroup DeviceTrackGroup
+        public TrackGroup TrackGroup
         {
-            get { return m_deviceTrackGroup; }
+            get { return m_trackGroup; }
             set
             {
-                if (value != m_deviceTrackGroup) {
-                    m_deviceTrackGroup = value;
-                    RaisePropertyChanged(() => DeviceTrackGroup);
+                if (value != m_trackGroup) {
+                    m_trackGroup = value;
+                    RaisePropertyChanged(() => TrackGroup);
                 }
             }
         }
-        private TrackGroup m_deviceTrackGroup;
-
-        public TrackGroup LocalTrackGroup
-        {
-            get { return m_localTrackGroup; }
-            set
-            {
-                if (value != m_localTrackGroup) {
-                    m_localTrackGroup = value;
-                    RaisePropertyChanged(() => LocalTrackGroup);
-                }
-            }
-        }
-        private TrackGroup m_localTrackGroup;
+        private TrackGroup m_trackGroup;
 
         public TrackCollection SelectedTracks
         {
@@ -253,22 +161,6 @@ namespace Viewer.Personal.ViewModel
             }
         }
         private bool m_searchAll;
-
-        /// <summary>
-        /// Search mode.
-        /// </summary>
-        public SearchMode SearchMode
-        {
-            get { return m_searchMode; }
-            set
-            {
-                if (value != m_searchMode) {
-                    m_searchMode = value;
-                    RaisePropertyChanged(() => SearchMode);
-                }
-            }
-        }
-        private SearchMode m_searchMode;
 
         /// <summary>
         /// ActiveTrack이 설정되면 자동으로 재생할 것인 지 설정.
@@ -364,19 +256,7 @@ namespace Viewer.Personal.ViewModel
             get { return Commands.Instance; }
         }
 
-        public ICommand OpenCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand SearchCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand SaveCommand
+        public ICommand LoadCommand
         {
             get;
             private set;
@@ -386,6 +266,18 @@ namespace Viewer.Personal.ViewModel
 
 
         #region methods
+
+        protected void ResetTrackGroup(ListCollectionView tracks)
+        {
+            if (tracks != null)
+                m_tracks = tracks;
+
+            this.TrackGroup = CreateGroupsFromTracks(m_tracks);
+            if (this.TrackGroup != null) {
+                RegisterEvents(this.TrackGroup);
+            }
+        }
+
         #endregion // methods
 
 
@@ -401,19 +293,6 @@ namespace Viewer.Personal.ViewModel
 
         #region internal methods
 
-        private void IsLocalChanged()
-        {
-            ActiveTrack = null;
-            TrackPoint = null;
-            // 시작 시점에는 아직 생성되지 않았을 수 있다.
-            if (DeviceTrackGroup != null) {
-                DeviceTrackGroup.IsChecked = false;
-            }
-            if (LocalTrackGroup != null) {
-                LocalTrackGroup.IsChecked = false;
-            }
-        }
-
         protected void BeginLoading()
         {
             m_loading = true;
@@ -422,24 +301,6 @@ namespace Viewer.Personal.ViewModel
         protected void EndLoading()
         {
             m_loading = false;
-        }
-
-        private void ResetDeviceTrackGroup(ListCollectionView tracks)
-        {
-            if (tracks != null)
-                m_deviceTracks = tracks;
-
-            this.DeviceTrackGroup = CreateGroupsFromTracks(m_deviceTracks);
-            RegisterDeviceEvents(this.DeviceTrackGroup);
-        }
-
-        private void ResetLocalTrackGroup(ListCollectionView tracks)
-        {
-            if (tracks != null)
-                m_localTracks = tracks;
-
-            this.LocalTrackGroup = CreateGroupsFromTracks(m_localTracks);
-            RegisterLocalEvents(this.LocalTrackGroup);
         }
 
         /// <summary>
@@ -530,24 +391,13 @@ namespace Viewer.Personal.ViewModel
             return root;
         }
 
-        private void RegisterDeviceEvents(TrackGroup group)
+        private void RegisterEvents(TrackGroup group)
         {
             group.TrackChanged += new Action<TrackGroup, Track, string>(TrackGroup_TrackChanged);
-            group.TrackAllChanged += new Action<TrackGroup>(DeviceTrackGroup_TrackAllChanged);
+            group.TrackAllChanged += new Action<Common.Model.TrackGroup>(TrackGroup_TrackAllChanged);
             foreach (object child in group.Children) {
                 if (child is TrackGroup) {
-                    RegisterDeviceEvents((TrackGroup)child);
-                }
-            }
-        }
-
-        private void RegisterLocalEvents(TrackGroup group)
-        {
-            group.TrackChanged += new Action<TrackGroup, Track, string>(TrackGroup_TrackChanged);
-            group.TrackAllChanged += new Action<TrackGroup>(LocalTrackGroup_TrackAllChanged);
-            foreach (object child in group.Children) {
-                if (child is TrackGroup) {
-                    RegisterLocalEvents((TrackGroup)child);
+                    RegisterEvents((TrackGroup)child);
                 }
             }
         }
@@ -566,37 +416,24 @@ namespace Viewer.Personal.ViewModel
             }
         }
 
-        private void ResetTrackSelection(ListCollectionView tracks)
+        private void TrackGroup_TrackAllChanged(TrackGroup group)
         {
-            if (tracks != null) {
-                m_selectedTracks.BeginUpdate();
-                try {
-                    m_selectedTracks.Clear();
-                    foreach (Track track in tracks) {
-                        if (track.IsChecked) {
-                            m_selectedTracks.Add(track);
-                        }
+            m_selectedTracks.BeginUpdate();
+            try {
+                m_selectedTracks.Clear();
+                foreach (Track track in m_tracks) {
+                    if (track.IsChecked) {
+                        m_selectedTracks.Add(track);
                     }
-
-                } finally {
-                    m_selectedTracks.EndUpdate();
                 }
+
+            } finally {
+                m_selectedTracks.EndUpdate();
             }
-        }
-
-        private void DeviceTrackGroup_TrackAllChanged(TrackGroup group)
-        {
-            ResetTrackSelection(m_deviceTracks);
-        }
-
-        private void LocalTrackGroup_TrackAllChanged(TrackGroup group)
-        {
-            ResetTrackSelection(m_localTracks);
         }
 
         private void Vehicles_CurrentChanged(object sender, EventArgs e)
         {
-            IsLocalChanged();
             SelectedVehicle = Vehicles.CurrentItem as Vehicle;
             CheckCommands();
         }
@@ -605,100 +442,6 @@ namespace Viewer.Personal.ViewModel
         {
             //((DelegateCommand<object>)DeleteCommand).RaiseCanExecuteChanged();
             //CommandManager.InvalidateRequerySuggested();
-        }
-
-        // Open command
-        private bool CanOpen(object data)
-        {
-            return true;
-        }
-
-        private void DoOpen(object data)
-        {
-            string folder = DriveManager.FindTrackDrive(PersonalDomain.Domain.Preferences.Testing);
-            if (folder != null) {
-                BeginLoading();
-                try {
-                    DeviceRepository.Open(SelectedVehicle, folder, () => {
-                        ResetDeviceTrackGroup(DeviceRepository.GetTracks());
-                        if (this.DeviceTrackGroup != null) {
-                            this.SearchFrom = DeviceRepository.StartTime.StripSeconds();
-                            this.SearchTo = DeviceRepository.EndTime.StripSeconds();
-                        }
-
-                        // for testing
-                        if (data is Action) {
-                            ((Action)data)();
-                        }
-                    });
-
-                } finally {
-                    EndLoading();
-                }
-
-            } else {
-                //PersonalDomain.Domain.EventAggregator.GetEvent<NoDriveEvent>().Publish(null);
-                // TODO 테스트 가능하도록 MessageUtil을 서비스 인터페이스로 구현해야 한다.
-                MessageUtil.Show("트랙 데이터 드라이브가 존재하지 않습니다.");
-            }
-        }
-
-        // Search command
-        private bool CanSearch(object data)
-        {
-            return true;
-        }
-
-        private void DoSearch(object data)
-        {
-            DateTime dateFrom = SearchFrom;
-            DateTime dateTo = SearchTo;
-
-            switch (SearchMode) {
-            /*
-            case ViewModel.SearchMode.Today:
-                dateFrom = DateTime.Today;
-                dateTo = dateFrom + TimeSpan.FromMinutes(23 * 60 + 59);
-                break;
-
-            case ViewModel.SearchMode.TwoDays:
-                dateFrom = DateTime.Today - TimeSpan.FromDays(1);
-                dateTo = dateFrom + TimeSpan.FromMinutes(47 * 60 + 59);
-                break;
-            */
-            case ViewModel.SearchMode.Recent:
-                dateFrom = new TrackFolderManager(LocalRepository).GetRecentDay(SelectedVehicle);
-                dateTo = dateFrom + TimeSpan.FromMinutes(23 * 60 + 59);
-                break;
-
-            case ViewModel.SearchMode.RecentTwo:
-                dateFrom = new TrackFolderManager(LocalRepository).GetRecentDay(SelectedVehicle) - TimeSpan.FromDays(1); ;
-                dateTo = dateFrom + TimeSpan.FromMinutes(47 * 60 + 59);
-                break;
-
-            case ViewModel.SearchMode.Range:
-            default:
-                break;
-            }
-
-            SearchFrom = dateFrom;
-            SearchTo = dateTo;
-
-            LocalRepository.Find(SelectedVehicle, dateFrom, dateTo, () => {
-                ResetLocalTrackGroup(LocalRepository.GetTracks());
-            });
-        }
-
-        // Save(sd card -> local storage) command
-        private bool CanSave()
-        {
-            return true;
-        }
-
-        private void DoSave()
-        {
-            SaveViewModel model = new SaveViewModel(DeviceRepository, SearchFrom, SearchTo);
-            DialogService.Run("저장", new SaveView(), model);
         }
 
         #endregion // internal methods

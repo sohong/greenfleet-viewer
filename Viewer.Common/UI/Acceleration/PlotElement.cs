@@ -133,10 +133,8 @@ namespace Viewer.Common.UI.Acceleration
                 m_seriesZ.Values = GetSeriesValues(2);
                 m_seriesZ.Draw();
 
-                if (this.Values.Count > 0) {
-                    DrawIndicator();
-                    DrawPanel();
-                }
+                DrawIndicator(this.Values);
+                DrawPanel(this.Values);
             }
         }
 
@@ -179,31 +177,35 @@ namespace Viewer.Common.UI.Acceleration
             return values;
         }
 
-        private void DrawIndicator()
+        private void DrawIndicator(IList<AccelerationChart.Value> values)
         {
             DrawingContext dc = m_indicator.RenderOpen();
 
-            Pen pen = new Pen(new SolidColorBrush(ToColor(0x880000ff)), 1);
-            pen.DashStyle = DashStyles.Dash;
-            double x = this.AxisLabels.GetPosition(this.Values.Count - 1) * this.Width;
-            dc.DrawLine(pen, new Point(x, -2), new Point(x, this.Height + 2));
+            if (values != null && values.Count > 0) {
+                Pen pen = new Pen(new SolidColorBrush(ToColor(0x880000ff)), 1);
+                pen.DashStyle = DashStyles.Dash;
+                double x = this.AxisLabels.GetPosition(this.Values.Count - 1) * this.Width;
+                dc.DrawLine(pen, new Point(x, -2), new Point(x, this.Height + 2));
+            }
 
             dc.Close();
         }
 
-        private void DrawPanel()
+        private void DrawPanel(IList<AccelerationChart.Value> values)
         {
             DrawingContext dc = m_panel.RenderOpen();
 
-            Brush fill = new SolidColorBrush(ToColor(0x110000ff));
-            double x = this.AxisLabels.GetPosition(this.Values.Count - 1) * this.Width;
-            dc.DrawRectangle(fill, null, new Rect(x, 0, this.Width - x, this.Height));
+            if (values != null && values.Count > 0) {
+                Brush fill = new SolidColorBrush(ToColor(0x110000ff));
+                double x = this.AxisLabels.GetPosition(this.Values.Count - 1) * this.Width;
+                dc.DrawRectangle(fill, null, new Rect(x, 0, this.Width - x, this.Height));
 
-            if (x < this.Width - 4) {
-                string s = this.AxisLabels.GetLabel(this.Values.Count - 1);
-                Typeface face = new Typeface("Tahoma");
-                FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 12, Brushes.Blue);
-                dc.DrawText(ft, new Point(x + 4, this.Height - ft.Height - 2));
+                if (x < this.Width - 4) {
+                    string s = this.AxisLabels.GetLabel(this.Values.Count - 1);
+                    Typeface face = new Typeface("Tahoma");
+                    FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 12, Brushes.Blue);
+                    dc.DrawText(ft, new Point(x + 4, this.Height - ft.Height - 2));
+                }
             }
 
             dc.Close();

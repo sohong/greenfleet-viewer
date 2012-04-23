@@ -14,8 +14,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="저장 범위" Margin="3">
+        <Label Grid.Row="0">SD 카드의 트랙 파일들을 로컬 저장소로 복사합니다.</Label>
+        <GroupBox Grid.Row="1" Header="저장 범위" Margin="3">
             <Grid Margin="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -39,7 +41,7 @@
                 </StackPanel>
             </Grid>
         </GroupBox>
-        <CheckBox Grid.Row="1" Margin="6" IsChecked="{Binding Path=Options.Overwrite}">존재하는 파일 덮어쓰기</CheckBox>
-        <CheckBox Grid.Row="2" Margin="6" IsChecked="{Binding Path=Options.Convert}">영상 파일 변환</CheckBox>
+        <CheckBox Grid.Row="2" Margin="6" IsChecked="{Binding Path=Options.Overwrite}">존재하는 파일 덮어쓰기</CheckBox>
+        <CheckBox Grid.Row="3" Margin="6" IsChecked="{Binding Path=Options.Convert}">영상 파일 변환</CheckBox>
     </Grid>
 </UserControl>

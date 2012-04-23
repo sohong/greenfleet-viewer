@@ -15,7 +15,7 @@
             <Button MinWidth="60" Margin="0,0,0,0" Command="{Binding ConfigDeviceCommand}">기기 설정</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding VehicleCommand}">차량 정보</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding PreferencesCommand}">환경 설정</Button>
-            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding TestCommand}">Test</Button>
+            <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding TestCommand}" Visibility="Collapsed">Test</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding Commands.About}">About</Button>
         </StackPanel>
         <ContentControl Grid.Row="1" prism:RegionManager.RegionName="main"/>

@@ -93,7 +93,7 @@ namespace Viewer.Common.Model
             get { return m_checked; }
             set
             {
-                if (value != m_checked) {
+                //if (value != m_checked) {
                     BeginUpdate();
                     try {
                         m_checked = value;
@@ -109,7 +109,7 @@ namespace Viewer.Common.Model
                     } finally {
                         EndUpdate();
                     }
-                }
+                //}
             }
         }
         private bool m_checked;
