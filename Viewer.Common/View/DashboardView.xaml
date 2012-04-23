@@ -29,18 +29,21 @@
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ui:DirectionIndicator x:Name="compass" Margin="10"/>
-                <StackPanel Grid.Row="1" Margin="10">
+                <StackPanel Grid.Row="0" Margin="10,0,10,0" HorizontalAlignment="Right">
                     <!-- Direction -->
-                    <Label Name="txtDirection" Content="222.22" Foreground="White" Margin="-4"/>
+                    <Label Name="txtDirection" Content="222.22" HorizontalAlignment="Right" Foreground="White" Margin="-2"/>
+                </StackPanel>
+                <ui:DirectionIndicator Grid.Row="1" x:Name="compass" Margin="10"/>
+                <StackPanel Grid.Row="2" Margin="10" HorizontalAlignment="Right">
                     <!-- Latitude -->
-                    <Label Name="txtLatitude" Content="37.123456" Foreground="White" Margin="-4"/>
+                    <Label Name="txtLatitude" Content="37.123456" HorizontalAlignment="Right" Foreground="White" Margin="-2"/>
                     <!-- Longitude -->
-                    <Label Name="txtLongitude" Content="111.123456" Foreground="White" Margin="-4"/>
+                    <Label Name="txtLongitude" Content="111.123456" HorizontalAlignment="Right" Foreground="White" Margin="-2"/>
                 </StackPanel>
             </Grid>
         </Grid>

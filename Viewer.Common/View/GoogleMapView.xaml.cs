@@ -27,14 +27,19 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Security.Permissions;
 using System.Runtime.InteropServices;
+using Viewer.Common.UI.Timeline;
+using Viewer.Common.Util;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.ServiceLocation;
+using Viewer.Common.Event;
 
-namespace Viewer.Common.View {
-
+namespace Viewer.Common.View
+{
     /// <summary>
     /// Interaction logic for GoogleMapView.xaml
     /// </summary>
-    public partial class GoogleMapView : UserControl {
-
+    public partial class GoogleMapView : UserControl
+    {
         #region dependency properties
 
         /// <summary>
@@ -47,7 +52,8 @@ namespace Viewer.Common.View {
                 typeof(GoogleMapView),
                 new PropertyMetadata(ActiveTrackPropertyChanged));
 
-        private static void ActiveTrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void ActiveTrackPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             GoogleMapView view = (GoogleMapView)obj;
             Track track = e.NewValue as Track;
             view.SetActive(track);
@@ -60,16 +66,18 @@ namespace Viewer.Common.View {
         public static readonly DependencyProperty TracksProperty =
             DependencyProperty.Register(
                 "Tracks",
-                typeof(IEnumerable),
+                typeof(TrackCollection),
                 typeof(GoogleMapView),
                 new PropertyMetadata(TracksPropertyChanged));
 
-        private static void TracksPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e) {
+        private static void TracksPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
             GoogleMapView view = (GoogleMapView)obj;
             view.ResetTracks(e.OldValue as ObservableCollection<Track>, e.NewValue as ObservableCollection<Track>);
         }
 
-        private void ResetTracks(ObservableCollection<Track> oldTracks, ObservableCollection<Track> tracks) {
+        private void ResetTracks(ObservableCollection<Track> oldTracks, ObservableCollection<Track> tracks)
+        {
             if (oldTracks != null) {
                 oldTracks.CollectionChanged -= new NotifyCollectionChangedEventHandler(tracks_CollectionChanged);
             }
@@ -79,7 +87,9 @@ namespace Viewer.Common.View {
             }
         }
 
-        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+        private void tracks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            /*
             switch (e.Action) {
             case NotifyCollectionChangedAction.Add:
                 foreach (Track track in e.NewItems) {
@@ -102,6 +112,38 @@ namespace Viewer.Common.View {
                     RefreshPins();
                 }
                 break;
+            }
+             */
+            RefreshView();
+        }
+
+        private void RefreshView()
+        {
+            ClearPoints();
+            if (Tracks == null) return;
+
+            DateTime start = new DateTime();
+            DateTime end = new DateTime();
+            if (Tracks.First != null) {
+                start = Tracks.First.StartTime;
+            }
+            if (Tracks.Last != null) {
+                end = Tracks.Last.EndTime;
+            }
+
+            TimelineValueCollection values = new TimelineValueCollection(start, end);
+            values.Build(Tracks);
+
+            Clear(true);
+            foreach (TimelineValue v in values) {
+                AddTrack(v.Track);
+            }
+
+            IEventAggregator events = ServiceLocator.Current.GetService(typeof(IEventAggregator)) as IEventAggregator;
+            if (events != null) {
+                events.GetEvent<TrackPointChangedEvent>().Subscribe((point) => {
+                    AddPoint(point);
+                });
             }
         }
 
@@ -129,7 +171,8 @@ namespace Viewer.Common.View {
 
         #region constructor
 
-        public GoogleMapView() {
+        public GoogleMapView()
+        {
             InitializeComponent();
 
             m_tracks = new List<Track>();
@@ -151,7 +194,8 @@ namespace Viewer.Common.View {
         /// <summary>
         /// map에 표시할 Track 정보.
         /// </summary>
-        public Track ActiveTrack {
+        public Track ActiveTrack
+        {
             get { return (Track)GetValue(ActiveTrackProperty); }
             set { SetValue(ActiveTrackProperty, value); }
         }
@@ -159,8 +203,9 @@ namespace Viewer.Common.View {
         /// <summary>
         /// map에 표시할 Track 정보들.
         /// </summary>
-        public IEnumerable Tracks {
-            get { return (IEnumerable)GetValue(TracksProperty); }
+        public TrackCollection Tracks
+        {
+            get { return (TrackCollection)GetValue(TracksProperty); }
             set { SetValue(TracksProperty, value); }
         }
 
@@ -169,7 +214,8 @@ namespace Viewer.Common.View {
 
         #region methods
 
-        public bool AddTrack(Track track, bool refresh = true) {
+        public bool AddTrack(Track track, bool refresh = true)
+        {
             if (track != null && !m_tracks.Contains(track)) {
                 m_tracks.Add(track);
 
@@ -182,7 +228,8 @@ namespace Viewer.Common.View {
             return false;
         }
 
-        public void RemoveTrack(Track track, bool refresh = true) {
+        public void RemoveTrack(Track track, bool refresh = true)
+        {
             if (track != null && m_tracks.Contains(track)) {
                 m_tracks.Remove(track);
 
@@ -192,7 +239,8 @@ namespace Viewer.Common.View {
             }
         }
 
-        public void Clear(bool refresh = true) {
+        public void Clear(bool refresh = true)
+        {
             m_tracks.Clear();
             if (refresh) {
                 RefreshMap();
@@ -204,14 +252,16 @@ namespace Viewer.Common.View {
 
         #region internal methods
 
-        private void RefreshMap() {
+        private void RefreshMap()
+        {
             //RefreshLocations(track);
             //RefreshRegion(track);
             //RefreshRoutes(track);
             RefreshPins();
         }
 
-        private void SetActive(Track track) {
+        private void SetActive(Track track)
+        {
             if (track != m_activeTrack) {
                 ClearActive();
                 m_activeTrack = track;
@@ -221,13 +271,15 @@ namespace Viewer.Common.View {
             }
         }
 
-        private void ClearActive() {
+        private void ClearActive()
+        {
             if (m_activeTrack != null) {
                 m_activeTrack = null;
             }
         }
 
-        private void CreateRegion() {
+        private void CreateRegion()
+        {
             /*
             m_region = new MapPolygon();
             m_region.Locations = new LocationCollection();
@@ -241,10 +293,12 @@ namespace Viewer.Common.View {
              */
         }
 
-        private void CreateRoutes() {
+        private void CreateRoutes()
+        {
         }
 
-        private void RefreshLocations(Track track) {
+        private void RefreshLocations(Track track)
+        {
             /*
             if (m_locations == null) {
                 m_locations = new List<Location>();
@@ -261,13 +315,16 @@ namespace Viewer.Common.View {
              */
         }
 
-        private void RefreshRegion(Track track) {
+        private void RefreshRegion(Track track)
+        {
         }
 
-        private void RefreshRoutes(Track track) {
+        private void RefreshRoutes(Track track)
+        {
         }
 
-        private void RefreshPins() {
+        private void RefreshPins()
+        {
             ClearPins();
             /*
             pinLayer.Children.Clear();
@@ -282,18 +339,35 @@ namespace Viewer.Common.View {
             }
         }
 
-        private void AddPin(Track track) {
+        private void AddPin(Track track)
+        {
             if (track.PointCount > 0) {
                 TrackPoint p = track[0];
                 browser.InvokeScript("addMarker", track.Id, p.Latitude, p.Longitude);
             }
         }
 
-        private void ClearPins() {
+        private void ClearPins()
+        {
             browser.InvokeScript("clearMarkers");
         }
 
-        private void MarkerClicked(string trackId) {
+        private void AddPoint(TrackPoint point)
+        {
+            browser.InvokeScript("addPoint", point.Latitude, point.Longitude);
+        }
+
+        private void ClearPoints()
+        {
+            try {
+                browser.InvokeScript("clearPoints");
+            } catch (Exception ex) {
+                MessageUtil.Show(ex.Message);
+            }
+        }
+
+        private void MarkerClicked(string trackId)
+        {
             Track track = FindTrack(trackId);
             if (track != null) {
                 //MessageBox.Show("marker clicked at " + track.Id, "map");
@@ -304,7 +378,8 @@ namespace Viewer.Common.View {
             }
         }
 
-        private void MarkerDoubleClicked(string trackId) {
+        private void MarkerDoubleClicked(string trackId)
+        {
             Track track = FindTrack(trackId);
             if (track != null) {
                 Action<object, Track> eh = TrackDoubleClicked;
@@ -314,7 +389,8 @@ namespace Viewer.Common.View {
             }
         }
 
-        private Track FindTrack(string trackId) {
+        private Track FindTrack(string trackId)
+        {
             Track track = m_tracks.First((t) => {
                 return t.Id.Equals(trackId);
             });
@@ -324,9 +400,10 @@ namespace Viewer.Common.View {
         #endregion // internal methods
 
 
-        #region event handlers 
+        #region event handlers
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e) {
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
         }
 
         #endregion // event handlers
@@ -337,7 +414,8 @@ namespace Viewer.Common.View {
         /// </summary>
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         [ComVisible(true)]
-        public class MapScriptHelper {
+        public class MapScriptHelper
+        {
 
             #region fields
 
@@ -348,23 +426,26 @@ namespace Viewer.Common.View {
 
             #region constructors
 
-            public MapScriptHelper(GoogleMapView view) {
+            public MapScriptHelper(GoogleMapView view)
+            {
                 m_view = view;
             }
 
             #endregion // constructors
 
 
-            #region javascript functions 
+            #region javascript functions
 
-            public void MarkerClicked(string track) {
+            public void MarkerClicked(string track)
+            {
                 m_view.MarkerClicked(track);
             }
 
-            public void MarkerDblClicked(string track) {
+            public void MarkerDblClicked(string track)
+            {
                 m_view.MarkerDoubleClicked(track);
             }
-        
+
             #endregion javascript functions
         }
     }

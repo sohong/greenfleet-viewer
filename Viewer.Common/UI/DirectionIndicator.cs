@@ -122,15 +122,15 @@ namespace Viewer.Common.UI
 
             double cx = width / 2;
             double cy = height / 2;
-            double len = 7;
-            double y = 12;
+            double len = 8;
+            double y = 15;
             double half = Math.Min(width, height) / 2 / 2;
-            width -= 12 * 2;
-            height -= 12 * 2;
+            width -= 15 * 2;
+            height -= 15 * 2;
 
             Brush fillWhite = new SolidColorBrush(UIElement.ToColor(0x88ffffff));
             Brush fillGray = new SolidColorBrush(UIElement.ToColor(0x88888888));
-            Brush fillYellow = new SolidColorBrush(UIElement.ToColor(0x880000ff));
+            Brush fillYellow = new SolidColorBrush(UIElement.ToColor(0xffffffff));
             Pen pen = new Pen(Brushes.Gray, 1);
 
             PathGeometry path = new PathGeometry();

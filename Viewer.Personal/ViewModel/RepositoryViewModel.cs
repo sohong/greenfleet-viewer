@@ -627,8 +627,8 @@ namespace Viewer.Personal.ViewModel
                     DeviceRepository.Open(SelectedVehicle, folder, () => {
                         ResetDeviceTrackGroup(DeviceRepository.GetTracks());
                         if (this.DeviceTrackGroup != null) {
-                            this.SearchFrom = DeviceRepository.StartTime.StripSeconds();
-                            this.SearchTo = DeviceRepository.EndTime.StripSeconds();
+                            //this.SearchFrom = DeviceRepository.StartTime.StripSeconds();
+                            //this.SearchTo = DeviceRepository.EndTime.StripSeconds();
                         }
 
                         // for testing

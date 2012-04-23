@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Viewer.Common;
+using Viewer.Common.Model;
 
 namespace Viewer.Common.UI.Timeline
 {
@@ -33,17 +34,30 @@ namespace Viewer.Common.UI.Timeline
 
         #region constructor
 
-        public TimelineValue(TimelineValueType type, DateTime start)
+        public TimelineValue(TimelineValueType type, Track track)
         {
             this.Type = type;
-            this.Start = start.StripSeconds();
-            this.Finish = start.StripSeconds();
+            this.Track = track;
+            this.Start = track.StartTime.StripSeconds();
+            this.Finish = track.StartTime.StripSeconds();
         }
 
         #endregion // constructor
 
 
         #region properties
+
+        public Track Track
+        {
+            get;
+            set;
+        }
+
+        public Track LastTrack
+        {
+            get;
+            set;
+        }
 
         public TimelineValueType Type
         {

@@ -14,6 +14,7 @@
 
     var map;
     var markers = [];
+    var polylines;
 
     function initialize() {
         var latlng = new google.maps.LatLng(37.380039, 127.115263);
@@ -23,6 +24,24 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("map_canvas"), options);
+
+        var polyOptions = {
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        };
+        polylines = new google.maps.Polyline(polyOptions);
+        polylines.setMap(map);
+    }
+
+    function addPoint(lattitude, longitude) {
+        var path = polylines.getPath();
+        path.push(new google.maps.LatLng(lattitude, longitude));
+    }
+
+    function clearPoints() {
+        var path = polylines.getPath();
+        path.clear();
     }
 
     function addMarker(track, lattitude, longitude) {

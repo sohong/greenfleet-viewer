@@ -22,7 +22,7 @@ namespace Viewer.Common.UI.Timeline
     /// 분이 연속되지 않는 시점 혹은, value type이 달라질 때 
     /// 새로운 TimelineValue가 생성된다. 
     /// </summary>
-    public class TimelineValueCollection
+    public class TimelineValueCollection : IEnumerable<TimelineValue>
     {
         #region fields
 
@@ -42,6 +42,21 @@ namespace Viewer.Common.UI.Timeline
         }
 
         #endregion // constructor
+
+
+        #region IEnumerable<TimelineValue>
+
+        public IEnumerator<TimelineValue> GetEnumerator()
+        {
+            return m_values.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return m_values.GetEnumerator();
+        }
+        
+        #endregion // IEnumerable<TimelineValue>
 
 
         #region properties
@@ -82,7 +97,8 @@ namespace Viewer.Common.UI.Timeline
             if (tracks.Count < 1) return;
 
             Track track = tracks.First;
-            TimelineValue value = new TimelineValue(GetValueType(track), track.StartTime);
+            TimelineValue value = new TimelineValue(GetValueType(track), track);
+            value.LastTrack = track;
             m_values.Add(value);
 
             for (int i = 1, count = tracks.Count; i < count; i++) {
@@ -93,9 +109,11 @@ namespace Viewer.Common.UI.Timeline
                 double m1 = TimeSpan.FromTicks(track.StartTime.StripSeconds().Ticks).TotalMinutes;
                 double m2 = TimeSpan.FromTicks(value.Finish.StripSeconds().Ticks).TotalMinutes + 1;
                 if (vtype != value.Type || m1 > m2) {                              
-                    value = new TimelineValue(vtype, track.StartTime);
+                    value = new TimelineValue(vtype, track);
+                    value.LastTrack = track;
                     m_values.Add(value);
                 } else {
+                    value.LastTrack = track;
                     value.Append(track.StartTime);
                 }
             }
