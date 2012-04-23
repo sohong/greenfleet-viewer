@@ -92,7 +92,7 @@ namespace Viewer.Common.UI.Acceleration
             // data points
             for (int i = 0; i < pts.Length; i++) {
                 Point p = pts[i];
-                dc.DrawEllipse(fill, null, p, 3, 3);
+                dc.DrawEllipse(fill, null, p, 2.5, 2.5);
             }
         }
 

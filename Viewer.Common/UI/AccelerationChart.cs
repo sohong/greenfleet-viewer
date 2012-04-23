@@ -112,9 +112,9 @@ namespace Viewer.Common.UI
             m_values = new List<Value>();
 
             m_series = new List<Series>();
-            m_series.Add(new Series("accel X", Colors.CadetBlue));
-            m_series.Add(new Series("accel Y", Colors.Goldenrod));
-            m_series.Add(new Series("accel Z", Colors.PaleVioletRed));
+            m_series.Add(new Series("accel X", UIElement.ToColor(0x88000000)));
+            m_series.Add(new Series("accel Y", UIElement.ToColor(0x88555555)));
+            m_series.Add(new Series("accel Z", UIElement.ToColor(0x88aaaaaa)));
 
             m_axisValues = new AxisValueProvider();
             m_axisLabels = new AxisLabelProvider();

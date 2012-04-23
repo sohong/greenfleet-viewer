@@ -61,8 +61,8 @@
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="4"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -73,8 +73,8 @@
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" MinHeight="60"/>
-                            <RowDefinition Height="4"/>
-                            <RowDefinition Height="130" MinHeight="20"/>
+                            <RowDefinition Height="2"/>
+                            <RowDefinition Height="100" MinHeight="20"/>
                         </Grid.RowDefinitions>
                         <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}" 
                                       PositionChanged="VideoView_PositionChanged" PlayEnded="VideoView_PlayEnded"/>
@@ -99,7 +99,7 @@
                     </Grid>
                 </Grid>
                 <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                <gf:TimelineView Grid.Row="2" Tracks="{Binding SelectedTracks}" CurrentPoint="{Binding TrackPoint}"/>
+                <gf:TimelineView Grid.Row="2" Tracks="{Binding SelectedTracks}" CurrentPoint="{Binding TrackPoint}" Margin="0,2,0,0" />
             </Grid>
         </Grid>
     </Grid>

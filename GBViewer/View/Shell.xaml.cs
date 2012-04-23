@@ -26,23 +26,24 @@ using Viewer.Common.Util;
 using Microsoft.Practices.Prism.Events;
 using Viewer.Personal.ViewModel;
 
-namespace GBViewer.View {
-
+namespace GBViewer.View
+{
     /// <summary>
     /// Application main visual.
     /// </summary>
     [Export]
     public partial class Shell : Window
     {
-        #region constructors 
+        #region constructors
 
-        public Shell() {
+        public Shell()
+        {
             InitializeComponent();
 
             if (SystemParameters.PrimaryScreenWidth > 1280) {
                 this.WindowState = WindowState.Normal;
                 this.Width = 1280;
-                this.Height = 900;
+                this.Height = Math.Min(SystemParameters.PrimaryScreenHeight - 40, 900);
             }
         }
 
@@ -54,7 +55,7 @@ namespace GBViewer.View {
         [Import]
         public PersonalViewModel ViewModel
         {
-            set 
+            set
             {
                 this.DataContext = value;
             }

@@ -50,7 +50,7 @@ namespace Viewer.Common.UI.Timeline
             if (AxisLabels == null) return;
 
             Rect r = new Rect(0, 0, Width, Height);
-            Pen pen = new Pen(new SolidColorBrush(ToColor(0xaaffffff)), 1);
+            Pen pen = new Pen(new SolidColorBrush(ToColor(0xaa333333)), 1);
             pen.DashStyle = DashStyles.Dash;
 
             // vertical lines

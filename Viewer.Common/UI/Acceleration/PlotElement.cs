@@ -140,7 +140,7 @@ namespace Viewer.Common.UI.Acceleration
 
         protected override void DoDraw(DrawingContext dc)
         {
-            LinearGradientBrush brush = new LinearGradientBrush(Colors.LightGray, Colors.White, 90);
+            LinearGradientBrush brush = new LinearGradientBrush(ToColor(0xffeeeeee), Colors.White, 90);
             dc.DrawRectangle(brush, new Pen(Brushes.Gray, 1), new Rect(0, 0, Width, Height));
         }
 

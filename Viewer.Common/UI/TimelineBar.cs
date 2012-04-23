@@ -199,9 +199,15 @@ namespace Viewer.Common.UI
             InvalidateArrange();
         }
 
-        public bool GetTimeAtPos(double x, ref DateTime t)
+        public Track GetTimeAtPos(double x, ref DateTime t)
         {
-            return false;
+            x = x / m_xaxisElement.Width;
+            AxisLabelProvider labels = m_xaxisElement.AxisLabels;
+            int mins = (int)TimeSpan.FromTicks(labels.EndTime.Ticks - labels.StartTime.Ticks).TotalMinutes;
+            t = labels.StartTime.AddMinutes(mins * x).StripSeconds();
+
+            Track track = m_plotElement.Values.GetTrackAt(t);
+            return track;
         }
 
         #endregion // methods
@@ -254,6 +260,8 @@ namespace Viewer.Common.UI
         {
             base.OnMouseDown(e);
 
+            CaptureMouse();
+
             Point p = e.GetPosition(this);
             m_clickedElement = GetHitTest(p);
             if (m_clickedElement != null) {
@@ -289,6 +297,8 @@ namespace Viewer.Common.UI
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             base.OnMouseUp(e);
+
+            ReleaseMouseCapture();
 
             Point p = e.GetPosition(this);
 

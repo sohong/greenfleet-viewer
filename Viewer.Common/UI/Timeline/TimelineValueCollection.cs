@@ -122,7 +122,7 @@ namespace Viewer.Common.UI.Timeline
         /// <summary>
         /// 0 ~ 1 사이의 x 값에 해당하는 time index를 리턴한다.
         /// </summary>
-        public TimelineValue GetValueAt(double x)
+        public Track GetTrackAt(DateTime t)
         {
             return null;
         }

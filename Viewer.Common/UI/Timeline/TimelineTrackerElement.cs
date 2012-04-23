@@ -15,6 +15,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Globalization;
+using Viewer.Common.Model;
 
 namespace Viewer.Common.UI.Timeline
 {
@@ -28,6 +29,7 @@ namespace Viewer.Common.UI.Timeline
         private bool m_dragging;
         private double m_startX;
         private Point m_startPos;
+        private DateTime m_dragTime;
 
         #endregion // fields
 
@@ -37,7 +39,7 @@ namespace Viewer.Common.UI.Timeline
         public TimelineTrackerElement(TimelineBar bar)
             : base(bar)
         {
-            this.Fill = new SolidColorBrush(ToColor(0xffff0000));
+            this.Fill = new SolidColorBrush(ToColor(0xff0000ff));
         }
 
         #endregion // constructor
@@ -86,23 +88,37 @@ namespace Viewer.Common.UI.Timeline
         protected override void DoDraw(DrawingContext dc)
         {
             // vertical line
-            Pen pen = new Pen(this.Fill, 2);
+            Pen pen = new Pen(this.Fill, 1);
             dc.DrawLine(pen, new Point(0, 0), new Point(0, Height));
 
-            // top / bottom
-            pen = new Pen(this.Fill, 1);
-            dc.DrawLine(pen, new Point(-5, 1), new Point(5, 1));
-            dc.DrawLine(pen, new Point(-5, Height), new Point(5, Height));
+            // top
+            PathGeometry path = new PathGeometry();
+            PathFigure figure = new PathFigure();
+            figure.StartPoint = new Point(-6, 0);
+            figure.Segments.Add(new LineSegment(new Point(0, 6), true));
+            figure.Segments.Add(new LineSegment(new Point(6, 0), true));
+            path.Figures.Add(figure);
+            dc.DrawGeometry(this.Fill, pen, path);
 
-            if (ShowLabel) {
+            // bottom
+            double y = Height;
+            path = new PathGeometry();
+            figure = new PathFigure();
+            figure.StartPoint = new Point(-6, y);
+            figure.Segments.Add(new LineSegment(new Point(0, y - 6), true));
+            figure.Segments.Add(new LineSegment(new Point(6, y), true));
+            path.Figures.Add(figure);
+            dc.DrawGeometry(this.Fill, pen, path);
+
+            if (ShowLabel || m_dragging) {
                 // label
-                string s = Time.ToString("MM-dd HH:mm:ss");
+                string s = (m_dragging ? m_dragTime : Time).ToString("MM-dd HH:mm:ss");
                 Typeface face = new Typeface("Tahoma");
-                Brush fill = new SolidColorBrush(ToColor(0xccff0000));
+                Brush fill = new SolidColorBrush(ToColor(0xdd0000ff));
                 FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, fill);
 
                 double x = LeftLabel ? -ft.Width - 4 : 4;
-                dc.DrawText(ft, new Point(x, this.Height - ft.Height / 3));
+                dc.DrawText(ft, new Point(x, this.Height - ft.Height / 2));
             }
         }
 
@@ -120,10 +136,10 @@ namespace Viewer.Common.UI.Timeline
                     double diff = p.X - m_startPos.X;
                     double x = m_startX + diff;
                     DateTime t = new DateTime();
-                    if (Bar.GetTimeAtPos(x, ref t)) {
-                        this.Time = t;
-                        this.X = x;
-                    }
+                    Bar.GetTimeAtPos(x - m_startX, ref t);
+                    m_dragTime = t;
+                    this.X = x;
+                    Draw();
 
                 } else {
                     m_dragging = false;
@@ -133,7 +149,17 @@ namespace Viewer.Common.UI.Timeline
 
         protected override void DoMouseUp(Point p)
         {
-            m_dragging = false;
+            if (m_dragging) {
+                m_dragging = false;
+                double diff = p.X - m_startPos.X;
+                double x = m_startX + diff;
+                DateTime t = new DateTime();
+                Track track = Bar.GetTimeAtPos(x - m_startX, ref t);
+                if (track != null) {
+                } else {
+                    this.X = m_startX;
+                }
+            }
         }
 
         #endregion // overriden methods
