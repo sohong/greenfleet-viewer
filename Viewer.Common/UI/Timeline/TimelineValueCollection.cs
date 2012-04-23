@@ -122,8 +122,14 @@ namespace Viewer.Common.UI.Timeline
         /// <summary>
         /// 0 ~ 1 사이의 x 값에 해당하는 time index를 리턴한다.
         /// </summary>
-        public Track GetTrackAt(DateTime t)
+        public TimelineValue GetValueAt(DateTime t)
         {
+            foreach (TimelineValue v in m_values) {
+                if (v.Start <= t && t <= v.Finish) {
+                    return v;
+                }
+            }
+
             return null;
         }
 

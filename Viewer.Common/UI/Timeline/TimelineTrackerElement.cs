@@ -72,6 +72,18 @@ namespace Viewer.Common.UI.Timeline
             set;
         }
 
+        public double StartX
+        {
+            get;
+            set;
+        }
+
+        public double EndX
+        {
+            get;
+            set;
+        }
+
         #endregion // properties
 
 
@@ -118,7 +130,9 @@ namespace Viewer.Common.UI.Timeline
                 FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, fill);
 
                 double x = LeftLabel ? -ft.Width - 4 : 4;
-                dc.DrawText(ft, new Point(x, this.Height - ft.Height / 2));
+                y = this.Height - ft.Height / 2;
+                dc.DrawRectangle(Brushes.Transparent, null, new Rect(x, y, ft.Width, ft.Height));
+                dc.DrawText(ft, new Point(x, y));
             }
         }
 
@@ -135,8 +149,9 @@ namespace Viewer.Common.UI.Timeline
                 if (pushed) {
                     double diff = p.X - m_startPos.X;
                     double x = m_startX + diff;
+                    x = Math.Max(StartX, Math.Min(EndX, x));
                     DateTime t = new DateTime();
-                    Bar.GetTimeAtPos(x - m_startX, ref t);
+                    Bar.GetTimeAtPos(x - StartX, ref t);
                     m_dragTime = t;
                     this.X = x;
                     Draw();
@@ -153,9 +168,9 @@ namespace Viewer.Common.UI.Timeline
                 m_dragging = false;
                 double diff = p.X - m_startPos.X;
                 double x = m_startX + diff;
+                x = Math.Max(StartX, Math.Min(EndX, x));
                 DateTime t = new DateTime();
-                Track track = Bar.GetTimeAtPos(x - m_startX, ref t);
-                if (track != null) {
+                if (Bar.GetTimeAtPos(x - StartX, ref t)) {
                 } else {
                     this.X = m_startX;
                 }

@@ -199,15 +199,15 @@ namespace Viewer.Common.UI
             InvalidateArrange();
         }
 
-        public Track GetTimeAtPos(double x, ref DateTime t)
+        public bool GetTimeAtPos(double x, ref DateTime t)
         {
             x = x / m_xaxisElement.Width;
             AxisLabelProvider labels = m_xaxisElement.AxisLabels;
             int mins = (int)TimeSpan.FromTicks(labels.EndTime.Ticks - labels.StartTime.Ticks).TotalMinutes;
             t = labels.StartTime.AddMinutes(mins * x).StripSeconds();
 
-            Track track = m_plotElement.Values.GetTrackAt(t);
-            return track;
+            TimelineValue value = m_plotElement.Values.GetValueAt(t);
+            return value != null;
         }
 
         #endregion // methods
@@ -246,6 +246,8 @@ namespace Viewer.Common.UI
             m_plotElement.Move(x, y);
 
             // tracker
+            m_trackerElement.StartX = x;
+            m_trackerElement.EndX = x + width;
             m_trackerElement.Height = height - m_xaxisElement.Height / 2;
             m_trackerElement.Move(x, y - PaddingTop / 2);
 
