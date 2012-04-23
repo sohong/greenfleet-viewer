@@ -19,6 +19,7 @@ using Viewer.Common.UI.Timeline;
 using System.Collections.Specialized;
 using System.Windows.Threading;
 using System.Windows.Input;
+using Viewer.Common.Event;
 
 namespace Viewer.Common.UI
 {
@@ -30,7 +31,7 @@ namespace Viewer.Common.UI
     {
         #region routed events
 
-        public static readonly RoutedEvent TrackPointChangedEvent;
+        public static readonly RoutedEvent TimelineSelectedEvent;
 
         #endregion // routed events
 
@@ -40,9 +41,9 @@ namespace Viewer.Common.UI
         static TimelineBar()
         {
             // events
-            TrackPointChangedEvent = EventManager.RegisterRoutedEvent(
-                "TrackPointChanged", RoutingStrategy.Bubble,
-                typeof(RoutedPropertyChangedEventHandler<TrackPoint>), typeof(TimelineBar));
+            TimelineSelectedEvent = EventManager.RegisterRoutedEvent(
+                "TimelineSelected", RoutingStrategy.Bubble,
+                typeof(RoutedEventHandler), typeof(TimelineBar));
         }
 
         #endregion // static constructor
@@ -71,13 +72,24 @@ namespace Viewer.Common.UI
 
         #region events
 
-        public event RoutedPropertyChangedEventHandler<TrackPoint> TrackPointChanged
+        public event RoutedEventHandler TimelineSelected
         {
-            add { AddHandler(TrackPointChangedEvent, value); }
-            remove { RemoveHandler(TrackPointChangedEvent, value); }
+            add { AddHandler(TimelineSelectedEvent, value); }
+            remove { RemoveHandler(TimelineSelectedEvent, value); }
         }
 
         #endregion // events
+
+        public void FireSelectedEvent(TimelineEventArg ea)
+        {
+            /*
+            RoutedPropertyChangedEventArgs<TrackPoint> args = new RoutedPropertyChangedEventArgs<TrackPoint>(oldValue, value);
+            args.RoutedEvent = TrackPointChangedEvent;
+            RaiseEvent(args);
+             */
+            RoutedEventArgs args = new RoutedEventArgs(TimelineSelectedEvent, ea);
+            RaiseEvent(args);
+        }
 
 
         #region properties
@@ -176,10 +188,6 @@ namespace Viewer.Common.UI
                     TrackPoint oldValue = m_position;
                     m_position = value;
                     ResetPosition();
-
-                    RoutedPropertyChangedEventArgs<TrackPoint> args = new RoutedPropertyChangedEventArgs<TrackPoint>(oldValue, value);
-                    args.RoutedEvent = TrackPointChangedEvent;
-                    RaiseEvent(args);
                 }
             }
         }
@@ -199,7 +207,7 @@ namespace Viewer.Common.UI
             InvalidateArrange();
         }
 
-        public bool GetTimeAtPos(double x, ref DateTime t)
+        public TimelineValue GetTimeAtPos(double x, ref DateTime t)
         {
             x = x / m_xaxisElement.Width;
             AxisLabelProvider labels = m_xaxisElement.AxisLabels;
@@ -207,7 +215,7 @@ namespace Viewer.Common.UI
             t = labels.StartTime.AddMinutes(mins * x).StripSeconds();
 
             TimelineValue value = m_plotElement.Values.GetValueAt(t);
-            return value != null;
+            return value;
         }
 
         #endregion // methods

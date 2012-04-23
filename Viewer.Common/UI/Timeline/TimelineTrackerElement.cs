@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Globalization;
 using Viewer.Common.Model;
+using Viewer.Common.Event;
 
 namespace Viewer.Common.UI.Timeline
 {
@@ -30,10 +31,11 @@ namespace Viewer.Common.UI.Timeline
         private double m_startX;
         private Point m_startPos;
         private DateTime m_dragTime;
+        private TimelineValue m_dragLine;
 
         #endregion // fields
 
-
+        
         #region constructor
 
         public TimelineTrackerElement(TimelineBar bar)
@@ -99,8 +101,17 @@ namespace Viewer.Common.UI.Timeline
 
         protected override void DoDraw(DrawingContext dc)
         {
+            Brush fill = this.Fill;
+            if (m_dragging) {
+                if (m_dragLine != null) {
+                    fill = m_dragLine.Type == TimelineValue.TimelineValueType.All ? Bar.AllBackground : Bar.EventBackground;
+                } else {
+                    fill = Brushes.Gray;
+                }
+            }
+
             // vertical line
-            Pen pen = new Pen(this.Fill, 1);
+            Pen pen = new Pen(fill, 1);
             dc.DrawLine(pen, new Point(0, 0), new Point(0, Height));
 
             // top
@@ -110,7 +121,7 @@ namespace Viewer.Common.UI.Timeline
             figure.Segments.Add(new LineSegment(new Point(0, 6), true));
             figure.Segments.Add(new LineSegment(new Point(6, 0), true));
             path.Figures.Add(figure);
-            dc.DrawGeometry(this.Fill, pen, path);
+            dc.DrawGeometry(fill, pen, path);
 
             // bottom
             double y = Height;
@@ -120,13 +131,13 @@ namespace Viewer.Common.UI.Timeline
             figure.Segments.Add(new LineSegment(new Point(0, y - 6), true));
             figure.Segments.Add(new LineSegment(new Point(6, y), true));
             path.Figures.Add(figure);
-            dc.DrawGeometry(this.Fill, pen, path);
+            dc.DrawGeometry(fill, pen, path);
 
             if (ShowLabel || m_dragging) {
                 // label
                 string s = (m_dragging ? m_dragTime : Time).ToString("MM-dd HH:mm:ss");
                 Typeface face = new Typeface("Tahoma");
-                Brush fill = new SolidColorBrush(ToColor(0xdd0000ff));
+                //fill = new SolidColorBrush(ToColor(0xdd0000ff));
                 FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, fill);
 
                 double x = LeftLabel ? -ft.Width - 4 : 4;
@@ -151,7 +162,7 @@ namespace Viewer.Common.UI.Timeline
                     double x = m_startX + diff;
                     x = Math.Max(StartX, Math.Min(EndX, x));
                     DateTime t = new DateTime();
-                    Bar.GetTimeAtPos(x - StartX, ref t);
+                    m_dragLine = Bar.GetTimeAtPos(x - StartX, ref t);
                     m_dragTime = t;
                     this.X = x;
                     Draw();
@@ -170,10 +181,15 @@ namespace Viewer.Common.UI.Timeline
                 double x = m_startX + diff;
                 x = Math.Max(StartX, Math.Min(EndX, x));
                 DateTime t = new DateTime();
-                if (Bar.GetTimeAtPos(x - StartX, ref t)) {
+                m_dragLine = Bar.GetTimeAtPos(x - StartX, ref t);
+                if (m_dragLine != null) {
+                    Bar.FireSelectedEvent(new TimelineEventArg(m_dragLine, t));
                 } else {
                     this.X = m_startX;
                 }
+
+                m_dragLine = null;
+                Draw();
             }
         }
 

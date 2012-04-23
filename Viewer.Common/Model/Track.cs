@@ -186,6 +186,9 @@ namespace Viewer.Common.Model
         /// </summary>
         public string MpegFile { get; set; }
 
+        [Transient]
+        public object Timeline { get; set; }
+
         /// <summary>
         /// Track points
         /// </summary>

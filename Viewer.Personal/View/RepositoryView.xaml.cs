@@ -147,6 +147,12 @@ namespace Viewer.Personal.View
             Debug.WriteLine("xxx");
         }
 
+        // timelineView
+        private void TimelineView_Selected(object sender, TimelineEventArg arg)
+        {
+            Events.GetEvent<TimelineSelectedEvent>().Publish(arg);
+        }
+
         #endregion // event handlers
     }
 }

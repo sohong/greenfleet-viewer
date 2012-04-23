@@ -99,6 +99,7 @@ namespace Viewer.Common.UI.Timeline
             Track track = tracks.First;
             TimelineValue value = new TimelineValue(GetValueType(track), track);
             value.LastTrack = track;
+            track.Timeline = value;
             m_values.Add(value);
 
             for (int i = 1, count = tracks.Count; i < count; i++) {
@@ -111,9 +112,11 @@ namespace Viewer.Common.UI.Timeline
                 if (vtype != value.Type || m1 > m2) {                              
                     value = new TimelineValue(vtype, track);
                     value.LastTrack = track;
+                    track.Timeline = value;
                     m_values.Add(value);
                 } else {
                     value.LastTrack = track;
+                    track.Timeline = value;
                     value.Append(track.StartTime);
                 }
             }

@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using Viewer.Common.Model;
 using System.Collections.Specialized;
 using Viewer.Common.UI.Timeline;
+using Microsoft.Practices.Prism.Events;
+using Viewer.Common.Event;
 
 namespace Viewer.Common.View
 {
@@ -82,6 +84,13 @@ namespace Viewer.Common.View
         }
 
         #endregion // dependency properties
+
+
+        #region events
+
+        public event Action<object, TimelineEventArg> Selected;
+
+        #endregion // events
 
 
         #region construcotr
@@ -192,5 +201,17 @@ namespace Viewer.Common.View
         }
 
         #endregion // internal methods
+
+
+        #region event handlers 
+
+        private void bar_TimelineSelected(object sender, RoutedEventArgs e)
+        {
+            if (Selected != null) {
+                Selected(this, e.OriginalSource as TimelineEventArg);
+            }
+        }
+    
+        #endregion // event handlers
     }
 }

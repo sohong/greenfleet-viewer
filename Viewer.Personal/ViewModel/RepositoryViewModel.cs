@@ -106,6 +106,9 @@ namespace Viewer.Personal.ViewModel
                 events.GetEvent<TrackPointChangedEvent>().Subscribe((point) => {
                     this.TrackPoint = point;
                 });
+                events.GetEvent<TimelineSelectedEvent>().Subscribe((arg) => {
+                    MessageUtil.Show(arg.Time.ToString());
+                });
             }
         }
 

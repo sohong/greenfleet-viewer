@@ -99,7 +99,8 @@
                     </Grid>
                 </Grid>
                 <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                <gf:TimelineView Grid.Row="2" Tracks="{Binding SelectedTracks}" CurrentPoint="{Binding TrackPoint}" Margin="0,2,0,0" />
+                <gf:TimelineView Grid.Row="2" Tracks="{Binding SelectedTracks}" CurrentPoint="{Binding TrackPoint}" 
+                                 Margin="0,2,0,0" Selected="TimelineView_Selected"/>
             </Grid>
         </Grid>
     </Grid>
