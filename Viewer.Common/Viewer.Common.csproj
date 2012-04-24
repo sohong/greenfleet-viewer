@@ -70,6 +70,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachedProperties.cs" />
     <Compile Include="DateTimeExtension.cs" />
     <Compile Include="EnumToBooleanConverter.cs" />
     <Compile Include="Event\TimelineSelectedEvent.cs" />

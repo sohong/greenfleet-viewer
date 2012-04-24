@@ -11,7 +11,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="3,0,3,6">
-            <Label FontWeight="Bold" Foreground="White" FontSize="14" Margin="0,0,8,0">GreenFleets Viewer 1.0</Label>
+            <Label FontWeight="Bold" Foreground="White" FontSize="14" Margin="0,0,8,0">GB5G Viewer 1.0</Label>
             <Button MinWidth="60" Margin="0,0,0,0" Command="{Binding ConfigDeviceCommand}">기기 설정</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding VehicleCommand}">차량 정보</Button>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding PreferencesCommand}">환경 설정</Button>

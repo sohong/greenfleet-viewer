@@ -135,7 +135,7 @@ namespace Viewer.Common.UI.Timeline
 
             if (ShowLabel || m_dragging) {
                 // label
-                string s = (m_dragging ? m_dragTime : Time).ToString("MM-dd HH:mm:ss");
+                string s = (m_dragging ? m_dragTime : Time).ToString("MM-dd HH:mm");
                 Typeface face = new Typeface("Tahoma");
                 //fill = new SolidColorBrush(ToColor(0xdd0000ff));
                 FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, face, 11, fill);

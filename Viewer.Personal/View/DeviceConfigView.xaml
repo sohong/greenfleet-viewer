@@ -63,16 +63,14 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!-- SSID -->
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">SSID:</Label>
-                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                </StackPanel>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding ApSsid}"></TextBox>
                 <!-- KEY -->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">KEY:</Label>
-                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                </StackPanel>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding ApKey}"></TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Header="Client AP 설정">
@@ -83,16 +81,14 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!-- SSID -->
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">SSID:</Label>
-                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                </StackPanel>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding ClientSsid}"></TextBox>
                 <!-- KEY -->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">KEY:</Label>
-                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                </StackPanel>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding ClientKey}"></TextBox>
             </Grid>
         </GroupBox>
     </Grid>

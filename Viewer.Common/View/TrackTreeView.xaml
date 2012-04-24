@@ -11,7 +11,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TreeView Name="tvMain" Grid.Row="0" MouseDoubleClick="tvMain_MouseDoubleClick">
+            <TreeView Name="tvMain" Grid.Row="0" MouseDoubleClick="tvMain_MouseDoubleClick" 
+                      PreviewMouseRightButtonDown="tvMain_PreviewMouseRightButtonDown">
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="TreeViewItem">
                         <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />

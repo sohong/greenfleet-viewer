@@ -67,6 +67,8 @@ namespace Viewer.Personal.ViewModel
 
         public RepositoryViewModel()
         {
+            CommandBindings = new CommandBindingCollection();
+
             this.DriveManager = new DriveManager();
             m_deviceRepository = new DeviceRepository();
 
@@ -85,9 +87,15 @@ namespace Viewer.Personal.ViewModel
 
             OpenCommand = new DelegateCommand<object>(DoOpen, CanOpen);
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
-            PlaybackCommand = new DelegateCommand(DoPlayback, CanPlayback);
+            PlaybackCommand = new DelegateCommand<object>(DoPlayback, CanPlayback);
             SaveCommand = new DelegateCommand(DoSave, CanSave);
+            DeleteExCommand = new DelegateCommand(DoDeleteEx, CanDeleteEx);
 
+            DeleteCommand = new RoutedUICommand("삭제", "삭제", typeof(RepositoryViewModel));
+            CommandBinding binding = new CommandBinding(DeleteCommand, DoDelete, CanDelete);
+            CommandManager.RegisterClassCommandBinding(typeof(RepositoryViewModel), binding);
+            CommandBindings.Add(binding);
+            
             RegisterGlobalEvents();
         }
 
@@ -107,7 +115,11 @@ namespace Viewer.Personal.ViewModel
                     this.TrackPoint = point;
                 });
                 events.GetEvent<TimelineSelectedEvent>().Subscribe((arg) => {
-                    MessageUtil.Show(arg.Time.ToString());
+                    Track track = m_selectedTracks.GetTrackAt(arg.Time);
+                    if (track != null) {
+                        ActiveTrack = track;
+                    }
+                    Logger.Debug("Track selected in timeline: " + (track != null ? track.ToString() : "<no track>"));
                 });
             }
         }
@@ -116,6 +128,12 @@ namespace Viewer.Personal.ViewModel
 
 
         #region properties
+
+        public CommandBindingCollection CommandBindings
+        {
+            get;
+            set;
+        }
 
         public int ViewIndex
         {
@@ -396,6 +414,18 @@ namespace Viewer.Personal.ViewModel
         {
             get;
             private set;
+        }
+
+        public ICommand DeleteCommand
+        {
+            get;
+            set;
+        }
+
+        public ICommand DeleteExCommand
+        {
+            get;
+            set;
         }
 
         #endregion // properties
@@ -706,12 +736,12 @@ namespace Viewer.Personal.ViewModel
         }
 
         // Playback command
-        private bool CanPlayback()
+        private bool CanPlayback(object data)
         {
             return true;
         }
 
-        private void DoPlayback()
+        private void DoPlayback(object data)
         {
             Track track = m_playbackManager.GetFirst();
             ActiveTrack = track;
@@ -727,6 +757,36 @@ namespace Viewer.Personal.ViewModel
         {
             SaveViewModel model = new SaveViewModel(DeviceRepository, SearchFrom, SearchTo);
             DialogService.Run("저장", new SaveView(), model);
+        }
+
+        // Delete command
+        private void CanDelete(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = e.Parameter is Track || e.Parameter is TrackGroup;
+        }
+
+        private void DoDelete(object sender, ExecutedRoutedEventArgs e)
+        {
+            Repository repo = IsLocal ? (Repository)LocalRepository : DeviceRepository;
+
+            if (e.Parameter is Track) {
+                MessageUtil.Show("Delete Trck : " + e.Parameter);
+                repo.Delete((Track)e.Parameter);
+
+            } else if (e.Parameter is TrackGroup) {
+                MessageUtil.Show("Delete TrackGroup: " + e.Parameter);
+                repo.Delete((TrackGroup)e.Parameter);
+            }
+        }
+
+        // Extended deletion
+        private bool CanDeleteEx()
+        {
+            return true;
+        }
+
+        private void DoDeleteEx()
+        {
         }
 
         #endregion // internal methods

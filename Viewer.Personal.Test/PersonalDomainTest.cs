@@ -74,7 +74,7 @@ namespace Viewer.Personal.Test
         public void StartTest() {
             PersonalDomain_Accessor domain = new PersonalDomain_Accessor();
             domain.EventAggregator = new EventAggregator();
-            domain.Start();
+            //domain.Start();
         }
     }
 }

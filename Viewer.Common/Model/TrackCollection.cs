@@ -101,7 +101,24 @@ namespace Viewer.Common.Model
 
         public long GetPosition(Track track)
         {
-            return (long)new TimeSpan(track.StartTime.Ticks - First.StartTime.Ticks).TotalSeconds;
+            return (long)new TimeSpan(track.StartTime.Ticks - First.StartTime.Ticks).TotalMinutes;
+        }
+
+        /// <summary>
+        /// 매개변수 t를 시작 시각으로 하는 Track을 찾아 리턴한다.
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public Track GetTrackAt(DateTime t)
+        {
+            t = t.StripSeconds();
+            foreach (Track track in this) {
+                if (track.StartTime.StripSeconds() == t) {
+                    return track;
+                }
+            }
+
+            return null;
         }
 
         public void BeginUpdate()

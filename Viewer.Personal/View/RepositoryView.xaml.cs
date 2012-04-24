@@ -154,5 +154,10 @@ namespace Viewer.Personal.View
         }
 
         #endregion // event handlers
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            ((ContextMenu)sender).DataContext = this.DataContext;
+        }
     }
 }
