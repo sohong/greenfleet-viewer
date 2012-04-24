@@ -771,6 +771,7 @@ namespace Viewer.Personal.ViewModel
 
             if (e.Parameter is Track) {
                 if (repo.Delete((Track)e.Parameter)) {
+                    
                 }
 
             } else if (e.Parameter is TrackGroup) {

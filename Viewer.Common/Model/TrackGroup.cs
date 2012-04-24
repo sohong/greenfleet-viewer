@@ -161,6 +161,14 @@ namespace Viewer.Common.Model
             m_children.Clear();
         }
 
+        public void Remove(Track track)
+        {
+        }
+
+        public void Remove(TrackGroup group)
+        {
+        }
+
         public void BeginUpdate()
         {
             m_updateLock++;

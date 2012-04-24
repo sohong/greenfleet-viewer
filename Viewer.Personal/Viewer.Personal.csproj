@@ -67,6 +67,7 @@
     <Compile Include="Event\DeviceTrackActivatedEvent.cs" />
     <Compile Include="Event\LocalTrackActivatedEvent.cs" />
     <Compile Include="Event\NoDriveEvent.cs" />
+    <Compile Include="Event\TrackRemovedEvent.cs" />
     <Compile Include="Model\DeviceConfig.cs" />
     <Compile Include="Model\DeviceConfigManager.cs" />
     <Compile Include="Model\DeviceRepository.cs" />
