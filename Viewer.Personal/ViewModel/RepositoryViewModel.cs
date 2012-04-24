@@ -89,7 +89,7 @@ namespace Viewer.Personal.ViewModel
             SearchCommand = new DelegateCommand<object>(DoSearch, CanSearch);
             PlaybackCommand = new DelegateCommand<object>(DoPlayback, CanPlayback);
             SaveCommand = new DelegateCommand(DoSave, CanSave);
-            DeleteExCommand = new DelegateCommand(DoDeleteEx, CanDeleteEx);
+            ArrangeCommand = new DelegateCommand(DoArrange, CanArrange);
 
             DeleteCommand = new RoutedUICommand("삭제", "삭제", typeof(RepositoryViewModel));
             CommandBinding binding = new CommandBinding(DeleteCommand, DoDelete, CanDelete);
@@ -422,7 +422,7 @@ namespace Viewer.Personal.ViewModel
             set;
         }
 
-        public ICommand DeleteExCommand
+        public ICommand ArrangeCommand
         {
             get;
             set;
@@ -770,22 +770,21 @@ namespace Viewer.Personal.ViewModel
             Repository repo = IsLocal ? (Repository)LocalRepository : DeviceRepository;
 
             if (e.Parameter is Track) {
-                MessageUtil.Show("Delete Trck : " + e.Parameter);
-                repo.Delete((Track)e.Parameter);
+                if (repo.Delete((Track)e.Parameter)) {
+                }
 
             } else if (e.Parameter is TrackGroup) {
-                MessageUtil.Show("Delete TrackGroup: " + e.Parameter);
-                repo.Delete((TrackGroup)e.Parameter);
+                //repo.Delete((TrackGroup)e.Parameter);
             }
         }
 
         // Extended deletion
-        private bool CanDeleteEx()
+        private bool CanArrange()
         {
             return true;
         }
 
-        private void DoDeleteEx()
+        private void DoArrange()
         {
         }
 

@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// VehicleListView.cs
-// 2012.03.16, created by sohong
+// ArrangeView.cs
+// 2012.04.24, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -24,11 +24,11 @@ using System.Windows.Shapes;
 namespace Viewer.Personal.View
 {
     /// <summary>
-    /// 차량 목록을 표시하고 관리한다.
+    /// 로컬저장소를 정리한다.
     /// </summary>
-    public partial class VehicleListView : UserControl
+    public partial class ArrangeView : UserControl
     {
-        public VehicleListView()
+        public ArrangeView()
         {
             InitializeComponent();
         }

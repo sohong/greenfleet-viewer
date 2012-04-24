@@ -88,6 +88,7 @@
     <Compile Include="PersonalModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
+    <Compile Include="ViewModel\ArrangeViewModel.cs" />
     <Compile Include="ViewModel\RepositoryViewModelBase.cs" />
     <Compile Include="ViewModel\DeviceConfigViewModel.cs" />
     <Compile Include="ViewModel\DeviceRepositoryViewModel.cs" />
@@ -101,6 +102,9 @@
     <Compile Include="ViewModel\VehicleViewModel.cs" />
     <Compile Include="View\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ArrangeView.xaml.cs">
+      <DependentUpon>ArrangeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DeviceConfigView.xaml.cs">
       <DependentUpon>DeviceConfigView.xaml</DependentUpon>
@@ -142,6 +146,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ArrangeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

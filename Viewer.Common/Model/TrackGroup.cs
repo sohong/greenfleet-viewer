@@ -142,6 +142,7 @@ namespace Viewer.Common.Model
         public void Add(Track track)
         {
             m_children.Add(track);
+            track.m_group = this;
             RegisterTrackEvents(track);
         }
 
@@ -149,6 +150,7 @@ namespace Viewer.Common.Model
         {
             foreach (object obj in Children) {
                 if (obj is Track) {
+                    ((Track)obj).m_group = null;
                     UnregisterTrackEvents((Track)obj);
                 } else if (obj is TrackGroup) {
                     ((TrackGroup)obj).Clear();

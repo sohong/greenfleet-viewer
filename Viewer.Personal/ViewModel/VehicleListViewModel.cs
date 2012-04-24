@@ -21,16 +21,17 @@ using Viewer.Common.Util;
 using Viewer.Common.Service;
 using Viewer.Personal.View;
 
-namespace Viewer.Personal.ViewModel {
-    
+namespace Viewer.Personal.ViewModel
+{
     /// <summary>
     /// View model for VehicleListView.
     /// </summary>
-    public class VehicleListViewModel : DialogViewModel {
-
+    public class VehicleListViewModel : DialogViewModel
+    {
         #region constructors
 
-        public VehicleListViewModel() {
+        public VehicleListViewModel()
+        {
             this.Vehicles = new ListCollectionView(PersonalDomain.Domain.Vehicles);
             this.Vehicles.CurrentChanged += new EventHandler(Vehicles_CurrentChanged);
 
@@ -48,22 +49,26 @@ namespace Viewer.Personal.ViewModel {
 
         #region properties
 
-        public ICollectionView Vehicles { 
-            get; 
-            private set; 
-        }
-
-        public DelegateCommand<object> AddCommand {
+        public ICollectionView Vehicles
+        {
             get;
             private set;
         }
 
-        public DelegateCommand<object> EditCommand {
+        public DelegateCommand<object> AddCommand
+        {
             get;
             private set;
         }
 
-        public DelegateCommand<object> DeleteCommand {
+        public DelegateCommand<object> EditCommand
+        {
+            get;
+            private set;
+        }
+
+        public DelegateCommand<object> DeleteCommand
+        {
             get;
             private set;
         }
@@ -73,28 +78,33 @@ namespace Viewer.Personal.ViewModel {
 
         #region internal methods
 
-        private void Vehicles_CurrentChanged(object sender, EventArgs e) {
+        private void Vehicles_CurrentChanged(object sender, EventArgs e)
+        {
             Vehicle v = Vehicles.CurrentItem as Vehicle;
             CheckCommands();
         }
 
-        private void CheckCommands() {
+        private void CheckCommands()
+        {
             AddCommand.RaiseCanExecuteChanged();
             EditCommand.RaiseCanExecuteChanged();
             DeleteCommand.RaiseCanExecuteChanged();
         }
 
-        private void DoAdd(object data) {
+        private void DoAdd(object data)
+        {
             DialogService.Run("차량 추가", new VehicleView(), new VehicleViewModel(null), (obj) => {
                 this.Vehicles.MoveCurrentTo(obj);
             });
         }
 
-        private bool CanAdd(object data) {
+        private bool CanAdd(object data)
+        {
             return true;
         }
 
-        private void DoEdit(object data) {
+        private void DoEdit(object data)
+        {
             Vehicle current = Vehicles.CurrentItem as Vehicle;
             if (current != null) {
                 DialogService.Run("차량 수정", new VehicleView(), new VehicleViewModel(current), (obj) => {
@@ -102,11 +112,13 @@ namespace Viewer.Personal.ViewModel {
             }
         }
 
-        private bool CanEdit(object data) {
+        private bool CanEdit(object data)
+        {
             return Vehicles.CurrentItem != null;
         }
 
-        private void DoDelete(object data) {
+        private void DoDelete(object data)
+        {
             Vehicle current = Vehicles.CurrentItem as Vehicle;
             if (current != null) {
                 if (MessageUtil.Conform("차량 삭제", "선택한 차량 정보를 삭제하시겠습니까?")) {
@@ -115,7 +127,8 @@ namespace Viewer.Personal.ViewModel {
             }
         }
 
-        private bool CanDelete(object data) {
+        private bool CanDelete(object data)
+        {
             return Vehicles.CurrentItem != null;
         }
 
@@ -124,7 +137,8 @@ namespace Viewer.Personal.ViewModel {
 
         #region overriden methods
 
-        protected override bool CanSubmit() {
+        protected override bool CanSubmit()
+        {
             return true;
         }
 

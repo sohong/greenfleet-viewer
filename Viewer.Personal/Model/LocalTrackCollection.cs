@@ -150,6 +150,20 @@ namespace Viewer.Personal.Model {
             return m_tracks.Where((t) => t.IsChecked == true);
         }
 
+        /// <summary>
+        /// 트랙 정보를 제거한다.
+        /// </summary>
+        /// <param name="track"></param>
+        public bool Delete(Track track)
+        {
+            int index = m_tracks.IndexOf(track);
+            if (index >= 0) {
+                m_tracks.RemoveAt(index);
+                return true;
+            }
+            return false;
+        }
+
         #endregion // methods
     }
 }

@@ -35,6 +35,7 @@ namespace Viewer.Common.Model
 
         private IList<TrackPoint> m_points;
         private string m_id;
+        internal TrackGroup m_group;
 
         #endregion // fields
 
@@ -56,6 +57,12 @@ namespace Viewer.Common.Model
         public string Id
         {
             get { return m_id; }
+        }
+
+        [Transient]
+        public TrackGroup Group
+        {
+            get { return m_group; }
         }
 
         /// <summary>

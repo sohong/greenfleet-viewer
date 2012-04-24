@@ -18,6 +18,7 @@ using System.ComponentModel;
 using Viewer.Common.Model;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Viewer.Personal.Model
 {
@@ -122,12 +123,25 @@ namespace Viewer.Personal.Model
             TrackList.ClearSelection();
         }
 
-        public void Delete(Track track)
+        public bool Delete(Track track)
         {
-        }
+            if (TrackList.Delete(track)) {
+                // .inc file
+                string fileName = track.TrackFile;
+                File.Delete(fileName);
+                // .log file
+                fileName = Path.ChangeExtension(track.TrackFile, "log");
+                File.Delete(fileName);
+                // .264 file
+                fileName = Path.ChangeExtension(track.TrackFile, "264");
+                File.Delete(fileName);
+                // .mp4 file
+                fileName = Path.ChangeExtension(track.TrackFile, "mp4");
+                File.Delete(fileName);
 
-        public void Delete(TrackGroup group)
-        {
+                return true;
+            }
+            return false;
         }
 
         #endregion // methods

@@ -52,6 +52,8 @@
             map: map
         });
         markers.push(marker);
+        map.setCenter(loc);
+        map.setZoom(12);
 
         google.maps.event.addListener(marker, 'click', function () {
             window.external.MarkerClicked(marker.track);
