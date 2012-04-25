@@ -41,7 +41,7 @@ namespace Viewer.Personal.ViewModel
 
             IsCancelable = true;
             CancelText = null; // cancel 버튼이 표시되지 않고 esc 키만 동작하도록.
-            SubmitText = "Close";
+            SubmitText = "닫기";
         }
 
         #endregion // constructors

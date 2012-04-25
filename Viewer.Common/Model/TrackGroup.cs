@@ -15,6 +15,7 @@ using System.Text;
 using Viewer.Common.Xml;
 using Microsoft.Practices.Prism.ViewModel;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Viewer.Common.Model
 {
@@ -41,7 +42,7 @@ namespace Viewer.Common.Model
         private TrackGroup m_parent;
         private DateTime m_date;
         private TrackGroupLevel m_level;
-        private List<NotificationObject> m_children;
+        private ObservableCollection<NotificationObject> m_children;
         private int m_updateLock;
 
         #endregion // fields
@@ -61,7 +62,7 @@ namespace Viewer.Common.Model
         {
             m_date = date;
             m_level = level;
-            m_children = new List<NotificationObject>();
+            m_children = new ObservableCollection<NotificationObject>();
         }
 
         #endregion // constructor
@@ -79,7 +80,7 @@ namespace Viewer.Common.Model
             get { return m_date; }
         }
 
-        public List<NotificationObject> Children
+        public ObservableCollection<NotificationObject> Children
         {
             get { return m_children; }
         }
@@ -163,10 +164,17 @@ namespace Viewer.Common.Model
 
         public void Remove(Track track)
         {
+            m_children.Remove(track);
         }
 
         public void Remove(TrackGroup group)
         {
+            m_children.Remove(group);
+        }
+
+        public void Delete()
+        {
+            m_parent.Remove(this);
         }
 
         public void BeginUpdate()

@@ -2,10 +2,33 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:gf="clr-namespace:Viewer.Common.View;assembly=Viewer.Common"
+             xmlns:tk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             Height="514" Width="745">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions> 
+        <StackPanel Grid.Row="0">
+            <Label>정리할 구간을 선택하세요.</Label>
+            <DockPanel>
+                <Label>검색 구간:</Label>
+                <tk:DateTimeUpDown Name="dateFrom" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchFrom}" Margin="3"/>
+                <Label Name="txtTilde">~</Label>
+                <tk:DateTimeUpDown Name="dateTo" Format="Custom" FormatString="yyyy-MM-dd HH:mm" Value="{Binding SearchTo}" Margin="3"/>
+                <CheckBox Name="chkAll" VerticalAlignment="Center" Margin="6,3,3,3" IsChecked="{Binding SearchAll}">전체</CheckBox>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="btnSearch" MinWidth="60" Margin="3,3,6,3" Command="{Binding SearchCommand}">검색</Button>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+        <gf:TrackTreeView Grid.Row="1" ItemsSource="{Binding Path=RootGroup}" Margin="3">
+        </gf:TrackTreeView>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,2,0,0">
+            <Button MinWidth="60" Margin="3">삭제</Button>
+            <Button MinWidth="60" Margin="3">복사</Button>
+        </StackPanel>
     </Grid>
 </UserControl>

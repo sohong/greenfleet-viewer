@@ -725,7 +725,7 @@ namespace Viewer.Personal.ViewModel
                 break;
 
             case ViewModel.SearchMode.RecentTwo:
-                dateFrom = new TrackFolderManager(LocalRepository).GetRecentDay(SelectedVehicle) - TimeSpan.FromDays(1); ;
+                dateFrom = new TrackFolderManager(LocalRepository).GetRecentDay(SelectedVehicle) - TimeSpan.FromDays(1);
                 dateTo = dateFrom + TimeSpan.FromMinutes(47 * 60 + 59);
                 break;
 
@@ -739,6 +739,8 @@ namespace Viewer.Personal.ViewModel
 
             LocalRepository.Find(SelectedVehicle, dateFrom, dateTo, () => {
                 ResetLocalTrackGroup(LocalRepository.GetTracks());
+                //SearchFrom = LocalRepository.StartTime.StripSeconds();
+                //SearchTo = LocalRepository.EndTime.StripSeconds().AddMinutes(1);
             });
         }
 
@@ -774,34 +776,51 @@ namespace Viewer.Personal.ViewModel
 
         private void DoDelete(object sender, ExecutedRoutedEventArgs e)
         {
-            if (DisplayMessage != null) {
-                if (!DisplayMessage.Confirm("삭제", "삭제하시겠습니까?"))
-                    return;
-            }
-
             Repository repo = IsLocal ? (Repository)LocalRepository : DeviceRepository;
 
             if (e.Parameter is Track) {
-                DeleteTrack(repo, (Track)e.Parameter);
+                DeleteTrack(repo, (Track)e.Parameter, true);
             } else if (e.Parameter is TrackGroup) {
-                DeleteTrackGroup(repo, (TrackGroup)e.Parameter);
+                DeleteTrackGroup(repo, (TrackGroup)e.Parameter, true);
             }
         }
 
-        private void DeleteTrack(Repository repo, Track track)
+        private void DeleteTrack(Repository repo, Track track, bool confirm)
         {
+            if (confirm && DisplayMessage != null) {
+                if (!DisplayMessage.Confirm("트랙 삭제", 
+                    "트랙과 관련된 정보 및 영상 파일이 모두 삭제됩니다.\r\n삭제하시겠습니까?"))
+                    return;
+            }
+
             // 재생 중이던 트랙이면 중지시킨다.
             if (track == ActiveTrack) {
                 ActiveTrack = null;
             }
             // 선택 상태이면 선택을 해제한다.
             track.IsChecked = false;
+            // 그룹에서 제거한다.
+            track.Group.Remove(track);
             // 트랙 객체와 관련 파일들을 모두 삭제한다.
             repo.Delete(track);
         }
 
-        private void DeleteTrackGroup(Repository repo, TrackGroup group)
+        private void DeleteTrackGroup(Repository repo, TrackGroup group, bool confirm)
         {
+            if (confirm && DisplayMessage != null) {
+                if (!DisplayMessage.Confirm("트랙 그룹 삭제",
+                    "포함된 트랙들과 관련된 정보 및 영상 파일이 모두 삭제됩니다.\r\n삭제하시겠습니까?"))
+                    return;
+            }
+
+            for (int i = group.Children.Count - 1; i >= 0; i--) {
+                if (group.Children[i] is TrackGroup) {
+                    DeleteTrackGroup(repo, (TrackGroup)group.Children[i], false);
+                } else {
+                    DeleteTrack(repo, (Track)group.Children[i], false);
+                }
+            }
+            group.Delete();
         }
 
         // Extended deletion
@@ -812,6 +831,7 @@ namespace Viewer.Personal.ViewModel
 
         private void DoArrange()
         {
+            DialogService.Run("저장소 정리", new ArrangeView(), new ArrangeViewModel());
         }
 
         #endregion // internal methods

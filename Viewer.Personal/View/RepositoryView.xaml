@@ -40,7 +40,7 @@
             <CheckBox VerticalAlignment="Center" Margin="8,0,0,0" IsChecked="{Binding LoopPlay}" ToolTip="재생 완료 후 처음부터 다시 재생">반복</CheckBox>
             <Button MinWidth="60" Margin="8,0,0,0" Command="{Binding PlaybackCommand}">재생</Button>
             <Button Name="btnSave" MinWidth="60" Margin="8,0,0,0" Command="{Binding SaveCommand}">저장</Button>
-            <Button Name="btnDelete" MinWidth="60" Margin="8,0,0,0" Command="{Binding ArrangeCommand}" Visibility="Collapsed">정리</Button>
+            <Button Name="btnDelete" MinWidth="60" Margin="8,0,0,0" Command="{Binding ArrangeCommand}">정리</Button>
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -62,7 +62,14 @@
                 </TabItem>
                 <TabItem Header="로컬 저장소">
                     <gf:TrackTreeView Grid.Row="0" ItemsSource="{Binding Path=LocalTrackGroup}"
-                            ActivateGroup="TrackTreeView_ActivateGroup" ActivateTrack="TrackTreeView_ActivateTrack"/>
+                            ActivateGroup="TrackTreeView_ActivateGroup" ActivateTrack="TrackTreeView_ActivateTrack">
+                        <gf:TrackTreeView.ContextMenu>
+                            <ContextMenu Opened="ContextMenu_Opened">
+                                <MenuItem Command="{Binding DeleteCommand}" 
+                                          CommandParameter="{Binding Path=PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                            </ContextMenu>
+                        </gf:TrackTreeView.ContextMenu>
+                    </gf:TrackTreeView>
                 </TabItem>
                 <TabItem Header="북마크">
                 </TabItem>
