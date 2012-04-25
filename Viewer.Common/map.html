@@ -14,6 +14,7 @@
 
     var map;
     var markers = [];
+    var bounds;
     var polylines;
 
     function initialize() {
@@ -32,6 +33,8 @@
         };
         polylines = new google.maps.Polyline(polyOptions);
         polylines.setMap(map);
+
+        bounds = new google.maps.LatLngBounds(new google.maps.LatLng(37.380039, 127.115263), new google.maps.LatLng(37.380039, 127.115263));
     }
 
     function addPoint(lattitude, longitude) {
@@ -52,8 +55,10 @@
             map: map
         });
         markers.push(marker);
+        bounds.extend(loc);
+        map.panToBounds(bounds);
         map.setCenter(loc);
-        map.setZoom(12);
+        //map.setZoom(12);
 
         google.maps.event.addListener(marker, 'click', function () {
             window.external.MarkerClicked(marker.track);
