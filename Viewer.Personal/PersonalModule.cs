@@ -21,6 +21,7 @@ using System.ComponentModel.Composition;
 using Microsoft.Practices.Prism.Regions;
 using Viewer.Personal.View;
 using Microsoft.Practices.ServiceLocation;
+using Viewer.Common.Service;
 
 namespace Viewer.Personal {
 

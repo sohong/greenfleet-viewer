@@ -23,6 +23,7 @@ using Microsoft.Practices.Prism.Regions;
 using Viewer.Common;
 using Viewer.Common.Util;
 using GBViewer.View;
+using Viewer.Common.Service;
 
 namespace GBViewer {
 

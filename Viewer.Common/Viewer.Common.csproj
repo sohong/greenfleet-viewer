@@ -55,6 +55,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -103,6 +104,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Service\DisplayMessageImpl.cs" />
+    <Compile Include="Service\IDisplayMessageService.cs" />
     <Compile Include="Service\PlaybackManager.cs" />
     <Compile Include="StringExtension.cs" />
     <Compile Include="UI\Acceleration\AxisHelper.cs" />

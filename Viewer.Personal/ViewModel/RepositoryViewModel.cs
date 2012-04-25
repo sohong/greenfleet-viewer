@@ -135,6 +135,13 @@ namespace Viewer.Personal.ViewModel
             set;
         }
 
+        [Import]
+        public IDisplayMessageService DisplayMessage
+        {
+            get;
+            set;
+        }
+
         public int ViewIndex
         {
             get { return m_viewIndex; }
@@ -767,16 +774,34 @@ namespace Viewer.Personal.ViewModel
 
         private void DoDelete(object sender, ExecutedRoutedEventArgs e)
         {
+            if (DisplayMessage != null) {
+                if (!DisplayMessage.Confirm("삭제", "삭제하시겠습니까?"))
+                    return;
+            }
+
             Repository repo = IsLocal ? (Repository)LocalRepository : DeviceRepository;
 
             if (e.Parameter is Track) {
-                if (repo.Delete((Track)e.Parameter)) {
-                    
-                }
-
+                DeleteTrack(repo, (Track)e.Parameter);
             } else if (e.Parameter is TrackGroup) {
-                //repo.Delete((TrackGroup)e.Parameter);
+                DeleteTrackGroup(repo, (TrackGroup)e.Parameter);
             }
+        }
+
+        private void DeleteTrack(Repository repo, Track track)
+        {
+            // 재생 중이던 트랙이면 중지시킨다.
+            if (track == ActiveTrack) {
+                ActiveTrack = null;
+            }
+            // 선택 상태이면 선택을 해제한다.
+            track.IsChecked = false;
+            // 트랙 객체와 관련 파일들을 모두 삭제한다.
+            repo.Delete(track);
+        }
+
+        private void DeleteTrackGroup(Repository repo, TrackGroup group)
+        {
         }
 
         // Extended deletion
