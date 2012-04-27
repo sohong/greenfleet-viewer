@@ -76,6 +76,8 @@
     <Compile Include="Model\IDriveManager.cs" />
     <Compile Include="Model\LocalTrackCollection.cs" />
     <Compile Include="Model\Repository.cs" />
+    <Compile Include="Model\RetentionManager.cs" />
+    <Compile Include="Model\RetentionSchedule.cs" />
     <Compile Include="Model\SaveOption.cs" />
     <Compile Include="Model\TrackCatalog.cs" />
     <Compile Include="Model\TrackCatalogCollection.cs" />
