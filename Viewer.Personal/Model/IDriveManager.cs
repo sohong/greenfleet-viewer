@@ -12,13 +12,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// 외부 입력 장치(SD 카드등) 관련...
     /// </summary>
-    public interface IDriveManager {
-
+    public interface IDriveManager
+    {
         /// <summary>
         /// (외부 입력 장치로 연결된)드라이브들 중 greenfleet 트랙 데이터를 포함했는 지
         /// 확인해서 포함된 첫번째 드라이브의 데이터 폴더를 리턴한다.

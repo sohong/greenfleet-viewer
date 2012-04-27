@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackActivatedEvent.cs
-// 2012.03.21, created by sohong
+// Bookmark.cs
+// 2012.04.27, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -8,14 +8,25 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Viewer.Common.Event;
+using System.Collections.ObjectModel;
 
-namespace Viewer.Personal.Event
+namespace Viewer.Common.Model
 {
-    public class DeviceTrackActivatedEvent : TrackActivatedEvent
+    /// <summary>
+    /// Bookmark collection
+    /// </summary>
+    public class BookmarkCollection : ObservableCollection<BookmarkCategory>
     {
+        #region constructor
+
+        public BookmarkCollection()
+        {
+        }
+
+        #endregion // constructor
     }
 }

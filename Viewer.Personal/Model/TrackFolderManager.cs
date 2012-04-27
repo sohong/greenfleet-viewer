@@ -15,8 +15,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// Repository track 파일들이 저장되는 폴더 구조를 관리한다.
     /// 
@@ -34,8 +34,8 @@ namespace Viewer.Personal.Model {
     ///  각 vehicle 폴더 아래 카타로그 파일들이 생성된다.
     /// 
     /// </summary>
-    public class TrackFolderManager {
-
+    public class TrackFolderManager
+    {
         #region fields
 
         private LocalRepository m_owner;
@@ -45,7 +45,8 @@ namespace Viewer.Personal.Model {
 
         #region constructor
 
-        public TrackFolderManager(LocalRepository owner) {
+        public TrackFolderManager(LocalRepository owner)
+        {
             Debug.Assert(owner != null, "owner is null");
             m_owner = owner;
         }
@@ -58,11 +59,13 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 트랙 파일이 repository에 이미 존재하는 지 리턴한다.
         /// </summary>
-        public bool ExistsFile(string trackFile) {
+        public bool ExistsFile(string trackFile)
+        {
             return false;
         }
 
-        public string GetRoot(Vehicle vehicle) {
+        public string GetRoot(Vehicle vehicle)
+        {
             return Path.Combine(m_owner.RootPath, vehicle.VehicleId);
         }
 
@@ -71,7 +74,8 @@ namespace Viewer.Personal.Model {
         /// relative가 true이면 repository root 상대 경로로 리턴한다.
         /// 기존하지 않으면 생성한 후 리턴한다.
         /// </summary>
-        public string GetFolder(Vehicle vehicle, string trackFile, bool relative) {
+        public string GetFolder(Vehicle vehicle, string trackFile, bool relative)
+        {
             string folder = Path.Combine(vehicle.VehicleId, ParseFolder(trackFile));
 
             if (folder != null) {
@@ -91,7 +95,8 @@ namespace Viewer.Personal.Model {
         /// root로 지정된 vehicle 폴더 내에서 date에 해당하는 폴더를 절대경로로 리턴한다.
         /// 폴더가 존재하지 않으면 null을 리턴한다.
         /// </summary>
-        public string DateTimeToFolder(string root, DateTime date) {
+        public string DateTimeToFolder(string root, DateTime date)
+        {
             string folder = string.Format(@"{0:0000}\{1:00}\{2:00}", date.Year, date.Month, date.Day);
             return Path.Combine(root, folder);
         }
@@ -100,7 +105,8 @@ namespace Viewer.Personal.Model {
         /// 가장 최근에 등록된 트랙파일 일자를 리턴한다. 
         /// </summary>
         /// <returns></returns>
-        public DateTime GetRecentDay(Vehicle vehicle) {
+        public DateTime GetRecentDay(Vehicle vehicle)
+        {
             DateTime d = DateTime.Today;
             string root = GetRoot(vehicle);
             string[] dirs = Directory.GetDirectories(root);
@@ -147,7 +153,8 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
-        private string ParseFolder(string trackFile) {
+        private string ParseFolder(string trackFile)
+        {
             Match match = LocalRepository.TRACK_DATE_PATTERN.Match(trackFile);
             if (match.Success) {
                 string[] arr = match.Value.Split('_');

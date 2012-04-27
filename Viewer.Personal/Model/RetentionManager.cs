@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// AboutCommand.cs
-// 2012.03.21, created by sohong
+// RetentionManager.cs
+// 2012.04.27, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -12,24 +12,29 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Viewer.Common.Service;
-using Viewer.Personal.View;
-using Viewer.Personal.ViewModel;
+using System.Collections.ObjectModel;
 
-namespace Viewer.Personal.Command
+namespace Viewer.Personal.Model
 {
     /// <summary>
-    /// Personal viewer를 소개한다.
+    /// 하나 이상의 Retention schecule을 실행한다.
+    /// 스케쥴 정보들을 xml에 보관한다.
     /// </summary>
-    public class AboutCommand : SimpleCommand
+    public class RetentionManager
     {
-        #region overriden methods
+        #region fields
 
-        public override void Execute(object parameter)
+        private ObservableCollection<RetentionSchedule> m_schedules;
+
+        #endregion // fields
+
+
+        #region constructor
+
+        public RetentionManager()
         {
-            DialogService.Run("About GreenFleets Viewer", new AboutView(), new AboutViewModel());
         }
 
-        #endregion // overriden methods
+        #endregion // constructor
     }
 }

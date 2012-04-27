@@ -23,24 +23,26 @@ using Viewer.Common;
 using Viewer.Common.ViewModel;
 using Viewer.Common.Service;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// SD Card 등 블랙박스 저장 미디어에 포함된 트랙 정보들.
     /// </summary>
-    public class DeviceRepository : Repository {
-
+    public class DeviceRepository : Repository
+    {
         #region fields
 
         private Vehicle m_vehicle;
         private string m_rootPath;
-        
+
         #endregion // fields
 
 
         #region constructor
 
-        public DeviceRepository() : base("Device") {
+        public DeviceRepository()
+            : base("Device")
+        {
         }
 
         #endregion // constructor
@@ -48,11 +50,13 @@ namespace Viewer.Personal.Model {
 
         #region properties
 
-        public Vehicle Vehicle {
+        public Vehicle Vehicle
+        {
             get { return m_vehicle; }
         }
 
-        public string RootPath {
+        public string RootPath
+        {
             get { return m_rootPath; }
         }
 
@@ -66,7 +70,8 @@ namespace Viewer.Personal.Model {
         /// 시작/끝 일시를 계산한다.
         /// </summary>
         /// <param name="rootPath"></param>
-        public void Open(Vehicle vehicle, string rootPath, Action callback) {
+        public void Open(Vehicle vehicle, string rootPath, Action callback)
+        {
             m_vehicle = vehicle;
             m_rootPath = rootPath;
 
@@ -81,7 +86,8 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
-        private void LoadTracks(Action callback) {
+        private void LoadTracks(Action callback)
+        {
             string[] files = Directory.GetFiles(m_rootPath, "*.inc");
             if (files.Length > 0) {
                 TrackList.Load(files, files.Length, "SD 카드 로딩", callback);

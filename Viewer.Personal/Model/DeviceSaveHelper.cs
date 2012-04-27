@@ -14,17 +14,18 @@ using System.Linq;
 using System.Text;
 using Viewer.Common.Model;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// Sd 카드 등 외부 드라이브의 트랙 파일들을 지정한 룰에 따라
     /// 로칼 저장소에 저장한다.
     /// </summary>
-    public class DeviceSaveHelper {
-
+    public class DeviceSaveHelper
+    {
         #region constructors
 
-        public DeviceSaveHelper() {
+        public DeviceSaveHelper()
+        {
         }
 
         #endregion // constructors
@@ -32,7 +33,8 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public void Save(DeviceRepository source, LocalRepository target, SaveOption options) {
+        public void Save(DeviceRepository source, LocalRepository target, SaveOption options)
+        {
             Debug.Assert(source != null);
             Debug.Assert(target != null);
             Debug.Assert(options != null);
@@ -59,7 +61,7 @@ namespace Viewer.Personal.Model {
                 new TrackImportHelper(target).Import(source.Vehicle, files, options.Convert, options.Overwrite);
             }
         }
-        
+
         #endregion // methods
     }
 }

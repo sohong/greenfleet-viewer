@@ -15,16 +15,16 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.IO;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// 스토리지에 저장된 catalog들을 읽어들이고,
     /// 검색하고,
     /// 변경하거나 추가하고,
     /// 저장한다.
     /// </summary>
-    public class TrackCatalogCollection {
-
+    public class TrackCatalogCollection
+    {
         #region fields
 
         private Vehicle m_vehicle;
@@ -36,7 +36,8 @@ namespace Viewer.Personal.Model {
 
         #region constructors
 
-        public TrackCatalogCollection() {
+        public TrackCatalogCollection()
+        {
         }
 
         #endregion // constructors
@@ -44,7 +45,8 @@ namespace Viewer.Personal.Model {
 
         #region properties
 
-        public Vehicle Vehicle {
+        public Vehicle Vehicle
+        {
             get { return m_vehicle; }
         }
 
@@ -53,7 +55,8 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public void Open(Vehicle vehicle, string rootFolder) {
+        public void Open(Vehicle vehicle, string rootFolder)
+        {
             m_vehicle = vehicle;
             m_root = rootFolder;
             m_catalogs = new ObservableCollection<TrackCatalog>();
@@ -61,7 +64,8 @@ namespace Viewer.Personal.Model {
             Load();
         }
 
-        public void Save(TrackCatalog catalog) {
+        public void Save(TrackCatalog catalog)
+        {
         }
 
         #endregion // methods
@@ -69,7 +73,8 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
-        private void Load() {
+        private void Load()
+        {
             // vehicle's storage folder
             string folder = Path.Combine(m_root, Vehicle.VehicleId);
             if (Directory.Exists(folder)) {
@@ -79,7 +84,8 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        private void LoadTrackCatalog(string folder) {
+        private void LoadTrackCatalog(string folder)
+        {
             m_catalogs.Clear();
 
             string[] files = Directory.GetFiles(folder, "*.xml");
@@ -91,7 +97,8 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        private void CreateVehicleStorage(string folder) {
+        private void CreateVehicleStorage(string folder)
+        {
             // vehicle's storage folder
             Directory.CreateDirectory(folder);
         }

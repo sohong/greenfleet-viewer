@@ -16,16 +16,16 @@ using System.Xml.Linq;
 using System.IO;
 using Viewer.Common.Model;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// Track file index.
     /// 차량/월 단위로 관리한다.
     /// </summary>
-    public class TrackCatalog {
-
+    public class TrackCatalog
+    {
         #region consts
-        
+
         private const string ROOT_ELEMENT = "TrackCatalog";
         private const string TRACK_ELEMENT = "track";
         private const string CREATED_ATTR = "created";
@@ -36,11 +36,13 @@ namespace Viewer.Personal.Model {
 
         #region static members
 
-        public static string MakeFileName(int year, int month) {
+        public static string MakeFileName(int year, int month)
+        {
             return "cat_" + year.ToString("0000") + "_" + month.ToString("00") + ".xml";
         }
 
-        public static bool GetFileData(string fileName, out int year, out int month) {
+        public static bool GetFileData(string fileName, out int year, out int month)
+        {
             year = 0;
             month = 0;
 
@@ -68,13 +70,14 @@ namespace Viewer.Personal.Model {
         private int m_year;
         private int m_month;
         private List<Track> m_tracks;
-        
+
         #endregion // fields
 
 
         #region constructor
 
-        public TrackCatalog(Vehicle vehicle, int year, int month) {
+        public TrackCatalog(Vehicle vehicle, int year, int month)
+        {
             m_vehicle = vehicle;
             m_year = year;
             m_month = month;
@@ -85,7 +88,8 @@ namespace Viewer.Personal.Model {
 
         #region properties
 
-        public List<Track> Tracks {
+        public List<Track> Tracks
+        {
             get { return m_tracks; }
         }
 
@@ -94,7 +98,8 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public void Load(string catalogPath) {
+        public void Load(string catalogPath)
+        {
             m_tracks = new List<Track>();
             XDocument doc = XDocument.Load(catalogPath);
             if (doc != null) {
@@ -102,7 +107,8 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        public void Add(IEnumerable<string> trackFiles) {
+        public void Add(IEnumerable<string> trackFiles)
+        {
             if (m_tracks == null) {
                 m_tracks = new List<Track>();
             }
@@ -113,7 +119,8 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        public void Save(string catalogPath) {
+        public void Save(string catalogPath)
+        {
             XDocument doc = new XDocument();
             Serialize(doc);
             Directory.CreateDirectory(Path.GetDirectoryName(catalogPath));
@@ -129,7 +136,8 @@ namespace Viewer.Personal.Model {
         /// Track file을 읽어 Track 개체를 생성한다.
         /// </summary>
         /// <param name="fileName">경로와 확장자가 제외된 파일명.</param>
-        private Track Add(string fileName) {
+        private Track Add(string fileName)
+        {
             DateTime date = new DateTime();
             if (Repository.ParseTrackFile(fileName, ref date)) {
                 if (date.Year == m_year && date.Month == m_month) {
@@ -145,7 +153,8 @@ namespace Viewer.Personal.Model {
             return null;
         }
 
-        private void Serialize(XDocument doc) {
+        private void Serialize(XDocument doc)
+        {
             XElement root = new XElement(ROOT_ELEMENT);
             doc.Add(root);
 
@@ -159,7 +168,8 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        private void Deserialize(XDocument doc) {
+        private void Deserialize(XDocument doc)
+        {
             XElement root = doc.Root;
             if (!ROOT_ELEMENT.Equals(root.Name.LocalName)) {
                 throw new Exception("Xml is not a Track catalog file.");

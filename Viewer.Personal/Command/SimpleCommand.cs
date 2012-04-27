@@ -14,18 +14,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
-namespace Viewer.Personal.Command {
-
-    public abstract class SimpleCommand : ICommand {
-
+namespace Viewer.Personal.Command
+{
+    public abstract class SimpleCommand : ICommand
+    {
         #region ICommand
 
-        public event EventHandler CanExecuteChanged {
+        public event EventHandler CanExecuteChanged
+        {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public virtual bool CanExecute(object parameter) {
+        public virtual bool CanExecute(object parameter)
+        {
             return true;
         }
 

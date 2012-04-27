@@ -14,22 +14,24 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
-namespace Viewer.Personal.Command {
+namespace Viewer.Personal.Command
+{
+    public class Commands
+    {
+        #region static members
 
-    public class Commands {
-
-        #region static members 
-        
         private static Commands m_instance;
 
-        static Commands() {
+        static Commands()
+        {
             m_instance = new Commands();
         }
 
-        public static Commands Instance {
+        public static Commands Instance
+        {
             get { return m_instance; }
         }
-        
+
         #endregion // static members
 
 
@@ -37,27 +39,30 @@ namespace Viewer.Personal.Command {
 
         private ICommand m_import;
         private ICommand m_about;
-        
+
         #endregion // fields
 
 
         #region constructor
 
-        internal Commands() {
+        internal Commands()
+        {
             m_import = new ImportCommand();
             m_about = new AboutCommand();
         }
-        
+
         #endregion // constructor
 
 
         #region properties
 
-        public ICommand Import {
+        public ICommand Import
+        {
             get { return m_import; }
         }
 
-        public ICommand About {
+        public ICommand About
+        {
             get { return m_about; }
         }
 

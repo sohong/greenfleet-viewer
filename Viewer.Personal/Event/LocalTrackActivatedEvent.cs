@@ -14,8 +14,9 @@ using System.Linq;
 using System.Text;
 using Viewer.Common.Event;
 
-namespace Viewer.Personal.Event {
-
-    public class LocalTrackActivatedEvent : TrackActivatedEvent {
+namespace Viewer.Personal.Event
+{
+    public class LocalTrackActivatedEvent : TrackActivatedEvent
+    {
     }
 }

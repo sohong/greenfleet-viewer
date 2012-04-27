@@ -21,13 +21,13 @@ using Viewer.Common.Loader;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// Local pc에 저장된 트랙파일들을 읽어 Track 컬렉션에 추가한다.
     /// </summary>
-    public class LocalTrackCollection {
-
+    public class LocalTrackCollection
+    {
         #region fields
 
         private ObservableCollection<Track> m_tracks;
@@ -40,7 +40,8 @@ namespace Viewer.Personal.Model {
 
         #region constructor
 
-        public LocalTrackCollection() {
+        public LocalTrackCollection()
+        {
             m_tracks = new ObservableCollection<Track>();
             m_loader = new LocalTrackLoader();
         }
@@ -50,19 +51,23 @@ namespace Viewer.Personal.Model {
 
         #region properties
 
-        public int Count {
+        public int Count
+        {
             get { return m_tracks.Count; }
         }
 
-        public IEnumerable<Track> Tracks {
+        public IEnumerable<Track> Tracks
+        {
             get { return m_tracks; }
         }
 
-        public DateTime StartTime {
+        public DateTime StartTime
+        {
             get { return m_startTime; }
         }
 
-        public DateTime EndTime {
+        public DateTime EndTime
+        {
             get { return m_endTime; }
         }
 
@@ -71,20 +76,23 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public void Clear() {
+        public void Clear()
+        {
             m_tracks.Clear();
         }
 
         /// <summary>
         /// 모든 track을 check되지 않은 상태로 변경한다.
         /// </summary>
-        public void ClearSelection() {
+        public void ClearSelection()
+        {
             foreach (Track t in m_tracks) {
                 t.IsChecked = false;
             }
         }
 
-        public void Load(IEnumerable<string> files, int count, string title, Action callback) {
+        public void Load(IEnumerable<string> files, int count, string title, Action callback)
+        {
             ProgressViewModel progView = new ProgressViewModel();
             progView.Maximum = count;
             progView.Caption = "트랙 파일들을 로드합니다.";
@@ -140,13 +148,15 @@ namespace Viewer.Personal.Model {
             worker.RunWorkerAsync();
         }
 
-        public ListCollectionView GetTracks() {
+        public ListCollectionView GetTracks()
+        {
             ListCollectionView view = new ListCollectionView(m_tracks);
             view.SortDescriptions.Add(new SortDescription("CreateDate", ListSortDirection.Ascending));
             return view;
         }
 
-        public IEnumerable<Track> GetSelection() {
+        public IEnumerable<Track> GetSelection()
+        {
             return m_tracks.Where((t) => t.IsChecked == true);
         }
 

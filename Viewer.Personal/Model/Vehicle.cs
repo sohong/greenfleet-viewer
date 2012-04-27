@@ -15,16 +15,17 @@ using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
 using Viewer.Common;
 
-namespace Viewer.Personal.Model {
-    
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// 차량 정보.
     /// </summary>
-    public class Vehicle : NotificationObjectEx {
-
+    public class Vehicle : NotificationObjectEx
+    {
         #region constructors
 
-        public Vehicle() {
+        public Vehicle()
+        {
         }
 
         #endregion // constructors
@@ -35,9 +36,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// Id
         /// </summary>
-        public string VehicleId {
+        public string VehicleId
+        {
             get { return m_vehicleId; }
-            set {
+            set
+            {
                 if (value != m_vehicleId) {
                     m_vehicleId = value;
                     RaisePropertyChanged(() => VehicleId);
@@ -49,9 +52,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// Name
         /// </summary>
-        public string Name {
+        public string Name
+        {
             get { return m_name; }
-            set {
+            set
+            {
                 if (value != m_name) {
                     m_name = value;
                     RaisePropertyChanged(() => Name);
@@ -63,9 +68,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 개요.
         /// </summary>
-        public string Description {
+        public string Description
+        {
             get { return m_description; }
-            set {
+            set
+            {
                 if (value != m_description) {
                     m_description = value;
                     RaisePropertyChanged(() => Description);
@@ -79,7 +86,8 @@ namespace Viewer.Personal.Model {
 
         #region overriden methods
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return string.IsNullOrWhiteSpace(Name) ? VehicleId : Name;
         }
 

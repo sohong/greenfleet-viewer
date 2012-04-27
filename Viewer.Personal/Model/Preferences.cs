@@ -18,24 +18,25 @@ using System.IO;
 using System.Xml.Linq;
 using Viewer.Common.Xml;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// Personal viewer 사용자 설정 정보들.
     /// </summary>
-    public class Preferences : NotificationObject {
-
+    public class Preferences : NotificationObject
+    {
         #region const
 
         private const string ROOT_ELEMENT = "GreenFleet";
         private const string STORAGE_ROOT = @"C:\GreenFleets\storage";
-        
+
         #endregion // const
 
 
         #region constructors
 
-        public Preferences() {
+        public Preferences()
+        {
         }
 
         #endregion // constructors
@@ -46,9 +47,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 프로그램 테스팅 중인가?
         /// </summary>
-        public bool Testing {
+        public bool Testing
+        {
             get { return m_testing; }
-            set {
+            set
+            {
                 if (value != m_testing) {
                     m_testing = value;
                     RaisePropertyChanged(() => Testing);
@@ -60,11 +63,14 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 트랙 파일 저장소 루트 경로.
         /// </summary>
-        public string StorageRoot {
-            get { 
-                return string.IsNullOrWhiteSpace(m_storageRoot) ? STORAGE_ROOT : m_storageRoot; 
+        public string StorageRoot
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(m_storageRoot) ? STORAGE_ROOT : m_storageRoot;
             }
-            set {
+            set
+            {
                 if (value != m_storageRoot) {
                     m_storageRoot = value;
                     RaisePropertyChanged(() => StorageRoot);
@@ -76,9 +82,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// Retention 적용 방법.
         /// </summary>
-        public RetentionMode RetentionMode {
+        public RetentionMode RetentionMode
+        {
             get { return m_retentionMode; }
-            set {
+            set
+            {
                 if (value != m_retentionMode) {
                     m_retentionMode = value;
                     RaisePropertyChanged(() => RetentionMode);
@@ -90,9 +98,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 보존 기간. YY,MM,DD로 지정.
         /// </summary>
-        public string Retention {
+        public string Retention
+        {
             get { return m_retention; }
-            set {
+            set
+            {
                 if (value != m_retention) {
                     m_retention = value;
                     RaisePropertyChanged(() => Retention);
@@ -110,7 +120,8 @@ namespace Viewer.Personal.Model {
         /// path로 지정된 xml 파일에서 설정 정보들을 가져온다.
         /// </summary>
         /// <param name="path"></param>
-        public void Load(string path) {
+        public void Load(string path)
+        {
             Debug.WriteLine("Preferences load...");
 
             if (!File.Exists(path)) {
@@ -132,9 +143,10 @@ namespace Viewer.Personal.Model {
         /// path로 지정된 파일에 설정 정보를 xml로 저장한다.
         /// </summary>
         /// <param name="path"></param>
-        public void Save(string path) {
+        public void Save(string path)
+        {
             Debug.WriteLine("Preferences save...");
-            
+
             XDocument doc = new XDocument();
             XElement root = new XElement(ROOT_ELEMENT);
             doc.Add(root);
@@ -146,13 +158,15 @@ namespace Viewer.Personal.Model {
             Debug.WriteLine(doc.ToString());
         }
 
-        public Preferences Clone() {
+        public Preferences Clone()
+        {
             Preferences prefers = new Preferences();
             Assign(prefers);
             return prefers;
         }
 
-        public void Assign(Preferences target) {
+        public void Assign(Preferences target)
+        {
             if (target != null) {
                 target.StorageRoot = StorageRoot;
                 target.RetentionMode = RetentionMode;

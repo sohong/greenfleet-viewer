@@ -19,28 +19,30 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Viewer.Common.Loader;
 
-namespace Viewer.Personal.Model {
-    
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// Track 파일 저장소.
     /// Repository를 열면 catalog를 읽어 트랙 개체들을 생성한다.
     /// 각 트랙의 실제 데이터 파일과 영상 파일은 트랙을 재생할 때 연다. 
     /// </summary>
-    public class LocalRepository : Repository {
-
+    public class LocalRepository : Repository
+    {
         #region fields
 
         private string m_rootPath;
         private Dictionary<Vehicle, TrackCatalogCollection> m_catalogs;
         private TrackFolderManager m_folderManager;
         private TrackImportHelper m_importHelper;
-        
+
         #endregion // fields
 
 
         #region constructors
 
-        public LocalRepository() : base("Local") {
+        public LocalRepository()
+            : base("Local")
+        {
             m_catalogs = new Dictionary<Vehicle, TrackCatalogCollection>();
             m_folderManager = new TrackFolderManager(this);
             m_importHelper = new TrackImportHelper(this);
@@ -51,7 +53,8 @@ namespace Viewer.Personal.Model {
 
         #region properties
 
-        public string RootPath {
+        public string RootPath
+        {
             get { return m_rootPath; }
         }
 
@@ -63,7 +66,8 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// Repository를 연다.
         /// </summary>
-        public void Open(string rootPath, IEnumerable<Vehicle> vehicles) {
+        public void Open(string rootPath, IEnumerable<Vehicle> vehicles)
+        {
             Logger.Info("Repository open...");
 
             m_rootPath = rootPath;
@@ -79,7 +83,8 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 기존에 스토리지에 없는 차량이 추가되면 해당 폴더를 생성한다.
         /// </summary>
-        public void AddVehicle(Vehicle vehicle) {
+        public void AddVehicle(Vehicle vehicle)
+        {
             if (!m_catalogs.ContainsKey(vehicle)) {
                 TrackCatalogCollection cats = new TrackCatalogCollection();
                 cats.Open(vehicle, RootPath);
@@ -92,11 +97,13 @@ namespace Viewer.Personal.Model {
         /// relative가 true이면 repository root 상대 경로로 리턴한다.
         /// 기존하지 않으면 생성한 후 리턴한다.
         /// </summary>
-        public string GetFolder(Vehicle vehicle, string trackFile, bool relative) {
+        public string GetFolder(Vehicle vehicle, string trackFile, bool relative)
+        {
             return m_folderManager.GetFolder(vehicle, trackFile, relative);
         }
 
-        public void Find(Vehicle vehicle, DateTime start, DateTime end, Action callback) {
+        public void Find(Vehicle vehicle, DateTime start, DateTime end, Action callback)
+        {
             if (end >= start) {
                 IList<string> trackFiles = new List<string>();
                 string root = m_folderManager.GetRoot(vehicle);
@@ -113,7 +120,8 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
-        private void LoadTrackCatalogs(IEnumerable<Vehicle> vehicles) {
+        private void LoadTrackCatalogs(IEnumerable<Vehicle> vehicles)
+        {
             if (vehicles != null) {
                 foreach (Vehicle v in vehicles) {
                     AddVehicle(v);
@@ -121,7 +129,8 @@ namespace Viewer.Personal.Model {
             }
         }
 
-        private void Find(IList<string> list, string root, DateTime start, DateTime end) {
+        private void Find(IList<string> list, string root, DateTime start, DateTime end)
+        {
             while (start < end) {
                 // 분단위로 판단할 수 있도록...
                 start = start.AddSeconds(-start.Second);

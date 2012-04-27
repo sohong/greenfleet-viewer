@@ -13,16 +13,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// 기기 설정 정보를 load/save 한다.
     /// </summary>
-    public class DeviceConfigManager {
-
+    public class DeviceConfigManager
+    {
         #region constructors
 
-        public DeviceConfigManager() {
+        public DeviceConfigManager()
+        {
         }
 
         #endregion // constructors
@@ -30,11 +31,13 @@ namespace Viewer.Personal.Model {
 
         #region methods
 
-        public DeviceConfig Load(string filename) {
+        public DeviceConfig Load(string filename)
+        {
             return new DeviceConfig();
         }
 
-        public void Save(DeviceConfig config) {
+        public void Save(DeviceConfig config)
+        {
         }
 
         #endregion // methods

@@ -1,6 +1,6 @@
 ﻿////////////////////////////////////////////////////////////////////////////////
-// TrackActivatedEvent.cs
-// 2012.03.21, created by sohong
+// RetentionSchedule.cs
+// 2012.04.27, created by sohong
 //
 // =============================================================================
 // Copyright (C) 2012 PalmVision.
@@ -8,14 +8,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Viewer.Common.Event;
+using Microsoft.Practices.Prism.ViewModel;
 
-namespace Viewer.Personal.Event
+namespace Viewer.Personal.Model
 {
-    public class DeviceTrackActivatedEvent : TrackActivatedEvent
+    /// <summary>
+    /// 지정된 룰에 따라 해당하는 트랙 파일들을 삭제한다.
+    /// </summary>
+    public class RetentionSchedule : NotificationObject
     {
     }
 }

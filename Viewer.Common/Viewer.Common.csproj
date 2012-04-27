@@ -79,6 +79,9 @@
     <Compile Include="Event\TrackChangedEvent.cs" />
     <Compile Include="Event\TrackDeactivatedEvent.cs" />
     <Compile Include="Event\TrackPointChangedEvent.cs" />
+    <Compile Include="Model\Bookmark.cs" />
+    <Compile Include="Model\BookmarkCategory.cs" />
+    <Compile Include="Model\BookmarkCollection.cs" />
     <Compile Include="Model\TrackCollection.cs" />
     <Compile Include="Model\TrackGroup.cs" />
     <Compile Include="Model\TrackRange.cs" />
@@ -156,6 +159,12 @@
     <Compile Include="View\BingMapView.xaml.cs">
       <DependentUpon>BingMapView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BookmarkCategoryView.xaml.cs">
+      <DependentUpon>BookmarkCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookmarkView.xaml.cs">
+      <DependentUpon>BookmarkView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
@@ -207,6 +216,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BingMapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookmarkCategoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookmarkView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

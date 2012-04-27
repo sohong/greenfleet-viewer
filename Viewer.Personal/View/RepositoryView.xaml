@@ -60,7 +60,7 @@
                         </gf:TrackTreeView.ContextMenu>
                     </gf:TrackTreeView>
                 </TabItem>
-                <TabItem Header="로컬 저장소">
+                <TabItem Header="PC 저장소">
                     <gf:TrackTreeView Grid.Row="0" ItemsSource="{Binding Path=LocalTrackGroup}"
                             ActivateGroup="TrackTreeView_ActivateGroup" ActivateTrack="TrackTreeView_ActivateTrack">
                         <gf:TrackTreeView.ContextMenu>

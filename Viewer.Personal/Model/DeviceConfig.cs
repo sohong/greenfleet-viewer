@@ -15,16 +15,17 @@ using System.Text;
 using Microsoft.Practices.Prism.ViewModel;
 using Viewer.Common;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// 기기 설정 정보.
     /// </summary>
-    public class DeviceConfig : NotificationObjectEx {
-
+    public class DeviceConfig : NotificationObjectEx
+    {
         #region constructors
 
-        public DeviceConfig() {
+        public DeviceConfig()
+        {
         }
 
         #endregion // constructors
@@ -35,9 +36,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 녹화 해상도
         /// </summary>
-        public int RecordingResolution {
+        public int RecordingResolution
+        {
             get { return m_recordingResolution; }
-            set {
+            set
+            {
                 if (value != m_recordingResolution) {
                     m_recordingResolution = value;
                     RaisePropertyChanged(() => RecordingResolution);
@@ -49,9 +52,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 녹화 화질
         /// </summary>
-        public int RecordingQuality {
+        public int RecordingQuality
+        {
             get { return m_recordingQuality; }
-            set {
+            set
+            {
                 if (value != m_recordingQuality) {
                     m_recordingQuality = value;
                     RaisePropertyChanged(() => RecordingQuality);
@@ -63,9 +68,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 전송 해상도
         /// </summary>
-        public int TransmitResolution {
+        public int TransmitResolution
+        {
             get { return m_transmitResolution; }
-            set {
+            set
+            {
                 if (value != m_transmitResolution) {
                     m_transmitResolution = value;
                     RaisePropertyChanged(() => TransmitResolution);
@@ -77,9 +84,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 전송 화질
         /// </summary>
-        public int TransmitQuality {
+        public int TransmitQuality
+        {
             get { return m_transmitQuality; }
-            set {
+            set
+            {
                 if (value != m_transmitQuality) {
                     m_transmitQuality = value;
                     RaisePropertyChanged(() => TransmitQuality);
@@ -91,9 +100,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// AP SSID
         /// </summary>
-        public string ApSsid {
+        public string ApSsid
+        {
             get { return m_apSsid; }
-            set {
+            set
+            {
                 if (value != m_apSsid) {
                     m_apSsid = value;
                     RaisePropertyChanged(() => ApSsid);
@@ -105,9 +116,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// AP Key
         /// </summary>
-        public string ApKey {
+        public string ApKey
+        {
             get { return m_apKey; }
-            set {
+            set
+            {
                 if (value != m_apKey) {
                     m_apKey = value;
                     RaisePropertyChanged(() => ApKey);
@@ -119,9 +132,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// Client Ap SSID
         /// </summary>
-        public string ClientApSsid {
+        public string ClientApSsid
+        {
             get { return m_clientApSsid; }
-            set {
+            set
+            {
                 if (value != m_clientApSsid) {
                     m_clientApSsid = value;
                     RaisePropertyChanged(() => ClientApSsid);
@@ -133,9 +148,11 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// Client Ap Key
         /// </summary>
-        public string ClientApKey {
+        public string ClientApKey
+        {
             get { return m_clientKey; }
-            set {
+            set
+            {
                 if (value != m_clientKey) {
                     m_clientKey = value;
                     RaisePropertyChanged(() => ClientApKey);

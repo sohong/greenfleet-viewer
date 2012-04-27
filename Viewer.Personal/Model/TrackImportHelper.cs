@@ -19,13 +19,13 @@ using Viewer.Common.Service;
 using System.ComponentModel;
 using System.Windows;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
     /// </summary>
-    public class TrackImportHelper {
-
+    public class TrackImportHelper
+    {
         #region fields
 
         private LocalRepository m_owner;
@@ -35,7 +35,8 @@ namespace Viewer.Personal.Model {
 
         #region constructors
 
-        public TrackImportHelper(LocalRepository owner) {
+        public TrackImportHelper(LocalRepository owner)
+        {
             Debug.Assert(owner != null, "owner is null");
             m_owner = owner;
         }
@@ -48,7 +49,8 @@ namespace Viewer.Personal.Model {
         /// <summary>
         /// 외부 트랙파일들을 스토리지의 각 위치에 추가한다.
         /// </summary>
-        public int Import(Vehicle vehicle, IEnumerable<string> files, bool convert, bool overwrite) {
+        public int Import(Vehicle vehicle, IEnumerable<string> files, bool convert, bool overwrite)
+        {
             int count = files.Count();
             ProgressViewModel progView = CreateProgressView(count);
             progView.Caption = "SD 트랙 파일들을 로컬 저장소로 저장합니다.";
@@ -75,7 +77,7 @@ namespace Viewer.Personal.Model {
             worker.RunWorkerCompleted += (sender, e) => {
             };
             worker.RunWorkerAsync();
-            
+
             return count;
         }
 
@@ -84,7 +86,8 @@ namespace Viewer.Personal.Model {
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="overwrite"></param>
-        public int ImportAll(Vehicle vehicle, string folder, bool convert, bool overwrite) {
+        public int ImportAll(Vehicle vehicle, string folder, bool convert, bool overwrite)
+        {
             int count = 0;
             if (Directory.Exists(folder)) {
                 string[] files = Directory.GetFiles(folder, "*.inc");
@@ -100,7 +103,8 @@ namespace Viewer.Personal.Model {
 
         #region internal methods
 
-        private ProgressViewModel CreateProgressView(int total) {
+        private ProgressViewModel CreateProgressView(int total)
+        {
             ProgressViewModel progView = new ProgressViewModel();
             progView.Maximum = total;
             return progView;
@@ -111,7 +115,8 @@ namespace Viewer.Personal.Model {
         /// 264파일은 mp4파일로 변환하여 저장한다.
         /// 264파을을 삭제하지는 않는다.
         /// </summary>
-        private bool ImportTrackFile(Vehicle vehicle, string file, bool convert, bool overwrite) {
+        private bool ImportTrackFile(Vehicle vehicle, string file, bool convert, bool overwrite)
+        {
             // inc 파일은 반드시 존재해야 한다.
             string source = Path.ChangeExtension(file, ".inc");
             if (File.Exists(source)) {

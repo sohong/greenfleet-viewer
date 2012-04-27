@@ -15,13 +15,13 @@ using System.Text;
 using Viewer.Common.Util;
 using System.IO;
 
-namespace Viewer.Personal.Model {
-
+namespace Viewer.Personal.Model
+{
     /// <summary>
     /// 외부 입력 장치(SD 카드등) 관련...
     /// </summary>
-    public class DriveManager : IDriveManager {
-
+    public class DriveManager : IDriveManager
+    {
         #region IDriveManager
 
         /// <summary>
@@ -33,7 +33,8 @@ namespace Viewer.Personal.Model {
         /// x, y, z 드라이브 중 하나를 Removable로 인식한다.
         /// </summary>
         /// <returns></returns>
-        public string FindTrackDrive(bool testing) {
+        public string FindTrackDrive(bool testing)
+        {
             DriveInfo[] drives = DriveUtil.GetDrives();
             foreach (DriveInfo drive in drives) {
                 Logger.Debug(drive.Name + ": " + drive.DriveType + ", " + drive.IsReady);
@@ -60,7 +61,8 @@ namespace Viewer.Personal.Model {
         /// 드라이브 루트 바로 아래 gfdata 폴더가 존재하면 track 데이터 드라이브라고 간주한다.
         /// TODO 스펙이 정해지면 반영할 것!
         /// </summary>
-        private string CheckDrive(string root) {
+        private string CheckDrive(string root)
+        {
             string path = Path.Combine(root, "gfdata");
             if (Directory.Exists(path)) {
                 return path;
