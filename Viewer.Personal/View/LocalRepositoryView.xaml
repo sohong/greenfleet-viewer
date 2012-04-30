@@ -85,9 +85,6 @@
                         </Grid.RowDefinitions>
                         <gf:VideoView Track="{Binding ActiveTrack}" AutoPlay="{Binding AutoPlay}" PositionChanged="VideoView_PositionChanged"/>
                         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
-                        <Grid Grid.Row="2">
-                            <gf:AccelerationView/>
-                        </Grid>
                     </Grid>
                     <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
                     <Grid Grid.Column="2">

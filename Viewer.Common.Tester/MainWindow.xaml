@@ -8,14 +8,8 @@
             <TabItem Header="Video">
                 <gf:VideoView Name="videoView"/>
             </TabItem>
-            <TabItem Header="BingMap">
-                <gf:BingMapView Name="bingView"/>
-            </TabItem>
             <TabItem Header="GoogleMap">
                 <gf:GoogleMapView Name="googleView"/>
-            </TabItem>
-            <TabItem Header="Chart">
-                <gf:AccelerationView Name="accelView"/>
             </TabItem>
             <TabItem Header="Chart2">
                 <gf:AccelerationChartView Name="accelerationView"/>

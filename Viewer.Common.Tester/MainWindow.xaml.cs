@@ -102,13 +102,9 @@ namespace Viewer.Common.Tester
             // video
             videoView.Track = track;
 
-            // bing map
-            bingView.ActiveTrack = track;
-
             // google map
 
             // chart
-            accelView.Track = track;
             accelerationView.Track = track;
 
             // timeline

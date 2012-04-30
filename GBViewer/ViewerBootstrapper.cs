@@ -43,11 +43,32 @@ namespace GBViewer {
         #region overriden methods
 
         protected override ILoggerFacade CreateLogger() {
-            return Viewer.Common.Util.Logger.InitLog4Net("GBiewer");
+            return Viewer.Common.Util.Logger.InitLog4Net("GBViewer");
         }
 
         protected override DependencyObject CreateShell() {
-            return ServiceLocator.Current.GetInstance<Shell>();
+            ///*
+            try {
+                Lazy<Shell> shell = Container.GetExport<Shell>();
+                if (shell != null)
+                    return shell.Value;
+                return null;
+            } catch (Exception ex) {
+                string msg = "Shell을 생성하지 못했습니다.\r\n" + ex.Message + "\r\n" + ex.StackTrace;
+                MessageBox.Show(msg, "GBViewer", MessageBoxButton.OK, MessageBoxImage.Error);
+                Viewer.Common.Util.Logger.Error(msg);
+                App.Current.Shutdown();
+                return null;
+            }
+             //*/
+
+            /*
+            IEnumerable<Lazy<object, object>> exports = Container.GetExports(typeof(Shell), null, "");
+            Shell v = exports.Single().Value as Shell;
+            return v;
+            */
+            
+            //return ServiceLocator.Current.GetInstance<Shell>();
         }
 
         protected override void InitializeShell() {
@@ -86,7 +107,6 @@ namespace GBViewer {
             // Because we created the CallbackLogger and it needs to be used immediately, we compose it to satisfy any imports it has.
             //this.Container.ComposeExportedValue<CallbackLogger>(this.callbackLogger);
         }
-
 
         protected override RegionAdapterMappings ConfigureRegionAdapterMappings() {
             return base.ConfigureRegionAdapterMappings();

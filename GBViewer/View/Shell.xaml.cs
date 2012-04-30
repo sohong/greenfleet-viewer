@@ -38,6 +38,7 @@ namespace GBViewer.View
 
         public Shell()
         {
+            Logger.Debug("Creating Shell...");
             InitializeComponent();
 
             if (SystemParameters.PrimaryScreenWidth > 1280) {

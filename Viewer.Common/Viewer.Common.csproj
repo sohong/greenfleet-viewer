@@ -37,9 +37,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\GFLib\Lib\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Maps.MapControl.WPF">
-      <HintPath>..\GFLib\Lib\Microsoft.Maps.MapControl.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\Microsoft.Practices.Prism.dll</HintPath>
@@ -57,10 +54,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -156,9 +149,6 @@
     <Compile Include="View\AccelerationChartView.xaml.cs">
       <DependentUpon>AccelerationChartView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BingMapView.xaml.cs">
-      <DependentUpon>BingMapView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\BookmarkCategoryView.xaml.cs">
       <DependentUpon>BookmarkCategoryView.xaml</DependentUpon>
     </Compile>
@@ -173,9 +163,6 @@
     </Compile>
     <Compile Include="View\GoogleMapView.xaml.cs">
       <DependentUpon>GoogleMapView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AccelerationView.xaml.cs">
-      <DependentUpon>AccelerationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProgressView.xaml.cs">
       <DependentUpon>ProgressView.xaml</DependentUpon>
@@ -215,10 +202,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BingMapView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\BookmarkCategoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -236,10 +219,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GoogleMapView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AccelerationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
