@@ -21,7 +21,7 @@ namespace Viewer.Personal.Model
 {
     /// <summary>
     /// Vehicle을 읽고/쓰고/추가하고/수정하고/삭제한다.
-    /// 즉, 관리한다.
+    /// xml 파일에 저장하고 로드한다.
     /// </summary>
     public class VehicleManager
     {
@@ -90,10 +90,6 @@ namespace Viewer.Personal.Model
         public int IndexOf(Vehicle vehicle)
         {
             return m_vehicles.IndexOf(vehicle);
-        }
-
-        public void AddNew()
-        {
         }
 
         public void Add(Vehicle vehicle)

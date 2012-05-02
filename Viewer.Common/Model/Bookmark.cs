@@ -28,5 +28,35 @@ namespace Viewer.Common.Model
         }
 
         #endregion // constructor
+
+
+        #region properties
+
+        [Transient]
+        public Track Track
+        {
+            get;
+            set;
+        }
+
+        public string TrackFile
+        {
+            get;
+            set;
+        }
+
+        public string Tags
+        {
+            get;
+            set;
+        }
+
+        public string Description
+        {
+            get;
+            set;
+        }
+
+        #endregion // properties
     }
 }
